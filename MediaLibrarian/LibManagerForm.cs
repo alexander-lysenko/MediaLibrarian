@@ -36,7 +36,8 @@ namespace MediaLibrarian
                 case "TEXT": return 300;            //Текст
                 case "VARCHAR(20)": return 120;     //Поле дата
                 case "DATETIME": return 120;        //Поле дата+время
-                case "VARCHAR(5)": return 90;       //Поле оценка
+                case "CHAR(5)": return 90;          //Поле оценка (5)
+                case "CHAR(10)": return 90;         //Поле оценка (10)
                 case "VARCHAR(10)": return 90;      //Поле приоритет
             }
             return 120;
@@ -49,8 +50,9 @@ namespace MediaLibrarian
                 case 1: return "TEXT";              //Текст
                 case 2: return "VARCHAR(20)";       //Поле дата
                 case 3: return "DATETIME";          //Поле дата+время
-                case 4: return "VARCHAR(5)";        //Поле оценка
-                case 5: return "VARCHAR(10)";       //Поле приоритет
+                case 4: return "CHAR(5)";           //Поле оценка (5)
+                case 5: return "CHAR(5)";           //Поле оценка (10)
+                case 6: return "VARCHAR(10)";       //Поле приоритет
                 default: return "VARCHAR(128)";
             }
         }
@@ -163,7 +165,7 @@ namespace MediaLibrarian
                 DropDownStyle = ComboBoxStyle.DropDownList,
             });
             FieldType[FNo].Items.AddRange(new object[] {"Строка", "Текст", "Поле \"Дата\"",
-            "Поле \"Дата + Время\"", "Поле \"Оценка\"", "Поле \"Приоритет\""});
+            "Поле \"Дата + Время\"", "Поле \"Оценка (5)\"", "Поле \"Оценка (10)\"", "Поле \"Приоритет\""});
             AddFieldsPanel.Controls.Add(FieldType[FNo]);
             FieldType[FNo].SelectedIndex = 0;
 
@@ -206,7 +208,7 @@ namespace MediaLibrarian
             this.Size = new Size(480, 220);
             ReadDatabase_ForLibsList();
             LibsList.TabIndex = 0;
-            LibsList.Items[0].Focused = true;
+            if(LibsList.Items.Count>0) LibsList.Items[0].Focused = true;
         }
         private void LibsList_ItemActivate(object sender, EventArgs e)
         {

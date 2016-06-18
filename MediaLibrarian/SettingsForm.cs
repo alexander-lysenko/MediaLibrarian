@@ -11,9 +11,27 @@ namespace MediaLibrarian
 {
     public partial class SettingsForm : Form
     {
-        public SettingsForm()
+        public SettingsForm(MainForm FormMain)
         {
             InitializeComponent();
+            MainForm = FormMain;
+        }
+        MainForm MainForm;
+
+        private void CancelButton_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+        }
+
+        private void ApplyButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void OK_Button_Click(object sender, EventArgs e)
+        {
+            ApplyButton.PerformClick();
+            CancelButton.PerformClick();
         }
     }
 }
