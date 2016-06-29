@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,8 +14,24 @@ namespace MediaLibrarian
         public SettingsForm(MainForm FormMain)
         {
             InitializeComponent();
-            MainForm = FormMain;  
+            MainForm = FormMain;
         }
         MainForm MainForm;
+
+        private void CancelButton_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+        }
+
+        private void ApplyButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void OK_Button_Click(object sender, EventArgs e)
+        {
+            Apply_Button.PerformClick();
+            Cancel_Button.PerformClick();
+        }
     }
 }

@@ -17,9 +17,6 @@ namespace MediaLibrarian
         LibManagerForm LibManagerForm;
         EditForm EditForm;
         SettingsForm SettingsForm;
-
-        public List<Category> CurrentLibraryColumns = new List<Category>();
-
         
         private void SelectCollectionButton_Click(object sender, EventArgs e)
         {

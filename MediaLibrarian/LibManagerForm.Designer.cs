@@ -38,7 +38,7 @@
             this.CollectionEditGB = new System.Windows.Forms.GroupBox();
             this.CreateLibraryButton = new System.Windows.Forms.Button();
             this.AddMoreFieldsButton = new System.Windows.Forms.Button();
-            this.AddFieldsPanel = new System.Windows.Forms.Panel();
+            this.AddFieldsPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.CollectionEditGB.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -93,9 +93,9 @@
             // 
             resources.ApplyResources(this.CollectionEditGB, "CollectionEditGB");
             this.CollectionEditGB.BackColor = System.Drawing.Color.Transparent;
+            this.CollectionEditGB.Controls.Add(this.AddFieldsPanel);
             this.CollectionEditGB.Controls.Add(this.CreateLibraryButton);
             this.CollectionEditGB.Controls.Add(this.AddMoreFieldsButton);
-            this.CollectionEditGB.Controls.Add(this.AddFieldsPanel);
             this.CollectionEditGB.Name = "CollectionEditGB";
             this.CollectionEditGB.TabStop = false;
             // 
@@ -116,7 +116,6 @@
             // AddFieldsPanel
             // 
             resources.ApplyResources(this.AddFieldsPanel, "AddFieldsPanel");
-            this.AddFieldsPanel.BackColor = System.Drawing.Color.Transparent;
             this.AddFieldsPanel.Name = "AddFieldsPanel";
             // 
             // LibManagerForm
@@ -128,6 +127,7 @@
             this.Controls.Add(this.AddCollectionButton);
             this.Controls.Add(this.LibsListHintLabel);
             this.Controls.Add(this.LibsList);
+            this.KeyPreview = true;
             this.Name = "LibManagerForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.LibManagerForm_FormClosing);
             this.Load += new System.EventHandler(this.LibManagerForm_Load);
@@ -148,7 +148,7 @@
         private System.Windows.Forms.GroupBox CollectionEditGB;
         private System.Windows.Forms.Button AddMoreFieldsButton;
         private System.Windows.Forms.Button CreateLibraryButton;
-        private System.Windows.Forms.Panel AddFieldsPanel;
         public System.Windows.Forms.ListView LibsList;
+        private System.Windows.Forms.FlowLayoutPanel AddFieldsPanel;
     }
 }

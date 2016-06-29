@@ -142,7 +142,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;Collection.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>5</value>
   </data>
   <metadata name="StatusBar.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
@@ -175,7 +175,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;StatusBar.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>3</value>
   </data>
   <metadata name="MainMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>133, 17</value>
@@ -307,13 +307,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;MainMenu.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>4</value>
   </data>
   <data name="HintLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="HintLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 108</value>
+    <value>9, 16</value>
   </data>
   <data name="HintLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>184, 23</value>
@@ -334,16 +334,16 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;HintLabel.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>LibInfoGB</value>
   </data>
   <data name="&gt;&gt;HintLabel.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>2</value>
   </data>
   <data name="SelectCollectionButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="SelectCollectionButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>371, 108</value>
+    <value>353, 16</value>
   </data>
   <data name="SelectCollectionButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -361,7 +361,7 @@
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;SelectCollectionButton.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>LibInfoGB</value>
   </data>
   <data name="&gt;&gt;SelectCollectionButton.ZOrder" xml:space="preserve">
     <value>3</value>
@@ -373,10 +373,10 @@
     <value>NoControl</value>
   </data>
   <data name="SelectedLibLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>195, 113</value>
+    <value>192, 21</value>
   </data>
   <data name="SelectedLibLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 13</value>
+    <value>155, 13</value>
   </data>
   <data name="SelectedLibLabel.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -394,16 +394,16 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;SelectedLibLabel.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>LibInfoGB</value>
   </data>
   <data name="&gt;&gt;SelectedLibLabel.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>4</value>
   </data>
   <data name="ElementCount.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="ElementCount.Location" type="System.Drawing.Point, System.Drawing">
-    <value>355, 47</value>
+    <value>355, 42</value>
   </data>
   <data name="ElementCount.Size" type="System.Drawing.Size, System.Drawing">
     <value>69, 13</value>
@@ -433,7 +433,7 @@
     <value>NoControl</value>
   </data>
   <data name="ElementCountHintLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 47</value>
+    <value>9, 39</value>
   </data>
   <data name="ElementCountHintLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>265, 13</value>
@@ -459,71 +459,11 @@
   <data name="&gt;&gt;ElementCountHintLabel.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="LibTypeLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="LibTypeLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>189, 25</value>
-  </data>
-  <data name="LibTypeLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>235, 13</value>
-  </data>
-  <data name="LibTypeLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="LibTypeLabel.Text" xml:space="preserve">
-    <value>Коллекция</value>
-  </data>
-  <data name="LibTypeLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
-  </data>
-  <data name="&gt;&gt;LibTypeLabel.Name" xml:space="preserve">
-    <value>LibTypeLabel</value>
-  </data>
-  <data name="&gt;&gt;LibTypeLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;LibTypeLabel.Parent" xml:space="preserve">
-    <value>LibInfoGB</value>
-  </data>
-  <data name="&gt;&gt;LibTypeLabel.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="LibTypeHintLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="LibTypeHintLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 25</value>
-  </data>
-  <data name="LibTypeHintLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 13</value>
-  </data>
-  <data name="LibTypeHintLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="LibTypeHintLabel.Text" xml:space="preserve">
-    <value>Тип библиотеки:</value>
-  </data>
-  <data name="LibTypeHintLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="&gt;&gt;LibTypeHintLabel.Name" xml:space="preserve">
-    <value>LibTypeHintLabel</value>
-  </data>
-  <data name="&gt;&gt;LibTypeHintLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;LibTypeHintLabel.Parent" xml:space="preserve">
-    <value>LibInfoGB</value>
-  </data>
-  <data name="&gt;&gt;LibTypeHintLabel.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
   <data name="LibInfoGB.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 137</value>
+    <value>12, 146</value>
   </data>
   <data name="LibInfoGB.Size" type="System.Drawing.Size, System.Drawing">
-    <value>434, 69</value>
+    <value>434, 60</value>
   </data>
   <data name="LibInfoGB.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -709,7 +649,7 @@
     <value>3</value>
   </data>
   <data name="ElementActionsGB.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 210</value>
+    <value>12, 489</value>
   </data>
   <data name="ElementActionsGB.Size" type="System.Drawing.Size, System.Drawing">
     <value>434, 49</value>
@@ -1484,7 +1424,7 @@
     <value>0</value>
   </data>
   <data name="ElementInfoGB.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 260</value>
+    <value>12, 212</value>
   </data>
   <data name="ElementInfoGB.Size" type="System.Drawing.Size, System.Drawing">
     <value>434, 277</value>

@@ -240,6 +240,30 @@
   <data name="CollectionEditGB.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left</value>
   </data>
+  <data name="AddFieldsPanel.AutoScroll" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="AddFieldsPanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 19</value>
+  </data>
+  <data name="AddFieldsPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>416, 366</value>
+  </data>
+  <data name="AddFieldsPanel.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;AddFieldsPanel.Name" xml:space="preserve">
+    <value>AddFieldsPanel</value>
+  </data>
+  <data name="&gt;&gt;AddFieldsPanel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;AddFieldsPanel.Parent" xml:space="preserve">
+    <value>CollectionEditGB</value>
+  </data>
+  <data name="&gt;&gt;AddFieldsPanel.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="CreateLibraryButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom</value>
   </data>
@@ -265,7 +289,7 @@
     <value>CollectionEditGB</value>
   </data>
   <data name="&gt;&gt;CreateLibraryButton.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="AddMoreFieldsButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom</value>
@@ -292,33 +316,6 @@
     <value>CollectionEditGB</value>
   </data>
   <data name="&gt;&gt;AddMoreFieldsButton.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="AddFieldsPanel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="AddFieldsPanel.AutoScroll" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="AddFieldsPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 19</value>
-  </data>
-  <data name="AddFieldsPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>416, 366</value>
-  </data>
-  <data name="AddFieldsPanel.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;AddFieldsPanel.Name" xml:space="preserve">
-    <value>AddFieldsPanel</value>
-  </data>
-  <data name="&gt;&gt;AddFieldsPanel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;AddFieldsPanel.Parent" xml:space="preserve">
-    <value>CollectionEditGB</value>
-  </data>
-  <data name="&gt;&gt;AddFieldsPanel.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="CollectionEditGB.Location" type="System.Drawing.Point, System.Drawing">
