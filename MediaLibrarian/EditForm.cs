@@ -21,14 +21,10 @@ namespace MediaLibrarian
         }
         MainForm MainForm;
 
-        int FNo;
         List<object> ColumnData = new List<object>();
-        public string[] ColumnValue;
+        List<Category> ColumnValue = new List<Category>();
         string CustomDateFormat = "d MMMM yyyy";
         string CustomDateTimeFormat = "d MMMM yyyy, HH:mm:ss";
-        Point ThisPoint;
-        Size ColNameSize = new Size(420, 15);
-        int H_I = 0;
         static string Database = "baza.db";
         SQLiteConnection connection = new SQLiteConnection(string.Format("Data Source={0};", Database));
         private void GetControlByType(string type, int i)
@@ -39,12 +35,12 @@ namespace MediaLibrarian
                 case "TEXT": MakeATextArea(i); break;               //Текст
                 case "VARCHAR(20)": MakeADateField(i); break;       //Поле дата
                 case "DATETIME": MakeADateTimeField(i); break;      //Поле дата+время
-                case "VARCHAR(5)": Make5Stars(i); break;            //Поле оценка
-                case "VARCHAR(10)": Make5Cubes(i); break;           //Поле приоритет
+                case "CHAR(5)": Make5Stars(i); break;               //Поле оценка(5)
+                case "CHAR(10)": Make10Stars(i); break;             //Поле оценка(10)
+                case "VARCHAR(10)": Make10Cubes(i); break;          //Поле приоритет
             }
         }
-
-        private void EditForm_Load(object sender, EventArgs e)
+        private void GetColumnInfo()
         {
             ColumnData.Clear();
             SQLiteCommand GetColumns = new SQLiteCommand(string.Format("pragma table_info('{0}');", MainForm.SelectedLibLabel.Text), connection);
@@ -52,99 +48,129 @@ namespace MediaLibrarian
             SQLiteDataReader ReadCols = GetColumns.ExecuteReader();
             foreach (DbDataRecord col in ReadCols)
             {
-                Label tt = new Label() { Text = col["name"].ToString() + col["type"].ToString() };
-                MessageBox.Show(col["name"].ToString() + col["type"].ToString());
-                EditPanel.Controls.Add(tt);
-                EditPanel.RowCount++;
+                ColumnValue.Add(new Category
+                {
+                    Name = col["name"].ToString(),
+                    Type = col["type"].ToString()
+                });
             }
             connection.Close();
+        }
+        private void EditForm_Load(object sender, EventArgs e)
+        {
+            GetColumnInfo();
+            for (int i = 0; i < ColumnValue.Count; i++)
+            {
+                CreateHeaderLabel(i);
+                GetControlByType(ColumnValue[i].Type, i);
+            }
         }
         #region CreateControls
         void CreateHeaderLabel(int i)
         {
             EditPanel.Controls.Add(new Label() 
-            { 
-                Size = ColNameSize, 
-                Text = MainForm.CurrentLibraryColumns[i].Name+":", 
-                Location = ThisPoint,
+            {
+                Size = new Size(220, 15),
+                Text = ColumnValue[i].Name
             });
-            ThisPoint = new Point(0, ThisPoint.Y + ColNameSize.Height);
         }
         void MakeATextBox(int i)
         {
-/*            ColumnData.Add(new TextBox() 
+            ColumnData.Add(new TextBox() 
             {
-                Tag = MainForm.CurrentLibraryColumns[i].FieldIndex,
-                Size = new Size(420, 25), 
-                Location = ThisPoint
+                Size = new Size(420, 25),
+                Margin = new Padding() { Bottom = 15 },
             });
             EditPanel.Controls.Add(ColumnData[i] as TextBox);
-            ThisPoint = new Point(0, ThisPoint.Y + 30);*/
         }
         void MakeATextArea(int i)
         {
-/*            ColumnData.Add(new RichTextBox()
+            ColumnData.Add(new RichTextBox()
             {
-                Tag = MainForm.CurrentLibraryColumns[i].FieldIndex,
                 Size = new Size(420, 60),
-                Location = ThisPoint,
+                Margin = new Padding() { Bottom = 15 },
                 ScrollBars = RichTextBoxScrollBars.ForcedVertical,
                 WordWrap = true,
                 BorderStyle = BorderStyle.FixedSingle
             });
             EditPanel.Controls.Add(ColumnData[i] as RichTextBox);
-            ThisPoint = new Point(0, ThisPoint.Y + 65);*/
         }
         void MakeADateField(int i)
         {
-/*            ColumnData.Add(new DateTimePicker() 
+            ColumnData.Add(new DateTimePicker()
             {
-                Tag = MainForm.CurrentLibraryColumns[i].FieldIndex,
-                Size = new Size(420, 20),
-                Location = ThisPoint,
+                Size = new Size(180, 20),
+                Margin = new Padding() { Left = 15},
                 Format = DateTimePickerFormat.Custom,
                 CustomFormat = CustomDateFormat,
                 Value = DateTime.Now,
             });
             EditPanel.Controls.Add(ColumnData[i] as DateTimePicker);
-            ThisPoint = new Point(0, ThisPoint.Y + 25);*/
         }
         void MakeADateTimeField(int i)
         {
-/*            ColumnData.Add(new DateTimePicker()
+            ColumnData.Add(new DateTimePicker()
             {
-                Tag = MainForm.CurrentLibraryColumns[i].FieldIndex,
-                Size = new Size(420, 20),
-                Location = ThisPoint,
+                Size = new Size(180, 20),
+                //Margin = new Padding(Left = 10),
                 Format = DateTimePickerFormat.Custom,
                 CustomFormat = CustomDateTimeFormat,
                 Value = DateTime.Now,
             });
             EditPanel.Controls.Add(ColumnData[i] as DateTimePicker);
-            ThisPoint = new Point(0, ThisPoint.Y + 25);*/
         }
-        #endregion
         void Make5Stars(int i)
         {
-           EditPanel.Controls.Add(new Label()
-           {
-               Text = "Здесь будет 5 звездочек",
-               Location = ThisPoint,
-               Size = new Size(420, 40)
-           });
-           ThisPoint = new Point(0, ThisPoint.Y + 45);
-        }
-        void Make5Cubes(int i)
-        {
-           EditPanel.Controls.Add(new Label()
+            ColumnData.Add(new Label()
             {
-                Text = "Здесь будет 5 кубиков",
-                Location = ThisPoint,
-                Size = new Size(420, 40)
+                Text = "☆☆☆☆☆",
             });
-           ThisPoint = new Point(0, ThisPoint.Y + 45);
+            Panel Stars5Panel = new Panel()
+            {
+                Size = new Size(190, 30)
+            };
+            for (int ii = 0; ii < 5; ii++)
+            {
+                Label Star = new Label() { Size = new Size(15, 30), Text = "☆", Tag = new int[] { ii, i } };
+                Stars5Panel.Controls.Add(Star);
+            }
+            EditPanel.Controls.Add(Stars5Panel);
         }
-
+        void Make10Stars(int i)
+        {
+            ColumnData.Add(new Label()
+            {
+                Text = "☆☆☆☆☆☆☆☆☆☆",
+            });
+            Panel Stars10Panel = new Panel()
+            {
+                Size = new Size(190, 30)
+            };
+            for (int ii = 0; ii < 10; ii++)
+            {
+                Label Star = new Label() { Size = new Size(15, 30), Text = "☆", Tag = new int[] { ii, i } };
+                Stars10Panel.Controls.Add(Star);
+            }
+            EditPanel.Controls.Add(Stars10Panel);
+        }
+        void Make10Cubes(int i)
+        {
+            ColumnData.Add(new Label()
+            {
+                Text = "▒▒▒▒▒█████",
+            }); 
+            Panel Cubes10Panel = new Panel()
+            {
+                Size = new Size(190, 30)
+            };
+            for (int ii = 0; ii < 10; ii++)
+            {
+                Label Cube = new Label() { Size = new Size(15, 30), Text = "▒", Tag = new int[] { ii, i } };
+                Cubes10Panel.Controls.Add(Cube);
+            }
+            EditPanel.Controls.Add(Cubes10Panel);
+        }
+        #endregion
         private void SaveButton_Click(object sender, EventArgs e)
         {
 

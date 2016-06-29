@@ -58,8 +58,6 @@
             this.LibInfoGB = new System.Windows.Forms.GroupBox();
             this.ElementCount = new System.Windows.Forms.Label();
             this.ElementCountHintLabel = new System.Windows.Forms.Label();
-            this.LibTypeLabel = new System.Windows.Forms.Label();
-            this.LibTypeHintLabel = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.ElementActionsGB = new System.Windows.Forms.GroupBox();
@@ -260,8 +258,9 @@
             this.LibInfoGB.BackColor = System.Drawing.Color.Transparent;
             this.LibInfoGB.Controls.Add(this.ElementCount);
             this.LibInfoGB.Controls.Add(this.ElementCountHintLabel);
-            this.LibInfoGB.Controls.Add(this.LibTypeLabel);
-            this.LibInfoGB.Controls.Add(this.LibTypeHintLabel);
+            this.LibInfoGB.Controls.Add(this.HintLabel);
+            this.LibInfoGB.Controls.Add(this.SelectCollectionButton);
+            this.LibInfoGB.Controls.Add(this.SelectedLibLabel);
             resources.ApplyResources(this.LibInfoGB, "LibInfoGB");
             this.LibInfoGB.Name = "LibInfoGB";
             this.LibInfoGB.TabStop = false;
@@ -277,18 +276,6 @@
             this.ElementCountHintLabel.BackColor = System.Drawing.Color.Transparent;
             resources.ApplyResources(this.ElementCountHintLabel, "ElementCountHintLabel");
             this.ElementCountHintLabel.Name = "ElementCountHintLabel";
-            // 
-            // LibTypeLabel
-            // 
-            this.LibTypeLabel.BackColor = System.Drawing.Color.Transparent;
-            resources.ApplyResources(this.LibTypeLabel, "LibTypeLabel");
-            this.LibTypeLabel.Name = "LibTypeLabel";
-            // 
-            // LibTypeHintLabel
-            // 
-            this.LibTypeHintLabel.BackColor = System.Drawing.Color.Transparent;
-            resources.ApplyResources(this.LibTypeHintLabel, "LibTypeHintLabel");
-            this.LibTypeHintLabel.Name = "LibTypeHintLabel";
             // 
             // label5
             // 
@@ -375,12 +362,9 @@
             this.Controls.Add(this.ElementInfoGB);
             this.Controls.Add(this.ElementActionsGB);
             this.Controls.Add(this.LibInfoGB);
-            this.Controls.Add(this.SelectCollectionButton);
-            this.Controls.Add(this.HintLabel);
             this.Controls.Add(this.StatusBar);
             this.Controls.Add(this.MainMenu);
             this.Controls.Add(this.Collection);
-            this.Controls.Add(this.SelectedLibLabel);
             this.DoubleBuffered = true;
             this.MainMenuStrip = this.MainMenu;
             this.Name = "MainForm";
@@ -413,8 +397,6 @@
         private System.Windows.Forms.GroupBox LibInfoGB;
         private System.Windows.Forms.Label ElementCount;
         private System.Windows.Forms.Label ElementCountHintLabel;
-        private System.Windows.Forms.Label LibTypeLabel;
-        private System.Windows.Forms.Label LibTypeHintLabel;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.GroupBox ElementActionsGB;

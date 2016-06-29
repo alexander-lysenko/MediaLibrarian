@@ -31,7 +31,13 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditForm));
             this.SaveButton = new System.Windows.Forms.Button();
             this.CancelButton = new System.Windows.Forms.Button();
-            this.EditPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.EditPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.button1 = new System.Windows.Forms.Button();
+            this.dateTimePicker3 = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePicker4 = new System.Windows.Forms.DateTimePicker();
+            this.EditPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // SaveButton
@@ -52,7 +58,45 @@
             // EditPanel
             // 
             resources.ApplyResources(this.EditPanel, "EditPanel");
+            this.EditPanel.Controls.Add(this.dateTimePicker2);
+            this.EditPanel.Controls.Add(this.dateTimePicker1);
+            this.EditPanel.Controls.Add(this.button1);
+            this.EditPanel.Controls.Add(this.dateTimePicker3);
+            this.EditPanel.Controls.Add(this.dateTimePicker4);
             this.EditPanel.Name = "EditPanel";
+            // 
+            // dateTimePicker2
+            // 
+            resources.ApplyResources(this.dateTimePicker2, "dateTimePicker2");
+            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePicker2.Name = "dateTimePicker2";
+            this.dateTimePicker2.Value = new System.DateTime(2022, 9, 29, 9, 49, 0, 0);
+            // 
+            // dateTimePicker1
+            // 
+            resources.ApplyResources(this.dateTimePicker1, "dateTimePicker1");
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Value = new System.DateTime(2020, 9, 24, 13, 58, 59, 0);
+            // 
+            // button1
+            // 
+            resources.ApplyResources(this.button1, "button1");
+            this.button1.Name = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // dateTimePicker3
+            // 
+            resources.ApplyResources(this.dateTimePicker3, "dateTimePicker3");
+            this.dateTimePicker3.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePicker3.Name = "dateTimePicker3";
+            this.dateTimePicker3.Value = new System.DateTime(2022, 9, 29, 9, 49, 0, 0);
+            // 
+            // dateTimePicker4
+            // 
+            resources.ApplyResources(this.dateTimePicker4, "dateTimePicker4");
+            this.dateTimePicker4.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePicker4.Name = "dateTimePicker4";
+            this.dateTimePicker4.Value = new System.DateTime(2022, 9, 29, 9, 49, 0, 0);
             // 
             // EditForm
             // 
@@ -67,6 +111,7 @@
             this.Name = "EditForm";
             this.ShowIcon = false;
             this.Load += new System.EventHandler(this.EditForm_Load);
+            this.EditPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -75,6 +120,11 @@
 
         private System.Windows.Forms.Button SaveButton;
         private System.Windows.Forms.Button CancelButton;
-        private System.Windows.Forms.TableLayoutPanel EditPanel;
+        private System.Windows.Forms.FlowLayoutPanel EditPanel;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.DateTimePicker dateTimePicker3;
+        private System.Windows.Forms.DateTimePicker dateTimePicker4;
     }
 }
