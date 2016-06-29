@@ -209,6 +209,7 @@
             // 
             this.PreferencesTSMI.Name = "PreferencesTSMI";
             resources.ApplyResources(this.PreferencesTSMI, "PreferencesTSMI");
+            this.PreferencesTSMI.Click += new System.EventHandler(this.PreferencesTSMI_Click);
             // 
             // HelpAboutTSMI
             // 

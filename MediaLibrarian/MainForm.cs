@@ -12,9 +12,11 @@ namespace MediaLibrarian
             InitializeComponent();
             LibManagerForm = new LibManagerForm(this);
             EditForm = new EditForm(this);
+            SettingsForm = new SettingsForm(this);
         }
         LibManagerForm LibManagerForm;
         EditForm EditForm;
+        SettingsForm SettingsForm;
 
         public List<Category> CurrentLibraryColumns = new List<Category>();
 
@@ -32,6 +34,11 @@ namespace MediaLibrarian
         private void Edit_Click(object sender, EventArgs e)
         {
             EditForm.ShowDialog();
+        }
+
+        private void PreferencesTSMI_Click(object sender, EventArgs e)
+        {
+            SettingsForm.ShowDialog();
         }
 
     }

@@ -11,9 +11,11 @@ namespace MediaLibrarian
 {
     public partial class SettingsForm : Form
     {
-        public SettingsForm()
+        public SettingsForm(MainForm FormMain)
         {
             InitializeComponent();
+            MainForm = FormMain;  
         }
+        MainForm MainForm;
     }
 }
