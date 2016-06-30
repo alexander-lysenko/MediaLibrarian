@@ -240,6 +240,9 @@
   <data name="CollectionEditGB.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left</value>
   </data>
+  <data name="AddFieldsPanel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
   <data name="AddFieldsPanel.AutoScroll" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>

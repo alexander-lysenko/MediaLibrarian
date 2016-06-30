@@ -203,7 +203,7 @@ namespace MediaLibrarian
                 MessageBox.Show("Это поле удалять нельзя!");
                 return;
             }
-            int In = int.Parse((sender as Button).Tag.ToString());
+            int In = RemoveButton.IndexOf(sender as Button);//int.Parse((sender as Button).Tag.ToString());
             AddFieldsPanel.Controls.Remove(FieldName[In]);
             FieldName.Remove(FieldName[In]);
             AddFieldsPanel.Controls.Remove(FieldType[In]);

@@ -150,167 +150,74 @@
   <data name="&gt;&gt;SaveButton.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="CancelButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="Cancel_Button.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom</value>
   </data>
-  <data name="CancelButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="Cancel_Button.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="CancelButton.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="Cancel_Button.Location" type="System.Drawing.Point, System.Drawing">
     <value>236, 409</value>
   </data>
-  <data name="CancelButton.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="Cancel_Button.Size" type="System.Drawing.Size, System.Drawing">
     <value>216, 23</value>
   </data>
-  <data name="CancelButton.TabIndex" type="System.Int32, mscorlib">
+  <data name="Cancel_Button.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="CancelButton.Text" xml:space="preserve">
+  <data name="Cancel_Button.Text" xml:space="preserve">
     <value>Отменить</value>
   </data>
-  <data name="&gt;&gt;CancelButton.Name" xml:space="preserve">
-    <value>CancelButton</value>
+  <data name="&gt;&gt;Cancel_Button.Name" xml:space="preserve">
+    <value>Cancel_Button</value>
   </data>
-  <data name="&gt;&gt;CancelButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;Cancel_Button.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;CancelButton.Parent" xml:space="preserve">
+  <data name="&gt;&gt;Cancel_Button.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;CancelButton.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;Cancel_Button.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="EditPanel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
   </data>
   <data name="EditPanel.AutoScroll" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="dateTimePicker2.CustomFormat" xml:space="preserve">
-    <value>dd MMMM yyy hh:mm:ss</value>
+  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="dateTimePicker2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
+  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 0</value>
   </data>
-  <data name="dateTimePicker2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>393, 20</value>
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>35, 13</value>
   </data>
-  <data name="dateTimePicker2.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;dateTimePicker2.Name" xml:space="preserve">
-    <value>dateTimePicker2</value>
-  </data>
-  <data name="&gt;&gt;dateTimePicker2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dateTimePicker2.Parent" xml:space="preserve">
-    <value>EditPanel</value>
-  </data>
-  <data name="&gt;&gt;dateTimePicker2.ZOrder" xml:space="preserve">
+  <data name="label1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="dateTimePicker1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 29</value>
+  <data name="label1.Text" xml:space="preserve">
+    <value>label1</value>
   </data>
-  <data name="dateTimePicker1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>220, 20</value>
+  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+    <value>label1</value>
   </data>
-  <data name="dateTimePicker1.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;dateTimePicker1.Name" xml:space="preserve">
-    <value>dateTimePicker1</value>
-  </data>
-  <data name="&gt;&gt;dateTimePicker1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dateTimePicker1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
     <value>EditPanel</value>
   </data>
-  <data name="&gt;&gt;dateTimePicker1.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="button1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 24pt</value>
-  </data>
-  <data name="button1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="button1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>229, 29</value>
-  </data>
-  <data name="button1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>190, 30</value>
-  </data>
-  <data name="button1.TabIndex" type="System.Int32, mscorlib">
+  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="button1.Text" xml:space="preserve">
-    <value>☺☺☺☺☺☺☺☺☺☺</value>
-  </data>
-  <data name="&gt;&gt;button1.Name" xml:space="preserve">
-    <value>button1</value>
-  </data>
-  <data name="&gt;&gt;button1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;button1.Parent" xml:space="preserve">
-    <value>EditPanel</value>
-  </data>
-  <data name="&gt;&gt;button1.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="dateTimePicker3.CustomFormat" xml:space="preserve">
-    <value>dd MMMM yyy hh:mm:ss</value>
-  </data>
-  <data name="dateTimePicker3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 65</value>
-  </data>
-  <data name="dateTimePicker3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>220, 20</value>
-  </data>
-  <data name="dateTimePicker3.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;dateTimePicker3.Name" xml:space="preserve">
-    <value>dateTimePicker3</value>
-  </data>
-  <data name="&gt;&gt;dateTimePicker3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dateTimePicker3.Parent" xml:space="preserve">
-    <value>EditPanel</value>
-  </data>
-  <data name="&gt;&gt;dateTimePicker3.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="dateTimePicker4.CustomFormat" xml:space="preserve">
-    <value>dd MMMM yyy hh:mm:ss</value>
-  </data>
-  <data name="dateTimePicker4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>229, 65</value>
-  </data>
-  <data name="dateTimePicker4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 20</value>
-  </data>
-  <data name="dateTimePicker4.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;dateTimePicker4.Name" xml:space="preserve">
-    <value>dateTimePicker4</value>
-  </data>
-  <data name="&gt;&gt;dateTimePicker4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dateTimePicker4.Parent" xml:space="preserve">
-    <value>EditPanel</value>
-  </data>
-  <data name="&gt;&gt;dateTimePicker4.ZOrder" xml:space="preserve">
-    <value>4</value>
   </data>
   <data name="EditPanel.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 13</value>
   </data>
   <data name="EditPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>440, 390</value>
+    <value>450, 390</value>
   </data>
   <data name="EditPanel.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>

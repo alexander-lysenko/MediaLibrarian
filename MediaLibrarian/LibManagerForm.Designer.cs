@@ -36,9 +36,9 @@
             this.AddCollectionButton = new System.Windows.Forms.Button();
             this.RemoveCollectionButton = new System.Windows.Forms.Button();
             this.CollectionEditGB = new System.Windows.Forms.GroupBox();
+            this.AddFieldsPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.CreateLibraryButton = new System.Windows.Forms.Button();
             this.AddMoreFieldsButton = new System.Windows.Forms.Button();
-            this.AddFieldsPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.CollectionEditGB.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -99,6 +99,11 @@
             this.CollectionEditGB.Name = "CollectionEditGB";
             this.CollectionEditGB.TabStop = false;
             // 
+            // AddFieldsPanel
+            // 
+            resources.ApplyResources(this.AddFieldsPanel, "AddFieldsPanel");
+            this.AddFieldsPanel.Name = "AddFieldsPanel";
+            // 
             // CreateLibraryButton
             // 
             resources.ApplyResources(this.CreateLibraryButton, "CreateLibraryButton");
@@ -112,11 +117,6 @@
             this.AddMoreFieldsButton.Name = "AddMoreFieldsButton";
             this.AddMoreFieldsButton.UseVisualStyleBackColor = true;
             this.AddMoreFieldsButton.Click += new System.EventHandler(this.AddMoreFieldsButton_Click);
-            // 
-            // AddFieldsPanel
-            // 
-            resources.ApplyResources(this.AddFieldsPanel, "AddFieldsPanel");
-            this.AddFieldsPanel.Name = "AddFieldsPanel";
             // 
             // LibManagerForm
             // 

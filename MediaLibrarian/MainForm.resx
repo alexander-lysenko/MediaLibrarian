@@ -147,12 +147,6 @@
   <metadata name="StatusBar.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <data name="toolStripStatusLabel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>246, 17</value>
-  </data>
-  <data name="toolStripStatusLabel1.Text" xml:space="preserve">
-    <value>Статусная строка отображает уведомления</value>
-  </data>
   <data name="StatusBar.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 540</value>
   </data>
@@ -177,56 +171,44 @@
   <data name="&gt;&gt;StatusBar.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="toolStripStatusLabel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>246, 17</value>
+  </data>
+  <data name="toolStripStatusLabel1.Text" xml:space="preserve">
+    <value>Статусная строка отображает уведомления</value>
+  </data>
   <metadata name="MainMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>133, 17</value>
   </metadata>
-  <data name="OpenLibTSMI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>247, 22</value>
-  </data>
-  <data name="OpenLibTSMI.Text" xml:space="preserve">
-    <value>Выбрать библиотеку</value>
-  </data>
-  <data name="CreateLibTSMI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>247, 22</value>
-  </data>
-  <data name="CreateLibTSMI.Text" xml:space="preserve">
-    <value>Создать новую библиотеку</value>
-  </data>
-  <data name="ClearLibTSMI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>247, 22</value>
-  </data>
-  <data name="ClearLibTSMI.Text" xml:space="preserve">
-    <value>Очистить текущую библиотеку</value>
-  </data>
-  <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>244, 6</value>
-  </data>
-  <data name="CloseAppTSMI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>247, 22</value>
-  </data>
-  <data name="CloseAppTSMI.Text" xml:space="preserve">
-    <value>Закрыть программу</value>
-  </data>
   <data name="FileTSMI.Size" type="System.Drawing.Size, System.Drawing">
     <value>48, 20</value>
   </data>
   <data name="FileTSMI.Text" xml:space="preserve">
     <value>Файл</value>
   </data>
+  <data name="AddElementTSMI.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Ctrl+N</value>
+  </data>
   <data name="AddElementTSMI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>203, 22</value>
+    <value>243, 22</value>
   </data>
   <data name="AddElementTSMI.Text" xml:space="preserve">
     <value>Добавить элемент</value>
   </data>
+  <data name="EditElementTSMI.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Ctrl+E</value>
+  </data>
   <data name="EditElementTSMI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>203, 22</value>
+    <value>243, 22</value>
   </data>
   <data name="EditElementTSMI.Text" xml:space="preserve">
     <value>Редактировать элемент</value>
   </data>
+  <data name="DeleteElementTSMI.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Del</value>
+  </data>
   <data name="DeleteElementTSMI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>203, 22</value>
+    <value>243, 22</value>
   </data>
   <data name="DeleteElementTSMI.Text" xml:space="preserve">
     <value>Удалить элемент</value>
@@ -234,8 +216,11 @@
   <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
     <value>200, 6</value>
   </data>
+  <data name="FindElementTSMI.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Ctrl+F</value>
+  </data>
   <data name="FindElementTSMI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>203, 22</value>
+    <value>243, 22</value>
   </data>
   <data name="FindElementTSMI.Text" xml:space="preserve">
     <value>Поиск элемента</value>
@@ -246,38 +231,11 @@
   <data name="EditTSMI.Text" xml:space="preserve">
     <value>Правка</value>
   </data>
-  <data name="AutoSortingTSMI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>287, 22</value>
-  </data>
-  <data name="AutoSortingTSMI.Text" xml:space="preserve">
-    <value>Автоматическая сортировка по имени</value>
-  </data>
-  <data name="toolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>284, 6</value>
-  </data>
-  <data name="PreferencesTSMI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>287, 22</value>
-  </data>
-  <data name="PreferencesTSMI.Text" xml:space="preserve">
-    <value>Настройки</value>
-  </data>
   <data name="ViewTSMI.Size" type="System.Drawing.Size, System.Drawing">
     <value>39, 20</value>
   </data>
   <data name="ViewTSMI.Text" xml:space="preserve">
     <value>Вид</value>
-  </data>
-  <data name="HelpTSMI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>156, 22</value>
-  </data>
-  <data name="HelpTSMI.Text" xml:space="preserve">
-    <value>Вызов справки</value>
-  </data>
-  <data name="AboutTSMI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>156, 22</value>
-  </data>
-  <data name="AboutTSMI.Text" xml:space="preserve">
-    <value>О программе</value>
   </data>
   <data name="HelpAboutTSMI.Size" type="System.Drawing.Size, System.Drawing">
     <value>65, 20</value>
@@ -308,6 +266,60 @@
   </data>
   <data name="&gt;&gt;MainMenu.ZOrder" xml:space="preserve">
     <value>4</value>
+  </data>
+  <data name="OpenLibTSMI.Size" type="System.Drawing.Size, System.Drawing">
+    <value>247, 22</value>
+  </data>
+  <data name="OpenLibTSMI.Text" xml:space="preserve">
+    <value>Выбрать библиотеку</value>
+  </data>
+  <data name="CreateLibTSMI.Size" type="System.Drawing.Size, System.Drawing">
+    <value>247, 22</value>
+  </data>
+  <data name="CreateLibTSMI.Text" xml:space="preserve">
+    <value>Создать новую библиотеку</value>
+  </data>
+  <data name="ClearLibTSMI.Size" type="System.Drawing.Size, System.Drawing">
+    <value>247, 22</value>
+  </data>
+  <data name="ClearLibTSMI.Text" xml:space="preserve">
+    <value>Очистить текущую библиотеку</value>
+  </data>
+  <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>244, 6</value>
+  </data>
+  <data name="CloseAppTSMI.Size" type="System.Drawing.Size, System.Drawing">
+    <value>247, 22</value>
+  </data>
+  <data name="CloseAppTSMI.Text" xml:space="preserve">
+    <value>Закрыть программу</value>
+  </data>
+  <data name="AutoSortingTSMI.Size" type="System.Drawing.Size, System.Drawing">
+    <value>287, 22</value>
+  </data>
+  <data name="AutoSortingTSMI.Text" xml:space="preserve">
+    <value>Автоматическая сортировка по имени</value>
+  </data>
+  <data name="toolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>284, 6</value>
+  </data>
+  <data name="PreferencesTSMI.Size" type="System.Drawing.Size, System.Drawing">
+    <value>287, 22</value>
+  </data>
+  <data name="PreferencesTSMI.Text" xml:space="preserve">
+    <value>Настройки</value>
+  </data>
+  <data name="HelpTSMI.Size" type="System.Drawing.Size, System.Drawing">
+    <value>156, 22</value>
+  </data>
+  <data name="HelpTSMI.Text" xml:space="preserve">
+    <value>Вызов справки</value>
+  </data>
+  <data name="AboutTSMI.Size" type="System.Drawing.Size, System.Drawing">
+    <value>156, 22</value>
+  </data>
+  <data name="AboutTSMI.Text" xml:space="preserve">
+    <value>О программе</value>
   </data>
   <data name="HintLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -382,7 +394,7 @@
     <value>5</value>
   </data>
   <data name="SelectedLibLabel.Text" xml:space="preserve">
-    <value>Киношки с котиками и другие женские прелести</value>
+    <value>Библиотека</value>
   </data>
   <data name="SelectedLibLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -398,6 +410,54 @@
   </data>
   <data name="&gt;&gt;SelectedLibLabel.ZOrder" xml:space="preserve">
     <value>4</value>
+  </data>
+  <data name="&gt;&gt;ElementCount.Name" xml:space="preserve">
+    <value>ElementCount</value>
+  </data>
+  <data name="&gt;&gt;ElementCount.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ElementCount.Parent" xml:space="preserve">
+    <value>LibInfoGB</value>
+  </data>
+  <data name="&gt;&gt;ElementCount.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ElementCountHintLabel.Name" xml:space="preserve">
+    <value>ElementCountHintLabel</value>
+  </data>
+  <data name="&gt;&gt;ElementCountHintLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ElementCountHintLabel.Parent" xml:space="preserve">
+    <value>LibInfoGB</value>
+  </data>
+  <data name="&gt;&gt;ElementCountHintLabel.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="LibInfoGB.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 146</value>
+  </data>
+  <data name="LibInfoGB.Size" type="System.Drawing.Size, System.Drawing">
+    <value>434, 60</value>
+  </data>
+  <data name="LibInfoGB.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="LibInfoGB.Text" xml:space="preserve">
+    <value>Информация о библиотеке</value>
+  </data>
+  <data name="&gt;&gt;LibInfoGB.Name" xml:space="preserve">
+    <value>LibInfoGB</value>
+  </data>
+  <data name="&gt;&gt;LibInfoGB.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LibInfoGB.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;LibInfoGB.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="ElementCount.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -459,30 +519,6 @@
   <data name="&gt;&gt;ElementCountHintLabel.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="LibInfoGB.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 146</value>
-  </data>
-  <data name="LibInfoGB.Size" type="System.Drawing.Size, System.Drawing">
-    <value>434, 60</value>
-  </data>
-  <data name="LibInfoGB.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="LibInfoGB.Text" xml:space="preserve">
-    <value>Информация о библиотеке</value>
-  </data>
-  <data name="&gt;&gt;LibInfoGB.Name" xml:space="preserve">
-    <value>LibInfoGB</value>
-  </data>
-  <data name="&gt;&gt;LibInfoGB.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;LibInfoGB.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;LibInfoGB.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
   <data name="label5.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
   </data>
@@ -539,6 +575,78 @@
   </data>
   <data name="&gt;&gt;label6.ZOrder" xml:space="preserve">
     <value>3</value>
+  </data>
+  <data name="&gt;&gt;EditElementButton.Name" xml:space="preserve">
+    <value>EditElementButton</value>
+  </data>
+  <data name="&gt;&gt;EditElementButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;EditElementButton.Parent" xml:space="preserve">
+    <value>ElementActionsGB</value>
+  </data>
+  <data name="&gt;&gt;EditElementButton.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;SearchButton.Name" xml:space="preserve">
+    <value>SearchButton</value>
+  </data>
+  <data name="&gt;&gt;SearchButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;SearchButton.Parent" xml:space="preserve">
+    <value>ElementActionsGB</value>
+  </data>
+  <data name="&gt;&gt;SearchButton.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;AddElementButton.Name" xml:space="preserve">
+    <value>AddElementButton</value>
+  </data>
+  <data name="&gt;&gt;AddElementButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;AddElementButton.Parent" xml:space="preserve">
+    <value>ElementActionsGB</value>
+  </data>
+  <data name="&gt;&gt;AddElementButton.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;DeleteElementButton.Name" xml:space="preserve">
+    <value>DeleteElementButton</value>
+  </data>
+  <data name="&gt;&gt;DeleteElementButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;DeleteElementButton.Parent" xml:space="preserve">
+    <value>ElementActionsGB</value>
+  </data>
+  <data name="&gt;&gt;DeleteElementButton.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="ElementActionsGB.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 489</value>
+  </data>
+  <data name="ElementActionsGB.Size" type="System.Drawing.Size, System.Drawing">
+    <value>434, 49</value>
+  </data>
+  <data name="ElementActionsGB.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="ElementActionsGB.Text" xml:space="preserve">
+    <value>Действия с элементами библиотеки</value>
+  </data>
+  <data name="&gt;&gt;ElementActionsGB.Name" xml:space="preserve">
+    <value>ElementActionsGB</value>
+  </data>
+  <data name="&gt;&gt;ElementActionsGB.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ElementActionsGB.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ElementActionsGB.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="EditElementButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -648,38 +756,95 @@
   <data name="&gt;&gt;DeleteElementButton.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="ElementActionsGB.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 489</value>
-  </data>
-  <data name="ElementActionsGB.Size" type="System.Drawing.Size, System.Drawing">
-    <value>434, 49</value>
-  </data>
-  <data name="ElementActionsGB.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="ElementActionsGB.Text" xml:space="preserve">
-    <value>Действия с элементами библиотеки</value>
-  </data>
-  <data name="&gt;&gt;ElementActionsGB.Name" xml:space="preserve">
-    <value>ElementActionsGB</value>
-  </data>
-  <data name="&gt;&gt;ElementActionsGB.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ElementActionsGB.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ElementActionsGB.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="ElementInfoGB.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left</value>
+  </data>
+  <data name="&gt;&gt;panel1.Name" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;panel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panel1.Parent" xml:space="preserve">
+    <value>ElementInfoGB</value>
+  </data>
+  <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ElementInfoGB.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 212</value>
+  </data>
+  <data name="ElementInfoGB.Size" type="System.Drawing.Size, System.Drawing">
+    <value>434, 277</value>
+  </data>
+  <data name="ElementInfoGB.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="ElementInfoGB.Text" xml:space="preserve">
+    <value>Информация о выделенном элементе</value>
+  </data>
+  <data name="&gt;&gt;ElementInfoGB.Name" xml:space="preserve">
+    <value>ElementInfoGB</value>
+  </data>
+  <data name="&gt;&gt;ElementInfoGB.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ElementInfoGB.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ElementInfoGB.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="panel1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left</value>
   </data>
   <data name="panel1.AutoScroll" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="&gt;&gt;label7.Name" xml:space="preserve">
+    <value>label7</value>
+  </data>
+  <data name="&gt;&gt;label7.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label7.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;label7.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;PosterBox.Name" xml:space="preserve">
+    <value>PosterBox</value>
+  </data>
+  <data name="&gt;&gt;PosterBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PosterBox.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;PosterBox.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 19</value>
+  </data>
+  <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>418, 252</value>
+  </data>
+  <data name="panel1.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;panel1.Name" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;panel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panel1.Parent" xml:space="preserve">
+    <value>ElementInfoGB</value>
+  </data>
+  <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="label7.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1401,51 +1566,6 @@
   </data>
   <data name="&gt;&gt;PosterBox.ZOrder" xml:space="preserve">
     <value>1</value>
-  </data>
-  <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 19</value>
-  </data>
-  <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>418, 252</value>
-  </data>
-  <data name="panel1.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;panel1.Name" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;panel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;panel1.Parent" xml:space="preserve">
-    <value>ElementInfoGB</value>
-  </data>
-  <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="ElementInfoGB.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 212</value>
-  </data>
-  <data name="ElementInfoGB.Size" type="System.Drawing.Size, System.Drawing">
-    <value>434, 277</value>
-  </data>
-  <data name="ElementInfoGB.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="ElementInfoGB.Text" xml:space="preserve">
-    <value>Информация о выделенном элементе</value>
-  </data>
-  <data name="&gt;&gt;ElementInfoGB.Name" xml:space="preserve">
-    <value>ElementInfoGB</value>
-  </data>
-  <data name="&gt;&gt;ElementInfoGB.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ElementInfoGB.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ElementInfoGB.ZOrder" xml:space="preserve">
-    <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

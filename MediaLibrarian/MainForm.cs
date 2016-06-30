@@ -38,5 +38,10 @@ namespace MediaLibrarian
             SettingsForm.ShowDialog();
         }
 
+        private void EditElementTSMI_Click(object sender, EventArgs e)
+        {
+            EditElementButton.PerformClick();
+        }
+
     }
 }

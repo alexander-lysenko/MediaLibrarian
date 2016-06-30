@@ -168,6 +168,7 @@
             // 
             this.EditElementTSMI.Name = "EditElementTSMI";
             resources.ApplyResources(this.EditElementTSMI, "EditElementTSMI");
+            this.EditElementTSMI.Click += new System.EventHandler(this.EditElementTSMI_Click);
             // 
             // DeleteElementTSMI
             // 
