@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
 using System.Windows.Forms;
 
 namespace MediaLibrarian
@@ -30,6 +28,7 @@ namespace MediaLibrarian
 
         private void Edit_Click(object sender, EventArgs e)
         {
+            EditForm.EditMode = true;
             EditForm.ShowDialog();
         }
 

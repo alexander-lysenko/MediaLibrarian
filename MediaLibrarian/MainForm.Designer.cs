@@ -81,6 +81,7 @@
             // Collection
             // 
             resources.ApplyResources(this.Collection, "Collection");
+            this.Collection.FullRowSelect = true;
             this.Collection.GridLines = true;
             this.Collection.Name = "Collection";
             this.Collection.ShowGroups = false;
@@ -291,12 +292,12 @@
             // 
             // ElementActionsGB
             // 
+            resources.ApplyResources(this.ElementActionsGB, "ElementActionsGB");
             this.ElementActionsGB.BackColor = System.Drawing.Color.Transparent;
             this.ElementActionsGB.Controls.Add(this.EditElementButton);
             this.ElementActionsGB.Controls.Add(this.SearchButton);
             this.ElementActionsGB.Controls.Add(this.AddElementButton);
             this.ElementActionsGB.Controls.Add(this.DeleteElementButton);
-            resources.ApplyResources(this.ElementActionsGB, "ElementActionsGB");
             this.ElementActionsGB.Name = "ElementActionsGB";
             this.ElementActionsGB.TabStop = false;
             // 

@@ -15,6 +15,7 @@ namespace MediaLibrarian
             MainForm = FormMain;
         }
         MainForm MainForm;
+        bool Edited = false;
         public const int MaxFC = 20;
         public int FNo = -1;
         public string LibTableHeaders = "";
@@ -49,7 +50,7 @@ namespace MediaLibrarian
                 case 2: return "VARCHAR(20)";       //Поле дата
                 case 3: return "DATETIME";          //Поле дата+время
                 case 4: return "CHAR(5)";           //Поле оценка (5)
-                case 5: return "CHAR(5)";           //Поле оценка (10)
+                case 5: return "CHAR(10)";           //Поле оценка (10)
                 case 6: return "VARCHAR(10)";       //Поле приоритет
                 default: return "VARCHAR(128)";
             }
@@ -75,6 +76,17 @@ namespace MediaLibrarian
             }
             connection.Close();
         }
+        private void ReadTableFromDatabase(string TableName)
+        {
+            SQLiteCommand ReadTable = new SQLiteCommand(String.Format("select * from {0}", TableName) , connection);
+            connection.Open();
+            SQLiteDataReader reader = ReadTable.ExecuteReader();
+            foreach (var record in reader)
+            {
+                MessageBox.Show(record.ToString());
+            }
+            connection.Close();
+        }
         private void LibManagerForm_Load(object sender, EventArgs e)
         {
             this.Size = new Size(480, 220);
@@ -82,7 +94,7 @@ namespace MediaLibrarian
             LibsList.TabIndex = 0;
             if (LibsList.Items.Count > 0) LibsList.Items[0].Focused = true;
         }
-        private void AddCollectionButton_Click(object sender, EventArgs e)
+        private void CreateNewLibraryButton_Click(object sender, EventArgs e)
         {
             AddFieldsPanel.Controls.Clear();
             CollectionEditGB.Visible = true;
@@ -94,7 +106,9 @@ namespace MediaLibrarian
             LibNameTB.KeyPress += new KeyPressEventHandler(this.TB_KeyPress);
             AddFieldsPanel.Controls.Add(LibNameTB);
             AddMoreFieldsButton.PerformClick();
-            AddCollectionButton.Enabled = false;
+            FieldType[0].Enabled = false;
+            RemoveButton[0].Enabled = false;
+            CreateNewLibraryButton.Enabled = false;
         }
         private void RemoveCollectionButton_Click(object sender, EventArgs e)
         {
@@ -109,7 +123,7 @@ namespace MediaLibrarian
                     ReadDatabase_ForLibsList();
                 }
         }
-        private void CreateLibraryButton_Click(object sender, EventArgs e)
+        private void SaveLibraryButton_Click(object sender, EventArgs e)
         {
             if (LibNameTB.Text == "")
             {
@@ -157,9 +171,10 @@ namespace MediaLibrarian
             connection.Close();
             ReadDatabase_ForLibsList();
             CollectionEditGB.Visible = false;
-            AddCollectionButton.Enabled = true;
+            CreateNewLibraryButton.Enabled = true;
             RemoveCollectionButton.Enabled = true;
             FormReset();
+            Edited = false;
         }
         private void AddMoreFieldsButton_Click(object sender, EventArgs e)
         {
@@ -195,6 +210,7 @@ namespace MediaLibrarian
             });
             RemoveButton[FNo].Click += new System.EventHandler(this.RemoveButton_Click);
             AddFieldsPanel.Controls.Add(RemoveButton[FNo]);
+            Edited = true;
         }
         private void RemoveButton_Click(object sender, EventArgs e)
         {
@@ -215,7 +231,6 @@ namespace MediaLibrarian
         {
             MainForm.Collection.Clear();
             MainForm.SelectedLibLabel.Text = LibsList.FocusedItem.Text;
-            SQLiteConnection connection = new SQLiteConnection(string.Format("Data Source={0};", Database));
             SQLiteCommand GetColumns = new SQLiteCommand(string.Format("pragma table_info('{0}');", LibsList.FocusedItem.Text), connection);
             connection.Open();
             SQLiteDataReader ReadCols = GetColumns.ExecuteReader();
@@ -224,6 +239,7 @@ namespace MediaLibrarian
                 MainForm.Collection.Columns.Add(col["name"].ToString(), GetColumnLength(col["type"].ToString()));
             }
             connection.Close();
+            //ReadTableFromDatabase(LibsList.FocusedItem.Text);
             this.Close();
         }
         private void LibManagerForm_KeyDown(object sender, KeyEventArgs e)
@@ -236,7 +252,16 @@ namespace MediaLibrarian
         }
         private void LibManagerForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            FormReset();
+            if (Edited)
+            {
+                if (MessageBox.Show("Выйти без сохранения?", "Предупреждение", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    Edited = false;
+                    FormReset();
+                }
+                else e.Cancel = true;
+            }
+            else FormReset();
         }
         private void TB_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -252,7 +277,7 @@ namespace MediaLibrarian
             FieldType.Clear();
             RemoveButton.Clear();
             FieldPosition = new Point(5, 25);
-            AddCollectionButton.Enabled = true;
+            CreateNewLibraryButton.Enabled = true;
             RemoveCollectionButton.Enabled = true;
         }
     }

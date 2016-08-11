@@ -32,8 +32,6 @@
             this.SaveButton = new System.Windows.Forms.Button();
             this.Cancel_Button = new System.Windows.Forms.Button();
             this.EditPanel = new System.Windows.Forms.FlowLayoutPanel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.EditPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // SaveButton
@@ -54,14 +52,7 @@
             // EditPanel
             // 
             resources.ApplyResources(this.EditPanel, "EditPanel");
-            this.EditPanel.Controls.Add(this.label1);
             this.EditPanel.Name = "EditPanel";
-            // 
-            // label1
-            // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.ForeColor = System.Drawing.Color.LimeGreen;
-            this.label1.Name = "label1";
             // 
             // EditForm
             // 
@@ -76,10 +67,9 @@
             this.MinimizeBox = false;
             this.Name = "EditForm";
             this.ShowIcon = false;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.EditForm_FormClosing);
             this.Load += new System.EventHandler(this.EditForm_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.EditForm_KeyDown);
-            this.EditPanel.ResumeLayout(false);
-            this.EditPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -89,6 +79,5 @@
         private System.Windows.Forms.Button SaveButton;
         private System.Windows.Forms.Button Cancel_Button;
         private System.Windows.Forms.FlowLayoutPanel EditPanel;
-        private System.Windows.Forms.Label label1;
     }
 }

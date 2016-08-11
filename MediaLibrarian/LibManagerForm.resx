@@ -183,31 +183,31 @@
   <data name="&gt;&gt;LibsListHintLabel.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="AddCollectionButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="CreateNewLibraryButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
   </data>
-  <data name="AddCollectionButton.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="CreateNewLibraryButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 407</value>
   </data>
-  <data name="AddCollectionButton.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="CreateNewLibraryButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>220, 23</value>
   </data>
-  <data name="AddCollectionButton.TabIndex" type="System.Int32, mscorlib">
+  <data name="CreateNewLibraryButton.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="AddCollectionButton.Text" xml:space="preserve">
+  <data name="CreateNewLibraryButton.Text" xml:space="preserve">
     <value>Добавить новую библиотеку</value>
   </data>
-  <data name="&gt;&gt;AddCollectionButton.Name" xml:space="preserve">
-    <value>AddCollectionButton</value>
+  <data name="&gt;&gt;CreateNewLibraryButton.Name" xml:space="preserve">
+    <value>CreateNewLibraryButton</value>
   </data>
-  <data name="&gt;&gt;AddCollectionButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;CreateNewLibraryButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;AddCollectionButton.Parent" xml:space="preserve">
+  <data name="&gt;&gt;CreateNewLibraryButton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;AddCollectionButton.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;CreateNewLibraryButton.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="RemoveCollectionButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -267,31 +267,31 @@
   <data name="&gt;&gt;AddFieldsPanel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="CreateLibraryButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="SaveLibraryButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom</value>
   </data>
-  <data name="CreateLibraryButton.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="SaveLibraryButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 391</value>
   </data>
-  <data name="CreateLibraryButton.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="SaveLibraryButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>208, 23</value>
   </data>
-  <data name="CreateLibraryButton.TabIndex" type="System.Int32, mscorlib">
+  <data name="SaveLibraryButton.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="CreateLibraryButton.Text" xml:space="preserve">
+  <data name="SaveLibraryButton.Text" xml:space="preserve">
     <value>Сохранить</value>
   </data>
-  <data name="&gt;&gt;CreateLibraryButton.Name" xml:space="preserve">
-    <value>CreateLibraryButton</value>
+  <data name="&gt;&gt;SaveLibraryButton.Name" xml:space="preserve">
+    <value>SaveLibraryButton</value>
   </data>
-  <data name="&gt;&gt;CreateLibraryButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;SaveLibraryButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;CreateLibraryButton.Parent" xml:space="preserve">
+  <data name="&gt;&gt;SaveLibraryButton.Parent" xml:space="preserve">
     <value>CollectionEditGB</value>
   </data>
-  <data name="&gt;&gt;CreateLibraryButton.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;SaveLibraryButton.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="AddMoreFieldsButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">

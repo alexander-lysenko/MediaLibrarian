@@ -228,58 +228,58 @@
   <data name="&gt;&gt;OK_Button.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="CancelButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="Cancel_Button.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="CancelButton.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="Cancel_Button.Location" type="System.Drawing.Point, System.Drawing">
     <value>456, 415</value>
   </data>
-  <data name="CancelButton.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="Cancel_Button.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
-  <data name="CancelButton.TabIndex" type="System.Int32, mscorlib">
+  <data name="Cancel_Button.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="CancelButton.Text" xml:space="preserve">
+  <data name="Cancel_Button.Text" xml:space="preserve">
     <value>Отмена</value>
   </data>
-  <data name="&gt;&gt;CancelButton.Name" xml:space="preserve">
-    <value>CancelButton</value>
+  <data name="&gt;&gt;Cancel_Button.Name" xml:space="preserve">
+    <value>Cancel_Button</value>
   </data>
-  <data name="&gt;&gt;CancelButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;Cancel_Button.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;CancelButton.Parent" xml:space="preserve">
+  <data name="&gt;&gt;Cancel_Button.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;CancelButton.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;Cancel_Button.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="ApplyButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="Apply_Button.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="ApplyButton.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="Apply_Button.Location" type="System.Drawing.Point, System.Drawing">
     <value>537, 415</value>
   </data>
-  <data name="ApplyButton.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="Apply_Button.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
-  <data name="ApplyButton.TabIndex" type="System.Int32, mscorlib">
+  <data name="Apply_Button.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="ApplyButton.Text" xml:space="preserve">
+  <data name="Apply_Button.Text" xml:space="preserve">
     <value>Применить</value>
   </data>
-  <data name="&gt;&gt;ApplyButton.Name" xml:space="preserve">
-    <value>ApplyButton</value>
+  <data name="&gt;&gt;Apply_Button.Name" xml:space="preserve">
+    <value>Apply_Button</value>
   </data>
-  <data name="&gt;&gt;ApplyButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;Apply_Button.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ApplyButton.Parent" xml:space="preserve">
+  <data name="&gt;&gt;Apply_Button.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;ApplyButton.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;Apply_Button.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
