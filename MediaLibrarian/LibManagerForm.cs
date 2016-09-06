@@ -4,6 +4,8 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Data.SQLite;
 using System.Data.Common;
+using System.Data.SqlClient;
+using System.Data;
 
 namespace MediaLibrarian
 {
@@ -34,7 +36,7 @@ namespace MediaLibrarian
                 case "VARCHAR(128)": return 200;    //Строка
                 case "TEXT": return 300;            //Текст
                 case "VARCHAR(20)": return 120;     //Поле дата
-                case "DATETIME": return 120;        //Поле дата+время
+                case "CHAR(20)": return 120;        //Поле дата+время
                 case "CHAR(5)": return 90;          //Поле оценка (5)
                 case "CHAR(10)": return 90;         //Поле оценка (10)
                 case "VARCHAR(10)": return 90;      //Поле приоритет
@@ -48,9 +50,9 @@ namespace MediaLibrarian
                 case 0: return "VARCHAR(128)";      //Строка
                 case 1: return "TEXT";              //Текст
                 case 2: return "VARCHAR(20)";       //Поле дата
-                case 3: return "DATETIME";          //Поле дата+время
+                case 3: return "CHAR(20)";          //Поле дата+время
                 case 4: return "CHAR(5)";           //Поле оценка (5)
-                case 5: return "CHAR(10)";           //Поле оценка (10)
+                case 5: return "CHAR(10)";          //Поле оценка (10)
                 case 6: return "VARCHAR(10)";       //Поле приоритет
                 default: return "VARCHAR(128)";
             }
@@ -65,7 +67,7 @@ namespace MediaLibrarian
             {
                 List<string> ColsList = new List<string>();
                 ListViewItem Lib = new ListViewItem(table["name"].ToString());
-                SQLiteCommand GetColumns = new SQLiteCommand(string.Format("pragma table_info('{0}');", table["name"]), connection);
+                SQLiteCommand GetColumns = new SQLiteCommand(string.Format("pragma table_info(`{0}`);", table["name"]), connection);
                 SQLiteDataReader ReadCols = GetColumns.ExecuteReader();
                 foreach (DbDataRecord col in ReadCols)
                 {
@@ -78,14 +80,22 @@ namespace MediaLibrarian
         }
         private void ReadTableFromDatabase(string TableName)
         {
-            SQLiteCommand ReadTable = new SQLiteCommand(String.Format("select * from {0}", TableName) , connection);
+            SQLiteCommand ReadTable = new SQLiteCommand(String.Format("select * from `{0}`", TableName), connection);
+            DataTable data = new DataTable();
             connection.Open();
             SQLiteDataReader reader = ReadTable.ExecuteReader();
-            foreach (var record in reader)
-            {
-                MessageBox.Show(record.ToString());
-            }
+            data.Load(reader);
+            reader.Close();
             connection.Close();
+            foreach (DataRow row in data.Rows)
+            {
+                ListViewItem item = new ListViewItem(row[0].ToString());
+                for (int i = 1; i < data.Columns.Count; i++)
+                {
+                    item.SubItems.Add(row[i].ToString());
+                }
+                MainForm.Collection.Items.Add(item);
+            }
         }
         private void LibManagerForm_Load(object sender, EventArgs e)
         {
@@ -239,7 +249,7 @@ namespace MediaLibrarian
                 MainForm.Collection.Columns.Add(col["name"].ToString(), GetColumnLength(col["type"].ToString()));
             }
             connection.Close();
-            //ReadTableFromDatabase(LibsList.FocusedItem.Text);
+            ReadTableFromDatabase(LibsList.FocusedItem.Text);
             this.Close();
         }
         private void LibManagerForm_KeyDown(object sender, KeyEventArgs e)

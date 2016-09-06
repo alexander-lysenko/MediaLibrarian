@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace MediaLibrarian
@@ -38,6 +40,11 @@ namespace MediaLibrarian
         }
 
         private void EditElementTSMI_Click(object sender, EventArgs e)
+        {
+            EditElementButton.PerformClick();
+        }
+
+        private void Collection_ItemActivate(object sender, EventArgs e)
         {
             EditElementButton.PerformClick();
         }

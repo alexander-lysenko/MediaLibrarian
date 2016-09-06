@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Common;
 using System.Data.SQLite;
 using System.Drawing;
@@ -18,7 +19,6 @@ namespace MediaLibrarian
 
         List<Control> ColumnData = new List<Control>();
         List<Category> ColumnValue = new List<Category>();
-        string CustomDateFormat = "d MMMM yyyy";
         string CustomDateTimeFormat = "d.MM.yyyy, HH:mm:ss";
         static string Database = "baza.db";
         SQLiteConnection connection = new SQLiteConnection(string.Format("Data Source={0};", Database));
@@ -30,7 +30,7 @@ namespace MediaLibrarian
                 case "VARCHAR(128)": MakeATextBox(i); break;        //Строка
                 case "TEXT": MakeATextArea(i); break;               //Текст
                 case "VARCHAR(20)": MakeADateField(i); break;       //Поле дата
-                case "DATETIME": MakeADateTimeField(i); break;      //Поле дата+время
+                case "CHAR(20)": MakeADateTimeField(i); break;      //Поле дата+время
                 case "CHAR(5)": Make5Stars(i); break;               //Поле оценка(5)
                 case "CHAR(10)": Make10Stars(i); break;             //Поле оценка(10)
                 case "VARCHAR(10)": Make10Cubes(i); break;          //Поле приоритет
@@ -39,7 +39,7 @@ namespace MediaLibrarian
         private void GetColumnInfo()
         {
             ColumnData.Clear();
-            SQLiteCommand GetColumns = new SQLiteCommand(string.Format("pragma table_info('{0}');", MainForm.SelectedLibLabel.Text), connection);
+            SQLiteCommand GetColumns = new SQLiteCommand(string.Format("pragma table_info(`{0}`);", MainForm.SelectedLibLabel.Text), connection);
             connection.Open();
             SQLiteDataReader ReadCols = GetColumns.ExecuteReader();
             foreach (DbDataRecord col in ReadCols)
@@ -52,44 +52,89 @@ namespace MediaLibrarian
             }
             connection.Close();
         }
-        private void GetDataFromDatabase(string ElementName, string TableName)
+        private List<string> GetDataFromDatabase(string TableName, string ElementHeaderName, string ElementName)
         {
-            SQLiteCommand GetData = new SQLiteCommand(String.Format("select * from {0} where name={1}", TableName, ElementName), connection);
+            SQLiteCommand GetData = new SQLiteCommand(String.Format("select * from `{0}` where `{1}`=\"{2}\"", TableName, ElementHeaderName, ElementName), connection);
+            DataTable EditString = new DataTable();
+            connection.Open();
+            EditString.Load(GetData.ExecuteReader());
+            connection.Close();
+            List<string> Items = new List<string>();
+            foreach (var item in EditString.Rows[0].ItemArray)
+            {
+                Items.Add(item.ToString());
+            }
+            return Items;
         }
-        private void PushDataIntoCreatedControls()
+        private void PushDataIntoCreatedControls(List<string> Items)
         {
             for (int i = 0; i < ColumnData.Count; i++)
             {
                 switch (ColumnData[i].GetType().ToString())
                 {
                     case "System.Windows.Forms.TextBox": case "System.Windows.Forms.RichTextBox":
-                        ColumnData[i].Text = MainForm.Collection.FocusedItem.SubItems[i].Text; break;
+                        ColumnData[i].Text = Items[i]; break;
                     case "System.Windows.Forms.Panel":
-                        if (MainForm.Collection.FocusedItem.SubItems[i].Text!="0") switch (ColumnData[i].Tag.ToString())
-                        {                            
-                            case "Star5": Star5_Click(ColumnData[i].Controls[int.Parse(MainForm.Collection.FocusedItem.SubItems[i].Text)-1], e); break;
-                            case "Star10": Star10_Click(ColumnData[i].Controls[int.Parse(MainForm.Collection.FocusedItem.SubItems[i].Text)-1], e); break;
-                            case "Cube10": Cube10_Click(ColumnData[i].Controls[int.Parse(MainForm.Collection.FocusedItem.SubItems[i].Text)-1], e); break;
+                        if (!new List<string>(){null, "","0"}.Contains(Items[i])) 
+                            switch (ColumnData[i].Tag.ToString())
+                        {
+                            case "Star5": Star5_Click(ColumnData[i].Controls[int.Parse(Items[i])-1], e); break;
+                            case "Star10": Star10_Click(ColumnData[i].Controls[int.Parse(Items[i])-1], e); break;
+                            case "Cube10": Cube10_Click(ColumnData[i].Controls[int.Parse(Items[i])-1], e); break;
                         }
+                        break;
+                    case "System.Windows.Forms.DateTimePicker": 
+                        try
+                            {
+                                (ColumnData[i] as DateTimePicker).Value = DateTime.Parse(Items[i]);
+                            }
+                        catch (Exception ex) {MessageBox.Show(ex.Message);}
                         break;
                 }
             }
         }
         private void SaveData()
         {
-            ListViewItem Item = new ListViewItem(ColumnData[0].Text);
+            string Names = String.Join("` , `", ColumnValue);
+            string Values = String.Join("\" , \"", ColumnData);
+            SQLiteCommand Verify = new SQLiteCommand(string.Format("select `{0}` from `{1}` where `{0}` = \"{2}\"", 
+                ColumnValue[0].Name, MainForm.SelectedLibLabel.Text, ColumnData[0].Text), connection);
+            SQLiteCommand AddNewItem = new SQLiteCommand(String.Format("insert into `{0}` (`{1}`) values (\"{2}\")",
+                MainForm.SelectedLibLabel.Text, Names, Values));
+            SQLiteCommand EditItem = new SQLiteCommand();
+            connection.Open();
+            SQLiteDataReader reader = Verify.ExecuteReader();
+            if (reader.HasRows && EditMode==false)
+            {
+                MessageBox.Show("Элемент с таким именем уже существует в библиотеке", "Обнаружен дубликат данных", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                connection.Close();
+                return;
+            }
+            connection.Close();
+            if (EditMode) {
+            /*ListViewItem Item = new ListViewItem(ColumnData[0].Text);
             foreach (var control in ColumnData)
             {
                 if (control == ColumnData[0]) continue;
                 Item.SubItems.Add(control.Text);
             }
-            MainForm.Collection.Items.Add(Item);
+            MainForm.Collection.Items.Add(Item);*/
+            }
+            else
+            {
+                //connection.Open();
+                //AddNewItem.ExecuteNonQuery();
+                //connection.Close();
+            }
+            EditMode = false;
+            this.Close();
         }
         private void FormReset()
         {
+            EditMode = false;
             ColumnData.Clear();
             ColumnValue.Clear();
-            EditPanel.Controls.Clear();
+            EditPanel.Controls.Clear();            
         }
 
         #region CreateControls
@@ -127,8 +172,7 @@ namespace MediaLibrarian
                 Size = new Size(150, 20),
                 Margin = new Padding() {Left = 47, Bottom = 5 },
                 Font = new Font("Tahoma", 9),
-                Format = DateTimePickerFormat.Custom,
-                CustomFormat = CustomDateFormat,
+                Format = DateTimePickerFormat.Long,
                 Value = DateTime.Now,
             });
         }
@@ -321,8 +365,7 @@ namespace MediaLibrarian
             }
             if (EditMode)
             {
-                GetDataFromDatabase(MainForm.Collection.FocusedItem.Text, MainForm.SelectedLibLabel.Text);
-                PushDataIntoCreatedControls();
+                PushDataIntoCreatedControls(GetDataFromDatabase(MainForm.SelectedLibLabel.Text, ColumnValue[0].Name, MainForm.Collection.FocusedItem.Text));
             }
         }
         private void EditForm_KeyDown(object sender, KeyEventArgs e)
@@ -336,7 +379,7 @@ namespace MediaLibrarian
         private void SaveButton_Click(object sender, EventArgs e)
         {
             SaveData();
-            this.Close();
+            //this.Close();
         }
         private void CancelButton_Click(object sender, EventArgs e)
         {

@@ -87,6 +87,7 @@
             this.Collection.ShowGroups = false;
             this.Collection.UseCompatibleStateImageBehavior = false;
             this.Collection.View = System.Windows.Forms.View.Details;
+            this.Collection.ItemActivate += new System.EventHandler(this.Collection_ItemActivate);
             // 
             // StatusBar
             // 
@@ -292,12 +293,12 @@
             // 
             // ElementActionsGB
             // 
-            resources.ApplyResources(this.ElementActionsGB, "ElementActionsGB");
             this.ElementActionsGB.BackColor = System.Drawing.Color.Transparent;
             this.ElementActionsGB.Controls.Add(this.EditElementButton);
             this.ElementActionsGB.Controls.Add(this.SearchButton);
             this.ElementActionsGB.Controls.Add(this.AddElementButton);
             this.ElementActionsGB.Controls.Add(this.DeleteElementButton);
+            resources.ApplyResources(this.ElementActionsGB, "ElementActionsGB");
             this.ElementActionsGB.Name = "ElementActionsGB";
             this.ElementActionsGB.TabStop = false;
             // 

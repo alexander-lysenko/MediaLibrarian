@@ -65,17 +65,17 @@
             this.OK_Button.UseVisualStyleBackColor = true;
             this.OK_Button.Click += new System.EventHandler(this.OK_Button_Click);
             // 
-            // Cancel_Button
+            // CancelButton
             // 
-            resources.ApplyResources(this.Cancel_Button, "Cancel_Button");
-            this.Cancel_Button.Name = "Cancel_Button";
+            resources.ApplyResources(this.Cancel_Button, "CancelButton");
+            this.Cancel_Button.Name = "CancelButton";
             this.Cancel_Button.UseVisualStyleBackColor = true;
             this.Cancel_Button.Click += new System.EventHandler(this.CancelButton_Click);
             // 
-            // Apply_Button
+            // ApplyButton
             // 
-            resources.ApplyResources(this.Apply_Button, "Apply_Button");
-            this.Apply_Button.Name = "Apply_Button";
+            resources.ApplyResources(this.Apply_Button, "ApplyButton");
+            this.Apply_Button.Name = "ApplyButton";
             this.Apply_Button.UseVisualStyleBackColor = true;
             this.Apply_Button.Click += new System.EventHandler(this.ApplyButton_Click);
             // 
