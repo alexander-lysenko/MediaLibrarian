@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Common;
 using System.Data.SQLite;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace MediaLibrarian
@@ -95,16 +96,16 @@ namespace MediaLibrarian
         }
         private void SaveData()
         {
-            string Names = String.Join("` , `", ColumnValue);
-            string Values = String.Join("\" , \"", ColumnData);
+            string Names = String.Join("` , `", from val in ColumnValue select val.Name);
+            string Values = String.Join("\" , \"", from data in ColumnData select data.Text);
             SQLiteCommand Verify = new SQLiteCommand(string.Format("select `{0}` from `{1}` where `{0}` = \"{2}\"", 
                 ColumnValue[0].Name, MainForm.SelectedLibLabel.Text, ColumnData[0].Text), connection);
             SQLiteCommand AddNewItem = new SQLiteCommand(String.Format("insert into `{0}` (`{1}`) values (\"{2}\")",
-                MainForm.SelectedLibLabel.Text, Names, Values));
-            SQLiteCommand EditItem = new SQLiteCommand();
+                MainForm.SelectedLibLabel.Text, Names, Values), connection);
+            SQLiteCommand EditItem = new SQLiteCommand("", connection);
             connection.Open();
             SQLiteDataReader reader = Verify.ExecuteReader();
-            if (reader.HasRows && EditMode==false)
+            if (reader.HasRows && !EditMode)
             {
                 MessageBox.Show("Элемент с таким именем уже существует в библиотеке", "Обнаружен дубликат данных", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 connection.Close();
@@ -122,9 +123,9 @@ namespace MediaLibrarian
             }
             else
             {
-                //connection.Open();
-                //AddNewItem.ExecuteNonQuery();
-                //connection.Close();
+                connection.Open();
+                AddNewItem.ExecuteNonQuery();
+                connection.Close();
             }
             EditMode = false;
             this.Close();
