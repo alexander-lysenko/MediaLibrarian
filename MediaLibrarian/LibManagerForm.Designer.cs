@@ -34,7 +34,7 @@
             this.CollectionFields = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.LibsListHintLabel = new System.Windows.Forms.Label();
             this.CreateNewLibraryButton = new System.Windows.Forms.Button();
-            this.RemoveCollectionButton = new System.Windows.Forms.Button();
+            this.RemoveLibraryButton = new System.Windows.Forms.Button();
             this.CollectionEditGB = new System.Windows.Forms.GroupBox();
             this.AddFieldsPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.SaveLibraryButton = new System.Windows.Forms.Button();
@@ -82,12 +82,12 @@
             this.CreateNewLibraryButton.UseVisualStyleBackColor = true;
             this.CreateNewLibraryButton.Click += new System.EventHandler(this.CreateNewLibraryButton_Click);
             // 
-            // RemoveCollectionButton
+            // RemoveLibraryButton
             // 
-            resources.ApplyResources(this.RemoveCollectionButton, "RemoveCollectionButton");
-            this.RemoveCollectionButton.Name = "RemoveCollectionButton";
-            this.RemoveCollectionButton.UseVisualStyleBackColor = true;
-            this.RemoveCollectionButton.Click += new System.EventHandler(this.RemoveCollectionButton_Click);
+            resources.ApplyResources(this.RemoveLibraryButton, "RemoveLibraryButton");
+            this.RemoveLibraryButton.Name = "RemoveLibraryButton";
+            this.RemoveLibraryButton.UseVisualStyleBackColor = true;
+            this.RemoveLibraryButton.Click += new System.EventHandler(this.RemoveCollectionButton_Click);
             // 
             // CollectionEditGB
             // 
@@ -123,12 +123,13 @@
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.CollectionEditGB);
-            this.Controls.Add(this.RemoveCollectionButton);
+            this.Controls.Add(this.RemoveLibraryButton);
             this.Controls.Add(this.CreateNewLibraryButton);
             this.Controls.Add(this.LibsListHintLabel);
             this.Controls.Add(this.LibsList);
             this.KeyPreview = true;
             this.Name = "LibManagerForm";
+            this.ShowInTaskbar = false;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.LibManagerForm_FormClosing);
             this.Load += new System.EventHandler(this.LibManagerForm_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LibManagerForm_KeyDown);
@@ -143,12 +144,12 @@
         private System.Windows.Forms.ColumnHeader CollectionName;
         private System.Windows.Forms.ColumnHeader CollectionFields;
         private System.Windows.Forms.Label LibsListHintLabel;
-        private System.Windows.Forms.Button CreateNewLibraryButton;
-        private System.Windows.Forms.Button RemoveCollectionButton;
+        private System.Windows.Forms.Button RemoveLibraryButton;
         private System.Windows.Forms.GroupBox CollectionEditGB;
         private System.Windows.Forms.Button AddMoreFieldsButton;
         private System.Windows.Forms.Button SaveLibraryButton;
         public System.Windows.Forms.ListView LibsList;
         private System.Windows.Forms.FlowLayoutPanel AddFieldsPanel;
+        public System.Windows.Forms.Button CreateNewLibraryButton;
     }
 }

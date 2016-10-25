@@ -80,8 +80,9 @@ namespace MediaLibrarian
         }
         public void ReadTableFromDatabase(string TableName)
         {
+            string SelectQuery = String.Format("select * from `{0}` ", TableName);
             mainForm.Collection.Items.Clear();
-            SQLiteCommand ReadTable = new SQLiteCommand(String.Format("select * from `{0}`", TableName), connection);
+            SQLiteCommand ReadTable = new SQLiteCommand(SelectQuery, connection);
             DataTable data = new DataTable();
             connection.Open();
             SQLiteDataReader reader = ReadTable.ExecuteReader();
@@ -191,7 +192,7 @@ namespace MediaLibrarian
             ReadDatabase_ForLibsList();
             CollectionEditGB.Visible = false;
             CreateNewLibraryButton.Enabled = true;
-            RemoveCollectionButton.Enabled = true;
+            RemoveLibraryButton.Enabled = true;
             FormReset();
             Edited = false;
         }
@@ -266,7 +267,7 @@ namespace MediaLibrarian
         {
             switch (e.KeyCode)
             {
-                case Keys.Delete: RemoveCollectionButton.PerformClick(); break;
+                case Keys.Delete: RemoveLibraryButton.PerformClick(); break;
                 case Keys.Escape: FormReset(); break;
             }
         }
@@ -298,7 +299,7 @@ namespace MediaLibrarian
             RemoveButton.Clear();
             FieldPosition = new Point(5, 25);
             CreateNewLibraryButton.Enabled = true;
-            RemoveCollectionButton.Enabled = true;
+            RemoveLibraryButton.Enabled = true;
         }
     }
 }

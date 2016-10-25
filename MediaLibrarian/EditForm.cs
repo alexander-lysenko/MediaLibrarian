@@ -115,6 +115,7 @@ namespace MediaLibrarian
             {
                 EditItem.ExecuteNonQuery();
                 connection.Close();
+                mainForm.StatusLabel.Text = "Элемент \"" + ColumnData[0].Text + "\" изменен";
                 Close();
             }
 
@@ -129,6 +130,7 @@ namespace MediaLibrarian
             {
                 AddNewItem.ExecuteNonQuery();
                 connection.Close();
+                mainForm.StatusLabel.Text = "Добавлен элемент \"" + ColumnData[0].Text + "\"";
                 Close();
             }
         }
@@ -147,9 +149,15 @@ namespace MediaLibrarian
             }
             return true;
         }
-        public void DeleteItem(string ItemName)
+        public void DeleteItem(string ItemType, string ItemName)
         {
-
+            SQLiteCommand DeleteItem = new SQLiteCommand(String.Format("delete from `{0}` where `{1}` = '{2}'", mainForm.SelectedLibLabel.Text,
+                ItemType, ItemName), connection);
+            connection.Open();
+            DeleteItem.ExecuteNonQuery();
+            connection.Close();
+            mainForm.StatusLabel.Text = "Элемент \"" + ItemName + "\" успешно удален";
+            UpdateCollection();
         }
         private void FormReset()
         {
@@ -157,6 +165,12 @@ namespace MediaLibrarian
             ColumnData.Clear();
             ColumnValue.Clear();
             EditPanel.Controls.Clear();         
+        }
+        private void UpdateCollection()
+        {
+            libManagerForm = new LibManagerForm(mainForm);
+            libManagerForm.ReadTableFromDatabase(mainForm.SelectedLibLabel.Text);
+            libManagerForm.Dispose();
         }
 
         #region CreateControls
@@ -387,9 +401,7 @@ namespace MediaLibrarian
                 return;
             }
             if (EditMode) EditItem(); else AddNewItem();
-            libManagerForm = new LibManagerForm(mainForm);
-            libManagerForm.ReadTableFromDatabase(mainForm.SelectedLibLabel.Text);
-            libManagerForm.Dispose();
+            UpdateCollection();
         }
         private void CancelButton_Click(object sender, EventArgs e)
         {
