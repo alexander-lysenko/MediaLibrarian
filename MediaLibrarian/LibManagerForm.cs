@@ -14,9 +14,9 @@ namespace MediaLibrarian
         public LibManagerForm(MainForm FormMain)
         {
             InitializeComponent();
-            MainForm = FormMain;
+            mainForm = FormMain;
         }
-        MainForm MainForm;
+        MainForm mainForm;
         bool Edited = false;
         public const int MaxFC = 20;
         public int FNo = -1;
@@ -78,8 +78,9 @@ namespace MediaLibrarian
             }
             connection.Close();
         }
-        private void ReadTableFromDatabase(string TableName)
+        public void ReadTableFromDatabase(string TableName)
         {
+            mainForm.Collection.Items.Clear();
             SQLiteCommand ReadTable = new SQLiteCommand(String.Format("select * from `{0}`", TableName), connection);
             DataTable data = new DataTable();
             connection.Open();
@@ -94,7 +95,7 @@ namespace MediaLibrarian
                 {
                     item.SubItems.Add(row[i].ToString());
                 }
-                MainForm.Collection.Items.Add(item);
+                mainForm.Collection.Items.Add(item);
             }
         }
         private void LibManagerForm_Load(object sender, EventArgs e)
@@ -126,11 +127,19 @@ namespace MediaLibrarian
                 if (MessageBox.Show("Нажимая \"Удалить библиотеку\", \nВы осознанно принимаете решение удалить выбранную библиотеку\n(" + LibsList.FocusedItem.Text
                     + ")\nцеликом, включая все накопленные в ней элементы.\nПродолжить?", "Очень важное предупреждение", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
+                    if (mainForm.SelectedLibLabel.Text == LibsList.FocusedItem.Text)
+                    {
+                        mainForm.Collection.Clear();
+                        mainForm.SelectedLibLabel.Text = "";
+                        mainForm.ElementActionsGB.Enabled = false;
+                        mainForm.StatusLabel.Text = " Была удалена библиотека \"" + LibsList.FocusedItem.Text + "\"";
+                    }
                     SQLiteCommand DropTable = new SQLiteCommand(String.Format("drop table `{0}`;", LibsList.FocusedItem.Text), connection);
                     connection.Open();
                     DropTable.ExecuteNonQuery();
                     connection.Close();
                     ReadDatabase_ForLibsList();
+
                 }
         }
         private void SaveLibraryButton_Click(object sender, EventArgs e)
@@ -239,18 +248,19 @@ namespace MediaLibrarian
         }
         private void LibsList_ItemActivate(object sender, EventArgs e)
         {
-            MainForm.Collection.Clear();
-            MainForm.SelectedLibLabel.Text = LibsList.FocusedItem.Text;
+            mainForm.Collection.Clear();
+            mainForm.SelectedLibLabel.Text = LibsList.FocusedItem.Text;
             SQLiteCommand GetColumns = new SQLiteCommand(string.Format("pragma table_info('{0}');", LibsList.FocusedItem.Text), connection);
             connection.Open();
             SQLiteDataReader ReadCols = GetColumns.ExecuteReader();
             foreach (DbDataRecord col in ReadCols)
             {
-                MainForm.Collection.Columns.Add(col["name"].ToString(), GetColumnLength(col["type"].ToString()));
+                mainForm.Collection.Columns.Add(col["name"].ToString(), GetColumnLength(col["type"].ToString()));
             }
             connection.Close();
             ReadTableFromDatabase(LibsList.FocusedItem.Text);
             this.Close();
+            mainForm.ElementActionsGB.Enabled = true;
         }
         private void LibManagerForm_KeyDown(object sender, KeyEventArgs e)
         {

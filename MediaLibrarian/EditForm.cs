@@ -14,16 +14,18 @@ namespace MediaLibrarian
         public EditForm(MainForm FormMain)
         {
             InitializeComponent();
-            MainForm = FormMain;            
+            mainForm = FormMain;            
         }
-        MainForm MainForm;
-
+        MainForm mainForm;
+        LibManagerForm libManagerForm;
         List<Control> ColumnData = new List<Control>();
         List<Category> ColumnValue = new List<Category>();
         string CustomDateTimeFormat = "d.MM.yyyy, HH:mm:ss";
         static string Database = "baza.db";
         SQLiteConnection connection = new SQLiteConnection(string.Format("Data Source={0};", Database));
         public bool EditMode = false;
+
+        #region DatabaseAPI
         private void GetControlByType(string type, int i)
         {
             switch (type)
@@ -40,7 +42,7 @@ namespace MediaLibrarian
         private void GetColumnInfo()
         {
             ColumnData.Clear();
-            SQLiteCommand GetColumns = new SQLiteCommand(string.Format("pragma table_info(`{0}`);", MainForm.SelectedLibLabel.Text), connection);
+            SQLiteCommand GetColumns = new SQLiteCommand(string.Format("pragma table_info(`{0}`);", mainForm.SelectedLibLabel.Text), connection);
             connection.Open();
             SQLiteDataReader ReadCols = GetColumns.ExecuteReader();
             foreach (DbDataRecord col in ReadCols)
@@ -94,48 +96,67 @@ namespace MediaLibrarian
                 }
             }
         }
-        private void SaveData()
+        #endregion
+        private void EditItem()
+        {
+            List<string> Names = new List<string>();
+            Names.AddRange(from val in ColumnValue select val.Name);
+            List<string> Values = new List<string>();
+            Values.AddRange(from data in ColumnData select data.Text);
+            string updateQuery = String.Format("update `{0}` set ", mainForm.SelectedLibLabel.Text);
+            for (int i = 0; i < Names.Count; i++)
+            {
+                updateQuery += "`" + Names[i] + "` = '" + Values[i].Replace("'", "''") + "'";
+                if (Names.Count - i > 1) updateQuery += ", ";
+            }
+            updateQuery += " where `" + Names[0] + "` = '" + ColumnData[0].Tag.ToString().Replace("'", "''") + "'";
+            SQLiteCommand EditItem = new SQLiteCommand(updateQuery, connection);
+            if (VerifyItem())
+            {
+                EditItem.ExecuteNonQuery();
+                connection.Close();
+                Close();
+            }
+
+        }
+        private void AddNewItem()
         {
             string Names = String.Join("` , `", from val in ColumnValue select val.Name);
             string Values = String.Join("\" , \"", from data in ColumnData select data.Text);
-            SQLiteCommand Verify = new SQLiteCommand(string.Format("select `{0}` from `{1}` where `{0}` = \"{2}\"", 
-                ColumnValue[0].Name, MainForm.SelectedLibLabel.Text, ColumnData[0].Text), connection);
             SQLiteCommand AddNewItem = new SQLiteCommand(String.Format("insert into `{0}` (`{1}`) values (\"{2}\")",
-                MainForm.SelectedLibLabel.Text, Names, Values), connection);
-            SQLiteCommand EditItem = new SQLiteCommand("", connection);
+                mainForm.SelectedLibLabel.Text, Names, Values), connection);
+            if (VerifyItem())
+            {
+                AddNewItem.ExecuteNonQuery();
+                connection.Close();
+                Close();
+            }
+        }
+        private bool VerifyItem()
+        {
+            SQLiteCommand Verify = new SQLiteCommand(string.Format("select `{0}` from `{1}` where `{0}` = \"{2}\"",
+                ColumnValue[0].Name, mainForm.SelectedLibLabel.Text, ColumnData[0].Text), connection);
             connection.Open();
             SQLiteDataReader reader = Verify.ExecuteReader();
-            if (reader.HasRows && !EditMode)
+            if (reader.HasRows && (ColumnData[0].Tag.ToString() != ColumnData[0].Text))
             {
                 MessageBox.Show("Элемент с таким именем уже существует в библиотеке", "Обнаружен дубликат данных", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 connection.Close();
-                return;
+                this.DialogResult = DialogResult.Abort;
+                return false;
             }
-            connection.Close();
-            if (EditMode) {
-            /*ListViewItem Item = new ListViewItem(ColumnData[0].Text);
-            foreach (var control in ColumnData)
-            {
-                if (control == ColumnData[0]) continue;
-                Item.SubItems.Add(control.Text);
-            }
-            MainForm.Collection.Items.Add(Item);*/
-            }
-            else
-            {
-                connection.Open();
-                AddNewItem.ExecuteNonQuery();
-                connection.Close();
-            }
-            EditMode = false;
-            this.Close();
+            return true;
+        }
+        public void DeleteItem(string ItemName)
+        {
+
         }
         private void FormReset()
         {
             EditMode = false;
             ColumnData.Clear();
             ColumnValue.Clear();
-            EditPanel.Controls.Clear();            
+            EditPanel.Controls.Clear();         
         }
 
         #region CreateControls
@@ -355,6 +376,26 @@ namespace MediaLibrarian
             }
         }
         #endregion
+
+        private void SaveButton_Click(object sender, EventArgs e)
+        {
+            if (ColumnData[0].Text == "")
+            {
+                MessageBox.Show("Графа \"" + ColumnValue[0].Name + "\" должна быть обязательно заполнена",
+                    "Ошибка входных данных", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.DialogResult = DialogResult.Abort;
+                return;
+            }
+            if (EditMode) EditItem(); else AddNewItem();
+            libManagerForm = new LibManagerForm(mainForm);
+            libManagerForm.ReadTableFromDatabase(mainForm.SelectedLibLabel.Text);
+            libManagerForm.Dispose();
+        }
+        private void CancelButton_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
         private void EditForm_Load(object sender, EventArgs e)
         {
             GetColumnInfo();
@@ -366,36 +407,23 @@ namespace MediaLibrarian
             }
             if (EditMode)
             {
-                PushDataIntoCreatedControls(GetDataFromDatabase(MainForm.SelectedLibLabel.Text, ColumnValue[0].Name, MainForm.Collection.FocusedItem.Text));
+                PushDataIntoCreatedControls(GetDataFromDatabase(mainForm.SelectedLibLabel.Text, ColumnValue[0].Name, 
+                    mainForm.Collection.FocusedItem.Text));
             }
+            ColumnData[0].Tag = ColumnData[0].Text;
+        }
+        private void EditForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (this.DialogResult == DialogResult.Abort) e.Cancel = true;
+            else FormReset();
         }
         private void EditForm_KeyDown(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)
             {
                 case Keys.F4: if (e.Alt) MessageBox.Show("Я не закрываюсь! Шутка))"); break;
-                case Keys.Escape: Cancel_Button.PerformClick(); break;
             }
         }
-        private void SaveButton_Click(object sender, EventArgs e)
-        {
-            SaveData();
-            //this.Close();
-        }
-        private void CancelButton_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-        private void EditForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            FormReset();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Star10_Click(ColumnData[5].Controls[6], e);
-        }
-
-        public EventArgs e { get; set; }
+        public EventArgs e { get; set; }        
     }
 }

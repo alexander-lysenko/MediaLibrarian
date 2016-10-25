@@ -31,7 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.Collection = new System.Windows.Forms.ListView();
             this.StatusBar = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.StatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.MainMenu = new System.Windows.Forms.MenuStrip();
             this.FileTSMI = new System.Windows.Forms.ToolStripMenuItem();
             this.OpenLibTSMI = new System.Windows.Forms.ToolStripMenuItem();
@@ -93,15 +93,15 @@
             // 
             this.StatusBar.BackColor = System.Drawing.Color.Transparent;
             this.StatusBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1});
+            this.StatusLabel});
             resources.ApplyResources(this.StatusBar, "StatusBar");
             this.StatusBar.Name = "StatusBar";
             // 
-            // toolStripStatusLabel1
+            // StatusLabel
             // 
-            this.toolStripStatusLabel1.BackColor = System.Drawing.SystemColors.Control;
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            resources.ApplyResources(this.toolStripStatusLabel1, "toolStripStatusLabel1");
+            this.StatusLabel.BackColor = System.Drawing.SystemColors.Control;
+            this.StatusLabel.Name = "StatusLabel";
+            resources.ApplyResources(this.StatusLabel, "StatusLabel");
             // 
             // MainMenu
             // 
@@ -314,6 +314,7 @@
             resources.ApplyResources(this.SearchButton, "SearchButton");
             this.SearchButton.Name = "SearchButton";
             this.SearchButton.UseVisualStyleBackColor = true;
+            this.SearchButton.Click += new System.EventHandler(this.SearchButton_Click);
             // 
             // AddElementButton
             // 
@@ -327,6 +328,7 @@
             resources.ApplyResources(this.DeleteElementButton, "DeleteElementButton");
             this.DeleteElementButton.Name = "DeleteElementButton";
             this.DeleteElementButton.UseVisualStyleBackColor = true;
+            this.DeleteElementButton.Click += new System.EventHandler(this.DeleteElementButton_Click);
             // 
             // ElementInfoGB
             // 
@@ -389,7 +391,6 @@
         #endregion
 
         private System.Windows.Forms.StatusStrip StatusBar;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.MenuStrip MainMenu;
         private System.Windows.Forms.ToolStripMenuItem FileTSMI;
         private System.Windows.Forms.ToolStripMenuItem EditTSMI;
@@ -402,7 +403,6 @@
         private System.Windows.Forms.Label ElementCountHintLabel;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.GroupBox ElementActionsGB;
         private System.Windows.Forms.GroupBox ElementInfoGB;
         private System.Windows.Forms.Button DeleteElementButton;
         private System.Windows.Forms.Button EditElementButton;
@@ -428,6 +428,8 @@
         private System.Windows.Forms.ToolStripMenuItem AboutTSMI;
         public System.Windows.Forms.Label SelectedLibLabel;
         public System.Windows.Forms.ListView Collection;
+        public System.Windows.Forms.ToolStripStatusLabel StatusLabel;
+        public System.Windows.Forms.GroupBox ElementActionsGB;
     }
 }
 

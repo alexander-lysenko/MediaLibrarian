@@ -37,6 +37,7 @@
             // SaveButton
             // 
             resources.ApplyResources(this.SaveButton, "SaveButton");
+            this.SaveButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.SaveButton.Name = "SaveButton";
             this.SaveButton.UseVisualStyleBackColor = true;
             this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);

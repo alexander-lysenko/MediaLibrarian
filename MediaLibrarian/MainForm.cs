@@ -30,24 +30,47 @@ namespace MediaLibrarian
 
         private void Edit_Click(object sender, EventArgs e)
         {
-            EditForm.EditMode = true;
-            EditForm.ShowDialog();
+            if (Collection.SelectedItems.Count > 0)
+            {
+                EditForm.EditMode = true;
+                EditForm.ShowDialog();
+            }
+            else
+            {
+                StatusLabel.Text = "Не выбран элемент для редактирования";
+            }
+        }
+        private void DeleteElementButton_Click(object sender, EventArgs e)
+        {
+            if (Collection.SelectedItems.Count > 0)
+            {
+                EditForm.DeleteItem(Collection.SelectedItems[0].Text);
+            }
+            else
+            {
+                StatusLabel.Text = "Не выбран элемент для удаления";
+            }
+        }
+
+        private void SearchButton_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void PreferencesTSMI_Click(object sender, EventArgs e)
         {
             SettingsForm.ShowDialog();
         }
-
         private void EditElementTSMI_Click(object sender, EventArgs e)
         {
             EditElementButton.PerformClick();
         }
-
         private void Collection_ItemActivate(object sender, EventArgs e)
         {
             EditElementButton.PerformClick();
         }
+
+
 
     }
 }
