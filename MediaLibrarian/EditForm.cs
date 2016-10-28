@@ -78,12 +78,12 @@ namespace MediaLibrarian
                     case "System.Windows.Forms.TextBox": case "System.Windows.Forms.RichTextBox":
                         ColumnData[i].Text = Items[i]; break;
                     case "System.Windows.Forms.Panel":
-                        if (!new List<string>(){null, "","0"}.Contains(Items[i])) 
+                        if (!new List<string>(){null, "", "0"}.Contains(Items[i])) 
                             switch (ColumnData[i].Tag.ToString())
                         {
-                            case "Star5": Star5_Click(ColumnData[i].Controls[int.Parse(Items[i])-1], e); break;
-                            case "Star10": Star10_Click(ColumnData[i].Controls[int.Parse(Items[i])-1], e); break;
-                            case "Cube10": Cube10_Click(ColumnData[i].Controls[int.Parse(Items[i])-1], e); break;
+                            case "Star5" : Star5_Click(ColumnData[i].Controls[GetNumValue(Items[i]) - 1], e); break;
+                            case "Star10": Star10_Click(ColumnData[i].Controls[GetNumValue(Items[i]) - 1], e); break;
+                            case "Cube10": Cube10_Click(ColumnData[i].Controls[GetNumValue(Items[i]) - 1], e); break;
                         }
                         break;
                     case "System.Windows.Forms.DateTimePicker": 
@@ -109,11 +109,17 @@ namespace MediaLibrarian
                 updateQuery += "`" + Names[i] + "` = '" + Values[i].Replace("'", "''") + "'";
                 if (Names.Count - i > 1) updateQuery += ", ";
             }
-            updateQuery += " where `" + Names[0] + "` = '" + ColumnData[0].Tag.ToString().Replace("'", "''") + "'";
-            SQLiteCommand EditItem = new SQLiteCommand(updateQuery, connection);
+            updateQuery += " where `" + Names[0] + "` = '" + ColumnData[0].Tag.ToString().Replace("'", "''") + "'";            
             if (VerifyItem())
             {
-                EditItem.ExecuteNonQuery();
+                SQLiteCommand EditItem = new SQLiteCommand(updateQuery, connection);
+                try { EditItem.ExecuteNonQuery(); }
+                catch (SQLiteException) { 
+                    MessageBox.Show("Доступ к базе временно заблокирован. Попробуйте еще раз",
+                        "ОТшибка ",MessageBoxButtons.OK, MessageBoxIcon.Error); 
+                    connection.Close();
+                    this.DialogResult = DialogResult.Abort;
+                    return; }
                 connection.Close();
                 mainForm.StatusLabel.Text = "Элемент \"" + ColumnData[0].Text + "\" изменен";
                 Close();
@@ -147,6 +153,8 @@ namespace MediaLibrarian
                 this.DialogResult = DialogResult.Abort;
                 return false;
             }
+            reader.Close();
+            reader.Dispose();
             return true;
         }
         public void DeleteItem(string ItemType, string ItemName)
@@ -232,7 +240,6 @@ namespace MediaLibrarian
             Panel Stars5Panel = new Panel()
             {
                 Size = new Size(190, 30),
-                Text = "0",
                 Tag = "Star5"
             };
             for (int ii = 0; ii < 5; ii++)
@@ -258,7 +265,6 @@ namespace MediaLibrarian
             Panel Stars10Panel = new Panel()
             {
                 Size = new Size(195, 30),
-                Text = "0",
                 Tag = "Star10"
             };
             for (int ii = 0; ii < 10; ii++)
@@ -270,7 +276,7 @@ namespace MediaLibrarian
                     FlatStyle = FlatStyle.System,
                     Font = new Font("Tahoma", 14, FontStyle.Bold),
                     ForeColor = Color.Gray,
-                    Text = "★",
+                    Text = "☆",
                     Tag = new int[] {i, StarsList.Count}
                 };
                 Star10.Click += new EventHandler(Star10_Click);
@@ -286,7 +292,6 @@ namespace MediaLibrarian
             {
                 Size = new Size(150, 30),
                 Margin = new Padding() { Left = 42 },
-                Text = "0",
                 Tag = "Cube10"
             };
             for (int ii = 0; ii < 10; ii++)
@@ -317,7 +322,7 @@ namespace MediaLibrarian
             {
                 ColumnData[ColCrd].Controls[0].Text = "☆";
                 ColumnData[ColCrd].Controls[0].ForeColor = Color.Gray;
-                ColumnData[ColCrd].Text = "0";
+                ColumnData[ColCrd].Text = "☆☆☆☆☆";
             }
             else
             {
@@ -328,12 +333,13 @@ namespace MediaLibrarian
                     if (ListCrd == 2) ColumnData[ColCrd].Controls[i].ForeColor = Color.Orange;
                     if (ListCrd > 2) ColumnData[ColCrd].Controls[i].ForeColor = Color.LimeGreen;
                     ColumnData[ColCrd].Controls[i].Text = "★";
+                    ColumnData[ColCrd].Text += "★";
                 }
-                ColumnData[ColCrd].Text = (ListCrd + 1).ToString();
                 for (int j = ColumnData[ColCrd].Controls.Count - 1; j > ListCrd; j--)
                 {
                     ColumnData[ColCrd].Controls[j].ForeColor = Color.Gray;
                     ColumnData[ColCrd].Controls[j].Text = "☆";
+                    ColumnData[ColCrd].Text += "☆";
                 }
             }
         }
@@ -345,22 +351,24 @@ namespace MediaLibrarian
             {
                 ColumnData[ColCrd].Controls[0].Text = "☆";
                 ColumnData[ColCrd].Controls[0].ForeColor = Color.Gray;
-                ColumnData[ColCrd].Text = "0";
+                ColumnData[ColCrd].Text = "☆☆☆☆☆☆☆☆☆☆";
             }
             else
             {
+                ColumnData[ColCrd].Text = "";
                 for (int i = 0; i < ListCrd + 1; i++)
                 {
                     if (ListCrd < 4) ColumnData[ColCrd].Controls[i].ForeColor = Color.Red;
                     if (ListCrd > 3 && ListCrd < 8) ColumnData[ColCrd].Controls[i].ForeColor = Color.Orange;
                     if (ListCrd > 7) ColumnData[ColCrd].Controls[i].ForeColor = Color.LimeGreen;
                     ColumnData[ColCrd].Controls[i].Text = "★";
+                    ColumnData[ColCrd].Text += "★";
                 }
-                ColumnData[ColCrd].Text = (ListCrd + 1).ToString();
                 for (int j = ColumnData[ColCrd].Controls.Count - 1; j > ListCrd; j--)
                 {
                     ColumnData[ColCrd].Controls[j].ForeColor = Color.Gray;
                     ColumnData[ColCrd].Controls[j].Text = "☆";
+                    ColumnData[ColCrd].Text += "☆";
                 }
             }
         }
@@ -372,24 +380,63 @@ namespace MediaLibrarian
             {
                 ColumnData[ColCrd].Controls[0].Text = "▒";
                 ColumnData[ColCrd].Controls[0].ForeColor = Color.Gray;
-                ColumnData[ColCrd].Text = "0";
+                ColumnData[ColCrd].Text = "▒▒▒▒▒▒▒▒▒▒";
             }
             else
             {
+                ColumnData[ColCrd].Text = "";
                 for (int i = 0; i < ListCrd + 1; i++)
                 {
                     ColumnData[ColCrd].Controls[i].ForeColor = Color.SeaGreen;
                     ColumnData[ColCrd].Controls[i].Text = "█";
+                    ColumnData[ColCrd].Text += "█";
                 }
-                ColumnData[ColCrd].Text = (ListCrd + 1).ToString();
                 for (int j = ColumnData[ColCrd].Controls.Count - 1; j > ListCrd; j--)
                 {
                     ColumnData[ColCrd].Controls[j].ForeColor = Color.Gray;
                     ColumnData[ColCrd].Controls[j].Text = "▒";
+                    ColumnData[ColCrd].Text += "▒";
                 }
             }
         }
         #endregion
+        int GetNumValue(string stars)
+        {
+            int digit = 0;
+            switch (stars)
+            {
+                case "☆☆☆☆☆": digit = 0; break;
+                case "☆☆☆☆☆☆☆☆☆☆": digit = 0; break;
+                case "▒▒▒▒▒▒▒▒▒▒": digit = 0; break;
+                case "★☆☆☆☆": digit = 1; break;
+                case "★☆☆☆☆☆☆☆☆☆": digit = 1; break;
+                case "█▒▒▒▒▒▒▒▒▒": digit = 1; break;
+                case "★★☆☆☆": digit = 2; break;
+                case "★★☆☆☆☆☆☆☆": digit = 2; break;
+                case "██▒▒▒▒▒▒▒▒": digit = 2; break;
+                case "★★★☆☆": digit = 3; break;
+                case "★★★☆☆☆☆☆☆☆": digit = 3; break;
+                case "███▒▒▒▒▒▒▒": digit = 3; break;
+                case "★★★★☆": digit = 4; break;
+                case "★★★★☆☆☆☆☆☆": digit = 4; break;
+                case "████▒▒▒▒▒▒": digit = 4; break;
+                case "★★★★★": digit = 5; break;
+                case "★★★★★☆☆☆☆☆": digit = 5; break;
+                case "█████▒▒▒▒▒": digit = 5; break;
+                case "★★★★★★☆☆☆☆": digit = 6; break;
+                case "██████▒▒▒▒": digit = 6; break;
+                case "★★★★★★★☆☆☆": digit = 7; break;
+                case "███████▒▒▒": digit = 7; break;
+                case "★★★★★★★★☆☆": digit = 8; break;
+                case "████████▒▒": digit = 8; break;
+                case "★★★★★★★★★☆": digit = 9; break;
+                case "█████████▒": digit = 9; break;
+                case "★★★★★★★★★★": digit = 10; break;
+                case "██████████": digit = 10; break;
+                default: digit = 1; break;
+            }
+            return digit;
+        }
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
