@@ -208,8 +208,8 @@ namespace MediaLibrarian
             }
             catch (Exception)
             {
-                MessageBox.Show(@"Извините, но этот файл зарезервирован для сохраннения в него информации о текущем элементе." + 
-                "Пожалуйста, выберите другой файл, или вставьте ссылку на другую картинку из Интернета", 
+                MessageBox.Show(@"Извините, но этот файл зарезервирован для сохраннения в него информации о текущем элементе.
+                Пожалуйста, выберите другой файл, или вставьте ссылку на другую картинку из Интернета", 
                     "Ошибка ввода-вывода", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -553,7 +553,7 @@ namespace MediaLibrarian
         }
         private void PosterImageTB_TextChanged(object sender, EventArgs e)
         {
-            if (PosterImageTB.Text == "") { SaveButton.Enabled = true; return; }
+            System.Threading.Thread.Sleep(200);
             LoadingLabel.Text = "Загрузка...";
             SaveButton.Enabled = false;
             if (new Regex("http://|https://|ftp://").IsMatch(PosterImageTB.Text))
@@ -579,19 +579,9 @@ namespace MediaLibrarian
             {
                 if (new Regex(@"^(.+):(\\.*)*\.(.*)$").IsMatch(PosterImageTB.Text) && File.Exists(PosterImageTB.Text))
                 {
-                    try
-                    {
-                        using (FileStream fs = File.OpenRead(PosterImageTB.Text))
-                        {
-                            LoadedBitmap = new Bitmap(fs);
-                        }
-                    }
-                    catch (Exception)
-                    {
-                        return;
-                    }                           
+                    LoadedBitmap = new Bitmap(PosterImageTB.Text);
                     LoadingLabel.Text = "Выбран локальный файл";
-                    SaveButton.Enabled = true;
+                    SaveButton.Enabled = false;
                 }
                 else
                 {

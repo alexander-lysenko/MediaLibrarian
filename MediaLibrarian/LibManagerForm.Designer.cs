@@ -44,7 +44,6 @@
             // 
             // LibsList
             // 
-            this.LibsList.Activation = System.Windows.Forms.ItemActivation.TwoClick;
             resources.ApplyResources(this.LibsList, "LibsList");
             this.LibsList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.CollectionName,

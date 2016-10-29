@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
 namespace MediaLibrarian
@@ -22,16 +23,16 @@ namespace MediaLibrarian
         {
             EditElementButton.PerformClick();
         }
+
+        #region Buttons
         private void SelectCollectionButton_Click(object sender, EventArgs e)
         {
             libManagerForm.ShowDialog();
         }
-
         private void AddElementButton_Click(object sender, EventArgs e)
         {
             editForm.ShowDialog();
         }
-
         private void Edit_Click(object sender, EventArgs e)
         {
             if (Collection.SelectedItems.Count > 0)
@@ -55,12 +56,11 @@ namespace MediaLibrarian
                 StatusLabel.Text = "Не выбран элемент для удаления";
             }
         }
-
         private void SearchButton_Click(object sender, EventArgs e)
         {
-
+            SearchButton.PerformClick();
         }
-
+        #endregion
         #region FileTSM
         private void OpenLibTSMI_Click(object sender, EventArgs e)
         {
@@ -69,8 +69,8 @@ namespace MediaLibrarian
 
         private void CreateLibTSMI_Click(object sender, EventArgs e)
         {
+            libManagerForm.Edited = true;
             libManagerForm.ShowDialog();
-            libManagerForm.CreateNewLibraryButton.PerformClick();
         }
 
         private void ClearLibTSMI_Click(object sender, EventArgs e)
@@ -106,8 +106,12 @@ namespace MediaLibrarian
         #region ViewTSM
         private void AutoSortingTSMI_Click(object sender, EventArgs e)
         {
-            if (AutoSortingTSMI.Checked) AutoSortingTSMI.Checked = false;
-            else AutoSortingTSMI.Checked = true;
+
+        }
+        private void FullScreenTSMI_Click(object sender, EventArgs e)
+        {
+            if (FullScreenTSMI.Checked) WindowState = FormWindowState.Maximized;
+            else WindowState = FormWindowState.Normal;
         }
         private void PreferencesTSMI_Click(object sender, EventArgs e)
         {
@@ -131,6 +135,29 @@ namespace MediaLibrarian
             PictureViewer PV = new PictureViewer();
             PV.ImageBox.Image = PosterBox.Image;
             PV.Show();
+        }
+
+        private void Collection_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            TitleLabel.Text = Collection.FocusedItem.Text;
+            try
+            {
+                using (FileStream fs = File.OpenRead(String.Format(@"{0}\{1}\{2}.jpg", Environment.CurrentDirectory,
+                    ReplaceSymblos(SelectedLibLabel.Text),
+                    ReplaceSymblos(Collection.FocusedItem.Text))))
+                { 
+                    PosterBox.Image = Image.FromStream(fs);
+                }
+            }
+            catch (Exception)
+            {
+                PosterBox.Image = null;
+            }
+        }
+        public string ReplaceSymblos(string str)
+        {
+            str = str.Replace(":", "꞉").Replace("*", "˟").Replace("?", "‽").Replace("\"", "ʺ");
+            return str;
         }
     }
 }

@@ -4,7 +4,6 @@ using System.Data;
 using System.Data.Common;
 using System.Data.SQLite;
 using System.Drawing;
-using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -129,8 +128,6 @@ namespace MediaLibrarian
                     this.DialogResult = DialogResult.Abort;
                     return; }
                 connection.Close();
-                VerifyPicture();
-                SavePicture();
                 mainForm.StatusLabel.Text = "Элемент \"" + ColumnData[0].Text + "\" изменен";
                 Close();
             }
@@ -146,7 +143,6 @@ namespace MediaLibrarian
             {
                 AddNewItem.ExecuteNonQuery();
                 connection.Close();
-                SavePicture();
                 mainForm.StatusLabel.Text = "Добавлен элемент \"" + ColumnData[0].Text + "\"";
                 Close();
             }
@@ -179,41 +175,36 @@ namespace MediaLibrarian
             UpdateCollection();
         }
         #endregion
-        void VerifyPicture()
+        void SavePicture()
         {
             if (PosterImageTB.Text == "")
+            {
                 try
                 {
                     File.Delete(String.Format(@"{0}\{1}\{2}.jpg", Environment.CurrentDirectory,
-                        mainForm.ReplaceSymblos(mainForm.SelectedLibLabel.Text),
-                        mainForm.ReplaceSymblos(ColumnData[0].Text)));
+                        mainForm.SelectedLibLabel.Text, ColumnData[0].Text));
                 }
                 catch (Exception)
                 {
                 }
+            }
+            else
+            {
+            }
         }
-        void SavePicture()
+        string ReplaceSymblos(string str)
         {
-            string NewStr = String.Format(@"{0}\{1}\{2}.jpg", Environment.CurrentDirectory,
-                        mainForm.ReplaceSymblos(mainForm.SelectedLibLabel.Text),
-                        mainForm.ReplaceSymblos(ColumnData[0].Text));
-            string OldStr = String.Format(@"{0}\{1}\{2}.jpg", Environment.CurrentDirectory,
-                        mainForm.ReplaceSymblos(mainForm.SelectedLibLabel.Text),
-                        mainForm.ReplaceSymblos(ColumnData[0].Tag.ToString()));
-            if(File.Exists(OldStr)&&EditMode) File.Move(OldStr, NewStr);
-            try
-            {
-            if(LoadedBitmap!=null)
-                LoadedBitmap.Save(NewStr, ImageFormat.Jpeg);
-            }
-            catch (Exception)
-            {
-                MessageBox.Show(@"Извините, но этот файл зарезервирован для сохраннения в него информации о текущем элементе." + 
-                "Пожалуйста, выберите другой файл, или вставьте ссылку на другую картинку из Интернета", 
-                    "Ошибка ввода-вывода", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            str = str.Replace("\\", "_")
+                .Replace("/", "_")
+                .Replace(":", "_")
+                .Replace("*", "_")
+                .Replace("?", "_")
+                .Replace("\"", "_")
+                .Replace("<", "_")
+                .Replace(">", "_")
+                .Replace("|", "_");
+            return str;
         }
-
 
         #region CreateControls
         void CreateHeaderLabel(int i)
@@ -232,11 +223,11 @@ namespace MediaLibrarian
             TextBox tb = new TextBox()
             {
                 Size = new Size(420, 25),
-                MaxLength = 128
             };
             tb.TextChanged += tb_TextChanged;
             ColumnData.Add(tb);
         }
+
         void MakeATextArea(int i)
         {
             ColumnData.Add(new RichTextBox()
@@ -471,8 +462,7 @@ namespace MediaLibrarian
             EditMode = false;
             ColumnData.Clear();
             ColumnValue.Clear();
-            EditPanel.Controls.Clear();
-            PosterImageTB.Text = "";
+            EditPanel.Controls.Clear();         
         }
         private void UpdateCollection()
         {
@@ -531,10 +521,6 @@ namespace MediaLibrarian
             {
                 PushDataIntoCreatedControls(GetDataFromDatabase(mainForm.SelectedLibLabel.Text, ColumnValue[0].Name, 
                     mainForm.Collection.FocusedItem.Text));
-            string PathToFile = String.Format(@"{0}\{1}\{2}.jpg", Environment.CurrentDirectory,
-                        mainForm.ReplaceSymblos(mainForm.SelectedLibLabel.Text),
-                        mainForm.ReplaceSymblos(ColumnData[0].Text));
-            if (File.Exists(PathToFile)) PosterImageTB.Text = PathToFile;
             }
             ColumnData[0].Tag = ColumnData[0].Text;
             LoadingLabel.Text = "";
@@ -553,9 +539,6 @@ namespace MediaLibrarian
         }
         private void PosterImageTB_TextChanged(object sender, EventArgs e)
         {
-            if (PosterImageTB.Text == "") { SaveButton.Enabled = true; return; }
-            LoadingLabel.Text = "Загрузка...";
-            SaveButton.Enabled = false;
             if (new Regex("http://|https://|ftp://").IsMatch(PosterImageTB.Text))
             {
                 try
@@ -566,7 +549,6 @@ namespace MediaLibrarian
                     {                        
                         LoadedBitmap = new Bitmap(responseStream);
                         LoadingLabel.Text = "Изображение загружено";
-                        SaveButton.Enabled = true;
                     }
                 }
                 catch (Exception ex)
@@ -579,19 +561,8 @@ namespace MediaLibrarian
             {
                 if (new Regex(@"^(.+):(\\.*)*\.(.*)$").IsMatch(PosterImageTB.Text) && File.Exists(PosterImageTB.Text))
                 {
-                    try
-                    {
-                        using (FileStream fs = File.OpenRead(PosterImageTB.Text))
-                        {
-                            LoadedBitmap = new Bitmap(fs);
-                        }
-                    }
-                    catch (Exception)
-                    {
-                        return;
-                    }                           
+                    LoadedBitmap = new Bitmap(PosterImageTB.Text);
                     LoadingLabel.Text = "Выбран локальный файл";
-                    SaveButton.Enabled = true;
                 }
                 else
                 {
@@ -602,8 +573,7 @@ namespace MediaLibrarian
         }
         void tb_TextChanged(object sender, EventArgs e)
         {
-            (sender as TextBox).Text = (sender as TextBox).Text.
-                Replace("<", "").Replace(">", "").Replace("|", "").Replace("/", "").Replace("\\", "");
+            Text = (sender as TextBox).Text;
         }
     }
 }

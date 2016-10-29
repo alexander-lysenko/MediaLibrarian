@@ -6,6 +6,7 @@ using System.Data.SQLite;
 using System.Data.Common;
 using System.Data.SqlClient;
 using System.Data;
+using System.Threading;
 
 namespace MediaLibrarian
 {
@@ -17,7 +18,8 @@ namespace MediaLibrarian
             mainForm = FormMain;
         }
         MainForm mainForm;
-        bool Edited = false;
+
+        public bool Edited = false;
         public const int MaxFC = 20;
         public int FNo = -1;
         public string LibTableHeaders = "";
@@ -104,7 +106,8 @@ namespace MediaLibrarian
             this.Size = new Size(480, 220);
             ReadDatabase_ForLibsList();
             LibsList.TabIndex = 0;
-            if (LibsList.Items.Count > 0) LibsList.Items[0].Focused = true;
+            if (LibsList.Items.Count>0) LibsList.Items[0].Selected = true;
+            if (Edited) CreateNewLibraryButton.PerformClick();
         }
         private void CreateNewLibraryButton_Click(object sender, EventArgs e)
         {
@@ -115,7 +118,7 @@ namespace MediaLibrarian
                 Size = new Size(120, 20),
                 Text = "Название библиотеки"
             });
-            LibNameTB.KeyPress += new KeyPressEventHandler(this.TB_KeyPress);
+            LibNameTB.TextChanged += new EventHandler(this.TB_TextChanged);
             AddFieldsPanel.Controls.Add(LibNameTB);
             AddMoreFieldsButton.PerformClick();
             FieldType[0].Enabled = false;
@@ -133,12 +136,14 @@ namespace MediaLibrarian
                         mainForm.Collection.Clear();
                         mainForm.SelectedLibLabel.Text = "";
                         mainForm.ElementActionsGB.Enabled = false;
-                        mainForm.StatusLabel.Text = " Была удалена библиотека \"" + LibsList.FocusedItem.Text + "\"";
                     }
                     SQLiteCommand DropTable = new SQLiteCommand(String.Format("drop table `{0}`;", LibsList.FocusedItem.Text), connection);
                     connection.Open();
                     DropTable.ExecuteNonQuery();
                     connection.Close();
+                    mainForm.StatusLabel.Text = " Была удалена библиотека \"" + LibsList.FocusedItem.Text + "\"";
+                    System.IO.Directory.Delete(Environment.CurrentDirectory + "\\" +
+                        mainForm.ReplaceSymblos(LibsList.FocusedItem.Text), true);
                     ReadDatabase_ForLibsList();
 
                 }
@@ -188,13 +193,15 @@ namespace MediaLibrarian
                 }
             }
             CreateTable.ExecuteNonQuery();
+            ReadTables.Close();
             connection.Close();
+            System.IO.Directory.CreateDirectory(Environment.CurrentDirectory+"\\" + mainForm.ReplaceSymblos(LibNameTB.Text));
             ReadDatabase_ForLibsList();
-            CollectionEditGB.Visible = false;
-            CreateNewLibraryButton.Enabled = true;
-            RemoveLibraryButton.Enabled = true;
+            CollectionEditGB.Visible = Edited = false;
+            CreateNewLibraryButton.Enabled = RemoveLibraryButton.Enabled = true;
+            mainForm.StatusLabel.Text = " Была создана библиотека \"" + LibNameTB.Text + "\"";
             FormReset();
-            Edited = false;
+            
         }
         private void AddMoreFieldsButton_Click(object sender, EventArgs e)
         {
@@ -209,7 +216,7 @@ namespace MediaLibrarian
                 Size = new Size(210, 20),
             });
             AddFieldsPanel.Controls.Add(FieldName[FNo]);
-            FieldName[FNo].KeyPress += new KeyPressEventHandler(this.TB_KeyPress);
+            FieldName[FNo].TextChanged += new EventHandler(this.TB_TextChanged);
 
             FieldType.Add(new ComboBox()
             {
@@ -284,10 +291,10 @@ namespace MediaLibrarian
             }
             else FormReset();
         }
-        private void TB_KeyPress(object sender, KeyPressEventArgs e)
+        private void TB_TextChanged(object sender, EventArgs e)
         {
-            /*if (e.KeyChar=)
-                e.Handled = true;*/
+            (sender as TextBox).Text = (sender as TextBox).Text.
+                Replace("<", "").Replace(">", "").Replace("|", "").Replace("/", "").Replace("\\", "");
         }
         private void FormReset()
         {

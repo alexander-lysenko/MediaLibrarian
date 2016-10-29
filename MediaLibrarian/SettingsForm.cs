@@ -33,5 +33,15 @@ namespace MediaLibrarian
             Apply_Button.PerformClick();
             Cancel_Button.PerformClick();
         }
+
+        private void SelectedColorLabel_Click(object sender, EventArgs e)
+        {
+            HeaderColorDialog.ShowDialog();
+        }
+
+        private void SelectedFontLabel_Click(object sender, EventArgs e)
+        {
+            HeaderFontDialog.ShowDialog();
+        }
     }
 }

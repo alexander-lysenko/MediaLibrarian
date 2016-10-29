@@ -126,7 +126,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="SaveButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 409</value>
+    <value>12, 448</value>
   </data>
   <data name="SaveButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>216, 23</value>
@@ -148,7 +148,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;SaveButton.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>6</value>
   </data>
   <data name="Cancel_Button.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom</value>
@@ -157,7 +157,7 @@
     <value>NoControl</value>
   </data>
   <data name="Cancel_Button.Location" type="System.Drawing.Point, System.Drawing">
-    <value>236, 409</value>
+    <value>236, 448</value>
   </data>
   <data name="Cancel_Button.Size" type="System.Drawing.Size, System.Drawing">
     <value>216, 23</value>
@@ -178,7 +178,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;Cancel_Button.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>5</value>
   </data>
   <data name="EditPanel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -190,7 +190,7 @@
     <value>12, 12</value>
   </data>
   <data name="EditPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>450, 391</value>
+    <value>450, 366</value>
   </data>
   <data name="EditPanel.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -205,6 +205,136 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;EditPanel.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="PosterHintLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="PosterHintLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="PosterHintLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 381</value>
+  </data>
+  <data name="PosterHintLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>415, 26</value>
+  </data>
+  <data name="PosterHintLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="PosterHintLabel.Text" xml:space="preserve">
+    <value>Постер (Вставье ссылку на картинку или выберите из своих файлов, JPG, PNG)
+Если не нужен, оставьте пустым. Не рекомендуется набирать адрес вручную.</value>
+  </data>
+  <data name="&gt;&gt;PosterHintLabel.Name" xml:space="preserve">
+    <value>PosterHintLabel</value>
+  </data>
+  <data name="&gt;&gt;PosterHintLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PosterHintLabel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;PosterHintLabel.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="PosterImageTB.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="PosterImageTB.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 422</value>
+  </data>
+  <data name="PosterImageTB.MaxLength" type="System.Int32, mscorlib">
+    <value>256</value>
+  </data>
+  <data name="PosterImageTB.Size" type="System.Drawing.Size, System.Drawing">
+    <value>363, 20</value>
+  </data>
+  <data name="PosterImageTB.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;PosterImageTB.Name" xml:space="preserve">
+    <value>PosterImageTB</value>
+  </data>
+  <data name="&gt;&gt;PosterImageTB.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PosterImageTB.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;PosterImageTB.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="SelectImageButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom</value>
+  </data>
+  <data name="SelectImageButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="SelectImageButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>381, 420</value>
+  </data>
+  <data name="SelectImageButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>71, 23</value>
+  </data>
+  <data name="SelectImageButton.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="SelectImageButton.Text" xml:space="preserve">
+    <value>Обзор...</value>
+  </data>
+  <data name="&gt;&gt;SelectImageButton.Name" xml:space="preserve">
+    <value>SelectImageButton</value>
+  </data>
+  <data name="&gt;&gt;SelectImageButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;SelectImageButton.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;SelectImageButton.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <metadata name="OpenFile.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <data name="OpenFile.Filter" xml:space="preserve">
+    <value>Файлы изображений (*.jpg, *.png)|*.jpg;*.png</value>
+  </data>
+  <data name="OpenFile.Title" xml:space="preserve">
+    <value>Выбрать изображение для постера</value>
+  </data>
+  <data name="LoadingLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="LoadingLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="LoadingLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="LoadingLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 406</value>
+  </data>
+  <data name="LoadingLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>63, 13</value>
+  </data>
+  <data name="LoadingLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="LoadingLabel.Text" xml:space="preserve">
+    <value>Загрузка...</value>
+  </data>
+  <data name="&gt;&gt;LoadingLabel.Name" xml:space="preserve">
+    <value>LoadingLabel</value>
+  </data>
+  <data name="&gt;&gt;LoadingLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LoadingLabel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;LoadingLabel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -214,7 +344,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>464, 442</value>
+    <value>464, 481</value>
   </data>
   <data name="$this.MaximumSize" type="System.Drawing.Size, System.Drawing">
     <value>480, 1000</value>
@@ -227,6 +357,12 @@
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Добавление элемента</value>
+  </data>
+  <data name="&gt;&gt;OpenFile.Name" xml:space="preserve">
+    <value>OpenFile</value>
+  </data>
+  <data name="&gt;&gt;OpenFile.Type" xml:space="preserve">
+    <value>System.Windows.Forms.OpenFileDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>EditForm</value>

@@ -32,6 +32,11 @@
             this.SaveButton = new System.Windows.Forms.Button();
             this.Cancel_Button = new System.Windows.Forms.Button();
             this.EditPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.PosterHintLabel = new System.Windows.Forms.Label();
+            this.PosterImageTB = new System.Windows.Forms.TextBox();
+            this.SelectImageButton = new System.Windows.Forms.Button();
+            this.OpenFile = new System.Windows.Forms.OpenFileDialog();
+            this.LoadingLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // SaveButton
@@ -55,11 +60,44 @@
             resources.ApplyResources(this.EditPanel, "EditPanel");
             this.EditPanel.Name = "EditPanel";
             // 
+            // PosterHintLabel
+            // 
+            resources.ApplyResources(this.PosterHintLabel, "PosterHintLabel");
+            this.PosterHintLabel.Name = "PosterHintLabel";
+            // 
+            // PosterImageTB
+            // 
+            resources.ApplyResources(this.PosterImageTB, "PosterImageTB");
+            this.PosterImageTB.Name = "PosterImageTB";
+            this.PosterImageTB.TextChanged += new System.EventHandler(this.PosterImageTB_TextChanged);
+            // 
+            // SelectImageButton
+            // 
+            resources.ApplyResources(this.SelectImageButton, "SelectImageButton");
+            this.SelectImageButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.SelectImageButton.Name = "SelectImageButton";
+            this.SelectImageButton.UseVisualStyleBackColor = true;
+            this.SelectImageButton.Click += new System.EventHandler(this.SelectImageButton_Click);
+            // 
+            // OpenFile
+            // 
+            resources.ApplyResources(this.OpenFile, "OpenFile");
+            // 
+            // LoadingLabel
+            // 
+            resources.ApplyResources(this.LoadingLabel, "LoadingLabel");
+            this.LoadingLabel.ForeColor = System.Drawing.Color.Blue;
+            this.LoadingLabel.Name = "LoadingLabel";
+            // 
             // EditForm
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.Cancel_Button;
+            this.Controls.Add(this.LoadingLabel);
+            this.Controls.Add(this.SelectImageButton);
+            this.Controls.Add(this.PosterImageTB);
+            this.Controls.Add(this.PosterHintLabel);
             this.Controls.Add(this.EditPanel);
             this.Controls.Add(this.Cancel_Button);
             this.Controls.Add(this.SaveButton);
@@ -73,6 +111,7 @@
             this.Load += new System.EventHandler(this.EditForm_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.EditForm_KeyDown);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -81,5 +120,10 @@
         private System.Windows.Forms.Button SaveButton;
         private System.Windows.Forms.Button Cancel_Button;
         private System.Windows.Forms.FlowLayoutPanel EditPanel;
+        private System.Windows.Forms.Label PosterHintLabel;
+        private System.Windows.Forms.TextBox PosterImageTB;
+        private System.Windows.Forms.Button SelectImageButton;
+        private System.Windows.Forms.OpenFileDialog OpenFile;
+        private System.Windows.Forms.Label LoadingLabel;
     }
 }

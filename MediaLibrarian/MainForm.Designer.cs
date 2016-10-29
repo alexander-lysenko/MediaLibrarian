@@ -47,6 +47,7 @@
             this.FindElementTSMI = new System.Windows.Forms.ToolStripMenuItem();
             this.ViewTSMI = new System.Windows.Forms.ToolStripMenuItem();
             this.AutoSortingTSMI = new System.Windows.Forms.ToolStripMenuItem();
+            this.FullScreenTSMI = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.PreferencesTSMI = new System.Windows.Forms.ToolStripMenuItem();
             this.HelpAboutTSMI = new System.Windows.Forms.ToolStripMenuItem();
@@ -89,6 +90,7 @@
             this.Collection.UseCompatibleStateImageBehavior = false;
             this.Collection.View = System.Windows.Forms.View.Details;
             this.Collection.ItemActivate += new System.EventHandler(this.Collection_ItemActivate);
+            this.Collection.SelectedIndexChanged += new System.EventHandler(this.Collection_SelectedIndexChanged);
             // 
             // StatusBar
             // 
@@ -134,8 +136,8 @@
             // 
             // CreateLibTSMI
             // 
-            this.CreateLibTSMI.Name = "CreateLibTSMI";
             resources.ApplyResources(this.CreateLibTSMI, "CreateLibTSMI");
+            this.CreateLibTSMI.Name = "CreateLibTSMI";
             this.CreateLibTSMI.Click += new System.EventHandler(this.CreateLibTSMI_Click);
             // 
             // ClearLibTSMI
@@ -199,6 +201,7 @@
             // 
             this.ViewTSMI.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.AutoSortingTSMI,
+            this.FullScreenTSMI,
             this.toolStripSeparator3,
             this.PreferencesTSMI});
             this.ViewTSMI.Name = "ViewTSMI";
@@ -206,9 +209,17 @@
             // 
             // AutoSortingTSMI
             // 
+            this.AutoSortingTSMI.CheckOnClick = true;
             this.AutoSortingTSMI.Name = "AutoSortingTSMI";
             resources.ApplyResources(this.AutoSortingTSMI, "AutoSortingTSMI");
             this.AutoSortingTSMI.Click += new System.EventHandler(this.AutoSortingTSMI_Click);
+            // 
+            // FullScreenTSMI
+            // 
+            this.FullScreenTSMI.CheckOnClick = true;
+            this.FullScreenTSMI.Name = "FullScreenTSMI";
+            resources.ApplyResources(this.FullScreenTSMI, "FullScreenTSMI");
+            this.FullScreenTSMI.Click += new System.EventHandler(this.FullScreenTSMI_Click);
             // 
             // toolStripSeparator3
             // 
@@ -420,8 +431,6 @@
         private System.Windows.Forms.Label HintLabel;
         private System.Windows.Forms.Button SelectCollectionButton;
         private System.Windows.Forms.GroupBox LibInfoGB;
-        private System.Windows.Forms.Label ElementCount;
-        private System.Windows.Forms.Label ElementCountHintLabel;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.GroupBox ElementInfoGB;
         private System.Windows.Forms.Button DeleteElementButton;
@@ -452,6 +461,9 @@
         public System.Windows.Forms.ToolStripMenuItem AutoSortingTSMI;
         private System.Windows.Forms.Label TitleLabel;
         private System.Windows.Forms.Label TitleHeaderLabel;
+        private System.Windows.Forms.ToolStripMenuItem FullScreenTSMI;
+        private System.Windows.Forms.Label ElementCount;
+        private System.Windows.Forms.Label ElementCountHintLabel;
     }
 }
 
