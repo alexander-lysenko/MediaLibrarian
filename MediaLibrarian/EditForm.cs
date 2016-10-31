@@ -25,10 +25,10 @@ namespace MediaLibrarian
         List<Control> ColumnData = new List<Control>();
         List<Category> ColumnValue = new List<Category>();
         string CustomDateTimeFormat = "d.MM.yyyy, HH:mm:ss";
-        static string Database = "baza.db";
-        SQLiteConnection connection = new SQLiteConnection(string.Format("Data Source={0};", Database));
+        static string database = "baza.db";
+        SQLiteConnection connection = new SQLiteConnection(string.Format("Data Source={0};", database));
         public bool EditMode = false;
-        Bitmap LoadedBitmap = null;
+        Bitmap loadedBitmap = null;
         public EventArgs e { get; set; }
 
         #region DatabaseAPI
@@ -129,7 +129,6 @@ namespace MediaLibrarian
                     this.DialogResult = DialogResult.Abort;
                     return; }
                 connection.Close();
-                VerifyPicture();
                 SavePicture();
                 mainForm.StatusLabel.Text = "Элемент \"" + ColumnData[0].Text + "\" изменен";
                 Close();
@@ -175,43 +174,68 @@ namespace MediaLibrarian
             connection.Open();
             DeleteItem.ExecuteNonQuery();
             connection.Close();
+            string PathToPoster = String.Format(@"{0}\{1}\{2}.jpg", Environment.CurrentDirectory,
+                        mainForm.ReplaceSymblos(mainForm.SelectedLibLabel.Text),
+                        mainForm.ReplaceSymblos(ItemName));
+            if (File.Exists(PathToPoster)) File.Delete(PathToPoster);
             mainForm.StatusLabel.Text = "Элемент \"" + ItemName + "\" успешно удален";
             UpdateCollection();
         }
         #endregion
-        void VerifyPicture()
+
+
+        void DownloadPicture(string address)
         {
-            if (PosterImageTB.Text == "")
-                try
+            LoadingLabel.Text = "Загрузка...";
+            try
+            {
+                var request = System.Net.WebRequest.Create(address);
+                var response = request.GetResponse();
+                using (var responseStream = response.GetResponseStream())
                 {
-                    File.Delete(String.Format(@"{0}\{1}\{2}.jpg", Environment.CurrentDirectory,
-                        mainForm.ReplaceSymblos(mainForm.SelectedLibLabel.Text),
-                        mainForm.ReplaceSymblos(ColumnData[0].Text)));
+                    loadedBitmap = new Bitmap(responseStream);
+                    LoadingLabel.Text = "Изображение загружено";
+                    SaveButton.Enabled = true;
                 }
-                catch (Exception)
-                {
-                }
+            }
+            catch (Exception ex)
+            {
+                LoadingLabel.Text = ex.Message;
+                loadedBitmap = null;
+            }
         }
         void SavePicture()
         {
-            string NewStr = String.Format(@"{0}\{1}\{2}.jpg", Environment.CurrentDirectory,
+            string newStr = String.Format(@"{0}\{1}\{2}.jpg", Environment.CurrentDirectory,
                         mainForm.ReplaceSymblos(mainForm.SelectedLibLabel.Text),
                         mainForm.ReplaceSymblos(ColumnData[0].Text));
-            string OldStr = String.Format(@"{0}\{1}\{2}.jpg", Environment.CurrentDirectory,
+            string oldStr = String.Format(@"{0}\{1}\{2}.jpg", Environment.CurrentDirectory,
                         mainForm.ReplaceSymblos(mainForm.SelectedLibLabel.Text),
                         mainForm.ReplaceSymblos(ColumnData[0].Tag.ToString()));
-            if(File.Exists(OldStr)&&EditMode) File.Move(OldStr, NewStr);
-            try
-            {
-            if(LoadedBitmap!=null)
-                LoadedBitmap.Save(NewStr, ImageFormat.Jpeg);
-            }
-            catch (Exception)
-            {
-                MessageBox.Show(@"Извините, но этот файл зарезервирован для сохраннения в него информации о текущем элементе." + 
-                "Пожалуйста, выберите другой файл, или вставьте ссылку на другую картинку из Интернета", 
-                    "Ошибка ввода-вывода", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            if (PosterImageTB.Text == "")
+                try
+                {
+                    File.Delete(newStr);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }            
+            if(File.Exists(oldStr)&&EditMode) File.Move(oldStr, newStr);
+            if (loadedBitmap != null)
+                try
+                {
+                    using (loadedBitmap)
+                    {
+                        loadedBitmap.Save(newStr, ImageFormat.Jpeg);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, ex.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    DialogResult = DialogResult.Abort;
+                }
+            else return;
         }
 
 
@@ -473,6 +497,7 @@ namespace MediaLibrarian
             ColumnValue.Clear();
             EditPanel.Controls.Clear();
             PosterImageTB.Text = "";
+            LoadingLabel.Text = "";
         }
         private void UpdateCollection()
         {
@@ -531,13 +556,16 @@ namespace MediaLibrarian
             {
                 PushDataIntoCreatedControls(GetDataFromDatabase(mainForm.SelectedLibLabel.Text, ColumnValue[0].Name, 
                     mainForm.Collection.FocusedItem.Text));
-            string PathToFile = String.Format(@"{0}\{1}\{2}.jpg", Environment.CurrentDirectory,
+                string PathToFile = String.Format(@"{0}\{1}\{2}.jpg", Environment.CurrentDirectory,
                         mainForm.ReplaceSymblos(mainForm.SelectedLibLabel.Text),
                         mainForm.ReplaceSymblos(ColumnData[0].Text));
-            if (File.Exists(PathToFile)) PosterImageTB.Text = PathToFile;
+                if (File.Exists(PathToFile))
+                {
+                    PosterImageTB.Text = PathToFile;
+                    PosterImageTB_TextChanged(PosterImageTB, null);
+                }
             }
             ColumnData[0].Tag = ColumnData[0].Text;
-            LoadingLabel.Text = "";
         }
         private void EditForm_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -554,49 +582,33 @@ namespace MediaLibrarian
         private void PosterImageTB_TextChanged(object sender, EventArgs e)
         {
             if (PosterImageTB.Text == "") { SaveButton.Enabled = true; return; }
-            LoadingLabel.Text = "Загрузка...";
             SaveButton.Enabled = false;
             if (new Regex("http://|https://|ftp://").IsMatch(PosterImageTB.Text))
-            {
-                try
-                {
-                    var request = System.Net.WebRequest.Create(PosterImageTB.Text);
-                    var response = request.GetResponse();
-                    using (var responseStream = response.GetResponseStream())
-                    {                        
-                        LoadedBitmap = new Bitmap(responseStream);
-                        LoadingLabel.Text = "Изображение загружено";
-                        SaveButton.Enabled = true;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    LoadingLabel.Text = ex.Message;
-                    LoadedBitmap = null;
-                }
-            }
+                DownloadPicture(PosterImageTB.Text);           
             else 
             {
                 if (new Regex(@"^(.+):(\\.*)*\.(.*)$").IsMatch(PosterImageTB.Text) && File.Exists(PosterImageTB.Text))
                 {
                     try
                     {
-                        using (FileStream fs = File.OpenRead(PosterImageTB.Text))
+                        using (FileStream localfileStream = File.Open(PosterImageTB.Text, 
+                            FileMode.Open, FileAccess.Read, FileShare.Read))
                         {
-                            LoadedBitmap = new Bitmap(fs);
+                            loadedBitmap = new Bitmap(localfileStream);                           
+                            LoadingLabel.Text = "Выбран локальный файл";
+                            SaveButton.Enabled = true;
                         }
                     }
-                    catch (Exception)
+                    catch (Exception ex)
                     {
-                        return;
-                    }                           
-                    LoadingLabel.Text = "Выбран локальный файл";
-                    SaveButton.Enabled = true;
+                        LoadingLabel.Text = ex.Message;
+                        loadedBitmap = null;
+                    }
                 }
                 else
                 {
                     LoadingLabel.Text = "Файл не найден";
-                    LoadedBitmap = null;
+                    loadedBitmap = null;
                 }
             }
         }
