@@ -80,6 +80,7 @@ namespace MediaLibrarian
             }
             connection.Close();
         }
+
         public void ReadTableFromDatabase(string TableName)
         {
             string SelectQuery = String.Format("select * from `{0}` ", TableName);
@@ -109,6 +110,7 @@ namespace MediaLibrarian
             if (LibsList.Items.Count>0) LibsList.Items[0].Selected = true;
             if (Edited) CreateNewLibraryButton.PerformClick();
         }
+        #region Buttons
         private void CreateNewLibraryButton_Click(object sender, EventArgs e)
         {
             AddFieldsPanel.Controls.Clear();
@@ -142,8 +144,12 @@ namespace MediaLibrarian
                     DropTable.ExecuteNonQuery();
                     connection.Close();
                     mainForm.StatusLabel.Text = " Была удалена библиотека \"" + LibsList.FocusedItem.Text + "\"";
+                    try { 
                     System.IO.Directory.Delete(Environment.CurrentDirectory + "\\" +
                         mainForm.ReplaceSymblos(LibsList.FocusedItem.Text), true);
+                    }
+                    catch(Exception)
+                    {}
                     ReadDatabase_ForLibsList();
 
                 }
@@ -254,9 +260,11 @@ namespace MediaLibrarian
             AddFieldsPanel.Controls.Remove(RemoveButton[In]);
             RemoveButton.Remove(RemoveButton[In]);
         }
+        #endregion
         private void LibsList_ItemActivate(object sender, EventArgs e)
         {
             mainForm.Collection.Clear();
+            mainForm.columnsInfo.Clear();
             mainForm.SelectedLibLabel.Text = LibsList.FocusedItem.Text;
             SQLiteCommand GetColumns = new SQLiteCommand(string.Format("pragma table_info('{0}');", LibsList.FocusedItem.Text), connection);
             connection.Open();
@@ -264,6 +272,11 @@ namespace MediaLibrarian
             foreach (DbDataRecord col in ReadCols)
             {
                 mainForm.Collection.Columns.Add(col["name"].ToString(), GetColumnLength(col["type"].ToString()));
+                mainForm.columnsInfo.Add(new Category
+                {
+                    Name = col["name"].ToString(),
+                    Type = col["type"].ToString()
+                });
             }
             connection.Close();
             ReadTableFromDatabase(LibsList.FocusedItem.Text);

@@ -18,11 +18,17 @@ namespace MediaLibrarian
         LibManagerForm libManagerForm;
         EditForm editForm;
         SettingsForm settingsForm;
-        
-        private void Collection_ItemActivate(object sender, EventArgs e)
+        public List<Category> columnsInfo = new List<Category>();
+        int LO;     //LocationOffset
+
+        void LoadItemInfo()
         {
-            EditElementButton.PerformClick();
+            LO = 5;
+
         }
+
+
+
 
         #region Buttons
         private void SelectCollectionButton_Click(object sender, EventArgs e)
@@ -137,9 +143,14 @@ namespace MediaLibrarian
             PV.Show();
         }
 
+        private void Collection_ItemActivate(object sender, EventArgs e)
+        {
+            EditElementButton.PerformClick();
+        }
         private void Collection_SelectedIndexChanged(object sender, EventArgs e)
         {
             TitleLabel.Text = Collection.FocusedItem.Text;
+            TitleHeaderLabel.Text = Collection.Columns[0].Text;
             try
             {
                 using (FileStream fs = File.OpenRead(String.Format(@"{0}\{1}\{2}.jpg", Environment.CurrentDirectory,
@@ -153,11 +164,31 @@ namespace MediaLibrarian
             {
                 PosterBox.Image = null;
             }
+            LoadItemInfo();
         }
         public string ReplaceSymblos(string str)
         {
             str = str.Replace(":", "꞉").Replace("*", "˟").Replace("?", "‽").Replace("\"", "ʺ");
             return str;
         }
+
+
+        void CreateHeader()
+        {
+            Label HeaderLabel = new Label() 
+            {
+                Location = new Point(3, ),
+            };
+        }
+        void CreateStringLabel()
+        { }
+        void CreateTextLabel()
+        { }
+        void CreateDateTimeLabel()
+        { }
+        void CreateMarkLabel()
+        { }
+        void CreatePriorityLabel()
+        { }
     }
 }

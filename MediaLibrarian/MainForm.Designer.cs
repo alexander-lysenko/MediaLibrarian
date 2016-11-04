@@ -372,6 +372,7 @@
             // 
             // PosterBox
             // 
+            this.PosterBox.BackgroundImage = global::MediaLibrarian.Properties.Resources.noposter;
             resources.ApplyResources(this.PosterBox, "PosterBox");
             this.PosterBox.Name = "PosterBox";
             this.PosterBox.TabStop = false;
