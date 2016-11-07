@@ -291,8 +291,9 @@ namespace MediaLibrarian
                 {
                     Size = new Size(25, 30),
                     Location = new Point(ii * 25 + 65, 0),
-                    Font = new Font("Tahoma", 16, FontStyle.Bold),
+                    Font = new Font("Lucida Console", 25f, FontStyle.Bold),
                     ForeColor = Color.Gray,
+                    TextAlign = ContentAlignment.TopLeft,
                     Text = "☆",
                     Tag = new int[] {i , StarsList.Count}
                 };
@@ -317,8 +318,9 @@ namespace MediaLibrarian
                     Size = new Size(20, 30),
                     Location = new Point(ii * 19 + 2, 0),
                     FlatStyle = FlatStyle.System,
-                    Font = new Font("Tahoma", 14, FontStyle.Bold),
+                    Font = new Font("Lucida Console", 25f, FontStyle.Bold),
                     ForeColor = Color.Gray,
+                    TextAlign = ContentAlignment.TopLeft,
                     Text = "☆",
                     Tag = new int[] {i, StarsList.Count}
                 };

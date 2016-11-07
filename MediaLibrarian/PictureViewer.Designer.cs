@@ -36,7 +36,6 @@
             // 
             this.ImageBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ImageBox.Location = new System.Drawing.Point(0, 0);
-            this.ImageBox.MaximumSize = new System.Drawing.Size(720, 720);
             this.ImageBox.Name = "ImageBox";
             this.ImageBox.Size = new System.Drawing.Size(400, 400);
             this.ImageBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -53,11 +52,11 @@
             this.Controls.Add(this.ImageBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.KeyPreview = true;
-            this.MaximumSize = new System.Drawing.Size(720, 720);
+            this.MaximumSize = new System.Drawing.Size(1366, 768);
             this.Name = "PictureViewer";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PictureViewer";
-            this.TransparencyKey = System.Drawing.Color.White;
+            this.TransparencyKey = System.Drawing.Color.Transparent;
             this.Deactivate += new System.EventHandler(this.PictureViewer_Deactivate);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.PictureViewer_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.ImageBox)).EndInit();

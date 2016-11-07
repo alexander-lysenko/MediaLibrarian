@@ -31,10 +31,15 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsForm));
             this.Tabs = new System.Windows.Forms.TabControl();
             this.GeneralPage = new System.Windows.Forms.TabPage();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.picMaxHeightNUD = new System.Windows.Forms.NumericUpDown();
+            this.picMaxWidthNUD = new System.Windows.Forms.NumericUpDown();
+            this.MaximumViewSizeChk = new System.Windows.Forms.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.FocusFirstItemCB = new System.Windows.Forms.CheckBox();
-            this.RememberLastLibraryCB = new System.Windows.Forms.CheckBox();
-            this.MaximumViewSizeCB = new System.Windows.Forms.CheckBox();
+            this.focusFirstItemChk = new System.Windows.Forms.CheckBox();
+            this.rememberLastLibraryChk = new System.Windows.Forms.CheckBox();
             this.UIPage = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.checkBox7 = new System.Windows.Forms.CheckBox();
@@ -45,9 +50,9 @@
             this.SelectedColorLabel = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.formCaptionTB = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.selectThemeCB = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
@@ -56,20 +61,15 @@
             this.Apply_Button = new System.Windows.Forms.Button();
             this.HeaderColorDialog = new System.Windows.Forms.ColorDialog();
             this.HeaderFontDialog = new System.Windows.Forms.FontDialog();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
             this.Tabs.SuspendLayout();
             this.GeneralPage.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picMaxHeightNUD)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picMaxWidthNUD)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.UIPage.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.groupBox4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.SuspendLayout();
             // 
             // Tabs
@@ -91,31 +91,92 @@
             this.GeneralPage.Name = "GeneralPage";
             this.GeneralPage.UseVisualStyleBackColor = true;
             // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.label7);
+            this.groupBox4.Controls.Add(this.label6);
+            this.groupBox4.Controls.Add(this.picMaxHeightNUD);
+            this.groupBox4.Controls.Add(this.picMaxWidthNUD);
+            this.groupBox4.Controls.Add(this.MaximumViewSizeChk);
+            resources.ApplyResources(this.groupBox4, "groupBox4");
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.TabStop = false;
+            // 
+            // label7
+            // 
+            resources.ApplyResources(this.label7, "label7");
+            this.label7.Name = "label7";
+            // 
+            // label6
+            // 
+            resources.ApplyResources(this.label6, "label6");
+            this.label6.Name = "label6";
+            // 
+            // picMaxHeightNUD
+            // 
+            resources.ApplyResources(this.picMaxHeightNUD, "picMaxHeightNUD");
+            this.picMaxHeightNUD.Maximum = new decimal(new int[] {
+            720,
+            0,
+            0,
+            0});
+            this.picMaxHeightNUD.Minimum = new decimal(new int[] {
+            480,
+            0,
+            0,
+            0});
+            this.picMaxHeightNUD.Name = "picMaxHeightNUD";
+            this.picMaxHeightNUD.Value = new decimal(new int[] {
+            720,
+            0,
+            0,
+            0});
+            // 
+            // picMaxWidthNUD
+            // 
+            resources.ApplyResources(this.picMaxWidthNUD, "picMaxWidthNUD");
+            this.picMaxWidthNUD.Maximum = new decimal(new int[] {
+            1280,
+            0,
+            0,
+            0});
+            this.picMaxWidthNUD.Minimum = new decimal(new int[] {
+            480,
+            0,
+            0,
+            0});
+            this.picMaxWidthNUD.Name = "picMaxWidthNUD";
+            this.picMaxWidthNUD.Value = new decimal(new int[] {
+            1280,
+            0,
+            0,
+            0});
+            // 
+            // MaximumViewSizeChk
+            // 
+            resources.ApplyResources(this.MaximumViewSizeChk, "MaximumViewSizeChk");
+            this.MaximumViewSizeChk.Name = "MaximumViewSizeChk";
+            this.MaximumViewSizeChk.UseVisualStyleBackColor = true;
+            // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.FocusFirstItemCB);
-            this.groupBox3.Controls.Add(this.RememberLastLibraryCB);
+            this.groupBox3.Controls.Add(this.focusFirstItemChk);
+            this.groupBox3.Controls.Add(this.rememberLastLibraryChk);
             resources.ApplyResources(this.groupBox3, "groupBox3");
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.TabStop = false;
             // 
-            // FocusFirstItemCB
+            // focusFirstItemChk
             // 
-            resources.ApplyResources(this.FocusFirstItemCB, "FocusFirstItemCB");
-            this.FocusFirstItemCB.Name = "FocusFirstItemCB";
-            this.FocusFirstItemCB.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.focusFirstItemChk, "focusFirstItemChk");
+            this.focusFirstItemChk.Name = "focusFirstItemChk";
+            this.focusFirstItemChk.UseVisualStyleBackColor = true;
             // 
-            // RememberLastLibraryCB
+            // rememberLastLibraryChk
             // 
-            resources.ApplyResources(this.RememberLastLibraryCB, "RememberLastLibraryCB");
-            this.RememberLastLibraryCB.Name = "RememberLastLibraryCB";
-            this.RememberLastLibraryCB.UseVisualStyleBackColor = true;
-            // 
-            // MaximumViewSizeCB
-            // 
-            resources.ApplyResources(this.MaximumViewSizeCB, "MaximumViewSizeCB");
-            this.MaximumViewSizeCB.Name = "MaximumViewSizeCB";
-            this.MaximumViewSizeCB.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.rememberLastLibraryChk, "rememberLastLibraryChk");
+            this.rememberLastLibraryChk.Name = "rememberLastLibraryChk";
+            this.rememberLastLibraryChk.UseVisualStyleBackColor = true;
             // 
             // UIPage
             // 
@@ -152,9 +213,9 @@
             this.groupBox1.Controls.Add(this.SelectedColorLabel);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Controls.Add(this.formCaptionTB);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.comboBox1);
+            this.groupBox1.Controls.Add(this.selectThemeCB);
             this.groupBox1.Controls.Add(this.label1);
             resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Name = "groupBox1";
@@ -187,21 +248,22 @@
             resources.ApplyResources(this.label3, "label3");
             this.label3.Name = "label3";
             // 
-            // textBox1
+            // formCaptionTB
             // 
-            resources.ApplyResources(this.textBox1, "textBox1");
-            this.textBox1.Name = "textBox1";
+            resources.ApplyResources(this.formCaptionTB, "formCaptionTB");
+            this.formCaptionTB.Name = "formCaptionTB";
             // 
             // label2
             // 
             resources.ApplyResources(this.label2, "label2");
             this.label2.Name = "label2";
             // 
-            // comboBox1
+            // selectThemeCB
             // 
-            this.comboBox1.FormattingEnabled = true;
-            resources.ApplyResources(this.comboBox1, "comboBox1");
-            this.comboBox1.Name = "comboBox1";
+            this.selectThemeCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.selectThemeCB.FormattingEnabled = true;
+            resources.ApplyResources(this.selectThemeCB, "selectThemeCB");
+            this.selectThemeCB.Name = "selectThemeCB";
             // 
             // label1
             // 
@@ -241,67 +303,6 @@
             this.Apply_Button.UseVisualStyleBackColor = true;
             this.Apply_Button.Click += new System.EventHandler(this.ApplyButton_Click);
             // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.label7);
-            this.groupBox4.Controls.Add(this.label6);
-            this.groupBox4.Controls.Add(this.numericUpDown2);
-            this.groupBox4.Controls.Add(this.numericUpDown1);
-            this.groupBox4.Controls.Add(this.MaximumViewSizeCB);
-            resources.ApplyResources(this.groupBox4, "groupBox4");
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.TabStop = false;
-            // 
-            // numericUpDown1
-            // 
-            resources.ApplyResources(this.numericUpDown1, "numericUpDown1");
-            this.numericUpDown1.Maximum = new decimal(new int[] {
-            1280,
-            0,
-            0,
-            0});
-            this.numericUpDown1.Minimum = new decimal(new int[] {
-            480,
-            0,
-            0,
-            0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Value = new decimal(new int[] {
-            1280,
-            0,
-            0,
-            0});
-            // 
-            // numericUpDown2
-            // 
-            resources.ApplyResources(this.numericUpDown2, "numericUpDown2");
-            this.numericUpDown2.Maximum = new decimal(new int[] {
-            720,
-            0,
-            0,
-            0});
-            this.numericUpDown2.Minimum = new decimal(new int[] {
-            480,
-            0,
-            0,
-            0});
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Value = new decimal(new int[] {
-            720,
-            0,
-            0,
-            0});
-            // 
-            // label6
-            // 
-            resources.ApplyResources(this.label6, "label6");
-            this.label6.Name = "label6";
-            // 
-            // label7
-            // 
-            resources.ApplyResources(this.label7, "label7");
-            this.label7.Name = "label7";
-            // 
             // SettingsForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -318,6 +319,10 @@
             this.ShowInTaskbar = false;
             this.Tabs.ResumeLayout(false);
             this.GeneralPage.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picMaxHeightNUD)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picMaxWidthNUD)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.UIPage.ResumeLayout(false);
@@ -325,10 +330,6 @@
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -343,17 +344,17 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         public System.Windows.Forms.TabControl Tabs;
-        private System.Windows.Forms.CheckBox MaximumViewSizeCB;
-        private System.Windows.Forms.CheckBox RememberLastLibraryCB;
+        private System.Windows.Forms.CheckBox MaximumViewSizeChk;
+        private System.Windows.Forms.CheckBox rememberLastLibraryChk;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.CheckBox checkBox8;
         private System.Windows.Forms.CheckBox checkBox7;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox selectThemeCB;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.CheckBox FocusFirstItemCB;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.CheckBox focusFirstItemChk;
+        private System.Windows.Forms.TextBox formCaptionTB;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ColorDialog HeaderColorDialog;
         private System.Windows.Forms.Label label4;
@@ -365,7 +366,7 @@
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.NumericUpDown numericUpDown2;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown picMaxHeightNUD;
+        private System.Windows.Forms.NumericUpDown picMaxWidthNUD;
     }
 }

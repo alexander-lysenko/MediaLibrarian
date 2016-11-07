@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace MediaLibrarian
@@ -21,10 +22,108 @@ namespace MediaLibrarian
         public List<Category> columnsInfo = new List<Category>();
         int LO;     //LocationOffset
 
-        void LoadItemInfo()
+        void LoadItemInfo(ListViewItem item)
         {
+            InfoPanel.Controls.Clear();
+            int s = 0;
             LO = 5;
-
+            foreach (var col in columnsInfo)
+            {
+                if (s == 0) { s++; continue; }
+                Label HeaderLabel = new Label() 
+                {
+                Location = new Point(3, LO),
+                Size = new Size(200, 15),
+                Font = new Font("Tahoma", 9.75f),
+                AutoEllipsis = true,
+                Text = col.Name + ":",
+                };
+                InfoPanel.Controls.Add(HeaderLabel);
+                switch (col.Type)
+                {
+                    case "VARCHAR(128)": case "VARCHAR(20)": case "CHAR(20)": case "VARCHAR(10)": default:
+                        {
+                            Label strLabel = new Label()
+                            {
+                                Location = new Point(210, LO),
+                                Size = new Size(200, 15),
+                                Font = new Font("Tahoma", 9.75f),
+                                AutoEllipsis = true,
+                                Text = item.SubItems[s].Text,
+                            };
+                            InfoPanel.Controls.Add(strLabel);
+                            LO += 20;
+                        }; break;       //Строка, дата, дата+время, приоритет
+                    case "TEXT":
+                        {
+                            LO += 20;
+                            Label txtLabel = new Label()
+                            {
+                                Location = new Point(3, LO),
+                                MaximumSize = new Size(405, 0),
+                                Font = new Font("Tahoma", 9.75f),
+                                AutoSize = true,
+                                Text = item.SubItems[s].Text,
+                            };
+                            InfoPanel.Controls.Add(txtLabel);
+                            LO += txtLabel.Size.Height+10;
+                        }; break;       //Текст
+                    
+                    case "CHAR(5)":
+                        {
+                            Label m5Label = new Label()
+                            {
+                                Location = new Point(210, LO-5),
+                                Size = new Size(200, 20),
+                                Font = new Font("Lucida Console", 18f),
+                                Text = item.SubItems[s].Text,
+                            };
+                            switch (HowMatch(m5Label.Text))
+                            {
+                                case 1:
+                                case 2: m5Label.ForeColor = Color.Red; break;
+                                case 3:
+                                case 4: m5Label.ForeColor = Color.Orange; break;
+                                case 5: m5Label.ForeColor = Color.LimeGreen; break;
+                                default: break;
+                            }
+                            InfoPanel.Controls.Add(m5Label);
+                            LO += 20;
+                        }; break;       //Поле оценка (5)
+                    case "CHAR(10)":
+                        {
+                            Label m10Label = new Label()
+                            {
+                                Location = new Point(210, LO-5),
+                                Size = new Size(200, 20),
+                                Font = new Font("Lucida Console", 18f),
+                                Text = item.SubItems[s].Text,
+                            }; 
+                            switch (HowMatch(m10Label.Text))
+                            {
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4: m10Label.ForeColor = Color.Red; break;
+                                case 5:
+                                case 6:
+                                case 7:
+                                case 8: m10Label.ForeColor = Color.Orange; break;
+                                case 9:
+                                case 10: m10Label.ForeColor = Color.LimeGreen; break; 
+                                default: break;
+                            }
+                            InfoPanel.Controls.Add(m10Label);
+                            LO += 20;
+                        }; break;       //Поле оценка (10)
+                }
+                s++;
+            }
+        }
+        int HowMatch(string sourceString)
+        {
+            var Star = new Regex("★");
+            return Star.Matches(sourceString, 0).Count;
         }
 
 
@@ -158,37 +257,20 @@ namespace MediaLibrarian
                     ReplaceSymblos(Collection.FocusedItem.Text))))
                 { 
                     PosterBox.Image = Image.FromStream(fs);
+                    PosterBox.BackgroundImage = null;
                 }
             }
             catch (Exception)
             {
                 PosterBox.Image = null;
+                PosterBox.BackgroundImage = MediaLibrarian.Properties.Resources.noposter;
             }
-            LoadItemInfo();
+            LoadItemInfo(Collection.FocusedItem);
         }
         public string ReplaceSymblos(string str)
         {
             str = str.Replace(":", "꞉").Replace("*", "˟").Replace("?", "‽").Replace("\"", "ʺ");
             return str;
         }
-
-
-        void CreateHeader()
-        {
-            Label HeaderLabel = new Label() 
-            {
-                Location = new Point(3, ),
-            };
-        }
-        void CreateStringLabel()
-        { }
-        void CreateTextLabel()
-        { }
-        void CreateDateTimeLabel()
-        { }
-        void CreateMarkLabel()
-        { }
-        void CreatePriorityLabel()
-        { }
     }
 }

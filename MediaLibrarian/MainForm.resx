@@ -574,7 +574,7 @@
     <value>InfoPanel</value>
   </data>
   <data name="&gt;&gt;label6.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="ElementActionsGB.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -800,9 +800,6 @@ Suicide Squad
   <data name="&gt;&gt;TitleLabel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="TitleHeaderLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="TitleHeaderLabel.Font" type="System.Drawing.Font, System.Drawing">
     <value>Tahoma, 9.75pt</value>
   </data>
@@ -813,7 +810,7 @@ Suicide Squad
     <value>10, 20</value>
   </data>
   <data name="TitleHeaderLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>233, 16</value>
+    <value>240, 18</value>
   </data>
   <data name="TitleHeaderLabel.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -869,23 +866,53 @@ Suicide Squad
   <data name="InfoPanel.AutoScroll" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="label7.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="label1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Lucida Console, 18pt, style=Bold</value>
+  </data>
+  <data name="label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 157</value>
+  </data>
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>200, 20</value>
+  </data>
+  <data name="label1.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>★★★★★★</value>
+  </data>
+  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+    <value>label1</value>
+  </data>
+  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+    <value>InfoPanel</value>
+  </data>
+  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="label7.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Lucida Console, 18pt, style=Bold</value>
   </data>
   <data name="label7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="label7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>151, 193</value>
+    <value>3, 177</value>
   </data>
   <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>35, 13</value>
+    <value>200, 20</value>
   </data>
   <data name="label7.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
   <data name="label7.Text" xml:space="preserve">
-    <value>label7</value>
+    <value>★★★★★</value>
   </data>
   <data name="&gt;&gt;label7.Name" xml:space="preserve">
     <value>label7</value>
@@ -897,13 +924,13 @@ Suicide Squad
     <value>InfoPanel</value>
   </data>
   <data name="&gt;&gt;label7.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="InfoPanel.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 113</value>
   </data>
   <data name="InfoPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>428, 301</value>
+    <value>428, 300</value>
   </data>
   <data name="InfoPanel.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>

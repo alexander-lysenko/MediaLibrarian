@@ -71,6 +71,7 @@
             this.PosterBox = new System.Windows.Forms.PictureBox();
             this.InfoPanel = new System.Windows.Forms.Panel();
             this.label7 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.StatusBar.SuspendLayout();
             this.MainMenu.SuspendLayout();
             this.LibInfoGB.SuspendLayout();
@@ -367,6 +368,7 @@
             // 
             // TitleHeaderLabel
             // 
+            this.TitleHeaderLabel.AutoEllipsis = true;
             resources.ApplyResources(this.TitleHeaderLabel, "TitleHeaderLabel");
             this.TitleHeaderLabel.Name = "TitleHeaderLabel";
             // 
@@ -382,6 +384,7 @@
             // 
             resources.ApplyResources(this.InfoPanel, "InfoPanel");
             this.InfoPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.InfoPanel.Controls.Add(this.label1);
             this.InfoPanel.Controls.Add(this.label7);
             this.InfoPanel.Controls.Add(this.label6);
             this.InfoPanel.Name = "InfoPanel";
@@ -390,6 +393,11 @@
             // 
             resources.ApplyResources(this.label7, "label7");
             this.label7.Name = "label7";
+            // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Name = "label1";
             // 
             // MainForm
             // 
@@ -412,10 +420,8 @@
             this.LibInfoGB.ResumeLayout(false);
             this.ElementActionsGB.ResumeLayout(false);
             this.ElementInfoGB.ResumeLayout(false);
-            this.ElementInfoGB.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PosterBox)).EndInit();
             this.InfoPanel.ResumeLayout(false);
-            this.InfoPanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -465,6 +471,7 @@
         private System.Windows.Forms.ToolStripMenuItem FullScreenTSMI;
         private System.Windows.Forms.Label ElementCount;
         private System.Windows.Forms.Label ElementCountHintLabel;
+        private System.Windows.Forms.Label label1;
     }
 }
 
