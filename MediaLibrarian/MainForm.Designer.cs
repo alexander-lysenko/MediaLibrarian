@@ -70,8 +70,7 @@
             this.TitleHeaderLabel = new System.Windows.Forms.Label();
             this.PosterBox = new System.Windows.Forms.PictureBox();
             this.InfoPanel = new System.Windows.Forms.Panel();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.screenResolutionLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.StatusBar.SuspendLayout();
             this.MainMenu.SuspendLayout();
             this.LibInfoGB.SuspendLayout();
@@ -97,7 +96,8 @@
             // 
             this.StatusBar.BackColor = System.Drawing.Color.Transparent;
             this.StatusBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.StatusLabel});
+            this.StatusLabel,
+            this.screenResolutionLabel});
             resources.ApplyResources(this.StatusBar, "StatusBar");
             this.StatusBar.Name = "StatusBar";
             // 
@@ -384,20 +384,14 @@
             // 
             resources.ApplyResources(this.InfoPanel, "InfoPanel");
             this.InfoPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.InfoPanel.Controls.Add(this.label1);
-            this.InfoPanel.Controls.Add(this.label7);
             this.InfoPanel.Controls.Add(this.label6);
             this.InfoPanel.Name = "InfoPanel";
             // 
-            // label7
+            // screenResolutionLabel
             // 
-            resources.ApplyResources(this.label7, "label7");
-            this.label7.Name = "label7";
-            // 
-            // label1
-            // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Name = "label1";
+            this.screenResolutionLabel.Name = "screenResolutionLabel";
+            resources.ApplyResources(this.screenResolutionLabel, "screenResolutionLabel");
+            this.screenResolutionLabel.Spring = true;
             // 
             // MainForm
             // 
@@ -413,6 +407,7 @@
             this.DoubleBuffered = true;
             this.MainMenuStrip = this.MainMenu;
             this.Name = "MainForm";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.StatusBar.ResumeLayout(false);
             this.StatusBar.PerformLayout();
             this.MainMenu.ResumeLayout(false);
@@ -443,10 +438,7 @@
         private System.Windows.Forms.Button DeleteElementButton;
         private System.Windows.Forms.Button EditElementButton;
         private System.Windows.Forms.Button AddElementButton;
-        private System.Windows.Forms.PictureBox PosterBox;
         private System.Windows.Forms.Button SearchButton;
-        private System.Windows.Forms.Panel InfoPanel;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ToolStripMenuItem OpenLibTSMI;
         private System.Windows.Forms.ToolStripMenuItem CreateLibTSMI;
         private System.Windows.Forms.ToolStripMenuItem AddElementTSMI;
@@ -466,12 +458,14 @@
         public System.Windows.Forms.ToolStripStatusLabel StatusLabel;
         public System.Windows.Forms.GroupBox ElementActionsGB;
         public System.Windows.Forms.ToolStripMenuItem AutoSortingTSMI;
-        private System.Windows.Forms.Label TitleLabel;
-        private System.Windows.Forms.Label TitleHeaderLabel;
         private System.Windows.Forms.ToolStripMenuItem FullScreenTSMI;
         private System.Windows.Forms.Label ElementCount;
         private System.Windows.Forms.Label ElementCountHintLabel;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ToolStripStatusLabel screenResolutionLabel;
+        public System.Windows.Forms.PictureBox PosterBox;
+        public System.Windows.Forms.Panel InfoPanel;
+        public System.Windows.Forms.Label TitleLabel;
+        public System.Windows.Forms.Label TitleHeaderLabel;
     }
 }
 

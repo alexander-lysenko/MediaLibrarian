@@ -11,9 +11,17 @@ namespace MediaLibrarian
 {
     public partial class SearchForm : Form
     {
-        public SearchForm()
+        public SearchForm(MainForm formMain)
         {
             InitializeComponent();
+            mainForm = formMain;
+        }
+        MainForm mainForm;
+
+        private void SearchForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.Hide();
+            e.Cancel = true;
         }
     }
 }

@@ -291,7 +291,7 @@ namespace MediaLibrarian
                 {
                     Size = new Size(25, 30),
                     Location = new Point(ii * 25 + 65, 0),
-                    Font = new Font("Lucida Console", 25f, FontStyle.Bold),
+                    Font = new Font("Lucida Console", 18f, FontStyle.Bold),
                     ForeColor = Color.Gray,
                     TextAlign = ContentAlignment.TopLeft,
                     Text = "☆",
@@ -318,7 +318,7 @@ namespace MediaLibrarian
                     Size = new Size(20, 30),
                     Location = new Point(ii * 19 + 2, 0),
                     FlatStyle = FlatStyle.System,
-                    Font = new Font("Lucida Console", 25f, FontStyle.Bold),
+                    Font = new Font("Lucida Console", 18f, FontStyle.Bold),
                     ForeColor = Color.Gray,
                     TextAlign = ContentAlignment.TopLeft,
                     Text = "☆",

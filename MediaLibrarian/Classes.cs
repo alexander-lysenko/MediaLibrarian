@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
 using System.IO;
+using System.Drawing;
 
 namespace MediaLibrarian
 {
@@ -17,6 +18,40 @@ namespace MediaLibrarian
             this.Name = Name;
             this.Type = Type;
         }
+    }
+    public class Settings
+    {
+        public bool RememberLastLibrary { get; set; }
+        public bool FocusFirstItem { get; set; }
+        public bool CropMaxViewSize { get; set; }
+        public decimal PicMaxWidth { get; set; }
+        public decimal PicMaxHeight { get; set; }
+        public bool StartFullScreen { get; set; }
+        public bool AutoSortByName { get; set; }
+        public string SelectedTheme { get; set; }
+        public string FormCaptionText { get; set; }
+        public Color MainColor { get; set; }
+        public Font MainFont { get; set; }
+
+        public Settings()
+        {
+            this.RememberLastLibrary = RememberLastLibrary;
+            this.FocusFirstItem = FocusFirstItem;
+            this.CropMaxViewSize = CropMaxViewSize;
+            this.PicMaxWidth = PicMaxWidth;
+            this.PicMaxHeight = PicMaxHeight;
+            this.StartFullScreen = StartFullScreen;
+            this.AutoSortByName = AutoSortByName;
+            this.SelectedTheme = SelectedTheme;
+            this.FormCaptionText = FormCaptionText;
+            this.MainColor = MainColor;
+            this.MainFont = MainFont;
+        }
+    }
+
+    public class ThemeSettings
+    {
+ 
     }
 
 /*    [Serializable]

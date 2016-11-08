@@ -553,16 +553,20 @@
     <value>NoControl</value>
   </data>
   <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>29, 346</value>
+    <value>3, 0</value>
   </data>
   <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 19</value>
+    <value>419, 298</value>
   </data>
   <data name="label6.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
   <data name="label6.Text" xml:space="preserve">
-    <value>МноготекстаМноготекстаМноготекстаМноготекста </value>
+    <value>Здесь будет отображаться подробная информация об элементах из выбранной Вами библиотеки.
+Создайте новую, или выберите существующую библиотеку, нажав кнопку "Выбрать..."</value>
+  </data>
+  <data name="label6.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
   </data>
   <data name="&gt;&gt;label6.Name" xml:space="preserve">
     <value>label6</value>
@@ -574,7 +578,7 @@
     <value>InfoPanel</value>
   </data>
   <data name="&gt;&gt;label6.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>0</value>
   </data>
   <data name="ElementActionsGB.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -780,11 +784,6 @@
   <data name="TitleLabel.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
-  <data name="TitleLabel.Text" xml:space="preserve">
-    <value>Отряд самоубийц / 
-Suicide Squad 
-(2016)</value>
-  </data>
   <data name="TitleLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopCenter</value>
   </data>
@@ -816,7 +815,7 @@ Suicide Squad
     <value>8</value>
   </data>
   <data name="TitleHeaderLabel.Text" xml:space="preserve">
-    <value>Название просматриваемого фильма:</value>
+    <value>Добро пожаловать!</value>
   </data>
   <data name="&gt;&gt;TitleHeaderLabel.Name" xml:space="preserve">
     <value>TitleHeaderLabel</value>
@@ -837,7 +836,7 @@ Suicide Squad
     <value>NoControl</value>
   </data>
   <data name="PosterBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>334, 10</value>
+    <value>335, 10</value>
   </data>
   <data name="PosterBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 100</value>
@@ -866,71 +865,11 @@ Suicide Squad
   <data name="InfoPanel.AutoScroll" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="label1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Lucida Console, 18pt, style=Bold</value>
-  </data>
-  <data name="label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 157</value>
-  </data>
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>200, 20</value>
-  </data>
-  <data name="label1.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="label1.Text" xml:space="preserve">
-    <value>★★★★★★</value>
-  </data>
-  <data name="&gt;&gt;label1.Name" xml:space="preserve">
-    <value>label1</value>
-  </data>
-  <data name="&gt;&gt;label1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
-    <value>InfoPanel</value>
-  </data>
-  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="label7.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Lucida Console, 18pt, style=Bold</value>
-  </data>
-  <data name="label7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 177</value>
-  </data>
-  <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>200, 20</value>
-  </data>
-  <data name="label7.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="label7.Text" xml:space="preserve">
-    <value>★★★★★</value>
-  </data>
-  <data name="&gt;&gt;label7.Name" xml:space="preserve">
-    <value>label7</value>
-  </data>
-  <data name="&gt;&gt;label7.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label7.Parent" xml:space="preserve">
-    <value>InfoPanel</value>
-  </data>
-  <data name="&gt;&gt;label7.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="InfoPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 113</value>
+    <value>5, 113</value>
   </data>
   <data name="InfoPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>428, 300</value>
+    <value>430, 300</value>
   </data>
   <data name="InfoPanel.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -970,6 +909,15 @@ Suicide Squad
   </data>
   <data name="&gt;&gt;ElementInfoGB.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="screenResolutionLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>716, 17</value>
+  </data>
+  <data name="screenResolutionLabel.Text" xml:space="preserve">
+    <value>Разрешение экрана: 1000 х 1000</value>
+  </data>
+  <data name="screenResolutionLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1120,6 +1068,12 @@ Suicide Squad
   </data>
   <data name="&gt;&gt;AboutTSMI.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;screenResolutionLabel.Name" xml:space="preserve">
+    <value>screenResolutionLabel</value>
+  </data>
+  <data name="&gt;&gt;screenResolutionLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>MainForm</value>

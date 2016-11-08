@@ -81,9 +81,22 @@ namespace MediaLibrarian
             connection.Close();
         }
 
-        public void ReadTableFromDatabase(string TableName)
+        public void ReadTableFromDatabase(string tableName)
         {
-            string SelectQuery = String.Format("select * from `{0}` ", TableName);
+            SQLiteCommand GetColumns = new SQLiteCommand(string.Format("pragma table_info('{0}');", tableName), connection);
+            connection.Open();
+            SQLiteDataReader ReadCols = GetColumns.ExecuteReader();
+            foreach (DbDataRecord col in ReadCols)
+            {
+                mainForm.Collection.Columns.Add(col["name"].ToString(), GetColumnLength(col["type"].ToString()));
+                mainForm.columnsInfo.Add(new Category
+                {
+                    Name = col["name"].ToString(),
+                    Type = col["type"].ToString()
+                });
+            }
+            connection.Close();
+            string SelectQuery = String.Format("select * from `{0}` ", tableName);
             mainForm.Collection.Items.Clear();
             SQLiteCommand ReadTable = new SQLiteCommand(SelectQuery, connection);
             DataTable data = new DataTable();
@@ -101,6 +114,11 @@ namespace MediaLibrarian
                 }
                 mainForm.Collection.Items.Add(item);
             }
+            mainForm.InfoPanel.Controls.Clear();
+            mainForm.PosterBox.BackgroundImage = null;
+            mainForm.PosterBox.Image = null;
+            mainForm.TitleHeaderLabel.Text = mainForm.Collection.Columns[0].Text + ":";
+            mainForm.TitleLabel.Text = "";
         }
         private void LibManagerForm_Load(object sender, EventArgs e)
         {
@@ -266,19 +284,7 @@ namespace MediaLibrarian
             mainForm.Collection.Clear();
             mainForm.columnsInfo.Clear();
             mainForm.SelectedLibLabel.Text = LibsList.FocusedItem.Text;
-            SQLiteCommand GetColumns = new SQLiteCommand(string.Format("pragma table_info('{0}');", LibsList.FocusedItem.Text), connection);
-            connection.Open();
-            SQLiteDataReader ReadCols = GetColumns.ExecuteReader();
-            foreach (DbDataRecord col in ReadCols)
-            {
-                mainForm.Collection.Columns.Add(col["name"].ToString(), GetColumnLength(col["type"].ToString()));
-                mainForm.columnsInfo.Add(new Category
-                {
-                    Name = col["name"].ToString(),
-                    Type = col["type"].ToString()
-                });
-            }
-            connection.Close();
+
             ReadTableFromDatabase(LibsList.FocusedItem.Text);
             this.Close();
             mainForm.ElementActionsGB.Enabled = true;

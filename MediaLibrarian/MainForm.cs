@@ -15,10 +15,12 @@ namespace MediaLibrarian
             libManagerForm = new LibManagerForm(this);
             editForm = new EditForm(this);
             settingsForm = new SettingsForm(this);
+            searchForm = new SearchForm(this);
         }
         LibManagerForm libManagerForm;
         EditForm editForm;
         SettingsForm settingsForm;
+        SearchForm searchForm;
         public List<Category> columnsInfo = new List<Category>();
         int LO;     //LocationOffset
 
@@ -50,6 +52,7 @@ namespace MediaLibrarian
                                 Font = new Font("Tahoma", 9.75f),
                                 AutoEllipsis = true,
                                 Text = item.SubItems[s].Text,
+                                TextAlign = ContentAlignment.MiddleRight,
                             };
                             InfoPanel.Controls.Add(strLabel);
                             LO += 20;
@@ -62,6 +65,7 @@ namespace MediaLibrarian
                                 Location = new Point(3, LO),
                                 MaximumSize = new Size(405, 0),
                                 Font = new Font("Tahoma", 9.75f),
+                                ForeColor = Color.Blue,
                                 AutoSize = true,
                                 Text = item.SubItems[s].Text,
                             };
@@ -77,6 +81,7 @@ namespace MediaLibrarian
                                 Size = new Size(200, 20),
                                 Font = new Font("Lucida Console", 18f),
                                 Text = item.SubItems[s].Text,
+                                TextAlign = ContentAlignment.MiddleRight,
                             };
                             switch (HowMatch(m5Label.Text))
                             {
@@ -98,6 +103,7 @@ namespace MediaLibrarian
                                 Size = new Size(200, 20),
                                 Font = new Font("Lucida Console", 18f),
                                 Text = item.SubItems[s].Text,
+                                TextAlign = ContentAlignment.MiddleRight,
                             }; 
                             switch (HowMatch(m10Label.Text))
                             {
@@ -125,9 +131,6 @@ namespace MediaLibrarian
             var Star = new Regex("★");
             return Star.Matches(sourceString, 0).Count;
         }
-
-
-
 
         #region Buttons
         private void SelectCollectionButton_Click(object sender, EventArgs e)
@@ -163,7 +166,7 @@ namespace MediaLibrarian
         }
         private void SearchButton_Click(object sender, EventArgs e)
         {
-            SearchButton.PerformClick();
+            searchForm.Show();
         }
         #endregion
         #region FileTSM
@@ -249,7 +252,6 @@ namespace MediaLibrarian
         private void Collection_SelectedIndexChanged(object sender, EventArgs e)
         {
             TitleLabel.Text = Collection.FocusedItem.Text;
-            TitleHeaderLabel.Text = Collection.Columns[0].Text;
             try
             {
                 using (FileStream fs = File.OpenRead(String.Format(@"{0}\{1}\{2}.jpg", Environment.CurrentDirectory,
@@ -271,6 +273,13 @@ namespace MediaLibrarian
         {
             str = str.Replace(":", "꞉").Replace("*", "˟").Replace("?", "‽").Replace("\"", "ʺ");
             return str;
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            screenResolutionLabel.Text = String.Format("Разрешение экрана: {0}х{1}", 
+                SystemInformation.PrimaryMonitorSize.Width, SystemInformation.PrimaryMonitorSize.Height);
+            //libManagerForm.ReadTableFromDatabase("автомобили");
         }
     }
 }

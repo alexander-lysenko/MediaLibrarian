@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsForm));
             this.Tabs = new System.Windows.Forms.TabControl();
             this.GeneralPage = new System.Windows.Forms.TabPage();
@@ -36,31 +37,32 @@
             this.label6 = new System.Windows.Forms.Label();
             this.picMaxHeightNUD = new System.Windows.Forms.NumericUpDown();
             this.picMaxWidthNUD = new System.Windows.Forms.NumericUpDown();
-            this.MaximumViewSizeChk = new System.Windows.Forms.CheckBox();
+            this.cropMaxViewSizeChk = new System.Windows.Forms.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.focusFirstItemChk = new System.Windows.Forms.CheckBox();
             this.rememberLastLibraryChk = new System.Windows.Forms.CheckBox();
             this.UIPage = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.checkBox7 = new System.Windows.Forms.CheckBox();
-            this.checkBox8 = new System.Windows.Forms.CheckBox();
+            this.fullScreenStartChk = new System.Windows.Forms.CheckBox();
+            this.autoSortByNameChk = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.SelectedFontLabel = new System.Windows.Forms.Label();
-            this.SelectedColorLabel = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.mainFontLabel = new System.Windows.Forms.Label();
+            this.mainColorLabel = new System.Windows.Forms.Label();
+            this.fontSelectLabel = new System.Windows.Forms.Label();
+            this.colorSelectLabel = new System.Windows.Forms.Label();
             this.formCaptionTB = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.fromCaptionLabel = new System.Windows.Forms.Label();
             this.selectThemeCB = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.selectThemeLabel = new System.Windows.Forms.Label();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.OK_Button = new System.Windows.Forms.Button();
             this.Cancel_Button = new System.Windows.Forms.Button();
             this.Apply_Button = new System.Windows.Forms.Button();
-            this.HeaderColorDialog = new System.Windows.Forms.ColorDialog();
-            this.HeaderFontDialog = new System.Windows.Forms.FontDialog();
+            this.headerColorDialog = new System.Windows.Forms.ColorDialog();
+            this.headerFontDialog = new System.Windows.Forms.FontDialog();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.label1 = new System.Windows.Forms.Label();
             this.Tabs.SuspendLayout();
             this.GeneralPage.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -97,7 +99,7 @@
             this.groupBox4.Controls.Add(this.label6);
             this.groupBox4.Controls.Add(this.picMaxHeightNUD);
             this.groupBox4.Controls.Add(this.picMaxWidthNUD);
-            this.groupBox4.Controls.Add(this.MaximumViewSizeChk);
+            this.groupBox4.Controls.Add(this.cropMaxViewSizeChk);
             resources.ApplyResources(this.groupBox4, "groupBox4");
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.TabStop = false;
@@ -152,11 +154,11 @@
             0,
             0});
             // 
-            // MaximumViewSizeChk
+            // cropMaxViewSizeChk
             // 
-            resources.ApplyResources(this.MaximumViewSizeChk, "MaximumViewSizeChk");
-            this.MaximumViewSizeChk.Name = "MaximumViewSizeChk";
-            this.MaximumViewSizeChk.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.cropMaxViewSizeChk, "cropMaxViewSizeChk");
+            this.cropMaxViewSizeChk.Name = "cropMaxViewSizeChk";
+            this.cropMaxViewSizeChk.UseVisualStyleBackColor = true;
             // 
             // groupBox3
             // 
@@ -188,75 +190,69 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.checkBox7);
-            this.groupBox2.Controls.Add(this.checkBox8);
+            this.groupBox2.Controls.Add(this.fullScreenStartChk);
+            this.groupBox2.Controls.Add(this.autoSortByNameChk);
             resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
             // 
-            // checkBox7
+            // fullScreenStartChk
             // 
-            resources.ApplyResources(this.checkBox7, "checkBox7");
-            this.checkBox7.Name = "checkBox7";
-            this.checkBox7.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.fullScreenStartChk, "fullScreenStartChk");
+            this.fullScreenStartChk.Name = "fullScreenStartChk";
+            this.fullScreenStartChk.UseVisualStyleBackColor = true;
             // 
-            // checkBox8
+            // autoSortByNameChk
             // 
-            resources.ApplyResources(this.checkBox8, "checkBox8");
-            this.checkBox8.Name = "checkBox8";
-            this.checkBox8.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.autoSortByNameChk, "autoSortByNameChk");
+            this.autoSortByNameChk.Name = "autoSortByNameChk";
+            this.autoSortByNameChk.UseVisualStyleBackColor = true;
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.SelectedFontLabel);
-            this.groupBox1.Controls.Add(this.SelectedColorLabel);
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.mainFontLabel);
+            this.groupBox1.Controls.Add(this.mainColorLabel);
+            this.groupBox1.Controls.Add(this.fontSelectLabel);
+            this.groupBox1.Controls.Add(this.colorSelectLabel);
             this.groupBox1.Controls.Add(this.formCaptionTB);
-            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.fromCaptionLabel);
             this.groupBox1.Controls.Add(this.selectThemeCB);
-            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.selectThemeLabel);
             resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
             // 
-            // label5
+            // mainFontLabel
             // 
-            resources.ApplyResources(this.label5, "label5");
-            this.label5.Name = "label5";
+            resources.ApplyResources(this.mainFontLabel, "mainFontLabel");
+            this.mainFontLabel.Name = "mainFontLabel";
+            this.mainFontLabel.Click += new System.EventHandler(this.SelectedFontLabel_Click);
             // 
-            // SelectedFontLabel
+            // mainColorLabel
             // 
-            resources.ApplyResources(this.SelectedFontLabel, "SelectedFontLabel");
-            this.SelectedFontLabel.Name = "SelectedFontLabel";
-            this.SelectedFontLabel.Click += new System.EventHandler(this.SelectedFontLabel_Click);
+            resources.ApplyResources(this.mainColorLabel, "mainColorLabel");
+            this.mainColorLabel.Name = "mainColorLabel";
+            this.mainColorLabel.Click += new System.EventHandler(this.SelectedColorLabel_Click);
             // 
-            // SelectedColorLabel
+            // fontSelectLabel
             // 
-            resources.ApplyResources(this.SelectedColorLabel, "SelectedColorLabel");
-            this.SelectedColorLabel.Name = "SelectedColorLabel";
-            this.SelectedColorLabel.Click += new System.EventHandler(this.SelectedColorLabel_Click);
+            resources.ApplyResources(this.fontSelectLabel, "fontSelectLabel");
+            this.fontSelectLabel.Name = "fontSelectLabel";
             // 
-            // label4
+            // colorSelectLabel
             // 
-            resources.ApplyResources(this.label4, "label4");
-            this.label4.Name = "label4";
-            // 
-            // label3
-            // 
-            resources.ApplyResources(this.label3, "label3");
-            this.label3.Name = "label3";
+            resources.ApplyResources(this.colorSelectLabel, "colorSelectLabel");
+            this.colorSelectLabel.Name = "colorSelectLabel";
             // 
             // formCaptionTB
             // 
             resources.ApplyResources(this.formCaptionTB, "formCaptionTB");
             this.formCaptionTB.Name = "formCaptionTB";
             // 
-            // label2
+            // fromCaptionLabel
             // 
-            resources.ApplyResources(this.label2, "label2");
-            this.label2.Name = "label2";
+            resources.ApplyResources(this.fromCaptionLabel, "fromCaptionLabel");
+            this.fromCaptionLabel.Name = "fromCaptionLabel";
             // 
             // selectThemeCB
             // 
@@ -265,10 +261,10 @@
             resources.ApplyResources(this.selectThemeCB, "selectThemeCB");
             this.selectThemeCB.Name = "selectThemeCB";
             // 
-            // label1
+            // selectThemeLabel
             // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Name = "label1";
+            resources.ApplyResources(this.selectThemeLabel, "selectThemeLabel");
+            this.selectThemeLabel.Name = "selectThemeLabel";
             // 
             // tabPage1
             // 
@@ -303,10 +299,25 @@
             this.Apply_Button.UseVisualStyleBackColor = true;
             this.Apply_Button.Click += new System.EventHandler(this.ApplyButton_Click);
             // 
+            // toolTip
+            // 
+            this.toolTip.AutomaticDelay = 200;
+            this.toolTip.AutoPopDelay = 10000;
+            this.toolTip.InitialDelay = 100;
+            this.toolTip.ReshowDelay = 200;
+            this.toolTip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this.toolTip.ToolTipTitle = "Подсказка к элементу:";
+            // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Name = "label1";
+            // 
             // SettingsForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             resources.ApplyResources(this, "$this");
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.Apply_Button);
             this.Controls.Add(this.Cancel_Button);
             this.Controls.Add(this.OK_Button);
@@ -317,6 +328,7 @@
             this.Name = "SettingsForm";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
+            this.Load += new System.EventHandler(this.SettingsForm_Load);
             this.Tabs.ResumeLayout(false);
             this.GeneralPage.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
@@ -344,29 +356,30 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         public System.Windows.Forms.TabControl Tabs;
-        private System.Windows.Forms.CheckBox MaximumViewSizeChk;
+        private System.Windows.Forms.CheckBox cropMaxViewSizeChk;
         private System.Windows.Forms.CheckBox rememberLastLibraryChk;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.CheckBox checkBox8;
-        private System.Windows.Forms.CheckBox checkBox7;
+        private System.Windows.Forms.CheckBox autoSortByNameChk;
+        private System.Windows.Forms.CheckBox fullScreenStartChk;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.ComboBox selectThemeCB;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label selectThemeLabel;
         private System.Windows.Forms.CheckBox focusFirstItemChk;
         private System.Windows.Forms.TextBox formCaptionTB;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ColorDialog HeaderColorDialog;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.FontDialog HeaderFontDialog;
-        private System.Windows.Forms.Label SelectedFontLabel;
-        private System.Windows.Forms.Label SelectedColorLabel;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label fromCaptionLabel;
+        private System.Windows.Forms.ColorDialog headerColorDialog;
+        private System.Windows.Forms.Label fontSelectLabel;
+        private System.Windows.Forms.Label colorSelectLabel;
+        private System.Windows.Forms.FontDialog headerFontDialog;
+        private System.Windows.Forms.Label mainFontLabel;
+        private System.Windows.Forms.Label mainColorLabel;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.NumericUpDown picMaxHeightNUD;
         private System.Windows.Forms.NumericUpDown picMaxWidthNUD;
+        private System.Windows.Forms.ToolTip toolTip;
+        private System.Windows.Forms.Label label1;
     }
 }
