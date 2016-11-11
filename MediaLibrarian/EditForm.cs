@@ -73,6 +73,7 @@ namespace MediaLibrarian
                         {
                             case "Star5" : Star5_Click(columnData[i].Controls[GetNumValue(Items[i]) - 1], e); break;
                             case "Star10": Star10_Click(columnData[i].Controls[GetNumValue(Items[i]) - 1], e); break;
+                                    //не работает с нулевой оценкой
                             case "Cube10": Cube10_Click(columnData[i].Controls[GetNumValue(Items[i]) - 1], e); break;
                         }
                         break;
