@@ -226,13 +226,13 @@
             // 
             resources.ApplyResources(this.mainFontLabel, "mainFontLabel");
             this.mainFontLabel.Name = "mainFontLabel";
-            this.mainFontLabel.Click += new System.EventHandler(this.SelectedFontLabel_Click);
+            this.mainFontLabel.Click += new System.EventHandler(this.mainFontLabel_Click);
             // 
             // mainColorLabel
             // 
             resources.ApplyResources(this.mainColorLabel, "mainColorLabel");
             this.mainColorLabel.Name = "mainColorLabel";
-            this.mainColorLabel.Click += new System.EventHandler(this.SelectedColorLabel_Click);
+            this.mainColorLabel.Click += new System.EventHandler(this.mainColorLabel_Click);
             // 
             // fontSelectLabel
             // 

@@ -80,9 +80,9 @@ namespace MediaLibrarian
             }
             connection.Close();
         }
-
-        public void ReadTableFromDatabase(string tableName)
+        void ReadHeadersForTable(string tableName)
         {
+            mainForm.columnsInfo.Clear();
             SQLiteCommand GetColumns = new SQLiteCommand(string.Format("pragma table_info('{0}');", tableName), connection);
             connection.Open();
             SQLiteDataReader ReadCols = GetColumns.ExecuteReader();
@@ -96,6 +96,10 @@ namespace MediaLibrarian
                 });
             }
             connection.Close();
+        }
+
+        public void ReadTableFromDatabase(string tableName)
+        {
             string SelectQuery = String.Format("select * from `{0}` ", tableName);
             mainForm.Collection.Items.Clear();
             SQLiteCommand ReadTable = new SQLiteCommand(SelectQuery, connection);
@@ -284,7 +288,7 @@ namespace MediaLibrarian
             mainForm.Collection.Clear();
             mainForm.columnsInfo.Clear();
             mainForm.SelectedLibLabel.Text = LibsList.FocusedItem.Text;
-
+            ReadHeadersForTable(LibsList.FocusedItem.Text);
             ReadTableFromDatabase(LibsList.FocusedItem.Text);
             this.Close();
             mainForm.ElementActionsGB.Enabled = true;

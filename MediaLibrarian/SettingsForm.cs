@@ -34,14 +34,22 @@ namespace MediaLibrarian
             Cancel_Button.PerformClick();
         }
 
-        private void SelectedColorLabel_Click(object sender, EventArgs e)
+        private void mainColorLabel_Click(object sender, EventArgs e)
         {
-            headerColorDialog.ShowDialog();
+            if (headerColorDialog.ShowDialog() == DialogResult.OK) 
+            {
+                mainColorLabel.Text = headerColorDialog.Color.Name;
+                mainColorLabel.ForeColor = headerColorDialog.Color;
+            }
         }
 
-        private void SelectedFontLabel_Click(object sender, EventArgs e)
+        private void mainFontLabel_Click(object sender, EventArgs e)
         {
-            headerFontDialog.ShowDialog();
+            if(headerFontDialog.ShowDialog()==DialogResult.OK)
+            {
+                mainFontLabel.Text = headerFontDialog.Font.Name+"\n(Проверка кириллицы)";
+                mainFontLabel.Font = headerFontDialog.Font;
+            }
         }
 
         private void SettingsForm_Load(object sender, EventArgs e)
@@ -54,7 +62,7 @@ namespace MediaLibrarian
             toolTip.SetToolTip(selectThemeLabel, "Выбор цветовой схемы отображения основных разделов программы \n(Основная форма, выбор библиотеки, редактирование элемента).\nВы можете выбрать цветовую схему из предложенных вариантов.");
             toolTip.SetToolTip(fromCaptionLabel, "Вы можете установить собственный заголовок программы.\nЭтот текст заменит стандартный заголовок - \"Медиа-библиотекарь\"");
             toolTip.SetToolTip(colorSelectLabel, "Независимо от выбранной темы оформления, можно выбрать \nцвет отображения подробных данных элемента в основной форме.\nЧтобы выбрать цвет, нажмите на элемент справа от этой надписи.\nДля удобства восприятия, его фон будет подкрашен в цвет \nвыбранной Вами темы.");
-            toolTip.SetToolTip(fontSelectLabel, "Можно выбрать шрифт отображения имени элемента в основной форме \n(Имя элемента - это первый столбец таблицы, в основной форме \nотображается большими буквами рядом с постером).\n Обратите внимание: не все шрифты поддерживают кириллицу!");
+            toolTip.SetToolTip(fontSelectLabel, "Можно выбрать шрифт отображения ИМЕНИ ЭЛЕМЕНТА в основной форме \n(Имя элемента - это первый столбец таблицы, в основной форме \nотображается большими буквами рядом с постером).\n Обратите внимание: не все шрифты поддерживают кириллицу!");
             //toolTip.SetToolTip()
             //toolTip.SetToolTip();
             //toolTip.SetToolTip();

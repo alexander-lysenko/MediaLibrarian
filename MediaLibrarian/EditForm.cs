@@ -68,13 +68,18 @@ namespace MediaLibrarian
                     case "System.Windows.Forms.TextBox": case "System.Windows.Forms.RichTextBox":
                         columnData[i].Text = Items[i]; break;
                     case "System.Windows.Forms.Panel":
-                        if (!new List<string>(){null, "", "0"}.Contains(Items[i])) 
+                        //if (!new List<string>(){null, "", "0"}.Contains(Items[i])) 
                             switch (columnData[i].Tag.ToString())
                         {
-                            case "Star5" : Star5_Click(columnData[i].Controls[GetNumValue(Items[i]) - 1], e); break;
-                            case "Star10": Star10_Click(columnData[i].Controls[GetNumValue(Items[i]) - 1], e); break;
-                                    //не работает с нулевой оценкой
-                            case "Cube10": Cube10_Click(columnData[i].Controls[GetNumValue(Items[i]) - 1], e); break;
+                            case "Star5": if (GetNumValue(Items[i]) != 0)
+                                Star5_Click(columnData[i].Controls[GetNumValue(Items[i]) - 1], e);
+                                else columnData[i].Text = "☆☆☆☆☆"; break;
+                            case "Star10": if (GetNumValue(Items[i]) != 0)
+                                Star10_Click(columnData[i].Controls[GetNumValue(Items[i]) - 1], e);
+                                else columnData[i].Text = "☆☆☆☆☆☆☆☆☆☆"; break;
+                            case "Cube10": if (GetNumValue(Items[i]) != 0)
+                                Cube10_Click(columnData[i].Controls[GetNumValue(Items[i]) - 1], e);
+                                else columnData[i].Text = "▒▒▒▒▒▒▒▒▒▒"; break;
                         }
                         break;
                     case "System.Windows.Forms.DateTimePicker": 
@@ -284,7 +289,8 @@ namespace MediaLibrarian
             Panel Stars5Panel = new Panel()
             {
                 Size = new Size(190, 30),
-                Tag = "Star5"
+                Tag = "Star5",
+               
             };
             for (int ii = 0; ii < 5; ii++)
             {
@@ -310,7 +316,7 @@ namespace MediaLibrarian
             Panel Stars10Panel = new Panel()
             {
                 Size = new Size(195, 30),
-                Tag = "Star10"
+                Tag = "Star10",
             };
             for (int ii = 0; ii < 10; ii++)
             {
@@ -472,7 +478,6 @@ namespace MediaLibrarian
             }
 
         }
-
         #endregion
 
         private void FormReset()
@@ -522,7 +527,7 @@ namespace MediaLibrarian
                 case "█████████▒": digit = 9; break;
                 case "★★★★★★★★★★": digit = 10; break;
                 case "██████████": digit = 10; break;
-                default: digit = 1; break;
+                default: digit = 0; break;
             }
             return digit;
         }
@@ -596,7 +601,7 @@ namespace MediaLibrarian
                 }
             }
         }
-        void tb_TextChanged(object sender, EventArgs e)
+        private void tb_TextChanged(object sender, EventArgs e)
         {
             (sender as TextBox).Text = (sender as TextBox).Text.
                 Replace("<", "").Replace(">", "").Replace("|", "").Replace("/", "").Replace("\\", "");

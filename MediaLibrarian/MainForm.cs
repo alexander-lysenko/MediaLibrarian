@@ -27,11 +27,10 @@ namespace MediaLibrarian
         void LoadItemInfo(ListViewItem item)
         {
             InfoPanel.Controls.Clear();
-            int s = 0;
             LO = 5;
             foreach (var col in columnsInfo)
             {
-                if (s == 0) { s++; continue; }
+                if (columnsInfo.IndexOf(col) == 0) continue;
                 Label HeaderLabel = new Label() 
                 {
                 Location = new Point(3, LO),
@@ -51,7 +50,7 @@ namespace MediaLibrarian
                                 Size = new Size(200, 15),
                                 Font = new Font("Tahoma", 9.75f),
                                 AutoEllipsis = true,
-                                Text = item.SubItems[s].Text,
+                                Text = item.SubItems[columnsInfo.IndexOf(col)].Text,
                                 TextAlign = ContentAlignment.MiddleRight,
                             };
                             InfoPanel.Controls.Add(strLabel);
@@ -67,7 +66,7 @@ namespace MediaLibrarian
                                 Font = new Font("Tahoma", 9.75f),
                                 ForeColor = Color.Blue,
                                 AutoSize = true,
-                                Text = item.SubItems[s].Text,
+                                Text = item.SubItems[columnsInfo.IndexOf(col)].Text,
                             };
                             InfoPanel.Controls.Add(txtLabel);
                             LO += txtLabel.Size.Height+10;
@@ -80,7 +79,7 @@ namespace MediaLibrarian
                                 Location = new Point(210, LO-5),
                                 Size = new Size(200, 20),
                                 Font = new Font("Lucida Console", 18f),
-                                Text = item.SubItems[s].Text,
+                                Text = item.SubItems[columnsInfo.IndexOf(col)].Text,
                                 TextAlign = ContentAlignment.MiddleRight,
                             };
                             switch (HowMatch(m5Label.Text))
@@ -102,7 +101,7 @@ namespace MediaLibrarian
                                 Location = new Point(210, LO-5),
                                 Size = new Size(200, 20),
                                 Font = new Font("Lucida Console", 18f),
-                                Text = item.SubItems[s].Text,
+                                Text = item.SubItems[columnsInfo.IndexOf(col)].Text,
                                 TextAlign = ContentAlignment.MiddleRight,
                             }; 
                             switch (HowMatch(m10Label.Text))
@@ -123,7 +122,6 @@ namespace MediaLibrarian
                             LO += 20;
                         }; break;       //Поле оценка (10)
                 }
-                s++;
             }
         }
         int HowMatch(string sourceString)
@@ -251,7 +249,11 @@ namespace MediaLibrarian
         }
         private void Collection_SelectedIndexChanged(object sender, EventArgs e)
         {
-            TitleLabel.Text = Collection.FocusedItem.Text;
+            if (Collection.SelectedItems.Count > 0)
+            {
+                LoadItemInfo(Collection.SelectedItems[0]);
+                TitleLabel.Text = Collection.SelectedItems[0].Text;
+            }
             try
             {
                 using (FileStream fs = File.OpenRead(String.Format(@"{0}\{1}\{2}.jpg", Environment.CurrentDirectory,
@@ -267,7 +269,6 @@ namespace MediaLibrarian
                 PosterBox.Image = null;
                 PosterBox.BackgroundImage = MediaLibrarian.Properties.Resources.noposter;
             }
-            LoadItemInfo(Collection.FocusedItem);
         }
         public string ReplaceSymblos(string str)
         {

@@ -456,7 +456,7 @@
     <value>12, 6</value>
   </data>
   <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>574, 112</value>
+    <value>574, 68</value>
   </data>
   <data name="groupBox2.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -476,6 +476,9 @@
   <data name="&gt;&gt;groupBox2.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="mainFontLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="mainFontLabel.Font" type="System.Drawing.Font, System.Drawing">
     <value>Algerian, 20.25pt</value>
   </data>
@@ -483,13 +486,10 @@
     <value>NoControl</value>
   </data>
   <data name="mainFontLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>242, 117</value>
-  </data>
-  <data name="mainFontLabel.MaximumSize" type="System.Drawing.Size, System.Drawing">
-    <value>325, 0</value>
+    <value>6, 150</value>
   </data>
   <data name="mainFontLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>325, 89</value>
+    <value>287, 60</value>
   </data>
   <data name="mainFontLabel.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -543,9 +543,6 @@
   <data name="&gt;&gt;mainColorLabel.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="fontSelectLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="fontSelectLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -553,18 +550,14 @@
     <value>3, 104</value>
   </data>
   <data name="fontSelectLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>240, 78</value>
+    <value>565, 46</value>
   </data>
   <data name="fontSelectLabel.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
   <data name="fontSelectLabel.Text" xml:space="preserve">
     <value>Шрифт названия отображаемого элемента:
-  Если текст в скобках (Проверка кириллицы)
-  отображается не тем же шрифтом, что и
-  название, значит выбранный шрифт НЕ
-  поддерживает кириллицу, и следовательно,
-  работать с ней не будет.</value>
+  Если текст в скобках (Проверка кириллицы) отображается не тем же шрифтом, что и название, значит выбранный шрифт НЕ поддерживает кириллицу, и следовательно, работать с ней не будет.</value>
   </data>
   <data name="&gt;&gt;fontSelectLabel.Name" xml:space="preserve">
     <value>fontSelectLabel</value>
@@ -711,10 +704,10 @@
     <value>7</value>
   </data>
   <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 124</value>
+    <value>12, 80</value>
   </data>
   <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>574, 219</value>
+    <value>574, 268</value>
   </data>
   <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -795,7 +788,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tabPage2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>592, 375</value>
+    <value>592, 354</value>
   </data>
   <data name="tabPage2.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
