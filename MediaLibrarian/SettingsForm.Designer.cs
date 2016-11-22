@@ -56,9 +56,9 @@
             this.selectThemeLabel = new System.Windows.Forms.Label();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.OK_Button = new System.Windows.Forms.Button();
-            this.Cancel_Button = new System.Windows.Forms.Button();
-            this.Apply_Button = new System.Windows.Forms.Button();
+            this.saveButton = new System.Windows.Forms.Button();
+            this.cancelButton = new System.Windows.Forms.Button();
+            this.applyButton = new System.Windows.Forms.Button();
             this.headerColorDialog = new System.Windows.Forms.ColorDialog();
             this.headerFontDialog = new System.Windows.Forms.FontDialog();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
@@ -278,26 +278,26 @@
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // OK_Button
+            // saveButton
             // 
-            resources.ApplyResources(this.OK_Button, "OK_Button");
-            this.OK_Button.Name = "OK_Button";
-            this.OK_Button.UseVisualStyleBackColor = true;
-            this.OK_Button.Click += new System.EventHandler(this.OK_Button_Click);
+            resources.ApplyResources(this.saveButton, "saveButton");
+            this.saveButton.Name = "saveButton";
+            this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Click += new System.EventHandler(this.OK_Button_Click);
             // 
-            // Cancel_Button
+            // cancelButton
             // 
-            resources.ApplyResources(this.Cancel_Button, "Cancel_Button");
-            this.Cancel_Button.Name = "Cancel_Button";
-            this.Cancel_Button.UseVisualStyleBackColor = true;
-            this.Cancel_Button.Click += new System.EventHandler(this.CancelButton_Click);
+            resources.ApplyResources(this.cancelButton, "cancelButton");
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
-            // Apply_Button
+            // applyButton
             // 
-            resources.ApplyResources(this.Apply_Button, "Apply_Button");
-            this.Apply_Button.Name = "Apply_Button";
-            this.Apply_Button.UseVisualStyleBackColor = true;
-            this.Apply_Button.Click += new System.EventHandler(this.ApplyButton_Click);
+            resources.ApplyResources(this.applyButton, "applyButton");
+            this.applyButton.Name = "applyButton";
+            this.applyButton.UseVisualStyleBackColor = true;
+            this.applyButton.Click += new System.EventHandler(this.ApplyButton_Click);
             // 
             // toolTip
             // 
@@ -318,9 +318,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             resources.ApplyResources(this, "$this");
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.Apply_Button);
-            this.Controls.Add(this.Cancel_Button);
-            this.Controls.Add(this.OK_Button);
+            this.Controls.Add(this.applyButton);
+            this.Controls.Add(this.cancelButton);
+            this.Controls.Add(this.saveButton);
             this.Controls.Add(this.Tabs);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
@@ -350,9 +350,9 @@
 
         private System.Windows.Forms.TabPage GeneralPage;
         private System.Windows.Forms.TabPage UIPage;
-        private System.Windows.Forms.Button OK_Button;
-        private System.Windows.Forms.Button Cancel_Button;
-        private System.Windows.Forms.Button Apply_Button;
+        private System.Windows.Forms.Button saveButton;
+        private System.Windows.Forms.Button cancelButton;
+        private System.Windows.Forms.Button applyButton;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         public System.Windows.Forms.TabControl Tabs;

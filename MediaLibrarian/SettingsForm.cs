@@ -1,10 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace MediaLibrarian
@@ -17,6 +11,7 @@ namespace MediaLibrarian
             MainForm = FormMain;
         }
         MainForm MainForm;
+        Settings Preferences;
 
         private void CancelButton_Click(object sender, EventArgs e)
         {
@@ -25,13 +20,25 @@ namespace MediaLibrarian
 
         private void ApplyButton_Click(object sender, EventArgs e)
         {
-
+            Preferences = new Settings(
+                rememberLastLibraryChk.Checked,
+                focusFirstItemChk.Checked,
+                cropMaxViewSizeChk.Checked,
+                picMaxWidthNUD.Value,
+                picMaxHeightNUD.Value,
+                fullScreenStartChk.Checked,
+                autoSortByNameChk.Checked,
+                selectThemeCB.Text, 
+                formCaptionTB.Text,
+                mainColorLabel.ForeColor,
+                mainFontLabel.Font);
+            Preferences.Serialize();
         }
 
         private void OK_Button_Click(object sender, EventArgs e)
         {
-            Apply_Button.PerformClick();
-            Cancel_Button.PerformClick();
+            applyButton.PerformClick();
+            cancelButton.PerformClick();
         }
 
         private void mainColorLabel_Click(object sender, EventArgs e)

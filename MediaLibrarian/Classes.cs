@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Xml.Serialization;
 using System.IO;
 using System.Drawing;
@@ -19,8 +16,11 @@ namespace MediaLibrarian
             this.Type = Type;
         }
     }
+
+    [Serializable]
     public class Settings
     {
+        static XmlSerializer formatter = new XmlSerializer(typeof(Settings));
         public bool RememberLastLibrary { get; set; }
         public bool FocusFirstItem { get; set; }
         public bool CropMaxViewSize { get; set; }
@@ -33,7 +33,20 @@ namespace MediaLibrarian
         public Color MainColor { get; set; }
         public Font MainFont { get; set; }
 
-        public Settings()
+        public Settings() { }
+
+        public Settings(
+            bool RememberLastLibrary, 
+            bool FocusFirstItem, 
+            bool CropMaxViewSize, 
+            decimal PicMaxWidth,
+            decimal PicMaxHeight, 
+            bool StartFullScreen, 
+            bool AutoSortByName, 
+            string SelectedTheme, 
+            string FormCaptionText,
+            Color MainColor, 
+            Font MainFont)
         {
             this.RememberLastLibrary = RememberLastLibrary;
             this.FocusFirstItem = FocusFirstItem;
@@ -46,6 +59,33 @@ namespace MediaLibrarian
             this.FormCaptionText = FormCaptionText;
             this.MainColor = MainColor;
             this.MainFont = MainFont;
+        }
+
+        public void Serialize()
+        {
+            using (FileStream file = new FileStream(Environment.CurrentDirectory + "Settings.xml", FileMode.OpenOrCreate))
+            {
+                formatter.Serialize(file, this);
+            }
+        }
+
+        public void Deserialize()
+        {
+            using (FileStream file = new FileStream(Environment.CurrentDirectory + "Settings.xml", FileMode.OpenOrCreate))
+            {
+                Settings Preferences = (Settings)formatter.Deserialize(file);
+                RememberLastLibrary = Preferences.RememberLastLibrary;
+                FocusFirstItem = Preferences.FocusFirstItem;
+                CropMaxViewSize = Preferences.CropMaxViewSize;
+                PicMaxWidth = Preferences.PicMaxWidth;
+                PicMaxHeight = Preferences.PicMaxHeight;
+                StartFullScreen = Preferences.StartFullScreen;
+                AutoSortByName = Preferences.AutoSortByName;
+                SelectedTheme = Preferences.SelectedTheme;
+                FormCaptionText = Preferences.FormCaptionText;
+                MainColor = Preferences.MainColor;
+                MainFont = Preferences.MainFont;
+            }
         }
     }
 

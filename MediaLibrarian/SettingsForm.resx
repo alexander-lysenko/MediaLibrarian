@@ -829,82 +829,82 @@
   <data name="&gt;&gt;Tabs.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="OK_Button.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="saveButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>375, 415</value>
   </data>
-  <data name="OK_Button.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="saveButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
-  <data name="OK_Button.TabIndex" type="System.Int32, mscorlib">
+  <data name="saveButton.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="OK_Button.Text" xml:space="preserve">
+  <data name="saveButton.Text" xml:space="preserve">
     <value>ОК</value>
   </data>
-  <data name="&gt;&gt;OK_Button.Name" xml:space="preserve">
-    <value>OK_Button</value>
+  <data name="&gt;&gt;saveButton.Name" xml:space="preserve">
+    <value>saveButton</value>
   </data>
-  <data name="&gt;&gt;OK_Button.Type" xml:space="preserve">
+  <data name="&gt;&gt;saveButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;OK_Button.Parent" xml:space="preserve">
+  <data name="&gt;&gt;saveButton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;OK_Button.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;saveButton.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="Cancel_Button.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="cancelButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="Cancel_Button.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="cancelButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>456, 415</value>
   </data>
-  <data name="Cancel_Button.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="cancelButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
-  <data name="Cancel_Button.TabIndex" type="System.Int32, mscorlib">
+  <data name="cancelButton.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="Cancel_Button.Text" xml:space="preserve">
+  <data name="cancelButton.Text" xml:space="preserve">
     <value>Отмена</value>
   </data>
-  <data name="&gt;&gt;Cancel_Button.Name" xml:space="preserve">
-    <value>Cancel_Button</value>
+  <data name="&gt;&gt;cancelButton.Name" xml:space="preserve">
+    <value>cancelButton</value>
   </data>
-  <data name="&gt;&gt;Cancel_Button.Type" xml:space="preserve">
+  <data name="&gt;&gt;cancelButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Cancel_Button.Parent" xml:space="preserve">
+  <data name="&gt;&gt;cancelButton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;Cancel_Button.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;cancelButton.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="Apply_Button.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="applyButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="Apply_Button.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="applyButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>537, 415</value>
   </data>
-  <data name="Apply_Button.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="applyButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
-  <data name="Apply_Button.TabIndex" type="System.Int32, mscorlib">
+  <data name="applyButton.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="Apply_Button.Text" xml:space="preserve">
+  <data name="applyButton.Text" xml:space="preserve">
     <value>Применить</value>
   </data>
-  <data name="&gt;&gt;Apply_Button.Name" xml:space="preserve">
-    <value>Apply_Button</value>
+  <data name="&gt;&gt;applyButton.Name" xml:space="preserve">
+    <value>applyButton</value>
   </data>
-  <data name="&gt;&gt;Apply_Button.Type" xml:space="preserve">
+  <data name="&gt;&gt;applyButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Apply_Button.Parent" xml:space="preserve">
+  <data name="&gt;&gt;applyButton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;Apply_Button.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;applyButton.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <metadata name="headerColorDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
@@ -948,6 +948,9 @@
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
+  </metadata>
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>49</value>
   </metadata>
   <data name="$this.AutoScroll" type="System.Boolean, mscorlib">
     <value>True</value>
