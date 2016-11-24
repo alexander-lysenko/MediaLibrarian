@@ -1,4 +1,5 @@
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace MediaLibrarian
@@ -20,18 +21,20 @@ namespace MediaLibrarian
 
         private void ApplyButton_Click(object sender, EventArgs e)
         {
-            Preferences = new Settings{
+            Preferences = new Settings
+            {
                 RememberLastLibrary = rememberLastLibraryChk.Checked,
                 FocusFirstItem = focusFirstItemChk.Checked,
                 CropMaxViewSize = cropMaxViewSizeChk.Checked,
                 PicMaxWidth = picMaxWidthNUD.Value,
                 PicMaxHeight = picMaxHeightNUD.Value,
                 StartFullScreen = fullScreenStartChk.Checked,
-                AutoSortByName =  autoSortByNameChk.Checked,
-                SelectedTheme = selectThemeCB.Text, 
+                AutoSortByName = autoSortByNameChk.Checked,
+                SelectedTheme = selectThemeCB.Text,
                 FormCaptionText = formCaptionTB.Text,
-                MainColor = mainColorLabel.ForeColor,
-                MainFont = mainFontLabel.Font};
+                MainColor = mainFontLabel.ForeColor.ToArgb(),
+                MainFont = new SFont(mainFontLabel.Font.FontFamily.Name, mainFontLabel.Font.Size, mainFontLabel.Font.Style)
+            };
             XmlManager.Serialize(Preferences);
             hintLabel.Text = "Настройки сохранены успешно.";
         }
@@ -74,6 +77,29 @@ namespace MediaLibrarian
             //toolTip.SetToolTip()
             //toolTip.SetToolTip();
             //toolTip.SetToolTip();
+
+            try
+            {
+                Preferences = XmlManager.Deserialize(); 
+                rememberLastLibraryChk.Checked = Preferences.RememberLastLibrary;
+                focusFirstItemChk.Checked = Preferences.FocusFirstItem;
+                cropMaxViewSizeChk.Checked = Preferences.CropMaxViewSize;
+                picMaxWidthNUD.Value = Preferences.PicMaxWidth;
+                picMaxHeightNUD.Value = Preferences.PicMaxHeight;
+                fullScreenStartChk.Checked = Preferences.StartFullScreen;
+                autoSortByNameChk.Checked = Preferences.AutoSortByName;
+                selectThemeCB.Text = Preferences.SelectedTheme;
+                formCaptionTB.Text = Preferences.FormCaptionText;
+                //mainColorLabel.ForeColor = ColorConverter(),
+                mainColorLabel.Text = Preferences.MainColor.ToString();
+                mainFontLabel.Font = new Font(Preferences.MainFont.FontFamily_Name, 
+                    Preferences.MainFont.Font_Size, Preferences.MainFont.Font_Style);
+            }
+            catch (InvalidOperationException)
+            {
+                hintLabel.Text = "Настройки были сброшены по умолчанию";
+            }
+
         }
     }
 }

@@ -10,15 +10,15 @@ namespace MediaLibrarian
 
         static XmlManager()
         {
-            _path = Environment.CurrentDirectory + "Settings.xml";
+            _path = Environment.CurrentDirectory + "/Settings.xml";
         }
 
         public static void Serialize(Settings settings)
         {
             if(settings == null)
-                throw new ArgumentNullException();
-            XmlSerializer formatter = new XmlSerializer(typeof(Settings));
-            using (FileStream file = new FileStream(_path, FileMode.OpenOrCreate))
+                throw new ArgumentNullException("Произошла ошибка при сохранении настроек");
+            XmlSerializer formatter = new XmlSerializer(settings.GetType());
+            using (FileStream file = new FileStream(_path, FileMode.Create))
             {
                 formatter.Serialize(file, settings);
             }

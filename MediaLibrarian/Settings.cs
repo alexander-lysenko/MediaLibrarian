@@ -15,7 +15,23 @@ namespace MediaLibrarian
         public bool AutoSortByName { get; set; }
         public string SelectedTheme { get; set; }
         public string FormCaptionText { get; set; }
-        public Color MainColor { get; set; }
-        public Font MainFont { get; set; }
+        public int MainColor { get; set; }
+        public SFont MainFont { get; set; }
+    }
+    [Serializable]
+    public class SFont 
+    {
+        public string FontFamily_Name { get; set; }
+        public float Font_Size { get; set; }
+        public FontStyle Font_Style { get; set; }
+
+        public SFont() { }
+
+        public SFont(string name, float size, FontStyle style)
+        {
+            FontFamily_Name = name;
+            Font_Size = size;
+            Font_Style = style;
+        }
     }
 }
