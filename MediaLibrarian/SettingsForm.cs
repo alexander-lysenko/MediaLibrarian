@@ -20,19 +20,20 @@ namespace MediaLibrarian
 
         private void ApplyButton_Click(object sender, EventArgs e)
         {
-            Preferences = new Settings(
-                rememberLastLibraryChk.Checked,
-                focusFirstItemChk.Checked,
-                cropMaxViewSizeChk.Checked,
-                picMaxWidthNUD.Value,
-                picMaxHeightNUD.Value,
-                fullScreenStartChk.Checked,
-                autoSortByNameChk.Checked,
-                selectThemeCB.Text, 
-                formCaptionTB.Text,
-                mainColorLabel.ForeColor,
-                mainFontLabel.Font);
-            Preferences.Serialize();
+            Preferences = new Settings{
+                RememberLastLibrary = rememberLastLibraryChk.Checked,
+                FocusFirstItem = focusFirstItemChk.Checked,
+                CropMaxViewSize = cropMaxViewSizeChk.Checked,
+                PicMaxWidth = picMaxWidthNUD.Value,
+                PicMaxHeight = picMaxHeightNUD.Value,
+                StartFullScreen = fullScreenStartChk.Checked,
+                AutoSortByName =  autoSortByNameChk.Checked,
+                SelectedTheme = selectThemeCB.Text, 
+                FormCaptionText = formCaptionTB.Text,
+                MainColor = mainColorLabel.ForeColor,
+                MainFont = mainFontLabel.Font};
+            XmlManager.Serialize(Preferences);
+            hintLabel.Text = "Настройки сохранены успешно.";
         }
 
         private void OK_Button_Click(object sender, EventArgs e)

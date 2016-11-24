@@ -63,6 +63,7 @@
             this.headerFontDialog = new System.Windows.Forms.FontDialog();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.label1 = new System.Windows.Forms.Label();
+            this.hintLabel = new System.Windows.Forms.Label();
             this.Tabs.SuspendLayout();
             this.GeneralPage.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -313,10 +314,16 @@
             resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
             // 
+            // hintLabel
+            // 
+            resources.ApplyResources(this.hintLabel, "hintLabel");
+            this.hintLabel.Name = "hintLabel";
+            // 
             // SettingsForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             resources.ApplyResources(this, "$this");
+            this.Controls.Add(this.hintLabel);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.applyButton);
             this.Controls.Add(this.cancelButton);
@@ -343,6 +350,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -381,5 +389,6 @@
         private System.Windows.Forms.NumericUpDown picMaxWidthNUD;
         private System.Windows.Forms.ToolTip toolTip;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label hintLabel;
     }
 }
