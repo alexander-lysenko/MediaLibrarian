@@ -32,6 +32,7 @@
             this.Collection = new System.Windows.Forms.ListView();
             this.StatusBar = new System.Windows.Forms.StatusStrip();
             this.StatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.screenResolutionLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.MainMenu = new System.Windows.Forms.MenuStrip();
             this.FileTSMI = new System.Windows.Forms.ToolStripMenuItem();
             this.OpenLibTSMI = new System.Windows.Forms.ToolStripMenuItem();
@@ -70,7 +71,6 @@
             this.TitleHeaderLabel = new System.Windows.Forms.Label();
             this.PosterBox = new System.Windows.Forms.PictureBox();
             this.InfoPanel = new System.Windows.Forms.Panel();
-            this.screenResolutionLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.StatusBar.SuspendLayout();
             this.MainMenu.SuspendLayout();
             this.LibInfoGB.SuspendLayout();
@@ -106,6 +106,12 @@
             this.StatusLabel.BackColor = System.Drawing.SystemColors.Control;
             this.StatusLabel.Name = "StatusLabel";
             resources.ApplyResources(this.StatusLabel, "StatusLabel");
+            // 
+            // screenResolutionLabel
+            // 
+            this.screenResolutionLabel.Name = "screenResolutionLabel";
+            resources.ApplyResources(this.screenResolutionLabel, "screenResolutionLabel");
+            this.screenResolutionLabel.Spring = true;
             // 
             // MainMenu
             // 
@@ -387,17 +393,12 @@
             this.InfoPanel.Controls.Add(this.label6);
             this.InfoPanel.Name = "InfoPanel";
             // 
-            // screenResolutionLabel
-            // 
-            this.screenResolutionLabel.Name = "screenResolutionLabel";
-            resources.ApplyResources(this.screenResolutionLabel, "screenResolutionLabel");
-            this.screenResolutionLabel.Spring = true;
-            // 
             // MainForm
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
+            this.BackgroundImage = global::MediaLibrarian.Properties.Resources.aa;
             this.Controls.Add(this.ElementInfoGB);
             this.Controls.Add(this.ElementActionsGB);
             this.Controls.Add(this.LibInfoGB);

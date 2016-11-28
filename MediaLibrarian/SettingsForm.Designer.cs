@@ -259,6 +259,13 @@
             // 
             this.selectThemeCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.selectThemeCB.FormattingEnabled = true;
+            this.selectThemeCB.Items.AddRange(new object[] {
+            resources.GetString("selectThemeCB.Items"),
+            resources.GetString("selectThemeCB.Items1"),
+            resources.GetString("selectThemeCB.Items2"),
+            resources.GetString("selectThemeCB.Items3"),
+            resources.GetString("selectThemeCB.Items4"),
+            resources.GetString("selectThemeCB.Items5")});
             resources.ApplyResources(this.selectThemeCB, "selectThemeCB");
             this.selectThemeCB.Name = "selectThemeCB";
             // 

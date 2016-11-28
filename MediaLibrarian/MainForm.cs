@@ -11,6 +11,8 @@ namespace MediaLibrarian
     {
         public MainForm()
         {
+            //SplashForm splash = new SplashForm();
+            //splash.ShowDialog();
             InitializeComponent();
             libManagerForm = new LibManagerForm(this);
             editForm = new EditForm(this);
@@ -123,6 +125,7 @@ namespace MediaLibrarian
                         }; break;       //Поле оценка (10)
                 }
             }
+            InfoPanel.Controls.Add(new Label() { Location = new Point(1, LO), Size = new Size(1, 20) });
         }
         int HowMatch(string sourceString)
         {

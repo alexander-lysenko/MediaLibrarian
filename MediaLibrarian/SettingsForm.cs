@@ -32,7 +32,7 @@ namespace MediaLibrarian
                 AutoSortByName = autoSortByNameChk.Checked,
                 SelectedTheme = selectThemeCB.Text,
                 FormCaptionText = formCaptionTB.Text,
-                MainColor = mainFontLabel.ForeColor.ToArgb(),
+                MainColor = mainColorLabel.ForeColor.ToArgb(),
                 MainFont = new SFont(mainFontLabel.Font.FontFamily.Name, mainFontLabel.Font.Size, mainFontLabel.Font.Style)
             };
             XmlManager.Serialize(Preferences);
@@ -90,8 +90,8 @@ namespace MediaLibrarian
                 autoSortByNameChk.Checked = Preferences.AutoSortByName;
                 selectThemeCB.Text = Preferences.SelectedTheme;
                 formCaptionTB.Text = Preferences.FormCaptionText;
-                //mainColorLabel.ForeColor = ColorConverter(),
-                mainColorLabel.Text = Preferences.MainColor.ToString();
+                mainColorLabel.ForeColor = Color.FromArgb(Preferences.MainColor);
+                mainColorLabel.Text = mainColorLabel.ForeColor.Name;
                 mainFontLabel.Font = new Font(Preferences.MainFont.FontFamily_Name, 
                     Preferences.MainFont.Font_Size, Preferences.MainFont.Font_Style);
             }

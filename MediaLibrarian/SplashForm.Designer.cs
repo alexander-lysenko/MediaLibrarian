@@ -28,22 +28,36 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.progressLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
+            // 
+            // progressLabel
+            // 
+            this.progressLabel.Location = new System.Drawing.Point(12, 172);
+            this.progressLabel.Name = "progressLabel";
+            this.progressLabel.Size = new System.Drawing.Size(296, 20);
+            this.progressLabel.TabIndex = 0;
+            this.progressLabel.Text = "Загрузка";
+            this.progressLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // SplashForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(320, 200);
             this.ControlBox = false;
+            this.Controls.Add(this.progressLabel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "SplashForm";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Load += new System.EventHandler(this.SplashForm_Load);
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private System.Windows.Forms.Label progressLabel;
     }
 }

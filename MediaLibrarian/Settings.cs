@@ -7,6 +7,7 @@ namespace MediaLibrarian
     public class Settings
     {
         public bool RememberLastLibrary { get; set; }
+        public string LastLibraryName { get; set; }
         public bool FocusFirstItem { get; set; }
         public bool CropMaxViewSize { get; set; }
         public decimal PicMaxWidth { get; set; }
