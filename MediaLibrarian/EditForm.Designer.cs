@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditForm));
+            var resources = new System.ComponentModel.ComponentResourceManager(typeof(EditForm));
             this.SaveButton = new System.Windows.Forms.Button();
             this.Cancel_Button = new System.Windows.Forms.Button();
             this.EditPanel = new System.Windows.Forms.FlowLayoutPanel();

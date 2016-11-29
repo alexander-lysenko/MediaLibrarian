@@ -4,32 +4,30 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Data.SQLite;
 using System.Data.Common;
-using System.Data.SqlClient;
 using System.Data;
-using System.Threading;
 
 namespace MediaLibrarian
 {
     public partial class LibManagerForm : Form
     {
-        public LibManagerForm(MainForm FormMain)
+        public LibManagerForm(MainForm formMain)
         {
             InitializeComponent();
-            mainForm = FormMain;
+            _mainForm = formMain;
         }
-        MainForm mainForm;
+        MainForm _mainForm;
 
-        public bool Edited = false;
-        public const int MaxFC = 20;
+        public bool Edited;
+        public const int MaxFc = 20;
         public int FNo = -1;
         public string LibTableHeaders = "";
-        List<TextBox> FieldName = new List<TextBox>();
-        List<ComboBox> FieldType = new List<ComboBox>();
-        List<Button> RemoveButton = new List<Button>();
-        TextBox LibNameTB = new TextBox() { Size = new Size(265, 20), Location = new Point(130, 0), MaxLength = 50 };
-        Point FieldPosition = new Point(5, 25);
-        static string Database = "baza.db";
-        SQLiteConnection connection = new SQLiteConnection(string.Format("Data Source={0};", Database));
+        List<TextBox> _fieldName = new List<TextBox>();
+        List<ComboBox> _fieldType = new List<ComboBox>();
+        List<Button> _removeButton = new List<Button>();
+        TextBox _libNameTb = new TextBox() { Size = new Size(265, 20), Location = new Point(130, 0), MaxLength = 50 };
+        Point _fieldPosition = new Point(5, 25);
+        static string _database = "baza.db";
+        public readonly SQLiteConnection Connection = new SQLiteConnection(string.Format("Data Source={0};", _database));
 
         private int GetColumnLength(string type)
         {
@@ -62,67 +60,67 @@ namespace MediaLibrarian
         private void ReadDatabase_ForLibsList()
         {
             LibsList.Items.Clear();
-            SQLiteCommand GetTables = new SQLiteCommand("select name from sqlite_master where type='table' order by name;", connection);
-            connection.Open();
-            SQLiteDataReader ReadTables = GetTables.ExecuteReader();
-            foreach (DbDataRecord table in ReadTables)
+            var getTables = new SQLiteCommand("select name from sqlite_master where type='table' order by name;", Connection);
+            Connection.Open();
+            var readTables = getTables.ExecuteReader();
+            foreach (DbDataRecord table in readTables)
             {
-                List<string> ColsList = new List<string>();
-                ListViewItem Lib = new ListViewItem(table["name"].ToString());
-                SQLiteCommand GetColumns = new SQLiteCommand(string.Format("pragma table_info(`{0}`);", table["name"]), connection);
-                SQLiteDataReader ReadCols = GetColumns.ExecuteReader();
-                foreach (DbDataRecord col in ReadCols)
+                var colsList = new List<string>();
+                var lib = new ListViewItem(table["name"].ToString());
+                var getColumns = new SQLiteCommand(string.Format("pragma table_info(`{0}`);", table["name"]), Connection);
+                var readCols = getColumns.ExecuteReader();
+                foreach (DbDataRecord col in readCols)
                 {
-                    ColsList.Add(col["name"].ToString());
+                    colsList.Add(col["name"].ToString());
                 }
-                Lib.SubItems.Add(string.Join(", ", ColsList));
-                LibsList.Items.Add(Lib);
+                lib.SubItems.Add(string.Join(", ", colsList));
+                LibsList.Items.Add(lib);
             }
-            connection.Close();
+            Connection.Close();
         }
         void ReadHeadersForTable(string tableName)
         {
-            mainForm.columnsInfo.Clear();
-            SQLiteCommand GetColumns = new SQLiteCommand(string.Format("pragma table_info('{0}');", tableName), connection);
-            connection.Open();
-            SQLiteDataReader ReadCols = GetColumns.ExecuteReader();
-            foreach (DbDataRecord col in ReadCols)
+            _mainForm.ColumnsInfo.Clear();
+            var getColumns = new SQLiteCommand(string.Format("pragma table_info('{0}');", tableName), Connection);
+            Connection.Open();
+            var readCols = getColumns.ExecuteReader();
+            foreach (DbDataRecord col in readCols)
             {
-                mainForm.Collection.Columns.Add(col["name"].ToString(), GetColumnLength(col["type"].ToString()));
-                mainForm.columnsInfo.Add(new Category
+                _mainForm.Collection.Columns.Add(col["name"].ToString(), GetColumnLength(col["type"].ToString()));
+                _mainForm.ColumnsInfo.Add(new Category
                 {
                     Name = col["name"].ToString(),
                     Type = col["type"].ToString()
                 });
             }
-            connection.Close();
+            Connection.Close();
         }
 
         public void ReadTableFromDatabase(string tableName)
         {
-            string SelectQuery = String.Format("select * from `{0}` ", tableName);
-            mainForm.Collection.Items.Clear();
-            SQLiteCommand ReadTable = new SQLiteCommand(SelectQuery, connection);
-            DataTable data = new DataTable();
-            connection.Open();
-            SQLiteDataReader reader = ReadTable.ExecuteReader();
+            var selectQuery = String.Format("select * from `{0}` ", tableName);
+            _mainForm.Collection.Items.Clear();
+            var readTable = new SQLiteCommand(selectQuery, Connection);
+            var data = new DataTable();
+            Connection.Open();
+            var reader = readTable.ExecuteReader();
             data.Load(reader);
             reader.Close();
-            connection.Close();
+            Connection.Close();
             foreach (DataRow row in data.Rows)
             {
-                ListViewItem item = new ListViewItem(row[0].ToString());
-                for (int i = 1; i < data.Columns.Count; i++)
+                var item = new ListViewItem(row[0].ToString());
+                for (var i = 1; i < data.Columns.Count; i++)
                 {
                     item.SubItems.Add(row[i].ToString());
                 }
-                mainForm.Collection.Items.Add(item);
+                _mainForm.Collection.Items.Add(item);
             }
-            mainForm.InfoPanel.Controls.Clear();
-            mainForm.PosterBox.BackgroundImage = null;
-            mainForm.PosterBox.Image = null;
-            mainForm.TitleHeaderLabel.Text = mainForm.Collection.Columns[0].Text + ":";
-            mainForm.TitleLabel.Text = "";
+            _mainForm.InfoPanel.Controls.Clear();
+            _mainForm.PosterBox.BackgroundImage = null;
+            _mainForm.PosterBox.Image = null;
+            _mainForm.TitleHeaderLabel.Text = _mainForm.Collection.Columns[0].Text + ":";
+            _mainForm.TitleLabel.Text = "";
         }
         private void LibManagerForm_Load(object sender, EventArgs e)
         {
@@ -142,11 +140,11 @@ namespace MediaLibrarian
                 Size = new Size(120, 20),
                 Text = "Название библиотеки"
             });
-            LibNameTB.TextChanged += new EventHandler(this.TB_TextChanged);
-            AddFieldsPanel.Controls.Add(LibNameTB);
+            _libNameTb.TextChanged += new EventHandler(this.TB_TextChanged);
+            AddFieldsPanel.Controls.Add(_libNameTb);
             AddMoreFieldsButton.PerformClick();
-            FieldType[0].Enabled = false;
-            RemoveButton[0].Enabled = false;
+            _fieldType[0].Enabled = false;
+            _removeButton[0].Enabled = false;
             CreateNewLibraryButton.Enabled = false;
         }
         private void RemoveCollectionButton_Click(object sender, EventArgs e)
@@ -155,20 +153,20 @@ namespace MediaLibrarian
                 if (MessageBox.Show("Нажимая \"Удалить библиотеку\", \nВы осознанно принимаете решение удалить выбранную библиотеку\n(" + LibsList.FocusedItem.Text
                     + ")\nцеликом, включая все накопленные в ней элементы.\nПродолжить?", "Очень важное предупреждение", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
-                    if (mainForm.SelectedLibLabel.Text == LibsList.FocusedItem.Text)
+                    if (_mainForm.SelectedLibLabel.Text == LibsList.FocusedItem.Text)
                     {
-                        mainForm.Collection.Clear();
-                        mainForm.SelectedLibLabel.Text = "";
-                        mainForm.ElementActionsGB.Enabled = false;
+                        _mainForm.Collection.Clear();
+                        _mainForm.SelectedLibLabel.Text = "";
+                        _mainForm.ElementActionsGB.Enabled = false;
                     }
-                    SQLiteCommand DropTable = new SQLiteCommand(String.Format("drop table `{0}`;", LibsList.FocusedItem.Text), connection);
-                    connection.Open();
-                    DropTable.ExecuteNonQuery();
-                    connection.Close();
-                    mainForm.StatusLabel.Text = " Была удалена библиотека \"" + LibsList.FocusedItem.Text + "\"";
+                    var dropTable = new SQLiteCommand(String.Format("drop table `{0}`;", LibsList.FocusedItem.Text), Connection);
+                    Connection.Open();
+                    dropTable.ExecuteNonQuery();
+                    Connection.Close();
+                    _mainForm.StatusLabel.Text = " Была удалена библиотека \"" + LibsList.FocusedItem.Text + "\"";
                     try { 
                     System.IO.Directory.Delete(Environment.CurrentDirectory + "\\" +
-                        mainForm.ReplaceSymblos(LibsList.FocusedItem.Text), true);
+                        _mainForm.ReplaceSymblos(LibsList.FocusedItem.Text), true);
                     }
                     catch(Exception)
                     {}
@@ -178,120 +176,120 @@ namespace MediaLibrarian
         }
         private void SaveLibraryButton_Click(object sender, EventArgs e)
         {
-            if (LibNameTB.Text == "")
+            if (_libNameTb.Text == "")
             {
                 MessageBox.Show("Не заполнено название новой библиотеки", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            for (int i = 0; i < FieldName.Count; i++)
+            for (var i = 0; i < _fieldName.Count; i++)
             {
-                if (FieldName[i].Text == "" || FieldType[FieldName.IndexOf(FieldName[i])].SelectedIndex == -1)
+                if (_fieldName[i].Text == "" || _fieldType[_fieldName.IndexOf(_fieldName[i])].SelectedIndex == -1)
                 { MessageBox.Show("Пожалуйста, заполните все поля", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
-                for (int j = i + 1; j < FieldName.Count; j++)
+                for (var j = i + 1; j < _fieldName.Count; j++)
                 {
-                    if (FieldName[i].Text == FieldName[j].Text)
+                    if (_fieldName[i].Text == _fieldName[j].Text)
                     { MessageBox.Show("Пожалуйста, воздержитесь от одинаковых имен для полей", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
                 }
             }
-            string query = String.Format("create table `{0}` (", LibNameTB.Text);
-            foreach (var item in FieldName)
+            var query = String.Format("create table `{0}` (", _libNameTb.Text);
+            foreach (var item in _fieldName)
             {
-                query += "`" + item.Text + "` " + GetTypeString(FieldType[FieldName.IndexOf(item)].SelectedIndex);
-                if (FieldName.IndexOf(item) == 0)
+                query += "`" + item.Text + "` " + GetTypeString(_fieldType[_fieldName.IndexOf(item)].SelectedIndex);
+                if (_fieldName.IndexOf(item) == 0)
                 {
                     query += " NOT NULL UNIQUE";
                 }
-                if (FieldName.IndexOf(item) != FieldName.Count - 1)
+                if (_fieldName.IndexOf(item) != _fieldName.Count - 1)
                 {
                     query += ", ";
                 }
             }
             query += ");";
 
-            SQLiteCommand CreateTable = new SQLiteCommand(query, connection);
-            connection.Open();
-            SQLiteCommand VerifyName = new SQLiteCommand("select name from sqlite_master where type='table' order by name;", connection);
-            SQLiteDataReader ReadTables = VerifyName.ExecuteReader();
-            foreach (DbDataRecord table in ReadTables)
+            var createTable = new SQLiteCommand(query, Connection);
+            Connection.Open();
+            var verifyName = new SQLiteCommand("select name from sqlite_master where type='table' order by name;", Connection);
+            var readTables = verifyName.ExecuteReader();
+            foreach (DbDataRecord table in readTables)
             {
-                if (table["name"].ToString().ToLower().Equals(LibNameTB.Text.ToLower()))
+                if (table["name"].ToString().ToLower().Equals(_libNameTb.Text.ToLower()))
                 {
                     MessageBox.Show("Библиотека с таким именем уже существует", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    connection.Close(); return;
+                    Connection.Close(); return;
                 }
             }
-            CreateTable.ExecuteNonQuery();
-            ReadTables.Close();
-            connection.Close();
-            System.IO.Directory.CreateDirectory(Environment.CurrentDirectory+"\\" + mainForm.ReplaceSymblos(LibNameTB.Text));
+            createTable.ExecuteNonQuery();
+            readTables.Close();
+            Connection.Close();
+            System.IO.Directory.CreateDirectory(Environment.CurrentDirectory+"\\" + _mainForm.ReplaceSymblos(_libNameTb.Text));
             ReadDatabase_ForLibsList();
             CollectionEditGB.Visible = Edited = false;
             CreateNewLibraryButton.Enabled = RemoveLibraryButton.Enabled = true;
-            mainForm.StatusLabel.Text = " Была создана библиотека \"" + LibNameTB.Text + "\"";
+            _mainForm.StatusLabel.Text = " Была создана библиотека \"" + _libNameTb.Text + "\"";
             FormReset();
             
         }
         private void AddMoreFieldsButton_Click(object sender, EventArgs e)
         {
-            if (FieldName.Count > 20)
+            if (_fieldName.Count > 20)
             {
                 MessageBox.Show("Простите, но больше полей добавть нельзя!");
                 return;
             }
-            FNo = FieldName.Count;
-            FieldName.Add(new TextBox()
+            FNo = _fieldName.Count;
+            _fieldName.Add(new TextBox()
             {
                 Size = new Size(210, 20),
             });
-            AddFieldsPanel.Controls.Add(FieldName[FNo]);
-            FieldName[FNo].TextChanged += new EventHandler(this.TB_TextChanged);
+            AddFieldsPanel.Controls.Add(_fieldName[FNo]);
+            _fieldName[FNo].TextChanged += new EventHandler(this.TB_TextChanged);
 
-            FieldType.Add(new ComboBox()
+            _fieldType.Add(new ComboBox()
             {
                 Size = new Size(150, 21),
                 DropDownStyle = ComboBoxStyle.DropDownList,
             });
-            FieldType[FNo].Items.AddRange(new object[] {"Строка", "Текст", "Поле \"Дата\"",
+            _fieldType[FNo].Items.AddRange(new object[] {"Строка", "Текст", "Поле \"Дата\"",
             "Поле \"Дата + Время\"", "Поле \"Оценка (5)\"", "Поле \"Оценка (10)\"", "Поле \"Приоритет\""});
-            AddFieldsPanel.Controls.Add(FieldType[FNo]);
-            FieldType[FNo].SelectedIndex = 0;
+            AddFieldsPanel.Controls.Add(_fieldType[FNo]);
+            _fieldType[FNo].SelectedIndex = 0;
 
-            RemoveButton.Add(new Button()
+            _removeButton.Add(new Button()
             {
                 Size = new Size(20, 21),
                 Text = "-",
                 Tag = FNo.ToString(),
                 TabStop = true
             });
-            RemoveButton[FNo].Click += new System.EventHandler(this.RemoveButton_Click);
-            AddFieldsPanel.Controls.Add(RemoveButton[FNo]);
+            _removeButton[FNo].Click += new System.EventHandler(this.RemoveButton_Click);
+            AddFieldsPanel.Controls.Add(_removeButton[FNo]);
             Edited = true;
         }
         private void RemoveButton_Click(object sender, EventArgs e)
         {
-            if (FieldName.Count <= 1)
+            if (_fieldName.Count <= 1)
             {
                 MessageBox.Show("Это поле удалять нельзя!");
                 return;
             }
-            int In = RemoveButton.IndexOf(sender as Button);//int.Parse((sender as Button).Tag.ToString());
-            AddFieldsPanel.Controls.Remove(FieldName[In]);
-            FieldName.Remove(FieldName[In]);
-            AddFieldsPanel.Controls.Remove(FieldType[In]);
-            FieldType.Remove(FieldType[In]);
-            AddFieldsPanel.Controls.Remove(RemoveButton[In]);
-            RemoveButton.Remove(RemoveButton[In]);
+            var In = _removeButton.IndexOf(sender as Button);//int.Parse((sender as Button).Tag.ToString());
+            AddFieldsPanel.Controls.Remove(_fieldName[In]);
+            _fieldName.Remove(_fieldName[In]);
+            AddFieldsPanel.Controls.Remove(_fieldType[In]);
+            _fieldType.Remove(_fieldType[In]);
+            AddFieldsPanel.Controls.Remove(_removeButton[In]);
+            _removeButton.Remove(_removeButton[In]);
         }
         #endregion
         private void LibsList_ItemActivate(object sender, EventArgs e)
         {
-            mainForm.Collection.Clear();
-            mainForm.columnsInfo.Clear();
-            mainForm.SelectedLibLabel.Text = LibsList.FocusedItem.Text;
+            _mainForm.Collection.Clear();
+            _mainForm.ColumnsInfo.Clear();
+            _mainForm.SelectedLibLabel.Text = LibsList.FocusedItem.Text;
             ReadHeadersForTable(LibsList.FocusedItem.Text);
             ReadTableFromDatabase(LibsList.FocusedItem.Text);
             this.Close();
-            mainForm.ElementActionsGB.Enabled = true;
+            _mainForm.ElementActionsGB.Enabled = true;
         }
         private void LibManagerForm_KeyDown(object sender, KeyEventArgs e)
         {
@@ -323,11 +321,11 @@ namespace MediaLibrarian
         {
             AddFieldsPanel.Controls.Clear();
             CollectionEditGB.Visible = false;
-            LibNameTB.Text = "";
-            FieldName.Clear();
-            FieldType.Clear();
-            RemoveButton.Clear();
-            FieldPosition = new Point(5, 25);
+            _libNameTb.Text = "";
+            _fieldName.Clear();
+            _fieldType.Clear();
+            _removeButton.Clear();
+            _fieldPosition = new Point(5, 25);
             CreateNewLibraryButton.Enabled = true;
             RemoveLibraryButton.Enabled = true;
         }

@@ -15,21 +15,21 @@ namespace MediaLibrarian
         {
             InitializeComponent();
         }
-        Timer timer;
-        int span = 0;
+        Timer _timer;
+        int _span = 0;
         private void SplashForm_Load(object sender, EventArgs e)
         {
-            timer = new Timer() { Interval = 300 };
-            timer.Tick += new EventHandler(timer_tick);
-            timer.Start();
+            _timer = new Timer() { Interval = 300 };
+            _timer.Tick += new EventHandler(timer_tick);
+            _timer.Start();
         }
         void timer_tick(object sender, EventArgs e)
         {
-            if (span % 3 == 0) { progressLabel.Text = "Загрузка."; }
-            if (span % 3 == 1) { progressLabel.Text = "Загрузка.."; }
-            if (span % 3 == 2) { progressLabel.Text = "Загрузка..."; }
-            if (span >= 15) { timer.Stop(); Close(); }
-            span++;
+            if (_span % 3 == 0) { progressLabel.Text = "Загрузка."; }
+            if (_span % 3 == 1) { progressLabel.Text = "Загрузка.."; }
+            if (_span % 3 == 2) { progressLabel.Text = "Загрузка..."; }
+            if (_span >= 15) { _timer.Stop(); Close(); }
+            _span++;
         }
     }
 }

@@ -405,9 +405,9 @@
             this.Controls.Add(this.StatusBar);
             this.Controls.Add(this.MainMenu);
             this.Controls.Add(this.Collection);
-            this.DoubleBuffered = true;
             this.MainMenuStrip = this.MainMenu;
             this.Name = "MainForm";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.StatusBar.ResumeLayout(false);
             this.StatusBar.PerformLayout();

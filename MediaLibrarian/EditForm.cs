@@ -15,20 +15,20 @@ namespace MediaLibrarian
 {
     public partial class EditForm : Form
     {
-        public EditForm(MainForm FormMain)
+        public EditForm(MainForm formMain)
         {
             InitializeComponent();
-            mainForm = FormMain;            
+            _mainForm = formMain;            
         }
-        MainForm mainForm;
-        LibManagerForm libManagerForm;
-        List<Control> columnData = new List<Control>();
-        string customDateTimeFormat = "d.MM.yyyy, HH:mm:ss";
-        static string database = "baza.db";
-        SQLiteConnection connection = new SQLiteConnection(string.Format("Data Source={0};", database));
+        MainForm _mainForm;
+        LibManagerForm _libManagerForm;
+        List<Control> _columnData = new List<Control>();
+        string _customDateTimeFormat = "d.MM.yyyy, HH:mm:ss";
+        static string _database = "baza.db";
+        SQLiteConnection _connection = new SQLiteConnection(string.Format("Data Source={0};", _database));
         public bool EditMode = false;
-        Bitmap loadedBitmap = null;
-        public EventArgs e { get; set; }
+        Bitmap _loadedBitmap = null;
+        public EventArgs E { get; set; }
 
         #region DatabaseAPI
         private void GetControlByType(string type, int i)
@@ -44,48 +44,48 @@ namespace MediaLibrarian
                 case "VARCHAR(10)": Make10Cubes(i); break;          //Поле приоритет
             }
         }
-        private List<string> GetDataFromDatabase(string TableName, string ElementHeaderName, string ElementName)
+        private List<string> GetDataFromDatabase(string tableName, string elementHeaderName, string elementName)
         {
-            SQLiteCommand GetData = new SQLiteCommand(String.Format("select * from `{0}` where `{1}`='{2}'", TableName, 
-                ElementHeaderName, ElementName.Replace("'","''")), connection);
-            DataTable EditString = new DataTable();
-            connection.Open();
-            EditString.Load(GetData.ExecuteReader());
-            connection.Close();
-            List<string> Items = new List<string>();
-            foreach (var item in EditString.Rows[0].ItemArray)
+            var getData = new SQLiteCommand(String.Format("select * from `{0}` where `{1}`='{2}'", tableName, 
+                elementHeaderName, elementName.Replace("'","''")), _connection);
+            var editString = new DataTable();
+            _connection.Open();
+            editString.Load(getData.ExecuteReader());
+            _connection.Close();
+            var items = new List<string>();
+            foreach (var item in editString.Rows[0].ItemArray)
             {
-                Items.Add(item.ToString());
+                items.Add(item.ToString());
             }
-            return Items;
+            return items;
         }
-        private void PushDataIntoCreatedControls(List<string> Items)
+        private void PushDataIntoCreatedControls(List<string> items)
         {
-            for (int i = 0; i < columnData.Count; i++)
+            for (var i = 0; i < _columnData.Count; i++)
             {
-                switch (columnData[i].GetType().ToString())
+                switch (_columnData[i].GetType().ToString())
                 {
                     case "System.Windows.Forms.TextBox": case "System.Windows.Forms.RichTextBox":
-                        columnData[i].Text = Items[i]; break;
+                        _columnData[i].Text = items[i]; break;
                     case "System.Windows.Forms.Panel":
                         //if (!new List<string>(){null, "", "0"}.Contains(Items[i])) 
-                            switch (columnData[i].Tag.ToString())
+                            switch (_columnData[i].Tag.ToString())
                         {
-                            case "Star5": if (GetNumValue(Items[i]) != 0)
-                                Star5_Click(columnData[i].Controls[GetNumValue(Items[i]) - 1], e);
-                                else columnData[i].Text = "☆☆☆☆☆"; break;
-                            case "Star10": if (GetNumValue(Items[i]) != 0)
-                                Star10_Click(columnData[i].Controls[GetNumValue(Items[i]) - 1], e);
-                                else columnData[i].Text = "☆☆☆☆☆☆☆☆☆☆"; break;
-                            case "Cube10": if (GetNumValue(Items[i]) != 0)
-                                Cube10_Click(columnData[i].Controls[GetNumValue(Items[i]) - 1], e);
-                                else columnData[i].Text = "▒▒▒▒▒▒▒▒▒▒"; break;
+                            case "Star5": if (GetNumValue(items[i]) != 0)
+                                Star5_Click(_columnData[i].Controls[GetNumValue(items[i]) - 1], E);
+                                else _columnData[i].Text = "☆☆☆☆☆"; break;
+                            case "Star10": if (GetNumValue(items[i]) != 0)
+                                Star10_Click(_columnData[i].Controls[GetNumValue(items[i]) - 1], E);
+                                else _columnData[i].Text = "☆☆☆☆☆☆☆☆☆☆"; break;
+                            case "Cube10": if (GetNumValue(items[i]) != 0)
+                                Cube10_Click(_columnData[i].Controls[GetNumValue(items[i]) - 1], E);
+                                else _columnData[i].Text = "▒▒▒▒▒▒▒▒▒▒"; break;
                         }
                         break;
                     case "System.Windows.Forms.DateTimePicker": 
                         try
                             {
-                                (columnData[i] as DateTimePicker).Value = DateTime.Parse(Items[i]);
+                                (_columnData[i] as DateTimePicker).Value = DateTime.Parse(items[i]);
                             }
                         catch (Exception ex) {MessageBox.Show(ex.Message);}
                         break;
@@ -96,59 +96,59 @@ namespace MediaLibrarian
         #region Items
         private void EditItem()
         {
-            List<string> Names = new List<string>();
-            Names.AddRange(from val in mainForm.columnsInfo select val.Name);
-            List<string> Values = new List<string>();
-            Values.AddRange(from data in columnData select data.Text);
-            string updateQuery = String.Format("update `{0}` set ", mainForm.SelectedLibLabel.Text);
-            for (int i = 0; i < Names.Count; i++)
+            var names = new List<string>();
+            names.AddRange(from val in _mainForm.ColumnsInfo select val.Name);
+            var values = new List<string>();
+            values.AddRange(from data in _columnData select data.Text);
+            var updateQuery = String.Format("update `{0}` set ", _mainForm.SelectedLibLabel.Text);
+            for (var i = 0; i < names.Count; i++)
             {
-                updateQuery += "`" + Names[i] + "` = '" + Values[i].Replace("'", "''") + "'";
-                if (Names.Count - i > 1) updateQuery += ", ";
+                updateQuery += "`" + names[i] + "` = '" + values[i].Replace("'", "''") + "'";
+                if (names.Count - i > 1) updateQuery += ", ";
             }
-            updateQuery += " where `" + Names[0] + "` = '" + columnData[0].Tag.ToString().Replace("'", "''") + "'";            
+            updateQuery += " where `" + names[0] + "` = '" + _columnData[0].Tag.ToString().Replace("'", "''") + "'";            
             if (VerifyItem())
             {
-                SQLiteCommand EditItem = new SQLiteCommand(updateQuery, connection);
-                try { EditItem.ExecuteNonQuery(); }
+                var editItem = new SQLiteCommand(updateQuery, _connection);
+                try { editItem.ExecuteNonQuery(); }
                 catch (SQLiteException) { 
                     MessageBox.Show("Доступ к базе временно заблокирован. Попробуйте еще раз",
                         "ОТшибка ",MessageBoxButtons.OK, MessageBoxIcon.Error); 
-                    connection.Close();
+                    _connection.Close();
                     this.DialogResult = DialogResult.Abort;
                     return; }
-                connection.Close();
+                _connection.Close();
                 SavePicture();
-                mainForm.StatusLabel.Text = "Элемент \"" + columnData[0].Text + "\" изменен";
+                _mainForm.StatusLabel.Text = "Элемент \"" + _columnData[0].Text + "\" изменен";
                 Close();
             }
 
         }
         private void AddNewItem()
         {
-            string Names = String.Join("` , `", from val in mainForm.columnsInfo select val.Name);
-            string Values = String.Join("\" , \"", from data in columnData select data.Text);
-            SQLiteCommand AddNewItem = new SQLiteCommand(String.Format("insert into `{0}` (`{1}`) values (\"{2}\")",
-                mainForm.SelectedLibLabel.Text, Names, Values), connection);
+            var names = String.Join("` , `", from val in _mainForm.ColumnsInfo select val.Name);
+            var values = String.Join("\" , \"", from data in _columnData select data.Text);
+            var addNewItem = new SQLiteCommand(String.Format("insert into `{0}` (`{1}`) values (\"{2}\")",
+                _mainForm.SelectedLibLabel.Text, names, values), _connection);
             if (VerifyItem())
             {
-                AddNewItem.ExecuteNonQuery();
-                connection.Close();
+                addNewItem.ExecuteNonQuery();
+                _connection.Close();
                 SavePicture();
-                mainForm.StatusLabel.Text = "Добавлен элемент \"" + columnData[0].Text + "\"";
+                _mainForm.StatusLabel.Text = "Добавлен элемент \"" + _columnData[0].Text + "\"";
                 Close();
             }
         }
         private bool VerifyItem()
         {
-            SQLiteCommand Verify = new SQLiteCommand(string.Format("select `{0}` from `{1}` where `{0}` = '{2}'",
-                mainForm.columnsInfo[0].Name, mainForm.SelectedLibLabel.Text, columnData[0].Text.Replace("'", "''")), connection);
-            connection.Open();
-            SQLiteDataReader reader = Verify.ExecuteReader();
-            if (reader.HasRows && (columnData[0].Tag.ToString() != columnData[0].Text))
+            var verify = new SQLiteCommand(string.Format("select `{0}` from `{1}` where `{0}` = '{2}'",
+                _mainForm.ColumnsInfo[0].Name, _mainForm.SelectedLibLabel.Text, _columnData[0].Text.Replace("'", "''")), _connection);
+            _connection.Open();
+            var reader = verify.ExecuteReader();
+            if (reader.HasRows && (_columnData[0].Tag.ToString() != _columnData[0].Text))
             {
                 MessageBox.Show("Элемент с таким именем уже существует в библиотеке", "Обнаружен дубликат данных", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                connection.Close();
+                _connection.Close();
                 this.DialogResult = DialogResult.Abort;
                 return false;
             }
@@ -156,18 +156,18 @@ namespace MediaLibrarian
             reader.Dispose();
             return true;
         }
-        public void DeleteItem(string ItemType, string ItemName)
+        public void DeleteItem(string itemType, string itemName)
         {
-            SQLiteCommand DeleteItem = new SQLiteCommand(String.Format("delete from `{0}` where `{1}` = '{2}'", mainForm.SelectedLibLabel.Text,
-                ItemType, ItemName), connection);
-            connection.Open();
-            DeleteItem.ExecuteNonQuery();
-            connection.Close();
-            string PathToPoster = String.Format(@"{0}\{1}\{2}.jpg", Environment.CurrentDirectory,
-                        mainForm.ReplaceSymblos(mainForm.SelectedLibLabel.Text),
-                        mainForm.ReplaceSymblos(ItemName));
-            if (File.Exists(PathToPoster)) File.Delete(PathToPoster);
-            mainForm.StatusLabel.Text = "Элемент \"" + ItemName + "\" успешно удален";
+            var deleteItem = new SQLiteCommand(String.Format("delete from `{0}` where `{1}` = '{2}'", _mainForm.SelectedLibLabel.Text,
+                itemType, itemName), _connection);
+            _connection.Open();
+            deleteItem.ExecuteNonQuery();
+            _connection.Close();
+            var pathToPoster = String.Format(@"{0}\{1}\{2}.jpg", Environment.CurrentDirectory,
+                        _mainForm.ReplaceSymblos(_mainForm.SelectedLibLabel.Text),
+                        _mainForm.ReplaceSymblos(itemName));
+            if (File.Exists(pathToPoster)) File.Delete(pathToPoster);
+            _mainForm.StatusLabel.Text = "Элемент \"" + itemName + "\" успешно удален";
             UpdateCollection();
         }
         #endregion
@@ -181,7 +181,7 @@ namespace MediaLibrarian
                 var response = request.GetResponse();
                 using (var responseStream = response.GetResponseStream())
                 {
-                    loadedBitmap = new Bitmap(responseStream);
+                    _loadedBitmap = new Bitmap(responseStream);
                     LoadingLabel.Text = "Изображение загружено";
                     SaveButton.Enabled = true;
                 }
@@ -189,17 +189,17 @@ namespace MediaLibrarian
             catch (Exception ex)
             {
                 LoadingLabel.Text = ex.Message;
-                loadedBitmap = null;
+                _loadedBitmap = null;
             }
         }
         void SavePicture()
         {
-            string newStr = String.Format(@"{0}\{1}\{2}.jpg", Environment.CurrentDirectory,
-                        mainForm.ReplaceSymblos(mainForm.SelectedLibLabel.Text),
-                        mainForm.ReplaceSymblos(columnData[0].Text));
-            string oldStr = String.Format(@"{0}\{1}\{2}.jpg", Environment.CurrentDirectory,
-                        mainForm.ReplaceSymblos(mainForm.SelectedLibLabel.Text),
-                        mainForm.ReplaceSymblos(columnData[0].Tag.ToString()));
+            var newStr = String.Format(@"{0}\{1}\{2}.jpg", Environment.CurrentDirectory,
+                        _mainForm.ReplaceSymblos(_mainForm.SelectedLibLabel.Text),
+                        _mainForm.ReplaceSymblos(_columnData[0].Text));
+            var oldStr = String.Format(@"{0}\{1}\{2}.jpg", Environment.CurrentDirectory,
+                        _mainForm.ReplaceSymblos(_mainForm.SelectedLibLabel.Text),
+                        _mainForm.ReplaceSymblos(_columnData[0].Tag.ToString()));
             if (PosterImageTB.Text == ""&&EditMode)
                 try
                 {
@@ -210,12 +210,12 @@ namespace MediaLibrarian
                     MessageBox.Show(ex.Message);
                 }            
             if(File.Exists(oldStr)&&EditMode) File.Move(oldStr, newStr);
-            if (loadedBitmap != null)
+            if (_loadedBitmap != null)
                 try
                 {
-                    using (loadedBitmap)
+                    using (_loadedBitmap)
                     {
-                        loadedBitmap.Save(newStr, ImageFormat.Jpeg);
+                        _loadedBitmap.Save(newStr, ImageFormat.Jpeg);
                     }
                 }
                 catch (Exception ex)
@@ -236,22 +236,22 @@ namespace MediaLibrarian
                 AutoEllipsis = true,
                 Font = new Font("Tahoma", 9),
                 FlatStyle = FlatStyle.System,
-                Text = mainForm.columnsInfo[i].Name
+                Text = _mainForm.ColumnsInfo[i].Name
             });
         }
         void MakeATextBox(int i)
         {
-            TextBox tb = new TextBox()
+            var tb = new TextBox()
             {
                 Size = new Size(420, 25),
                 MaxLength = 128
             };
             tb.TextChanged += tb_TextChanged;
-            columnData.Add(tb);
+            _columnData.Add(tb);
         }
         void MakeATextArea(int i)
         {
-            columnData.Add(new RichTextBox()
+            _columnData.Add(new RichTextBox()
             {
                 Size = new Size(420, 100),
                 ScrollBars = RichTextBoxScrollBars.ForcedVertical,
@@ -260,7 +260,7 @@ namespace MediaLibrarian
         }
         void MakeADateField(int i)
         {
-            columnData.Add(new DateTimePicker()
+            _columnData.Add(new DateTimePicker()
             {
                 Size = new Size(150, 20),
                 Margin = new Padding() {Left = 47, Bottom = 5 },
@@ -271,13 +271,13 @@ namespace MediaLibrarian
         }
         void MakeADateTimeField(int i)
         {
-            columnData.Add(new DateTimePicker()
+            _columnData.Add(new DateTimePicker()
             {
                 Size = new Size(160, 20),
                 Margin = new Padding() {Left = 37, Bottom = 5 },
                 Font = new Font("Tahoma", 9),
                 Format = DateTimePickerFormat.Custom,
-                CustomFormat = customDateTimeFormat,
+                CustomFormat = _customDateTimeFormat,
                 Value = DateTime.Now,
             });
         }
@@ -285,16 +285,16 @@ namespace MediaLibrarian
         #region CreateStarsAndCubes
         void Make5Stars(int i) //i - порядок панели на форме
         {
-            var StarsList = new List<Label>();
-            Panel Stars5Panel = new Panel()
+            var starsList = new List<Label>();
+            var stars5Panel = new Panel()
             {
                 Size = new Size(190, 30),
                 Tag = "Star5",
                
             };
-            for (int ii = 0; ii < 5; ii++)
+            for (var ii = 0; ii < 5; ii++)
             {
-                Label Star5 = new Label()
+                var star5 = new Label()
                 {
                     Size = new Size(25, 30),
                     Location = new Point(ii * 25 + 65, 0),
@@ -302,25 +302,25 @@ namespace MediaLibrarian
                     ForeColor = Color.Gray,
                     TextAlign = ContentAlignment.TopLeft,
                     Text = "☆",
-                    Tag = new int[] {i , StarsList.Count}
+                    Tag = new int[] {i , starsList.Count}
                 };
-                Star5.Click += new EventHandler(Star5_Click);
-                StarsList.Add(Star5);
+                star5.Click += new EventHandler(Star5_Click);
+                starsList.Add(star5);
             }
-            Stars5Panel.Controls.AddRange(StarsList.ToArray());
-            columnData.Add(Stars5Panel);
+            stars5Panel.Controls.AddRange(starsList.ToArray());
+            _columnData.Add(stars5Panel);
         }
         void Make10Stars(int i) //i - порядок панели на форме
         {
-            var StarsList = new List<Label>();
-            Panel Stars10Panel = new Panel()
+            var starsList = new List<Label>();
+            var stars10Panel = new Panel()
             {
                 Size = new Size(195, 30),
                 Tag = "Star10",
             };
-            for (int ii = 0; ii < 10; ii++)
+            for (var ii = 0; ii < 10; ii++)
             {
-                Label Star10 = new Label()
+                var star10 = new Label()
                 {
                     Size = new Size(20, 30),
                     Location = new Point(ii * 19 + 2, 0),
@@ -329,26 +329,26 @@ namespace MediaLibrarian
                     ForeColor = Color.Gray,
                     TextAlign = ContentAlignment.TopLeft,
                     Text = "☆",
-                    Tag = new int[] {i, StarsList.Count}
+                    Tag = new int[] {i, starsList.Count}
                 };
-                Star10.Click += new EventHandler(Star10_Click);
-                StarsList.Add(Star10);
+                star10.Click += new EventHandler(Star10_Click);
+                starsList.Add(star10);
             }
-            Stars10Panel.Controls.AddRange(StarsList.ToArray());
-            columnData.Add(Stars10Panel);
+            stars10Panel.Controls.AddRange(starsList.ToArray());
+            _columnData.Add(stars10Panel);
         }
         void Make10Cubes(int i) //i - порядок панели на форме
         {
-            var CubeList = new List<Label>();
-            Panel Cubes10Panel = new Panel()
+            var cubeList = new List<Label>();
+            var cubes10Panel = new Panel()
             {
                 Size = new Size(150, 30),
                 Margin = new Padding() { Left = 42 },
                 Tag = "Cube10"
             };
-            for (int ii = 0; ii < 10; ii++)
+            for (var ii = 0; ii < 10; ii++)
             {
-                Label Cube = new Label()
+                var cube = new Label()
                 {
                     Size = new Size(15, 30),
                     Location = new Point(ii * 15, 0),
@@ -356,98 +356,98 @@ namespace MediaLibrarian
                     FlatStyle = FlatStyle.System,
                     ForeColor = Color.Gray,
                     Text = "▒",
-                    Tag = new int[] {i, CubeList.Count}
+                    Tag = new int[] {i, cubeList.Count}
                 };
-                Cube.Click += new EventHandler(Cube10_Click);
-                CubeList.Add(Cube);
+                cube.Click += new EventHandler(Cube10_Click);
+                cubeList.Add(cube);
             }
-            Cubes10Panel.Controls.AddRange(CubeList.ToArray());
-            columnData.Add(Cubes10Panel);
+            cubes10Panel.Controls.AddRange(cubeList.ToArray());
+            _columnData.Add(cubes10Panel);
         }
         #endregion
         #region ClickToBlocks
         private void Star5_Click(object sender, EventArgs e)
         {
-            int ColCrd = ((int[])(sender as Label).Tag)[0];
-            int ListCrd = ((int[])(sender as Label).Tag)[1];
-            if ((sender as Label) == columnData[ColCrd].Controls[0] && columnData[ColCrd].Controls[0].Text == "★" && columnData[ColCrd].Controls[1].Text == "☆")
+            var colCrd = ((int[])(sender as Label).Tag)[0];
+            var listCrd = ((int[])(sender as Label).Tag)[1];
+            if ((sender as Label) == _columnData[colCrd].Controls[0] && _columnData[colCrd].Controls[0].Text == "★" && _columnData[colCrd].Controls[1].Text == "☆")
             {
-                columnData[ColCrd].Controls[0].Text = "☆";
-                columnData[ColCrd].Controls[0].ForeColor = Color.Gray;
-                columnData[ColCrd].Text = "☆☆☆☆☆";
+                _columnData[colCrd].Controls[0].Text = "☆";
+                _columnData[colCrd].Controls[0].ForeColor = Color.Gray;
+                _columnData[colCrd].Text = "☆☆☆☆☆";
             }
             else
             {
-                columnData[ColCrd].Text = "";
-                for (int i = 0; i < ListCrd + 1; i++)
+                _columnData[colCrd].Text = "";
+                for (var i = 0; i < listCrd + 1; i++)
                 {
-                    if (ListCrd < 2) columnData[ColCrd].Controls[i].ForeColor = Color.Red;
-                    if (ListCrd == 2) columnData[ColCrd].Controls[i].ForeColor = Color.Orange;
-                    if (ListCrd > 2) columnData[ColCrd].Controls[i].ForeColor = Color.LimeGreen;
-                    columnData[ColCrd].Controls[i].Text = "★";
-                    columnData[ColCrd].Text += "★";
+                    if (listCrd < 2) _columnData[colCrd].Controls[i].ForeColor = Color.Red;
+                    if (listCrd == 2) _columnData[colCrd].Controls[i].ForeColor = Color.Orange;
+                    if (listCrd > 2) _columnData[colCrd].Controls[i].ForeColor = Color.LimeGreen;
+                    _columnData[colCrd].Controls[i].Text = "★";
+                    _columnData[colCrd].Text += "★";
                 }
-                for (int j = columnData[ColCrd].Controls.Count - 1; j > ListCrd; j--)
+                for (var j = _columnData[colCrd].Controls.Count - 1; j > listCrd; j--)
                 {
-                    columnData[ColCrd].Controls[j].ForeColor = Color.Gray;
-                    columnData[ColCrd].Controls[j].Text = "☆";
-                    columnData[ColCrd].Text += "☆";
+                    _columnData[colCrd].Controls[j].ForeColor = Color.Gray;
+                    _columnData[colCrd].Controls[j].Text = "☆";
+                    _columnData[colCrd].Text += "☆";
                 }
             }
         }
         private void Star10_Click(object sender, EventArgs e)
         {
-            int ColCrd = ((int[])(sender as Label).Tag)[0];
-            int ListCrd = ((int[])(sender as Label).Tag)[1];
-            if ((sender as Label) == columnData[ColCrd].Controls[0] && columnData[ColCrd].Controls[0].Text == "★" && columnData[ColCrd].Controls[1].Text == "☆")
+            var colCrd = ((int[])(sender as Label).Tag)[0];
+            var listCrd = ((int[])(sender as Label).Tag)[1];
+            if ((sender as Label) == _columnData[colCrd].Controls[0] && _columnData[colCrd].Controls[0].Text == "★" && _columnData[colCrd].Controls[1].Text == "☆")
             {
-                columnData[ColCrd].Controls[0].Text = "☆";
-                columnData[ColCrd].Controls[0].ForeColor = Color.Gray;
-                columnData[ColCrd].Text = "☆☆☆☆☆☆☆☆☆☆";
+                _columnData[colCrd].Controls[0].Text = "☆";
+                _columnData[colCrd].Controls[0].ForeColor = Color.Gray;
+                _columnData[colCrd].Text = "☆☆☆☆☆☆☆☆☆☆";
             }
             else
             {
-                columnData[ColCrd].Text = "";
-                for (int i = 0; i < ListCrd + 1; i++)
+                _columnData[colCrd].Text = "";
+                for (var i = 0; i < listCrd + 1; i++)
                 {
-                    if (ListCrd < 4) columnData[ColCrd].Controls[i].ForeColor = Color.Red;
-                    if (ListCrd > 3 && ListCrd < 8) columnData[ColCrd].Controls[i].ForeColor = Color.Orange;
-                    if (ListCrd > 7) columnData[ColCrd].Controls[i].ForeColor = Color.LimeGreen;
-                    columnData[ColCrd].Controls[i].Text = "★";
-                    columnData[ColCrd].Text += "★";
+                    if (listCrd < 4) _columnData[colCrd].Controls[i].ForeColor = Color.Red;
+                    if (listCrd > 3 && listCrd < 8) _columnData[colCrd].Controls[i].ForeColor = Color.Orange;
+                    if (listCrd > 7) _columnData[colCrd].Controls[i].ForeColor = Color.LimeGreen;
+                    _columnData[colCrd].Controls[i].Text = "★";
+                    _columnData[colCrd].Text += "★";
                 }
-                for (int j = columnData[ColCrd].Controls.Count - 1; j > ListCrd; j--)
+                for (var j = _columnData[colCrd].Controls.Count - 1; j > listCrd; j--)
                 {
-                    columnData[ColCrd].Controls[j].ForeColor = Color.Gray;
-                    columnData[ColCrd].Controls[j].Text = "☆";
-                    columnData[ColCrd].Text += "☆";
+                    _columnData[colCrd].Controls[j].ForeColor = Color.Gray;
+                    _columnData[colCrd].Controls[j].Text = "☆";
+                    _columnData[colCrd].Text += "☆";
                 }
             }
         }
         private void Cube10_Click(object sender, EventArgs e)
         {
-            int ColCrd = ((int[])(sender as Label).Tag)[0];
-            int ListCrd = ((int[])(sender as Label).Tag)[1];
-            if ((sender as Label) == columnData[ColCrd].Controls[0] && columnData[ColCrd].Controls[0].Text == "█" && columnData[ColCrd].Controls[1].Text == "▒")
+            var colCrd = ((int[])(sender as Label).Tag)[0];
+            var listCrd = ((int[])(sender as Label).Tag)[1];
+            if ((sender as Label) == _columnData[colCrd].Controls[0] && _columnData[colCrd].Controls[0].Text == "█" && _columnData[colCrd].Controls[1].Text == "▒")
             {
-                columnData[ColCrd].Controls[0].Text = "▒";
-                columnData[ColCrd].Controls[0].ForeColor = Color.Gray;
-                columnData[ColCrd].Text = "▒▒▒▒▒▒▒▒▒▒";
+                _columnData[colCrd].Controls[0].Text = "▒";
+                _columnData[colCrd].Controls[0].ForeColor = Color.Gray;
+                _columnData[colCrd].Text = "▒▒▒▒▒▒▒▒▒▒";
             }
             else
             {
-                columnData[ColCrd].Text = "";
-                for (int i = 0; i < ListCrd + 1; i++)
+                _columnData[colCrd].Text = "";
+                for (var i = 0; i < listCrd + 1; i++)
                 {
-                    columnData[ColCrd].Controls[i].ForeColor = Color.SeaGreen;
-                    columnData[ColCrd].Controls[i].Text = "█";
-                    columnData[ColCrd].Text += "█";
+                    _columnData[colCrd].Controls[i].ForeColor = Color.SeaGreen;
+                    _columnData[colCrd].Controls[i].Text = "█";
+                    _columnData[colCrd].Text += "█";
                 }
-                for (int j = columnData[ColCrd].Controls.Count - 1; j > ListCrd; j--)
+                for (var j = _columnData[colCrd].Controls.Count - 1; j > listCrd; j--)
                 {
-                    columnData[ColCrd].Controls[j].ForeColor = Color.Gray;
-                    columnData[ColCrd].Controls[j].Text = "▒";
-                    columnData[ColCrd].Text += "▒";
+                    _columnData[colCrd].Controls[j].ForeColor = Color.Gray;
+                    _columnData[colCrd].Controls[j].Text = "▒";
+                    _columnData[colCrd].Text += "▒";
                 }
             }
         }
@@ -455,9 +455,9 @@ namespace MediaLibrarian
         #region ButtonClicks
         private void SaveButton_Click(object sender, EventArgs e)
         {
-            if (columnData[0].Text == "")
+            if (_columnData[0].Text == "")
             {
-                MessageBox.Show("Графа \"" + mainForm.columnsInfo[0].Name + "\" должна быть обязательно заполнена",
+                MessageBox.Show("Графа \"" + _mainForm.ColumnsInfo[0].Name + "\" должна быть обязательно заполнена",
                     "Ошибка входных данных", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.DialogResult = DialogResult.Abort;
                 return;
@@ -483,20 +483,20 @@ namespace MediaLibrarian
         private void FormReset()
         {
             EditMode = false;
-            columnData.Clear();
+            _columnData.Clear();
             EditPanel.Controls.Clear();
             PosterImageTB.Text = "";
             LoadingLabel.Text = "";
         }
         private void UpdateCollection()
         {
-            libManagerForm = new LibManagerForm(mainForm);
-            libManagerForm.ReadTableFromDatabase(mainForm.SelectedLibLabel.Text);
-            libManagerForm.Dispose();
+            _libManagerForm = new LibManagerForm(_mainForm);
+            _libManagerForm.ReadTableFromDatabase(_mainForm.SelectedLibLabel.Text);
+            _libManagerForm.Dispose();
         }
         int GetNumValue(string stars)
         {
-            int digit = 0;
+            var digit = 0;
             switch (stars)
             {
                 case "☆☆☆☆☆": digit = 0; break;
@@ -534,27 +534,27 @@ namespace MediaLibrarian
 
         private void EditForm_Load(object sender, EventArgs e)
         {
-            columnData.Clear();
-            for (int i = 0; i < mainForm.columnsInfo.Count; i++)
+            _columnData.Clear();
+            for (var i = 0; i < _mainForm.ColumnsInfo.Count; i++)
             {
                 CreateHeaderLabel(i);
-                GetControlByType(mainForm.columnsInfo[i].Type, i);
-                EditPanel.Controls.Add(columnData[i]);
+                GetControlByType(_mainForm.ColumnsInfo[i].Type, i);
+                EditPanel.Controls.Add(_columnData[i]);
             }
             if (EditMode)
             {
-                PushDataIntoCreatedControls(GetDataFromDatabase(mainForm.SelectedLibLabel.Text, mainForm.columnsInfo[0].Name, 
-                    mainForm.Collection.FocusedItem.Text));
-                string PathToFile = String.Format(@"{0}\{1}\{2}.jpg", Environment.CurrentDirectory,
-                        mainForm.ReplaceSymblos(mainForm.SelectedLibLabel.Text),
-                        mainForm.ReplaceSymblos(columnData[0].Text));
-                if (File.Exists(PathToFile))
+                PushDataIntoCreatedControls(GetDataFromDatabase(_mainForm.SelectedLibLabel.Text, _mainForm.ColumnsInfo[0].Name, 
+                    _mainForm.Collection.FocusedItem.Text));
+                var pathToFile = String.Format(@"{0}\{1}\{2}.jpg", Environment.CurrentDirectory,
+                        _mainForm.ReplaceSymblos(_mainForm.SelectedLibLabel.Text),
+                        _mainForm.ReplaceSymblos(_columnData[0].Text));
+                if (File.Exists(pathToFile))
                 {
-                    PosterImageTB.Text = PathToFile;
+                    PosterImageTB.Text = pathToFile;
                     PosterImageTB_TextChanged(PosterImageTB, null);
                 }
             }
-            columnData[0].Tag = columnData[0].Text;
+            _columnData[0].Tag = _columnData[0].Text;
         }
         private void EditForm_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -580,10 +580,10 @@ namespace MediaLibrarian
                 {
                     try
                     {
-                        using (FileStream localfileStream = File.Open(PosterImageTB.Text, 
+                        using (var localfileStream = File.Open(PosterImageTB.Text, 
                             FileMode.Open, FileAccess.Read, FileShare.Read))
                         {
-                            loadedBitmap = new Bitmap(localfileStream);                           
+                            _loadedBitmap = new Bitmap(localfileStream);                           
                             LoadingLabel.Text = "Выбран локальный файл";
                             SaveButton.Enabled = true;
                         }
@@ -591,13 +591,13 @@ namespace MediaLibrarian
                     catch (Exception ex)
                     {
                         LoadingLabel.Text = ex.Message;
-                        loadedBitmap = null;
+                        _loadedBitmap = null;
                     }
                 }
                 else
                 {
                     LoadingLabel.Text = "Файл не найден";
-                    loadedBitmap = null;
+                    _loadedBitmap = null;
                 }
             }
         }

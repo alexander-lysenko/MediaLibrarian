@@ -6,17 +6,17 @@ namespace MediaLibrarian
 {
     public partial class SettingsForm : Form
     {
-        public SettingsForm(MainForm FormMain)
+        public SettingsForm(MainForm formMain)
         {
             InitializeComponent();
-            MainForm = FormMain;
+            _mainForm = formMain;
         }
-        MainForm MainForm;
-        Settings Preferences;
+        MainForm _mainForm;
+        public Settings Preferences;
 
         private void CancelButton_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            Hide();
         }
 
         private void ApplyButton_Click(object sender, EventArgs e)
@@ -24,6 +24,7 @@ namespace MediaLibrarian
             Preferences = new Settings
             {
                 RememberLastLibrary = rememberLastLibraryChk.Checked,
+                LastLibraryName = _mainForm.SelectedLibLabel.Text,
                 FocusFirstItem = focusFirstItemChk.Checked,
                 CropMaxViewSize = cropMaxViewSizeChk.Checked,
                 PicMaxWidth = picMaxWidthNUD.Value,
@@ -82,6 +83,7 @@ namespace MediaLibrarian
             {
                 Preferences = XmlManager.Deserialize(); 
                 rememberLastLibraryChk.Checked = Preferences.RememberLastLibrary;
+                _mainForm.SelectedLibLabel.Text = Preferences.LastLibraryName;
                 focusFirstItemChk.Checked = Preferences.FocusFirstItem;
                 cropMaxViewSizeChk.Checked = Preferences.CropMaxViewSize;
                 picMaxWidthNUD.Value = Preferences.PicMaxWidth;
@@ -92,8 +94,8 @@ namespace MediaLibrarian
                 formCaptionTB.Text = Preferences.FormCaptionText;
                 mainColorLabel.ForeColor = Color.FromArgb(Preferences.MainColor);
                 mainColorLabel.Text = mainColorLabel.ForeColor.Name;
-                mainFontLabel.Font = new Font(Preferences.MainFont.FontFamily_Name, 
-                    Preferences.MainFont.Font_Size, Preferences.MainFont.Font_Style);
+                mainFontLabel.Font = new Font(Preferences.MainFont.FontFamilyName, 
+                    Preferences.MainFont.FontSize, Preferences.MainFont.FontStyle);
             }
             catch (InvalidOperationException)
             {

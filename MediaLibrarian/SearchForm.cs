@@ -14,9 +14,9 @@ namespace MediaLibrarian
         public SearchForm(MainForm formMain)
         {
             InitializeComponent();
-            mainForm = formMain;
+            _mainForm = formMain;
         }
-        MainForm mainForm;
+        MainForm _mainForm;
 
         private void SearchForm_FormClosing(object sender, FormClosingEventArgs e)
         {

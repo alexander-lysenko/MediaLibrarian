@@ -1,16 +1,17 @@
 ﻿using System;
 using System.IO;
 using System.Xml.Serialization;
+// ReSharper disable SuggestVarOrType_SimpleTypes
 
 namespace MediaLibrarian
 {
     public static class XmlManager
     {
-        private static readonly string _path;
+        private static readonly string Path;
 
         static XmlManager()
         {
-            _path = Environment.CurrentDirectory + "/Settings.xml";
+            Path = Environment.CurrentDirectory + "/Settings.xml";
         }
 
         public static void Serialize(Settings settings)
@@ -18,7 +19,7 @@ namespace MediaLibrarian
             if(settings == null)
                 throw new ArgumentNullException("Произошла ошибка при сохранении настроек");
             XmlSerializer formatter = new XmlSerializer(settings.GetType());
-            using (FileStream file = new FileStream(_path, FileMode.Create))
+            using (FileStream file = new FileStream(Path, FileMode.Create))
             {
                 formatter.Serialize(file, settings);
             }
@@ -28,7 +29,7 @@ namespace MediaLibrarian
         {
             XmlSerializer formatter = new XmlSerializer(typeof(Settings));
             Settings preferences;
-            using (FileStream file = new FileStream(_path, FileMode.OpenOrCreate))
+            using (FileStream file = new FileStream(Path, FileMode.OpenOrCreate))
             {
                 preferences = (Settings)formatter.Deserialize(file);
             }

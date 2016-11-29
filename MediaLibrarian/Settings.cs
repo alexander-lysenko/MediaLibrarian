@@ -22,17 +22,17 @@ namespace MediaLibrarian
     [Serializable]
     public class SFont 
     {
-        public string FontFamily_Name { get; set; }
-        public float Font_Size { get; set; }
-        public FontStyle Font_Style { get; set; }
+        public string FontFamilyName { get; set; }
+        public float FontSize { get; set; }
+        public FontStyle FontStyle { get; set; }
 
         public SFont() { }
 
         public SFont(string name, float size, FontStyle style)
         {
-            FontFamily_Name = name;
-            Font_Size = size;
-            Font_Style = style;
+            FontFamilyName = name;
+            FontSize = size;
+            FontStyle = style;
         }
     }
 }
