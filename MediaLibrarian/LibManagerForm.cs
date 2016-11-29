@@ -57,6 +57,7 @@ namespace MediaLibrarian
                 default: return "VARCHAR(128)";
             }
         }
+        #region Database API
         private void ReadDatabase_ForLibsList()
         {
             LibsList.Items.Clear();
@@ -78,7 +79,7 @@ namespace MediaLibrarian
             }
             Connection.Close();
         }
-        void ReadHeadersForTable(string tableName)
+        public void ReadHeadersForTable(string tableName)
         {
             _mainForm.ColumnsInfo.Clear();
             var getColumns = new SQLiteCommand(string.Format("pragma table_info('{0}');", tableName), Connection);
@@ -95,7 +96,6 @@ namespace MediaLibrarian
             }
             Connection.Close();
         }
-
         public void ReadTableFromDatabase(string tableName)
         {
             var selectQuery = String.Format("select * from `{0}` ", tableName);
@@ -121,15 +121,12 @@ namespace MediaLibrarian
             _mainForm.PosterBox.Image = null;
             _mainForm.TitleHeaderLabel.Text = _mainForm.Collection.Columns[0].Text + ":";
             _mainForm.TitleLabel.Text = "";
+            _mainForm.SelectedLibLabel.Text = tableName;
+            _mainForm.ElementActionsGB.Enabled = true;
+            if (_mainForm.Preferences.FocusFirstItem && _mainForm.Collection.Items.Count > 0) 
+                _mainForm.Collection.Items[0].Selected = true;
         }
-        private void LibManagerForm_Load(object sender, EventArgs e)
-        {
-            this.Size = new Size(480, 220);
-            ReadDatabase_ForLibsList();
-            LibsList.TabIndex = 0;
-            if (LibsList.Items.Count>0) LibsList.Items[0].Selected = true;
-            if (Edited) CreateNewLibraryButton.PerformClick();
-        }
+        #endregion
         #region Buttons
         private void CreateNewLibraryButton_Click(object sender, EventArgs e)
         {
@@ -285,11 +282,14 @@ namespace MediaLibrarian
         {
             _mainForm.Collection.Clear();
             _mainForm.ColumnsInfo.Clear();
-            _mainForm.SelectedLibLabel.Text = LibsList.FocusedItem.Text;
             ReadHeadersForTable(LibsList.FocusedItem.Text);
             ReadTableFromDatabase(LibsList.FocusedItem.Text);
             this.Close();
-            _mainForm.ElementActionsGB.Enabled = true;
+        }
+        private void TB_TextChanged(object sender, EventArgs e)
+        {
+            (sender as TextBox).Text = (sender as TextBox).Text.
+                Replace("<", "").Replace(">", "").Replace("|", "").Replace("/", "").Replace("\\", "");
         }
         private void LibManagerForm_KeyDown(object sender, KeyEventArgs e)
         {
@@ -298,6 +298,14 @@ namespace MediaLibrarian
                 case Keys.Delete: RemoveLibraryButton.PerformClick(); break;
                 case Keys.Escape: FormReset(); break;
             }
+        }
+        private void LibManagerForm_Load(object sender, EventArgs e)
+        {
+            this.Size = new Size(480, 220);
+            ReadDatabase_ForLibsList();
+            LibsList.TabIndex = 0;
+            if (LibsList.Items.Count>0) LibsList.Items[0].Selected = true;
+            if (Edited) CreateNewLibraryButton.PerformClick();
         }
         private void LibManagerForm_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -311,11 +319,6 @@ namespace MediaLibrarian
                 else e.Cancel = true;
             }
             else FormReset();
-        }
-        private void TB_TextChanged(object sender, EventArgs e)
-        {
-            (sender as TextBox).Text = (sender as TextBox).Text.
-                Replace("<", "").Replace(">", "").Replace("|", "").Replace("/", "").Replace("\\", "");
         }
         private void FormReset()
         {

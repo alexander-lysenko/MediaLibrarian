@@ -33,6 +33,7 @@
             // 
             // progressLabel
             // 
+            this.progressLabel.BackColor = System.Drawing.Color.Transparent;
             this.progressLabel.Location = new System.Drawing.Point(12, 172);
             this.progressLabel.Name = "progressLabel";
             this.progressLabel.Size = new System.Drawing.Size(296, 20);
@@ -51,6 +52,7 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SplashForm_FormClosing);
             this.Load += new System.EventHandler(this.SplashForm_Load);
             this.ResumeLayout(false);
 

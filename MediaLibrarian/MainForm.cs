@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Text.RegularExpressions;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MediaLibrarian
@@ -11,8 +13,8 @@ namespace MediaLibrarian
     {
         public MainForm()
         {
-            //SplashForm splash = new SplashForm();
-            //splash.ShowDialog();
+            _splash = new SplashForm();
+            Thread t = new Thread(() => MainForm_Load(null, null));
             InitializeComponent();
             _libManagerForm = new LibManagerForm(this);
             _editForm = new EditForm(this);
@@ -24,6 +26,7 @@ namespace MediaLibrarian
         EditForm _editForm;
         SettingsForm _settingsForm;
         SearchForm _searchForm;
+        SplashForm _splash;
         public Settings Preferences;
         public List<Category> ColumnsInfo = new List<Category>();
         int offset; //LocationOffset
@@ -57,6 +60,7 @@ namespace MediaLibrarian
                             Location = new Point(210, offset),
                             Size = new Size(200, 15),
                             Font = new Font("Tahoma", 9.75f),
+                            ForeColor = Color.FromArgb(Preferences.MainColor),
                             AutoEllipsis = true,
                             Text = item.SubItems[ColumnsInfo.IndexOf(col)].Text,
                             TextAlign = ContentAlignment.MiddleRight,
@@ -74,7 +78,7 @@ namespace MediaLibrarian
                             Location = new Point(3, offset),
                             MaximumSize = new Size(405, 0),
                             Font = new Font("Tahoma", 9.75f),
-                            ForeColor = Color.Blue,
+                            ForeColor = Color.FromArgb(Preferences.MainColor),
                             AutoSize = true,
                             Text = item.SubItems[ColumnsInfo.IndexOf(col)].Text,
                         };
@@ -105,7 +109,7 @@ namespace MediaLibrarian
                                 m5Label.ForeColor = Color.Orange;
                                 break;
                             case 5:
-                                m5Label.ForeColor = Color.LimeGreen;
+                                m5Label.ForeColor = Color.Green;
                                 break;
                             default:
                                 break;
@@ -141,7 +145,7 @@ namespace MediaLibrarian
                                 break;
                             case 9:
                             case 10:
-                                m10Label.ForeColor = Color.LimeGreen;
+                                m10Label.ForeColor = Color.Green;
                                 break;
                             default:
                                 break;
@@ -189,7 +193,10 @@ namespace MediaLibrarian
         {
             if (Collection.SelectedItems.Count > 0)
             {
-                _editForm.DeleteItem(Collection.Columns[0].Text, Collection.SelectedItems[0].Text);
+                if (MessageBox.Show("Удалить элемент \"" + Collection.FocusedItem.Text + "\"?",
+                        "Подтверждение удаления элемента",
+                        MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    _editForm.DeleteItem(Collection.Columns[0].Text, Collection.SelectedItems[0].Text);
             }
             else
             {
@@ -241,9 +248,6 @@ namespace MediaLibrarian
 
         private void DeleteElementTSMI_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Удалить элемент \"" + Collection.FocusedItem.Text + "\"?",
-                    "Подтверждение удаления элемента",
-                    MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 DeleteElementButton.PerformClick();
         }
 
@@ -288,6 +292,9 @@ namespace MediaLibrarian
         private void PosterBox_MouseClick(object sender, MouseEventArgs e)
         {
             var pv = new PictureViewer {ImageBox = {Image = PosterBox.Image}};
+            if (Preferences.CropMaxViewSize) pv.Size =
+                new Size((int)Preferences.PicMaxWidth, (int)Preferences.PicMaxHeight);
+            else pv.Size = new Size(720, 720);
             pv.Show();
         }
         private void Collection_ItemActivate(object sender, EventArgs e)
@@ -305,7 +312,7 @@ namespace MediaLibrarian
             {
                 using (var fs = File.OpenRead(String.Format(@"{0}\{1}\{2}.jpg", Environment.CurrentDirectory,
                     ReplaceSymblos(SelectedLibLabel.Text),
-                    ReplaceSymblos(Collection.FocusedItem.Text))))
+                    ReplaceSymblos(Collection.SelectedItems[0].Text))))
                 {
                     PosterBox.Image = Image.FromStream(fs);
                     PosterBox.BackgroundImage = null;
@@ -326,27 +333,37 @@ namespace MediaLibrarian
         {
             try
             {
-                _settingsForm.Preferences = XmlManager.Deserialize();
-                Text = _settingsForm.Preferences.FormCaptionText;
-                TitleLabel.ForeColor = Color.FromArgb(_settingsForm.Preferences.MainColor);
-                TitleLabel.Font = new Font(_settingsForm.Preferences.MainFont.FontFamilyName,
-                    _settingsForm.Preferences.MainFont.FontSize, _settingsForm.Preferences.MainFont.FontStyle);
-                _libManagerForm.ReadTableFromDatabase("Фильмы");
+                Preferences = XmlManager.Deserialize();
+                _libManagerForm.ReadHeadersForTable(Preferences.LastLibraryName);
+                _libManagerForm.ReadTableFromDatabase(Preferences.LastLibraryName);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                ;
+                MessageBox.Show(ex.Message);
             }
+            if (Preferences.StartFullScreen)
+            {
+                WindowState = FormWindowState.Maximized;
+                FullScreenTSMI.Checked = true;
+            }
+            Text = Preferences.FormCaptionText;
+            TitleLabel.ForeColor = SelectedLibLabel.ForeColor = ElementCount.ForeColor = 
+                Color.FromArgb(Preferences.MainColor);            
+
+            TitleLabel.Font = new Font(Preferences.MainFont.FontFamilyName,
+                Preferences.MainFont.FontSize, Preferences.MainFont.FontStyle);
+
             screenResolutionLabel.Text = String.Format("Разрешение экрана: {0}х{1}", 
                 SystemInformation.PrimaryMonitorSize.Width, SystemInformation.PrimaryMonitorSize.Height);
+            _splash.Close();
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (_settingsForm.rememberLastLibraryChk.Checked)
+            if (Preferences.RememberLastLibrary)
             {
-                _settingsForm.Preferences.LastLibraryName = SelectedLibLabel.Text;
-                XmlManager.Serialize(_settingsForm.Preferences);
+                Preferences.LastLibraryName = SelectedLibLabel.Text;
+                XmlManager.Serialize(Preferences);
             }
         }
     }

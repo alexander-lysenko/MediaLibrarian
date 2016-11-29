@@ -565,7 +565,9 @@ namespace MediaLibrarian
         {
             switch (e.KeyCode)
             {
-                case Keys.F4: if (e.Alt) MessageBox.Show("Я не закрываюсь! Шутка))"); break;
+                case Keys.F4: if (e.Alt) if(MessageBox.Show("Редактирование еще не завершено.\nВы действительно желаете закрыть это окно?",
+                    "Стоп-стоп-стоп...", MessageBoxButtons.YesNo, MessageBoxIcon.Question)==DialogResult.No) e.Handled = true;
+                    break;
             }
         }
         private void PosterImageTB_TextChanged(object sender, EventArgs e)

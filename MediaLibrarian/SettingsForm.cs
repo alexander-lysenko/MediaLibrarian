@@ -12,7 +12,6 @@ namespace MediaLibrarian
             _mainForm = formMain;
         }
         MainForm _mainForm;
-        public Settings Preferences;
 
         private void CancelButton_Click(object sender, EventArgs e)
         {
@@ -21,7 +20,7 @@ namespace MediaLibrarian
 
         private void ApplyButton_Click(object sender, EventArgs e)
         {
-            Preferences = new Settings
+            _mainForm.Preferences = new Settings
             {
                 RememberLastLibrary = rememberLastLibraryChk.Checked,
                 LastLibraryName = _mainForm.SelectedLibLabel.Text,
@@ -36,8 +35,10 @@ namespace MediaLibrarian
                 MainColor = mainColorLabel.ForeColor.ToArgb(),
                 MainFont = new SFont(mainFontLabel.Font.FontFamily.Name, mainFontLabel.Font.Size, mainFontLabel.Font.Style)
             };
-            XmlManager.Serialize(Preferences);
+            XmlManager.Serialize(_mainForm.Preferences);
             hintLabel.Text = "Настройки сохранены успешно.";
+            _mainForm.TitleLabel.ForeColor = _mainForm.SelectedLibLabel.ForeColor =
+                _mainForm.ElementCount.ForeColor = Color.FromArgb(_mainForm.Preferences.MainColor);
         }
 
         private void OK_Button_Click(object sender, EventArgs e)
@@ -57,6 +58,7 @@ namespace MediaLibrarian
 
         private void mainFontLabel_Click(object sender, EventArgs e)
         {
+            headerFontDialog.Font = mainFontLabel.Font;
             if(headerFontDialog.ShowDialog()==DialogResult.OK)
             {
                 mainFontLabel.Text = headerFontDialog.Font.Name+"\n(Проверка кириллицы)";
@@ -64,6 +66,24 @@ namespace MediaLibrarian
             }
         }
 
+        public void RestoreSettings(Settings Preferences)
+        {
+            rememberLastLibraryChk.Checked = Preferences.RememberLastLibrary;
+            _mainForm.SelectedLibLabel.Text = Preferences.LastLibraryName;
+            focusFirstItemChk.Checked = Preferences.FocusFirstItem;
+            cropMaxViewSizeChk.Checked = Preferences.CropMaxViewSize;
+            picMaxWidthNUD.Value = Preferences.PicMaxWidth;
+            picMaxHeightNUD.Value = Preferences.PicMaxHeight;
+            fullScreenStartChk.Checked = Preferences.StartFullScreen;
+            autoSortByNameChk.Checked = Preferences.AutoSortByName;
+            selectThemeCB.Text = Preferences.SelectedTheme;
+            formCaptionTB.Text = Preferences.FormCaptionText;
+            mainColorLabel.ForeColor = Color.FromArgb(Preferences.MainColor);
+            mainColorLabel.Text = mainColorLabel.ForeColor.Name;
+            mainFontLabel.Font = new Font(Preferences.MainFont.FontFamilyName,
+                Preferences.MainFont.FontSize, Preferences.MainFont.FontStyle);
+            mainFontLabel.Text = Preferences.MainFont.FontFamilyName + "\n(Проверка кириллицы)";
+        }
         private void SettingsForm_Load(object sender, EventArgs e)
         {
             toolTip.SetToolTip(rememberLastLibraryChk, "При зауске в программу будет автоматически \nзагружаться последняя открытая ранее библиотека");
@@ -81,25 +101,15 @@ namespace MediaLibrarian
 
             try
             {
-                Preferences = XmlManager.Deserialize(); 
-                rememberLastLibraryChk.Checked = Preferences.RememberLastLibrary;
-                _mainForm.SelectedLibLabel.Text = Preferences.LastLibraryName;
-                focusFirstItemChk.Checked = Preferences.FocusFirstItem;
-                cropMaxViewSizeChk.Checked = Preferences.CropMaxViewSize;
-                picMaxWidthNUD.Value = Preferences.PicMaxWidth;
-                picMaxHeightNUD.Value = Preferences.PicMaxHeight;
-                fullScreenStartChk.Checked = Preferences.StartFullScreen;
-                autoSortByNameChk.Checked = Preferences.AutoSortByName;
-                selectThemeCB.Text = Preferences.SelectedTheme;
-                formCaptionTB.Text = Preferences.FormCaptionText;
-                mainColorLabel.ForeColor = Color.FromArgb(Preferences.MainColor);
-                mainColorLabel.Text = mainColorLabel.ForeColor.Name;
-                mainFontLabel.Font = new Font(Preferences.MainFont.FontFamilyName, 
-                    Preferences.MainFont.FontSize, Preferences.MainFont.FontStyle);
+                RestoreSettings(_mainForm.Preferences);
             }
             catch (InvalidOperationException)
             {
                 hintLabel.Text = "Настройки были сброшены по умолчанию";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
 
         }

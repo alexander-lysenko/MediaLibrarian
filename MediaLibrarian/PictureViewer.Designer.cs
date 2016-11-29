@@ -34,11 +34,13 @@
             // 
             // ImageBox
             // 
-            this.ImageBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ImageBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ImageBox.Location = new System.Drawing.Point(0, 0);
             this.ImageBox.Name = "ImageBox";
             this.ImageBox.Size = new System.Drawing.Size(400, 400);
-            this.ImageBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.ImageBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.ImageBox.TabIndex = 0;
             this.ImageBox.TabStop = false;
             // 
@@ -61,7 +63,6 @@
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.PictureViewer_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.ImageBox)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 

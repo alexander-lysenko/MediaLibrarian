@@ -405,6 +405,7 @@
             this.Controls.Add(this.StatusBar);
             this.Controls.Add(this.MainMenu);
             this.Controls.Add(this.Collection);
+            this.DoubleBuffered = true;
             this.MainMenuStrip = this.MainMenu;
             this.Name = "MainForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
@@ -460,13 +461,13 @@
         public System.Windows.Forms.GroupBox ElementActionsGB;
         public System.Windows.Forms.ToolStripMenuItem AutoSortingTSMI;
         private System.Windows.Forms.ToolStripMenuItem FullScreenTSMI;
-        private System.Windows.Forms.Label ElementCount;
         private System.Windows.Forms.Label ElementCountHintLabel;
         private System.Windows.Forms.ToolStripStatusLabel screenResolutionLabel;
         public System.Windows.Forms.PictureBox PosterBox;
         public System.Windows.Forms.Panel InfoPanel;
         public System.Windows.Forms.Label TitleLabel;
         public System.Windows.Forms.Label TitleHeaderLabel;
+        public System.Windows.Forms.Label ElementCount;
     }
 }
 
