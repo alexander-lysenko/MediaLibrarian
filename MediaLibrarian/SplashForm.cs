@@ -16,13 +16,12 @@ namespace MediaLibrarian
             InitializeComponent();
         }
         Timer _timer;
-        int _span = 0;
+        int _span;
         private void SplashForm_Load(object sender, EventArgs e)
         {
             _timer = new Timer() { Interval = 300 };
-            _timer.Tick += new EventHandler(timer_tick);
+            _timer.Tick += timer_tick;
             _timer.Start();
-
         }
         void timer_tick(object sender, EventArgs e)
         {

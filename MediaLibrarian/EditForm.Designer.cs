@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            var resources = new System.ComponentModel.ComponentResourceManager(typeof(EditForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditForm));
             this.SaveButton = new System.Windows.Forms.Button();
             this.Cancel_Button = new System.Windows.Forms.Button();
             this.EditPanel = new System.Windows.Forms.FlowLayoutPanel();
@@ -37,6 +37,8 @@
             this.SelectImageButton = new System.Windows.Forms.Button();
             this.OpenFile = new System.Windows.Forms.OpenFileDialog();
             this.LoadingLabel = new System.Windows.Forms.Label();
+            this.loadedPicture = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.loadedPicture)).BeginInit();
             this.SuspendLayout();
             // 
             // SaveButton
@@ -89,11 +91,18 @@
             this.LoadingLabel.ForeColor = System.Drawing.Color.Blue;
             this.LoadingLabel.Name = "LoadingLabel";
             // 
+            // loadedPicture
+            // 
+            resources.ApplyResources(this.loadedPicture, "loadedPicture");
+            this.loadedPicture.Name = "loadedPicture";
+            this.loadedPicture.TabStop = false;
+            // 
             // EditForm
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.Cancel_Button;
+            this.Controls.Add(this.loadedPicture);
             this.Controls.Add(this.LoadingLabel);
             this.Controls.Add(this.SelectImageButton);
             this.Controls.Add(this.PosterImageTB);
@@ -110,6 +119,7 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.EditForm_FormClosing);
             this.Load += new System.EventHandler(this.EditForm_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.EditForm_KeyDown);
+            ((System.ComponentModel.ISupportInitialize)(this.loadedPicture)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -124,6 +134,7 @@
         private System.Windows.Forms.TextBox PosterImageTB;
         private System.Windows.Forms.Button SelectImageButton;
         private System.Windows.Forms.OpenFileDialog OpenFile;
-        private System.Windows.Forms.Label LoadingLabel;
+        public System.Windows.Forms.Label LoadingLabel;
+        private System.Windows.Forms.PictureBox loadedPicture;
     }
 }

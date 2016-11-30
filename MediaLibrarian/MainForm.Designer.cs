@@ -397,8 +397,7 @@
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.Control;
-            this.BackgroundImage = global::MediaLibrarian.Properties.Resources.aa;
+            this.BackColor = System.Drawing.Color.LightSkyBlue;
             this.Controls.Add(this.ElementInfoGB);
             this.Controls.Add(this.ElementActionsGB);
             this.Controls.Add(this.LibInfoGB);
