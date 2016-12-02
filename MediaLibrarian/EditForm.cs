@@ -245,19 +245,32 @@ namespace MediaLibrarian
                         _mainForm.ReplaceSymblos(columnData[0].Tag.ToString()));
             try
             {
-                if (columnData[0].Text != columnData[0].Tag.ToString())
+                if (PosterImageTB.Text == "") //Если картинка пуста, независимо от изменения имени, убираем ее
                 {
-                    if (oldStr != PosterImageTB.Text) loadedPicture.Image.Save(newStr, ImageFormat.Jpeg);
-                    else if (File.Exists(oldStr))
-                    {
-                        loadedPicture.Image.Dispose();
-                        File.Move(oldStr, newStr);
-                    }
+                    loadedPicture.Image.Dispose();
                     if (File.Exists(oldStr)) File.Delete(oldStr);
                 }
-                else
+                else //Если картинка не пуста...
                 {
-                    loadedPicture.Image.Save(newStr, ImageFormat.Jpeg);
+                    if (columnData[0].Text != columnData[0].Tag.ToString()) //Если изменено имя...
+                    {
+                        if (oldStr != PosterImageTB.Text) //Если изменены имя и картинка, сохраняем новую
+                        {
+                            loadedPicture.Image.Save(newStr, ImageFormat.Jpeg);
+                            loadedPicture.Image.Dispose();
+                            if (File.Exists(oldStr)) File.Delete(oldStr); //Избавляемся от старой картинки
+                        }
+                        else if (File.Exists(oldStr)) //Если имя изменено, а картинка нет, ее нужно переместить
+                            {
+                                loadedPicture.Image.Dispose();
+                                File.Move(oldStr, newStr);
+                            }
+                    }
+                    else //Если имя не изменено, но изменена картинка перезаписываем существующую картинку
+                    {
+                        if(oldStr != PosterImageTB.Text)loadedPicture.Image.Save(newStr, ImageFormat.Jpeg);
+                        //В случае, если ничего не изменено, ничего не делать
+                    }
                 }
             }
             catch (Exception ex)

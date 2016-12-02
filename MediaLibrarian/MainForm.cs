@@ -10,8 +10,8 @@ namespace MediaLibrarian
     {
         public MainForm()
         {
-            _splash = new SplashForm();
             InitializeComponent();
+            SplashForm.ShowForm();
             _libManagerForm = new LibManagerForm(this);
             _editForm = new EditForm(this);
             _settingsForm = new SettingsForm(this);
@@ -22,10 +22,15 @@ namespace MediaLibrarian
         EditForm _editForm;
         SettingsForm _settingsForm;
         SearchForm _searchForm;
-        SplashForm _splash;
         public Settings Preferences;
         public List<Category> ColumnsInfo = new List<Category>();
         int offset; //LocationOffset
+
+        public static void ShowForm()
+        {
+            MainForm mainForm = new MainForm();
+            mainForm.Show();
+        }
 
         #region Buttons
         private void SelectCollectionButton_Click(object sender, EventArgs e)
@@ -329,7 +334,6 @@ namespace MediaLibrarian
 
             screenResolutionLabel.Text = String.Format("Разрешение экрана: {0}х{1}", 
                 SystemInformation.PrimaryMonitorSize.Width, SystemInformation.PrimaryMonitorSize.Height);
-            _splash.Close();
         }
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
