@@ -69,7 +69,7 @@ namespace MediaLibrarian
         }
         private void SearchButton_Click(object sender, EventArgs e)
         {
-            _searchForm.Show();
+            if(Collection.Items.Count>1) _searchForm.Show();
         }
         #endregion
         #region FileTSM
@@ -77,14 +77,16 @@ namespace MediaLibrarian
         {
             SelectCollectionButton.PerformClick();
         }
-        private void CreateLibTSMI_Click(object sender, EventArgs e)
-        {
-            _libManagerForm.Edited = true;
-            _libManagerForm.ShowDialog();
-        }
         private void ClearLibTSMI_Click(object sender, EventArgs e)
         {
-
+            if(MessageBox.Show("Внимание! Данная операция безвозратно уничтожит ВСЕ элементы в этой библиотеке.\n"+
+                "В результате библиотека останется, но будет пуста."+
+                "Вы действительно желаете продолжить?", 
+                "Подтверждение очистки библиотеки",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                _libManagerForm.ClearLibrary(SelectedLibLabel.Text);
+            }
         }
         private void CloseAppTSMI_Click(object sender, EventArgs e)
         {
@@ -110,23 +112,29 @@ namespace MediaLibrarian
         }
         #endregion
         #region ViewTSM
-
         private void AutoSortingTSMI_Click(object sender, EventArgs e)
         {
-
+            if (AutoSortingTSMI.Checked) Preferences.AutoSortByName = true;
+            else Preferences.AutoSortByName = false; 
+            try
+            {
+                _libManagerForm.ReadTableFromDatabase(SelectedLibLabel.Text);
+            }
+            catch (Exception)
+            {
+                _libManagerForm._connection.Close();
+                StatusLabel.Text = "Включить автоматическую сортировку таблицы по имени";
+            }
         }
-
         private void FullScreenTSMI_Click(object sender, EventArgs e)
         {
             if (FullScreenTSMI.Checked) WindowState = FormWindowState.Maximized;
             else WindowState = FormWindowState.Normal;
         }
-
         private void PreferencesTSMI_Click(object sender, EventArgs e)
         {
             _settingsForm.ShowDialog();
         }
-
         #endregion
         #region HelpTSM
         private void HelpTSMI_Click(object sender, EventArgs e)
@@ -325,6 +333,10 @@ namespace MediaLibrarian
                 WindowState = FormWindowState.Maximized;
                 FullScreenTSMI.Checked = true;
             }
+            if(Preferences.AutoSortByName)
+            {
+                AutoSortingTSMI.Checked = true;
+            }
             Text = Preferences.FormCaptionText;
             TitleLabel.ForeColor = SelectedLibLabel.ForeColor = ElementCount.ForeColor = 
                 Color.FromArgb(Preferences.MainColor);            
@@ -342,6 +354,14 @@ namespace MediaLibrarian
                 Preferences.LastLibraryName = SelectedLibLabel.Text;
                 XmlManager.Serialize(Preferences);
             }
+        }
+        public void FormReset()
+        {
+            Collection.Items.Clear();
+            InfoPanel.Controls.Clear();
+            SelectedLibLabel.Text = "";
+            ColumnsInfo.Clear();
+            ElementActionsGB.Enabled = false;
         }
     }
 }

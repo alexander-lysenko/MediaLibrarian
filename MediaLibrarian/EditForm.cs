@@ -603,7 +603,7 @@ namespace MediaLibrarian
                 GetControlByType(_mainForm.ColumnsInfo[i].Type, i);
                 EditPanel.Controls.Add(columnData[i]);
             }
-            if (EditMode)
+            if (EditMode && _mainForm.Collection.SelectedItems.Count > 0)
             {
                 PushDataIntoCreatedControls(GetDataFromDatabase(_mainForm.SelectedLibLabel.Text, _mainForm.ColumnsInfo[0].Name, 
                     _mainForm.Collection.FocusedItem.Text));

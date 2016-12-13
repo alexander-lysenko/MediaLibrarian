@@ -23,5 +23,14 @@ namespace MediaLibrarian
             this.Hide();
             e.Cancel = true;
         }
+
+        private void SearchForm_Load(object sender, EventArgs e)
+        {
+
+        }
+        public void LoadMeta(List<Category> columns)
+        {
+
+        }
     }
 }

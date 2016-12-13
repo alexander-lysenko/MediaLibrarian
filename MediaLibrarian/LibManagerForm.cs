@@ -27,7 +27,7 @@ namespace MediaLibrarian
         TextBox _libNameTb = new TextBox() { Size = new Size(265, 20), Location = new Point(130, 0), MaxLength = 50 };
         Point _fieldPosition = new Point(5, 25);
         static string _database = "baza.db";
-        public readonly SQLiteConnection Connection = new SQLiteConnection(string.Format("Data Source={0};", _database));
+        public readonly SQLiteConnection _connection = new SQLiteConnection(string.Format("Data Source={0};", _database));
 
         private int GetColumnLength(string type)
         {
@@ -61,14 +61,14 @@ namespace MediaLibrarian
         private void ReadDatabase_ForLibsList()
         {
             LibsList.Items.Clear();
-            var getTables = new SQLiteCommand("select name from sqlite_master where type='table' order by name;", Connection);
-            Connection.Open();
+            var getTables = new SQLiteCommand("select name from sqlite_master where type='table' order by name;", _connection);
+            _connection.Open();
             var readTables = getTables.ExecuteReader();
             foreach (DbDataRecord table in readTables)
             {
                 var colsList = new List<string>();
                 var lib = new ListViewItem(table["name"].ToString());
-                var getColumns = new SQLiteCommand(string.Format("pragma table_info(`{0}`);", table["name"]), Connection);
+                var getColumns = new SQLiteCommand(string.Format("pragma table_info(`{0}`);", table["name"]), _connection);
                 var readCols = getColumns.ExecuteReader();
                 foreach (DbDataRecord col in readCols)
                 {
@@ -77,13 +77,13 @@ namespace MediaLibrarian
                 lib.SubItems.Add(string.Join(", ", colsList));
                 LibsList.Items.Add(lib);
             }
-            Connection.Close();
+            _connection.Close();
         }
         public void ReadHeadersForTable(string tableName)
         {
             _mainForm.ColumnsInfo.Clear();
-            var getColumns = new SQLiteCommand(string.Format("pragma table_info('{0}');", tableName), Connection);
-            Connection.Open();
+            var getColumns = new SQLiteCommand(string.Format("pragma table_info('{0}');", tableName), _connection);
+            _connection.Open();
             var readCols = getColumns.ExecuteReader();
             foreach (DbDataRecord col in readCols)
             {
@@ -94,19 +94,20 @@ namespace MediaLibrarian
                     Type = col["type"].ToString()
                 });
             }
-            Connection.Close();
+            _connection.Close();
         }
         public void ReadTableFromDatabase(string tableName)
         {
             var selectQuery = String.Format("select * from `{0}` ", tableName);
+            if (_mainForm.Preferences.AutoSortByName) selectQuery += "order by " + _mainForm.ColumnsInfo[0].Name;
             _mainForm.Collection.Items.Clear();
-            var readTable = new SQLiteCommand(selectQuery, Connection);
+            var readTable = new SQLiteCommand(selectQuery, _connection);
             var data = new DataTable();
-            Connection.Open();
+            _connection.Open();
             var reader = readTable.ExecuteReader();
             data.Load(reader);
             reader.Close();
-            Connection.Close();
+            _connection.Close();
             foreach (DataRow row in data.Rows)
             {
                 var item = new ListViewItem(row[0].ToString());
@@ -125,6 +126,14 @@ namespace MediaLibrarian
             _mainForm.ElementActionsGB.Enabled = true;
             if (_mainForm.Preferences.FocusFirstItem && _mainForm.Collection.Items.Count > 0) 
                 _mainForm.Collection.Items[0].Selected = true;
+        }
+        public void ClearLibrary(string tableName)
+        {
+            var clearQuery = String.Format("delete from `{0}`", tableName);
+            var Clear = new SQLiteCommand(clearQuery, _connection);
+            _connection.Open();
+            Clear.ExecuteNonQuery();
+            _connection.Close();
         }
         #endregion
         #region Buttons
@@ -150,25 +159,25 @@ namespace MediaLibrarian
                 if (MessageBox.Show("Нажимая \"Удалить библиотеку\", \nВы осознанно принимаете решение удалить выбранную библиотеку\n(" + LibsList.FocusedItem.Text
                     + ")\nцеликом, включая все накопленные в ней элементы.\nПродолжить?", "Очень важное предупреждение", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
-                    if (_mainForm.SelectedLibLabel.Text == LibsList.FocusedItem.Text)
+                    if (_mainForm.SelectedLibLabel.Text == LibsList.SelectedItems[0].Text)
                     {
                         _mainForm.Collection.Clear();
                         _mainForm.SelectedLibLabel.Text = "";
                         _mainForm.ElementActionsGB.Enabled = false;
                     }
-                    var dropTable = new SQLiteCommand(String.Format("drop table `{0}`;", LibsList.FocusedItem.Text), Connection);
-                    Connection.Open();
+                    var dropTable = new SQLiteCommand(String.Format("drop table `{0}`;", LibsList.SelectedItems[0].Text), _connection);
+                    _connection.Open();
                     dropTable.ExecuteNonQuery();
-                    Connection.Close();
-                    _mainForm.StatusLabel.Text = " Была удалена библиотека \"" + LibsList.FocusedItem.Text + "\"";
+                    _connection.Close();
+                    _mainForm.StatusLabel.Text = " Была удалена библиотека \"" + LibsList.SelectedItems[0].Text + "\"";
                     try { 
                     System.IO.Directory.Delete(Environment.CurrentDirectory + "\\" +
-                        _mainForm.ReplaceSymblos(LibsList.FocusedItem.Text), true);
+                        _mainForm.ReplaceSymblos(LibsList.SelectedItems[0].Text), true);
                     }
                     catch(Exception)
                     {}
-                    ReadDatabase_ForLibsList();
-
+                    if (_mainForm.SelectedLibLabel.Text == LibsList.SelectedItems[0].Text) _mainForm.FormReset();
+                    ReadDatabase_ForLibsList(); 
                 }
         }
         private void SaveLibraryButton_Click(object sender, EventArgs e)
@@ -203,21 +212,21 @@ namespace MediaLibrarian
             }
             query += ");";
 
-            var createTable = new SQLiteCommand(query, Connection);
-            Connection.Open();
-            var verifyName = new SQLiteCommand("select name from sqlite_master where type='table' order by name;", Connection);
+            var createTable = new SQLiteCommand(query, _connection);
+            _connection.Open();
+            var verifyName = new SQLiteCommand("select name from sqlite_master where type='table' order by name;", _connection);
             var readTables = verifyName.ExecuteReader();
             foreach (DbDataRecord table in readTables)
             {
                 if (table["name"].ToString().ToLower().Equals(_libNameTb.Text.ToLower()))
                 {
                     MessageBox.Show("Библиотека с таким именем уже существует", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    Connection.Close(); return;
+                    _connection.Close(); return;
                 }
             }
             createTable.ExecuteNonQuery();
             readTables.Close();
-            Connection.Close();
+            _connection.Close();
             System.IO.Directory.CreateDirectory(Environment.CurrentDirectory+"\\" + _mainForm.ReplaceSymblos(_libNameTb.Text));
             ReadDatabase_ForLibsList();
             CollectionEditGB.Visible = Edited = false;
@@ -284,6 +293,7 @@ namespace MediaLibrarian
             _mainForm.ColumnsInfo.Clear();
             ReadHeadersForTable(LibsList.FocusedItem.Text);
             ReadTableFromDatabase(LibsList.FocusedItem.Text);
+            _mainForm.ClearLibTSMI.Enabled = true;
             this.Close();
         }
         private void TB_TextChanged(object sender, EventArgs e)
@@ -303,9 +313,8 @@ namespace MediaLibrarian
         {
             this.Size = new Size(480, 220);
             ReadDatabase_ForLibsList();
-            LibsList.TabIndex = 0;
-            if (LibsList.Items.Count>0) LibsList.Items[0].Selected = true;
-            if (Edited) CreateNewLibraryButton.PerformClick();
+            LibsList.Focus();
+            if (LibsList.Items.Count>0) LibsList.Items[0].Selected = LibsList.Items[0].Focused = true;
         }
         private void LibManagerForm_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -313,7 +322,6 @@ namespace MediaLibrarian
             {
                 if (MessageBox.Show("Выйти без сохранения?", "Предупреждение", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
-                    Edited = false;
                     FormReset();
                 }
                 else e.Cancel = true;
@@ -331,6 +339,7 @@ namespace MediaLibrarian
             _fieldPosition = new Point(5, 25);
             CreateNewLibraryButton.Enabled = true;
             RemoveLibraryButton.Enabled = true;
+            Edited = false;
         }
     }
 }

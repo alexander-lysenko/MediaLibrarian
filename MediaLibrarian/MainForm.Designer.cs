@@ -36,7 +36,6 @@
             this.MainMenu = new System.Windows.Forms.MenuStrip();
             this.FileTSMI = new System.Windows.Forms.ToolStripMenuItem();
             this.OpenLibTSMI = new System.Windows.Forms.ToolStripMenuItem();
-            this.CreateLibTSMI = new System.Windows.Forms.ToolStripMenuItem();
             this.ClearLibTSMI = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.CloseAppTSMI = new System.Windows.Forms.ToolStripMenuItem();
@@ -128,7 +127,6 @@
             // 
             this.FileTSMI.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.OpenLibTSMI,
-            this.CreateLibTSMI,
             this.ClearLibTSMI,
             this.toolStripSeparator1,
             this.CloseAppTSMI});
@@ -141,16 +139,10 @@
             resources.ApplyResources(this.OpenLibTSMI, "OpenLibTSMI");
             this.OpenLibTSMI.Click += new System.EventHandler(this.OpenLibTSMI_Click);
             // 
-            // CreateLibTSMI
-            // 
-            resources.ApplyResources(this.CreateLibTSMI, "CreateLibTSMI");
-            this.CreateLibTSMI.Name = "CreateLibTSMI";
-            this.CreateLibTSMI.Click += new System.EventHandler(this.CreateLibTSMI_Click);
-            // 
             // ClearLibTSMI
             // 
-            this.ClearLibTSMI.Name = "ClearLibTSMI";
             resources.ApplyResources(this.ClearLibTSMI, "ClearLibTSMI");
+            this.ClearLibTSMI.Name = "ClearLibTSMI";
             this.ClearLibTSMI.Click += new System.EventHandler(this.ClearLibTSMI_Click);
             // 
             // toolStripSeparator1
@@ -441,10 +433,8 @@
         private System.Windows.Forms.Button AddElementButton;
         private System.Windows.Forms.Button SearchButton;
         private System.Windows.Forms.ToolStripMenuItem OpenLibTSMI;
-        private System.Windows.Forms.ToolStripMenuItem CreateLibTSMI;
         private System.Windows.Forms.ToolStripMenuItem AddElementTSMI;
         private System.Windows.Forms.ToolStripMenuItem EditElementTSMI;
-        private System.Windows.Forms.ToolStripMenuItem ClearLibTSMI;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem CloseAppTSMI;
         private System.Windows.Forms.ToolStripMenuItem DeleteElementTSMI;
@@ -467,6 +457,7 @@
         public System.Windows.Forms.Label TitleLabel;
         public System.Windows.Forms.Label TitleHeaderLabel;
         public System.Windows.Forms.Label ElementCount;
+        public System.Windows.Forms.ToolStripMenuItem ClearLibTSMI;
     }
 }
 
