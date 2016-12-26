@@ -33,44 +33,47 @@
             this.saveButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
             this.applyButton = new System.Windows.Forms.Button();
-            this.headerColorDialog = new System.Windows.Forms.ColorDialog();
             this.headerFontDialog = new System.Windows.Forms.FontDialog();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.hintLabel = new System.Windows.Forms.Label();
             this.UIPage = new System.Windows.Forms.TabPage();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.selectThemeLabel = new System.Windows.Forms.Label();
-            this.selectThemeCB = new System.Windows.Forms.ComboBox();
-            this.fromCaptionLabel = new System.Windows.Forms.Label();
-            this.formCaptionTB = new System.Windows.Forms.TextBox();
-            this.colorSelectLabel = new System.Windows.Forms.Label();
-            this.fontSelectLabel = new System.Windows.Forms.Label();
-            this.mainColorLabel = new System.Windows.Forms.Label();
-            this.mainFontLabel = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.autoSortByNameChk = new System.Windows.Forms.CheckBox();
             this.fullScreenStartChk = new System.Windows.Forms.CheckBox();
+            this.autoSortByNameChk = new System.Windows.Forms.CheckBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.mainFontLabel = new System.Windows.Forms.Label();
+            this.fontSelectLabel = new System.Windows.Forms.Label();
+            this.colorSelectLabel = new System.Windows.Forms.Label();
+            this.formCaptionTB = new System.Windows.Forms.TextBox();
+            this.fromCaptionLabel = new System.Windows.Forms.Label();
+            this.themeColorCB = new System.Windows.Forms.ComboBox();
+            this.selectThemeLabel = new System.Windows.Forms.Label();
             this.GeneralPage = new System.Windows.Forms.TabPage();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.rememberLastLibraryChk = new System.Windows.Forms.CheckBox();
-            this.focusFirstItemChk = new System.Windows.Forms.CheckBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.cropMaxViewSizeChk = new System.Windows.Forms.CheckBox();
-            this.picMaxWidthNUD = new System.Windows.Forms.NumericUpDown();
-            this.picMaxHeightNUD = new System.Windows.Forms.NumericUpDown();
-            this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.picMaxHeightNUD = new System.Windows.Forms.NumericUpDown();
+            this.picMaxWidthNUD = new System.Windows.Forms.NumericUpDown();
+            this.cropMaxViewSizeChk = new System.Windows.Forms.CheckBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.focusFirstItemChk = new System.Windows.Forms.CheckBox();
+            this.rememberLastLibraryChk = new System.Windows.Forms.CheckBox();
             this.Tabs = new System.Windows.Forms.TabControl();
+            this.mainColorCB = new System.Windows.Forms.ComboBox();
+            this.themeColorPB = new System.Windows.Forms.PictureBox();
+            this.mainColorPB = new System.Windows.Forms.PictureBox();
             this.UIPage.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.GeneralPage.SuspendLayout();
-            this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picMaxWidthNUD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picMaxHeightNUD)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picMaxWidthNUD)).BeginInit();
+            this.groupBox3.SuspendLayout();
             this.Tabs.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.themeColorPB)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mainColorPB)).BeginInit();
             this.SuspendLayout();
             // 
             // saveButton
@@ -121,71 +124,6 @@
             this.UIPage.Name = "UIPage";
             this.UIPage.UseVisualStyleBackColor = true;
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.mainFontLabel);
-            this.groupBox1.Controls.Add(this.mainColorLabel);
-            this.groupBox1.Controls.Add(this.fontSelectLabel);
-            this.groupBox1.Controls.Add(this.colorSelectLabel);
-            this.groupBox1.Controls.Add(this.formCaptionTB);
-            this.groupBox1.Controls.Add(this.fromCaptionLabel);
-            this.groupBox1.Controls.Add(this.selectThemeCB);
-            this.groupBox1.Controls.Add(this.selectThemeLabel);
-            resources.ApplyResources(this.groupBox1, "groupBox1");
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.TabStop = false;
-            // 
-            // selectThemeLabel
-            // 
-            resources.ApplyResources(this.selectThemeLabel, "selectThemeLabel");
-            this.selectThemeLabel.Name = "selectThemeLabel";
-            // 
-            // selectThemeCB
-            // 
-            this.selectThemeCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.selectThemeCB.FormattingEnabled = true;
-            this.selectThemeCB.Items.AddRange(new object[] {
-            resources.GetString("selectThemeCB.Items"),
-            resources.GetString("selectThemeCB.Items1"),
-            resources.GetString("selectThemeCB.Items2"),
-            resources.GetString("selectThemeCB.Items3"),
-            resources.GetString("selectThemeCB.Items4"),
-            resources.GetString("selectThemeCB.Items5")});
-            resources.ApplyResources(this.selectThemeCB, "selectThemeCB");
-            this.selectThemeCB.Name = "selectThemeCB";
-            // 
-            // fromCaptionLabel
-            // 
-            resources.ApplyResources(this.fromCaptionLabel, "fromCaptionLabel");
-            this.fromCaptionLabel.Name = "fromCaptionLabel";
-            // 
-            // formCaptionTB
-            // 
-            resources.ApplyResources(this.formCaptionTB, "formCaptionTB");
-            this.formCaptionTB.Name = "formCaptionTB";
-            // 
-            // colorSelectLabel
-            // 
-            resources.ApplyResources(this.colorSelectLabel, "colorSelectLabel");
-            this.colorSelectLabel.Name = "colorSelectLabel";
-            // 
-            // fontSelectLabel
-            // 
-            resources.ApplyResources(this.fontSelectLabel, "fontSelectLabel");
-            this.fontSelectLabel.Name = "fontSelectLabel";
-            // 
-            // mainColorLabel
-            // 
-            resources.ApplyResources(this.mainColorLabel, "mainColorLabel");
-            this.mainColorLabel.Name = "mainColorLabel";
-            this.mainColorLabel.Click += new System.EventHandler(this.mainColorLabel_Click);
-            // 
-            // mainFontLabel
-            // 
-            resources.ApplyResources(this.mainFontLabel, "mainFontLabel");
-            this.mainFontLabel.Name = "mainFontLabel";
-            this.mainFontLabel.Click += new System.EventHandler(this.mainFontLabel_Click);
-            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.fullScreenStartChk);
@@ -194,17 +132,72 @@
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
             // 
+            // fullScreenStartChk
+            // 
+            resources.ApplyResources(this.fullScreenStartChk, "fullScreenStartChk");
+            this.fullScreenStartChk.Name = "fullScreenStartChk";
+            this.fullScreenStartChk.UseVisualStyleBackColor = true;
+            // 
             // autoSortByNameChk
             // 
             resources.ApplyResources(this.autoSortByNameChk, "autoSortByNameChk");
             this.autoSortByNameChk.Name = "autoSortByNameChk";
             this.autoSortByNameChk.UseVisualStyleBackColor = true;
             // 
-            // fullScreenStartChk
+            // groupBox1
             // 
-            resources.ApplyResources(this.fullScreenStartChk, "fullScreenStartChk");
-            this.fullScreenStartChk.Name = "fullScreenStartChk";
-            this.fullScreenStartChk.UseVisualStyleBackColor = true;
+            this.groupBox1.Controls.Add(this.mainColorPB);
+            this.groupBox1.Controls.Add(this.themeColorPB);
+            this.groupBox1.Controls.Add(this.mainColorCB);
+            this.groupBox1.Controls.Add(this.mainFontLabel);
+            this.groupBox1.Controls.Add(this.fontSelectLabel);
+            this.groupBox1.Controls.Add(this.colorSelectLabel);
+            this.groupBox1.Controls.Add(this.formCaptionTB);
+            this.groupBox1.Controls.Add(this.fromCaptionLabel);
+            this.groupBox1.Controls.Add(this.themeColorCB);
+            this.groupBox1.Controls.Add(this.selectThemeLabel);
+            resources.ApplyResources(this.groupBox1, "groupBox1");
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.TabStop = false;
+            // 
+            // mainFontLabel
+            // 
+            resources.ApplyResources(this.mainFontLabel, "mainFontLabel");
+            this.mainFontLabel.Name = "mainFontLabel";
+            this.mainFontLabel.Click += new System.EventHandler(this.mainFontLabel_Click);
+            // 
+            // fontSelectLabel
+            // 
+            resources.ApplyResources(this.fontSelectLabel, "fontSelectLabel");
+            this.fontSelectLabel.Name = "fontSelectLabel";
+            // 
+            // colorSelectLabel
+            // 
+            resources.ApplyResources(this.colorSelectLabel, "colorSelectLabel");
+            this.colorSelectLabel.Name = "colorSelectLabel";
+            // 
+            // formCaptionTB
+            // 
+            resources.ApplyResources(this.formCaptionTB, "formCaptionTB");
+            this.formCaptionTB.Name = "formCaptionTB";
+            // 
+            // fromCaptionLabel
+            // 
+            resources.ApplyResources(this.fromCaptionLabel, "fromCaptionLabel");
+            this.fromCaptionLabel.Name = "fromCaptionLabel";
+            // 
+            // themeColorCB
+            // 
+            this.themeColorCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.themeColorCB.FormattingEnabled = true;
+            resources.ApplyResources(this.themeColorCB, "themeColorCB");
+            this.themeColorCB.Name = "themeColorCB";
+            this.themeColorCB.SelectedIndexChanged += new System.EventHandler(this.themeColorCB_SelectedIndexChanged);
+            // 
+            // selectThemeLabel
+            // 
+            resources.ApplyResources(this.selectThemeLabel, "selectThemeLabel");
+            this.selectThemeLabel.Name = "selectThemeLabel";
             // 
             // GeneralPage
             // 
@@ -213,26 +206,6 @@
             this.GeneralPage.Controls.Add(this.groupBox3);
             this.GeneralPage.Name = "GeneralPage";
             this.GeneralPage.UseVisualStyleBackColor = true;
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.focusFirstItemChk);
-            this.groupBox3.Controls.Add(this.rememberLastLibraryChk);
-            resources.ApplyResources(this.groupBox3, "groupBox3");
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.TabStop = false;
-            // 
-            // rememberLastLibraryChk
-            // 
-            resources.ApplyResources(this.rememberLastLibraryChk, "rememberLastLibraryChk");
-            this.rememberLastLibraryChk.Name = "rememberLastLibraryChk";
-            this.rememberLastLibraryChk.UseVisualStyleBackColor = true;
-            // 
-            // focusFirstItemChk
-            // 
-            resources.ApplyResources(this.focusFirstItemChk, "focusFirstItemChk");
-            this.focusFirstItemChk.Name = "focusFirstItemChk";
-            this.focusFirstItemChk.UseVisualStyleBackColor = true;
             // 
             // groupBox4
             // 
@@ -245,31 +218,15 @@
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.TabStop = false;
             // 
-            // cropMaxViewSizeChk
+            // label7
             // 
-            resources.ApplyResources(this.cropMaxViewSizeChk, "cropMaxViewSizeChk");
-            this.cropMaxViewSizeChk.Name = "cropMaxViewSizeChk";
-            this.cropMaxViewSizeChk.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.label7, "label7");
+            this.label7.Name = "label7";
             // 
-            // picMaxWidthNUD
+            // label6
             // 
-            resources.ApplyResources(this.picMaxWidthNUD, "picMaxWidthNUD");
-            this.picMaxWidthNUD.Maximum = new decimal(new int[] {
-            1280,
-            0,
-            0,
-            0});
-            this.picMaxWidthNUD.Minimum = new decimal(new int[] {
-            480,
-            0,
-            0,
-            0});
-            this.picMaxWidthNUD.Name = "picMaxWidthNUD";
-            this.picMaxWidthNUD.Value = new decimal(new int[] {
-            1280,
-            0,
-            0,
-            0});
+            resources.ApplyResources(this.label6, "label6");
+            this.label6.Name = "label6";
             // 
             // picMaxHeightNUD
             // 
@@ -291,15 +248,51 @@
             0,
             0});
             // 
-            // label6
+            // picMaxWidthNUD
             // 
-            resources.ApplyResources(this.label6, "label6");
-            this.label6.Name = "label6";
+            resources.ApplyResources(this.picMaxWidthNUD, "picMaxWidthNUD");
+            this.picMaxWidthNUD.Maximum = new decimal(new int[] {
+            1280,
+            0,
+            0,
+            0});
+            this.picMaxWidthNUD.Minimum = new decimal(new int[] {
+            480,
+            0,
+            0,
+            0});
+            this.picMaxWidthNUD.Name = "picMaxWidthNUD";
+            this.picMaxWidthNUD.Value = new decimal(new int[] {
+            1280,
+            0,
+            0,
+            0});
             // 
-            // label7
+            // cropMaxViewSizeChk
             // 
-            resources.ApplyResources(this.label7, "label7");
-            this.label7.Name = "label7";
+            resources.ApplyResources(this.cropMaxViewSizeChk, "cropMaxViewSizeChk");
+            this.cropMaxViewSizeChk.Name = "cropMaxViewSizeChk";
+            this.cropMaxViewSizeChk.UseVisualStyleBackColor = true;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.focusFirstItemChk);
+            this.groupBox3.Controls.Add(this.rememberLastLibraryChk);
+            resources.ApplyResources(this.groupBox3, "groupBox3");
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.TabStop = false;
+            // 
+            // focusFirstItemChk
+            // 
+            resources.ApplyResources(this.focusFirstItemChk, "focusFirstItemChk");
+            this.focusFirstItemChk.Name = "focusFirstItemChk";
+            this.focusFirstItemChk.UseVisualStyleBackColor = true;
+            // 
+            // rememberLastLibraryChk
+            // 
+            resources.ApplyResources(this.rememberLastLibraryChk, "rememberLastLibraryChk");
+            this.rememberLastLibraryChk.Name = "rememberLastLibraryChk";
+            this.rememberLastLibraryChk.UseVisualStyleBackColor = true;
             // 
             // Tabs
             // 
@@ -309,6 +302,26 @@
             this.Tabs.Multiline = true;
             this.Tabs.Name = "Tabs";
             this.Tabs.SelectedIndex = 0;
+            // 
+            // mainColorCB
+            // 
+            this.mainColorCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.mainColorCB.FormattingEnabled = true;
+            resources.ApplyResources(this.mainColorCB, "mainColorCB");
+            this.mainColorCB.Name = "mainColorCB";
+            this.mainColorCB.SelectedIndexChanged += new System.EventHandler(this.mainColorCB_SelectedIndexChanged);
+            // 
+            // themeColorPB
+            // 
+            resources.ApplyResources(this.themeColorPB, "themeColorPB");
+            this.themeColorPB.Name = "themeColorPB";
+            this.themeColorPB.TabStop = false;
+            // 
+            // mainColorPB
+            // 
+            resources.ApplyResources(this.mainColorPB, "mainColorPB");
+            this.mainColorPB.Name = "mainColorPB";
+            this.mainColorPB.TabStop = false;
             // 
             // SettingsForm
             // 
@@ -328,18 +341,20 @@
             this.ShowInTaskbar = false;
             this.Load += new System.EventHandler(this.SettingsForm_Load);
             this.UIPage.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.GeneralPage.ResumeLayout(false);
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picMaxWidthNUD)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picMaxHeightNUD)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picMaxWidthNUD)).EndInit();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.Tabs.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.themeColorPB)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mainColorPB)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -350,7 +365,6 @@
         private System.Windows.Forms.Button saveButton;
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.Button applyButton;
-        private System.Windows.Forms.ColorDialog headerColorDialog;
         private System.Windows.Forms.FontDialog headerFontDialog;
         private System.Windows.Forms.ToolTip toolTip;
         private System.Windows.Forms.Label label1;
@@ -361,12 +375,11 @@
         public System.Windows.Forms.CheckBox autoSortByNameChk;
         private System.Windows.Forms.GroupBox groupBox1;
         public System.Windows.Forms.Label mainFontLabel;
-        public System.Windows.Forms.Label mainColorLabel;
         private System.Windows.Forms.Label fontSelectLabel;
         private System.Windows.Forms.Label colorSelectLabel;
         public System.Windows.Forms.TextBox formCaptionTB;
         private System.Windows.Forms.Label fromCaptionLabel;
-        public System.Windows.Forms.ComboBox selectThemeCB;
+        public System.Windows.Forms.ComboBox themeColorCB;
         private System.Windows.Forms.Label selectThemeLabel;
         private System.Windows.Forms.TabPage GeneralPage;
         private System.Windows.Forms.GroupBox groupBox4;
@@ -379,5 +392,8 @@
         public System.Windows.Forms.CheckBox focusFirstItemChk;
         public System.Windows.Forms.CheckBox rememberLastLibraryChk;
         public System.Windows.Forms.TabControl Tabs;
+        public System.Windows.Forms.ComboBox mainColorCB;
+        private System.Windows.Forms.PictureBox mainColorPB;
+        private System.Windows.Forms.PictureBox themeColorPB;
     }
 }

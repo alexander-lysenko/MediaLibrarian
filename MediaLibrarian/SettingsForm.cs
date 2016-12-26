@@ -30,30 +30,22 @@ namespace MediaLibrarian
                 PicMaxHeight = picMaxHeightNUD.Value,
                 StartFullScreen = fullScreenStartChk.Checked,
                 AutoSortByName = autoSortByNameChk.Checked,
-                SelectedTheme = selectThemeCB.Text,
+                ThemeColor = themeColorCB.Text,
                 FormCaptionText = formCaptionTB.Text,
-                MainColor = mainColorLabel.ForeColor.ToArgb(),
+                MainColor = mainColorCB.Text,
                 MainFont = new SFont(mainFontLabel.Font.FontFamily.Name, mainFontLabel.Font.Size, mainFontLabel.Font.Style)
             };
             XmlManager.Serialize(_mainForm.Preferences);
             hintLabel.Text = "Настройки сохранены успешно.";
             _mainForm.TitleLabel.ForeColor = _mainForm.SelectedLibLabel.ForeColor =
-                _mainForm.ElementCount.ForeColor = Color.FromArgb(_mainForm.Preferences.MainColor);
+                _mainForm.ElementCount.ForeColor = Color.FromName(_mainForm.Preferences.MainColor);
+            _mainForm.BackColor = Color.FromName(_mainForm.Preferences.ThemeColor);
         }
 
         private void OK_Button_Click(object sender, EventArgs e)
         {
             applyButton.PerformClick();
             cancelButton.PerformClick();
-        }
-
-        private void mainColorLabel_Click(object sender, EventArgs e)
-        {
-            if (headerColorDialog.ShowDialog() == DialogResult.OK) 
-            {
-                mainColorLabel.Text = headerColorDialog.Color.Name;
-                mainColorLabel.ForeColor = headerColorDialog.Color;
-            }
         }
 
         private void mainFontLabel_Click(object sender, EventArgs e)
@@ -76,16 +68,24 @@ namespace MediaLibrarian
             picMaxHeightNUD.Value = Preferences.PicMaxHeight;
             fullScreenStartChk.Checked = Preferences.StartFullScreen;
             autoSortByNameChk.Checked = Preferences.AutoSortByName;
-            selectThemeCB.Text = Preferences.SelectedTheme;
             formCaptionTB.Text = Preferences.FormCaptionText;
-            mainColorLabel.ForeColor = Color.FromArgb(Preferences.MainColor);
-            mainColorLabel.Text = mainColorLabel.ForeColor.Name;
+            themeColorCB.Text = Preferences.ThemeColor;
+            mainColorCB.Text = Preferences.MainColor;
             mainFontLabel.Font = new Font(Preferences.MainFont.FontFamilyName,
                 Preferences.MainFont.FontSize, Preferences.MainFont.FontStyle);
             mainFontLabel.Text = Preferences.MainFont.FontFamilyName + "\n(Проверка кириллицы)";
         }
         private void SettingsForm_Load(object sender, EventArgs e)
         {
+            string[] colors = Enum.GetNames(typeof(KnownColor));            
+            foreach (string color in colors)
+            {
+                if (((Color.FromName(color)).IsSystemColor == false) && ((Color.FromName(color)).Name != Color.Transparent.Name))
+                {
+                    themeColorCB.Items.Add(color);
+                    mainColorCB.Items.Add(color);
+                }
+            }
             toolTip.SetToolTip(rememberLastLibraryChk, "При зауске в программу будет автоматически \nзагружаться последняя открытая ранее библиотека");
             toolTip.SetToolTip(focusFirstItemChk, "Когда в программу загружена библиотека, и в ней есть элементы, \nбудет автоамтически выделен первый элемент, и будет отображена информация о нем");
             toolTip.SetToolTip(cropMaxViewSizeChk, "По умолчанию просмотрщик постеров определяет разрешение \nВашего экрана, и будет подгонять постер под него. \nВы можете ограничить размер отображения постеров.");
@@ -111,7 +111,16 @@ namespace MediaLibrarian
             {
                 MessageBox.Show(ex.Message);
             }
+        }
 
+        private void themeColorCB_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            themeColorPB.BackColor = Color.FromName(themeColorCB.Text);
+        }
+
+        private void mainColorCB_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            mainColorPB.BackColor = Color.FromName(mainColorCB.Text);
         }
     }
 }

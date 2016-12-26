@@ -39,7 +39,7 @@ namespace MediaLibrarian.Properties {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    var temp = new global::System.Resources.ResourceManager("MediaLibrarian.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MediaLibrarian.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -65,7 +65,7 @@ namespace MediaLibrarian.Properties {
         /// </summary>
         public static System.Drawing.Bitmap aa {
             get {
-                var obj = ResourceManager.GetObject("aa", resourceCulture);
+                object obj = ResourceManager.GetObject("aa", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -75,7 +75,17 @@ namespace MediaLibrarian.Properties {
         /// </summary>
         public static System.Drawing.Bitmap noposter {
             get {
-                var obj = ResourceManager.GetObject("noposter", resourceCulture);
+                object obj = ResourceManager.GetObject("noposter", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap splash {
+            get {
+                object obj = ResourceManager.GetObject("splash", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

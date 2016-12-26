@@ -33,10 +33,12 @@
             // 
             // progressLabel
             // 
+            this.progressLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.progressLabel.BackColor = System.Drawing.Color.Transparent;
-            this.progressLabel.Location = new System.Drawing.Point(12, 172);
+            this.progressLabel.Location = new System.Drawing.Point(12, 150);
             this.progressLabel.Name = "progressLabel";
-            this.progressLabel.Size = new System.Drawing.Size(296, 20);
+            this.progressLabel.Size = new System.Drawing.Size(476, 20);
             this.progressLabel.TabIndex = 0;
             this.progressLabel.Text = "Загрузка";
             this.progressLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -44,9 +46,13 @@
             // SplashForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(320, 200);
+            this.BackColor = System.Drawing.Color.White;
+            this.BackgroundImage = global::MediaLibrarian.Properties.Resources.splash;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.ClientSize = new System.Drawing.Size(500, 173);
             this.ControlBox = false;
             this.Controls.Add(this.progressLabel);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "SplashForm";
             this.ShowIcon = false;

@@ -14,9 +14,9 @@ namespace MediaLibrarian
         public decimal PicMaxHeight { get; set; }
         public bool StartFullScreen { get; set; }
         public bool AutoSortByName { get; set; }
-        public string SelectedTheme { get; set; }
         public string FormCaptionText { get; set; }
-        public int MainColor { get; set; }
+        public string ThemeColor { get; set; }
+        public string MainColor { get; set; }
         public SFont MainFont { get; set; }
     }
     [Serializable]

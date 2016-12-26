@@ -66,22 +66,25 @@
             this.AddElementButton = new System.Windows.Forms.Button();
             this.DeleteElementButton = new System.Windows.Forms.Button();
             this.ElementInfoGB = new System.Windows.Forms.GroupBox();
-            this.TitleLabel = new System.Windows.Forms.Label();
             this.TitleHeaderLabel = new System.Windows.Forms.Label();
-            this.PosterBox = new System.Windows.Forms.PictureBox();
             this.InfoPanel = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.TitleLabel = new System.Windows.Forms.Label();
+            this.PosterBox = new System.Windows.Forms.PictureBox();
             this.StatusBar.SuspendLayout();
             this.MainMenu.SuspendLayout();
             this.LibInfoGB.SuspendLayout();
             this.ElementActionsGB.SuspendLayout();
             this.ElementInfoGB.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PosterBox)).BeginInit();
             this.InfoPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PosterBox)).BeginInit();
             this.SuspendLayout();
             // 
             // Collection
             // 
             resources.ApplyResources(this.Collection, "Collection");
+            this.Collection.BackColor = System.Drawing.Color.White;
             this.Collection.FullRowSelect = true;
             this.Collection.GridLines = true;
             this.Collection.Name = "Collection";
@@ -357,18 +360,32 @@
             this.ElementInfoGB.Name = "ElementInfoGB";
             this.ElementInfoGB.TabStop = false;
             // 
+            // TitleHeaderLabel
+            // 
+            this.TitleHeaderLabel.AutoEllipsis = true;
+            resources.ApplyResources(this.TitleHeaderLabel, "TitleHeaderLabel");
+            this.TitleHeaderLabel.Name = "TitleHeaderLabel";
+            // 
+            // InfoPanel
+            // 
+            resources.ApplyResources(this.InfoPanel, "InfoPanel");
+            this.InfoPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.InfoPanel.Controls.Add(this.label6);
+            this.InfoPanel.Name = "InfoPanel";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::MediaLibrarian.Properties.Resources.splash;
+            resources.ApplyResources(this.pictureBox1, "pictureBox1");
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.TabStop = false;
+            // 
             // TitleLabel
             // 
             this.TitleLabel.AutoEllipsis = true;
             resources.ApplyResources(this.TitleLabel, "TitleLabel");
             this.TitleLabel.ForeColor = System.Drawing.Color.Blue;
             this.TitleLabel.Name = "TitleLabel";
-            // 
-            // TitleHeaderLabel
-            // 
-            this.TitleHeaderLabel.AutoEllipsis = true;
-            resources.ApplyResources(this.TitleHeaderLabel, "TitleHeaderLabel");
-            this.TitleHeaderLabel.Name = "TitleHeaderLabel";
             // 
             // PosterBox
             // 
@@ -378,18 +395,12 @@
             this.PosterBox.TabStop = false;
             this.PosterBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.PosterBox_MouseClick);
             // 
-            // InfoPanel
-            // 
-            resources.ApplyResources(this.InfoPanel, "InfoPanel");
-            this.InfoPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.InfoPanel.Controls.Add(this.label6);
-            this.InfoPanel.Name = "InfoPanel";
-            // 
             // MainForm
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.ElementInfoGB);
             this.Controls.Add(this.ElementActionsGB);
             this.Controls.Add(this.LibInfoGB);
@@ -408,8 +419,9 @@
             this.LibInfoGB.ResumeLayout(false);
             this.ElementActionsGB.ResumeLayout(false);
             this.ElementInfoGB.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.PosterBox)).EndInit();
             this.InfoPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PosterBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -458,6 +470,7 @@
         public System.Windows.Forms.Label TitleHeaderLabel;
         public System.Windows.Forms.Label ElementCount;
         public System.Windows.Forms.ToolStripMenuItem ClearLibTSMI;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 

@@ -199,7 +199,7 @@ namespace MediaLibrarian
                 Location = new Point(210, offset),
                 Size = new Size(200, 15),
                 Font = new Font("Tahoma", 9.75f),
-                ForeColor = Color.FromArgb(Preferences.MainColor),
+                ForeColor = Color.FromName(Preferences.MainColor),
                 AutoEllipsis = true,
                 Text = text,
                 TextAlign = ContentAlignment.MiddleRight,
@@ -216,7 +216,7 @@ namespace MediaLibrarian
                 Location = new Point(3, offset),
                 MaximumSize = new Size(405, 0),
                 Font = new Font("Tahoma", 9.75f),
-                ForeColor = Color.FromArgb(Preferences.MainColor),
+                ForeColor = Color.FromName(Preferences.MainColor),
                 AutoSize = true,
                 Text = text,
             };
@@ -338,8 +338,9 @@ namespace MediaLibrarian
                 AutoSortingTSMI.Checked = true;
             }
             Text = Preferences.FormCaptionText;
-            TitleLabel.ForeColor = SelectedLibLabel.ForeColor = ElementCount.ForeColor = 
-                Color.FromArgb(Preferences.MainColor);            
+            BackColor = Color.FromName(Preferences.ThemeColor);
+            TitleLabel.ForeColor = SelectedLibLabel.ForeColor = ElementCount.ForeColor =
+                Color.FromName(Preferences.MainColor);          
 
             TitleLabel.Font = new Font(Preferences.MainFont.FontFamilyName,
                 Preferences.MainFont.FontSize, Preferences.MainFont.FontStyle);
