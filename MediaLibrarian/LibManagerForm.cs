@@ -100,32 +100,44 @@ namespace MediaLibrarian
         {
             var selectQuery = String.Format("select * from `{0}` ", tableName);
             if (_mainForm.Preferences.AutoSortByName) selectQuery += "order by " + _mainForm.ColumnsInfo[0].Name;
+            var selectCountQuery = String.Format("select count(*) from `{0}`", tableName);
             _mainForm.Collection.Items.Clear();
             var readTable = new SQLiteCommand(selectQuery, _connection);
+            var count = new SQLiteCommand(selectCountQuery, _connection);
             var data = new DataTable();
-            _connection.Open();
-            var reader = readTable.ExecuteReader();
-            data.Load(reader);
-            reader.Close();
-            _connection.Close();
-            foreach (DataRow row in data.Rows)
+            object rowsCount;
+            try
             {
-                var item = new ListViewItem(row[0].ToString());
-                for (var i = 1; i < data.Columns.Count; i++)
+                _connection.Open();
+                var reader = readTable.ExecuteReader();
+                rowsCount = count.ExecuteScalar();
+                data.Load(reader);
+                reader.Close();
+                _connection.Close();
+                foreach (DataRow row in data.Rows)
                 {
-                    item.SubItems.Add(row[i].ToString());
+                    var item = new ListViewItem(row[0].ToString());
+                    for (var i = 1; i < data.Columns.Count; i++)
+                    {
+                        item.SubItems.Add(row[i].ToString());
+                    }
+                    _mainForm.Collection.Items.Add(item);
                 }
-                _mainForm.Collection.Items.Add(item);
+                _mainForm.ElementCount.Text = rowsCount.ToString();
+                _mainForm.InfoPanel.Controls.Clear();
+                _mainForm.PosterBox.BackgroundImage = null;
+                _mainForm.PosterBox.Image = null;
+                _mainForm.TitleHeaderLabel.Text = _mainForm.Collection.Columns[0].Text + ":";
+                _mainForm.TitleLabel.Text = "";
+                _mainForm.SelectedLibLabel.Text = tableName;
+                _mainForm.ElementActionsGB.Enabled = true;
+                if (_mainForm.Preferences.FocusFirstItem && _mainForm.Collection.Items.Count > 0)
+                    _mainForm.Collection.Items[0].Selected = true;
             }
-            _mainForm.InfoPanel.Controls.Clear();
-            _mainForm.PosterBox.BackgroundImage = null;
-            _mainForm.PosterBox.Image = null;
-            _mainForm.TitleHeaderLabel.Text = _mainForm.Collection.Columns[0].Text + ":";
-            _mainForm.TitleLabel.Text = "";
-            _mainForm.SelectedLibLabel.Text = tableName;
-            _mainForm.ElementActionsGB.Enabled = true;
-            if (_mainForm.Preferences.FocusFirstItem && _mainForm.Collection.Items.Count > 0) 
-                _mainForm.Collection.Items[0].Selected = true;
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка подключения к базе данных", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         public void ClearLibrary(string tableName)
         {

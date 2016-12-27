@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -31,7 +32,11 @@ namespace MediaLibrarian
             MainForm mainForm = new MainForm();
             mainForm.Show();
         }
-
+        public void InitFont()
+        {
+            MainMenu.ForeColor = ElementInfoGB.ForeColor = ElementActionsGB.ForeColor = LibInfoGB.ForeColor = 
+                StatusLabel.ForeColor = screenResolutionLabel.ForeColor = Color.FromName(Preferences.FontColor);
+        }
         #region Buttons
         private void SelectCollectionButton_Click(object sender, EventArgs e)
         {
@@ -295,6 +300,7 @@ namespace MediaLibrarian
                     Size = new Size(200, 15),
                     Font = new Font("Tahoma", 9.75f),
                     AutoEllipsis = true,
+                    ForeColor = Color.FromName(Preferences.FontColor),
                     Text = col.Name + ":",
                 };
                 InfoPanel.Controls.Add(headerLabel);
@@ -317,7 +323,25 @@ namespace MediaLibrarian
         {
             try
             {
-                Preferences = XmlManager.Deserialize();
+                if (File.Exists("Settings.xml"))
+                    Preferences = XmlManager.Deserialize();
+                else Preferences = new Settings
+                {
+                    AutoSortByName = true,
+                    CropMaxViewSize = true,
+                    FocusFirstItem = true,
+                    FormCaptionText = "Media Librarian",
+                    LastLibraryName = "",
+                    MainFont = new SFont { FontFamilyName = "Tahoma", FontSize = 16, FontStyle = FontStyle.Bold },
+                    PicMaxHeight = 720,
+                    PicMaxWidth = 720,
+                    RememberLastLibrary = false,
+                    StartFullScreen = false,
+                    ThemeColor = "White",
+                    MainColor = "Black",
+                    FontColor = "ControlText"
+                };
+                InitFont();
                 if (Preferences.RememberLastLibrary)
                 {
                     _libManagerForm.ReadHeadersForTable(Preferences.LastLibraryName);
@@ -363,6 +387,16 @@ namespace MediaLibrarian
             SelectedLibLabel.Text = "";
             ColumnsInfo.Clear();
             ElementActionsGB.Enabled = false;
+        }
+
+        private void InfoPanel_ControlRemoved(object sender, ControlEventArgs e)
+        {
+
+        }
+
+        private void InfoPanel_ControlAdded(object sender, ControlEventArgs e)
+        {
+
         }
     }
 }

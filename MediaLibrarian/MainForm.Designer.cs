@@ -53,32 +53,32 @@
             this.HelpAboutTSMI = new System.Windows.Forms.ToolStripMenuItem();
             this.HelpTSMI = new System.Windows.Forms.ToolStripMenuItem();
             this.AboutTSMI = new System.Windows.Forms.ToolStripMenuItem();
-            this.HintLabel = new System.Windows.Forms.Label();
+            this.CurrentLibHintLabel = new System.Windows.Forms.Label();
             this.SelectCollectionButton = new System.Windows.Forms.Button();
             this.SelectedLibLabel = new System.Windows.Forms.Label();
             this.LibInfoGB = new System.Windows.Forms.GroupBox();
             this.ElementCount = new System.Windows.Forms.Label();
             this.ElementCountHintLabel = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
+            this.infoHintLabel = new System.Windows.Forms.Label();
             this.ElementActionsGB = new System.Windows.Forms.GroupBox();
             this.EditElementButton = new System.Windows.Forms.Button();
             this.SearchButton = new System.Windows.Forms.Button();
             this.AddElementButton = new System.Windows.Forms.Button();
             this.DeleteElementButton = new System.Windows.Forms.Button();
             this.ElementInfoGB = new System.Windows.Forms.GroupBox();
+            this.TitleLabel = new System.Windows.Forms.Label();
             this.TitleHeaderLabel = new System.Windows.Forms.Label();
+            this.PosterBox = new System.Windows.Forms.PictureBox();
             this.InfoPanel = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.TitleLabel = new System.Windows.Forms.Label();
-            this.PosterBox = new System.Windows.Forms.PictureBox();
             this.StatusBar.SuspendLayout();
             this.MainMenu.SuspendLayout();
             this.LibInfoGB.SuspendLayout();
             this.ElementActionsGB.SuspendLayout();
             this.ElementInfoGB.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PosterBox)).BeginInit();
             this.InfoPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PosterBox)).BeginInit();
             this.SuspendLayout();
             // 
             // Collection
@@ -254,11 +254,11 @@
             resources.ApplyResources(this.AboutTSMI, "AboutTSMI");
             this.AboutTSMI.Click += new System.EventHandler(this.AboutTSMI_Click);
             // 
-            // HintLabel
+            // CurrentLibHintLabel
             // 
-            this.HintLabel.BackColor = System.Drawing.Color.Transparent;
-            resources.ApplyResources(this.HintLabel, "HintLabel");
-            this.HintLabel.Name = "HintLabel";
+            this.CurrentLibHintLabel.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this.CurrentLibHintLabel, "CurrentLibHintLabel");
+            this.CurrentLibHintLabel.Name = "CurrentLibHintLabel";
             // 
             // SelectCollectionButton
             // 
@@ -286,7 +286,7 @@
             this.LibInfoGB.BackColor = System.Drawing.Color.Transparent;
             this.LibInfoGB.Controls.Add(this.ElementCount);
             this.LibInfoGB.Controls.Add(this.ElementCountHintLabel);
-            this.LibInfoGB.Controls.Add(this.HintLabel);
+            this.LibInfoGB.Controls.Add(this.CurrentLibHintLabel);
             this.LibInfoGB.Controls.Add(this.SelectCollectionButton);
             this.LibInfoGB.Controls.Add(this.SelectedLibLabel);
             this.LibInfoGB.Name = "LibInfoGB";
@@ -304,11 +304,11 @@
             resources.ApplyResources(this.ElementCountHintLabel, "ElementCountHintLabel");
             this.ElementCountHintLabel.Name = "ElementCountHintLabel";
             // 
-            // label6
+            // infoHintLabel
             // 
-            this.label6.AutoEllipsis = true;
-            resources.ApplyResources(this.label6, "label6");
-            this.label6.Name = "label6";
+            this.infoHintLabel.AutoEllipsis = true;
+            resources.ApplyResources(this.infoHintLabel, "infoHintLabel");
+            this.infoHintLabel.Name = "infoHintLabel";
             // 
             // ElementActionsGB
             // 
@@ -360,32 +360,18 @@
             this.ElementInfoGB.Name = "ElementInfoGB";
             this.ElementInfoGB.TabStop = false;
             // 
-            // TitleHeaderLabel
-            // 
-            this.TitleHeaderLabel.AutoEllipsis = true;
-            resources.ApplyResources(this.TitleHeaderLabel, "TitleHeaderLabel");
-            this.TitleHeaderLabel.Name = "TitleHeaderLabel";
-            // 
-            // InfoPanel
-            // 
-            resources.ApplyResources(this.InfoPanel, "InfoPanel");
-            this.InfoPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.InfoPanel.Controls.Add(this.label6);
-            this.InfoPanel.Name = "InfoPanel";
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::MediaLibrarian.Properties.Resources.splash;
-            resources.ApplyResources(this.pictureBox1, "pictureBox1");
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.TabStop = false;
-            // 
             // TitleLabel
             // 
             this.TitleLabel.AutoEllipsis = true;
             resources.ApplyResources(this.TitleLabel, "TitleLabel");
             this.TitleLabel.ForeColor = System.Drawing.Color.Blue;
             this.TitleLabel.Name = "TitleLabel";
+            // 
+            // TitleHeaderLabel
+            // 
+            this.TitleHeaderLabel.AutoEllipsis = true;
+            resources.ApplyResources(this.TitleHeaderLabel, "TitleHeaderLabel");
+            this.TitleHeaderLabel.Name = "TitleHeaderLabel";
             // 
             // PosterBox
             // 
@@ -394,6 +380,22 @@
             this.PosterBox.Name = "PosterBox";
             this.PosterBox.TabStop = false;
             this.PosterBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.PosterBox_MouseClick);
+            // 
+            // InfoPanel
+            // 
+            resources.ApplyResources(this.InfoPanel, "InfoPanel");
+            this.InfoPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.InfoPanel.Controls.Add(this.infoHintLabel);
+            this.InfoPanel.Name = "InfoPanel";
+            this.InfoPanel.ControlAdded += new System.Windows.Forms.ControlEventHandler(this.InfoPanel_ControlAdded);
+            this.InfoPanel.ControlRemoved += new System.Windows.Forms.ControlEventHandler(this.InfoPanel_ControlRemoved);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::MediaLibrarian.Properties.Resources.splash;
+            resources.ApplyResources(this.pictureBox1, "pictureBox1");
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.TabStop = false;
             // 
             // MainForm
             // 
@@ -419,9 +421,9 @@
             this.LibInfoGB.ResumeLayout(false);
             this.ElementActionsGB.ResumeLayout(false);
             this.ElementInfoGB.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.PosterBox)).EndInit();
             this.InfoPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PosterBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -435,10 +437,10 @@
         private System.Windows.Forms.ToolStripMenuItem EditTSMI;
         private System.Windows.Forms.ToolStripMenuItem ViewTSMI;
         private System.Windows.Forms.ToolStripMenuItem HelpAboutTSMI;
-        private System.Windows.Forms.Label HintLabel;
+        private System.Windows.Forms.Label CurrentLibHintLabel;
         private System.Windows.Forms.Button SelectCollectionButton;
         private System.Windows.Forms.GroupBox LibInfoGB;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label infoHintLabel;
         private System.Windows.Forms.GroupBox ElementInfoGB;
         private System.Windows.Forms.Button DeleteElementButton;
         private System.Windows.Forms.Button EditElementButton;

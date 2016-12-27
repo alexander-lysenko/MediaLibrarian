@@ -270,53 +270,80 @@
   <data name="UIPage.AutoScroll" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;fullScreenStartChk.Name" xml:space="preserve">
-    <value>fullScreenStartChk</value>
+  <data name="fontColorPB.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;fullScreenStartChk.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="fontColorPB.Location" type="System.Drawing.Point, System.Drawing">
+    <value>220, 75</value>
   </data>
-  <data name="&gt;&gt;fullScreenStartChk.Parent" xml:space="preserve">
-    <value>groupBox2</value>
+  <data name="fontColorPB.Size" type="System.Drawing.Size, System.Drawing">
+    <value>21, 21</value>
   </data>
-  <data name="&gt;&gt;fullScreenStartChk.ZOrder" xml:space="preserve">
+  <data name="fontColorPB.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="&gt;&gt;fontColorPB.Name" xml:space="preserve">
+    <value>fontColorPB</value>
+  </data>
+  <data name="&gt;&gt;fontColorPB.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;fontColorPB.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;fontColorPB.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;autoSortByNameChk.Name" xml:space="preserve">
-    <value>autoSortByNameChk</value>
+  <data name="fontColorCB.Location" type="System.Drawing.Point, System.Drawing">
+    <value>247, 75</value>
   </data>
-  <data name="&gt;&gt;autoSortByNameChk.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="fontColorCB.Size" type="System.Drawing.Size, System.Drawing">
+    <value>321, 21</value>
   </data>
-  <data name="&gt;&gt;autoSortByNameChk.Parent" xml:space="preserve">
-    <value>groupBox2</value>
+  <data name="fontColorCB.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
   </data>
-  <data name="&gt;&gt;autoSortByNameChk.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;fontColorCB.Name" xml:space="preserve">
+    <value>fontColorCB</value>
+  </data>
+  <data name="&gt;&gt;fontColorCB.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;fontColorCB.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;fontColorCB.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 6</value>
+  <data name="fontColorLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>574, 68</value>
+  <data name="fontColorLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="groupBox2.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="fontColorLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 78</value>
   </data>
-  <data name="groupBox2.Text" xml:space="preserve">
-    <value>Поведение</value>
+  <data name="fontColorLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>203, 13</value>
   </data>
-  <data name="&gt;&gt;groupBox2.Name" xml:space="preserve">
-    <value>groupBox2</value>
+  <data name="fontColorLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
   </data>
-  <data name="&gt;&gt;groupBox2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="fontColorLabel.Text" xml:space="preserve">
+    <value>Цвет отображения остального текста:</value>
   </data>
-  <data name="&gt;&gt;groupBox2.Parent" xml:space="preserve">
-    <value>UIPage</value>
+  <data name="&gt;&gt;fontColorLabel.Name" xml:space="preserve">
+    <value>fontColorLabel</value>
   </data>
-  <data name="&gt;&gt;groupBox2.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="&gt;&gt;fontColorLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;fontColorLabel.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;fontColorLabel.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="mainColorPB.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -340,7 +367,7 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;mainColorPB.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>3</value>
   </data>
   <data name="themeColorPB.Location" type="System.Drawing.Point, System.Drawing">
     <value>220, 21</value>
@@ -361,7 +388,7 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;themeColorPB.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>4</value>
   </data>
   <data name="mainColorCB.Location" type="System.Drawing.Point, System.Drawing">
     <value>247, 48</value>
@@ -382,7 +409,7 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;mainColorCB.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>5</value>
   </data>
   <data name="mainFontLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -394,7 +421,7 @@
     <value>NoControl</value>
   </data>
   <data name="mainFontLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 150</value>
+    <value>6, 183</value>
   </data>
   <data name="mainFontLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>287, 60</value>
@@ -416,13 +443,13 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;mainFontLabel.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>6</value>
   </data>
   <data name="fontSelectLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="fontSelectLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 104</value>
+    <value>3, 137</value>
   </data>
   <data name="fontSelectLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>565, 46</value>
@@ -444,40 +471,40 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;fontSelectLabel.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>7</value>
   </data>
-  <data name="colorSelectLabel.AutoSize" type="System.Boolean, mscorlib">
+  <data name="mainColorLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="colorSelectLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="mainColorLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="colorSelectLabel.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="mainColorLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 51</value>
   </data>
-  <data name="colorSelectLabel.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="mainColorLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>197, 13</value>
   </data>
-  <data name="colorSelectLabel.TabIndex" type="System.Int32, mscorlib">
+  <data name="mainColorLabel.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="colorSelectLabel.Text" xml:space="preserve">
+  <data name="mainColorLabel.Text" xml:space="preserve">
     <value>Цвет отображения данных элемента:</value>
   </data>
-  <data name="&gt;&gt;colorSelectLabel.Name" xml:space="preserve">
-    <value>colorSelectLabel</value>
+  <data name="&gt;&gt;mainColorLabel.Name" xml:space="preserve">
+    <value>mainColorLabel</value>
   </data>
-  <data name="&gt;&gt;colorSelectLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;mainColorLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;colorSelectLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;mainColorLabel.Parent" xml:space="preserve">
     <value>groupBox1</value>
   </data>
-  <data name="&gt;&gt;colorSelectLabel.ZOrder" xml:space="preserve">
-    <value>5</value>
+  <data name="&gt;&gt;mainColorLabel.ZOrder" xml:space="preserve">
+    <value>8</value>
   </data>
   <data name="formCaptionTB.Location" type="System.Drawing.Point, System.Drawing">
-    <value>247, 75</value>
+    <value>247, 108</value>
   </data>
   <data name="formCaptionTB.MaxLength" type="System.Int32, mscorlib">
     <value>128</value>
@@ -498,7 +525,7 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;formCaptionTB.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>9</value>
   </data>
   <data name="fromCaptionLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -507,7 +534,7 @@
     <value>NoControl</value>
   </data>
   <data name="fromCaptionLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 78</value>
+    <value>3, 111</value>
   </data>
   <data name="fromCaptionLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>164, 13</value>
@@ -528,7 +555,7 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;fromCaptionLabel.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>10</value>
   </data>
   <data name="themeColorCB.Location" type="System.Drawing.Point, System.Drawing">
     <value>247, 21</value>
@@ -549,43 +576,43 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;themeColorCB.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>11</value>
   </data>
-  <data name="selectThemeLabel.AutoSize" type="System.Boolean, mscorlib">
+  <data name="themeColorLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="selectThemeLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="themeColorLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="selectThemeLabel.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="themeColorLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 24</value>
   </data>
-  <data name="selectThemeLabel.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="themeColorLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>161, 13</value>
   </data>
-  <data name="selectThemeLabel.TabIndex" type="System.Int32, mscorlib">
+  <data name="themeColorLabel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="selectThemeLabel.Text" xml:space="preserve">
+  <data name="themeColorLabel.Text" xml:space="preserve">
     <value>Цвет оформления программы</value>
   </data>
-  <data name="&gt;&gt;selectThemeLabel.Name" xml:space="preserve">
-    <value>selectThemeLabel</value>
+  <data name="&gt;&gt;themeColorLabel.Name" xml:space="preserve">
+    <value>themeColorLabel</value>
   </data>
-  <data name="&gt;&gt;selectThemeLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;themeColorLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;selectThemeLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;themeColorLabel.Parent" xml:space="preserve">
     <value>groupBox1</value>
   </data>
-  <data name="&gt;&gt;selectThemeLabel.ZOrder" xml:space="preserve">
-    <value>9</value>
+  <data name="&gt;&gt;themeColorLabel.ZOrder" xml:space="preserve">
+    <value>12</value>
   </data>
   <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 80</value>
+    <value>3, 6</value>
   </data>
   <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>574, 268</value>
+    <value>583, 342</value>
   </data>
   <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -603,7 +630,7 @@
     <value>UIPage</value>
   </data>
   <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="UIPage.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
@@ -632,68 +659,20 @@
   <data name="&gt;&gt;UIPage.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="fullScreenStartChk.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="fullScreenStartChk.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="fullScreenStartChk.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 19</value>
-  </data>
-  <data name="fullScreenStartChk.Size" type="System.Drawing.Size, System.Drawing">
-    <value>273, 17</value>
-  </data>
-  <data name="fullScreenStartChk.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="fullScreenStartChk.Text" xml:space="preserve">
-    <value>Запускать программу в полноэкранном режиме</value>
-  </data>
-  <data name="&gt;&gt;fullScreenStartChk.Name" xml:space="preserve">
-    <value>fullScreenStartChk</value>
-  </data>
-  <data name="&gt;&gt;fullScreenStartChk.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;fullScreenStartChk.Parent" xml:space="preserve">
-    <value>groupBox2</value>
-  </data>
-  <data name="&gt;&gt;fullScreenStartChk.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="autoSortByNameChk.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="autoSortByNameChk.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="autoSortByNameChk.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 42</value>
-  </data>
-  <data name="autoSortByNameChk.Size" type="System.Drawing.Size, System.Drawing">
-    <value>328, 17</value>
-  </data>
-  <data name="autoSortByNameChk.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="autoSortByNameChk.Text" xml:space="preserve">
-    <value>Автоматически сортировать элементы по имени в таблице</value>
-  </data>
-  <data name="&gt;&gt;autoSortByNameChk.Name" xml:space="preserve">
-    <value>autoSortByNameChk</value>
-  </data>
-  <data name="&gt;&gt;autoSortByNameChk.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;autoSortByNameChk.Parent" xml:space="preserve">
-    <value>groupBox2</value>
-  </data>
-  <data name="&gt;&gt;autoSortByNameChk.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="GeneralPage.AutoScroll" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="&gt;&gt;groupBox2.Name" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;groupBox2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBox2.Parent" xml:space="preserve">
+    <value>GeneralPage</value>
+  </data>
+  <data name="&gt;&gt;groupBox2.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;groupBox4.Name" xml:space="preserve">
     <value>groupBox4</value>
@@ -705,7 +684,7 @@
     <value>GeneralPage</value>
   </data>
   <data name="&gt;&gt;groupBox4.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;groupBox3.Name" xml:space="preserve">
     <value>groupBox3</value>
@@ -717,7 +696,7 @@
     <value>GeneralPage</value>
   </data>
   <data name="&gt;&gt;groupBox3.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="GeneralPage.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
@@ -807,7 +786,7 @@
     <value>4</value>
   </data>
   <data name="groupBox4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 112</value>
+    <value>6, 186</value>
   </data>
   <data name="groupBox4.Size" type="System.Drawing.Size, System.Drawing">
     <value>580, 88</value>
@@ -828,7 +807,7 @@
     <value>GeneralPage</value>
   </data>
   <data name="&gt;&gt;groupBox4.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="label7.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1010,7 +989,7 @@
     <value>GeneralPage</value>
   </data>
   <data name="&gt;&gt;groupBox3.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="focusFirstItemChk.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1096,6 +1075,114 @@
   <data name="&gt;&gt;Tabs.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
+  <data name="&gt;&gt;fullScreenStartChk.Name" xml:space="preserve">
+    <value>fullScreenStartChk</value>
+  </data>
+  <data name="&gt;&gt;fullScreenStartChk.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;fullScreenStartChk.Parent" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;fullScreenStartChk.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;autoSortByNameChk.Name" xml:space="preserve">
+    <value>autoSortByNameChk</value>
+  </data>
+  <data name="&gt;&gt;autoSortByNameChk.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;autoSortByNameChk.Parent" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;autoSortByNameChk.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 112</value>
+  </data>
+  <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>580, 68</value>
+  </data>
+  <data name="groupBox2.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="groupBox2.Text" xml:space="preserve">
+    <value>Поведение</value>
+  </data>
+  <data name="&gt;&gt;groupBox2.Name" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;groupBox2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBox2.Parent" xml:space="preserve">
+    <value>GeneralPage</value>
+  </data>
+  <data name="&gt;&gt;groupBox2.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="fullScreenStartChk.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="fullScreenStartChk.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="fullScreenStartChk.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 19</value>
+  </data>
+  <data name="fullScreenStartChk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>273, 17</value>
+  </data>
+  <data name="fullScreenStartChk.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="fullScreenStartChk.Text" xml:space="preserve">
+    <value>Запускать программу в полноэкранном режиме</value>
+  </data>
+  <data name="&gt;&gt;fullScreenStartChk.Name" xml:space="preserve">
+    <value>fullScreenStartChk</value>
+  </data>
+  <data name="&gt;&gt;fullScreenStartChk.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;fullScreenStartChk.Parent" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;fullScreenStartChk.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="autoSortByNameChk.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="autoSortByNameChk.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="autoSortByNameChk.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 42</value>
+  </data>
+  <data name="autoSortByNameChk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>328, 17</value>
+  </data>
+  <data name="autoSortByNameChk.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="autoSortByNameChk.Text" xml:space="preserve">
+    <value>Автоматически сортировать элементы по имени в таблице</value>
+  </data>
+  <data name="&gt;&gt;autoSortByNameChk.Name" xml:space="preserve">
+    <value>autoSortByNameChk</value>
+  </data>
+  <data name="&gt;&gt;autoSortByNameChk.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;autoSortByNameChk.Parent" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;autoSortByNameChk.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -1107,9 +1194,6 @@
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>624, 442</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

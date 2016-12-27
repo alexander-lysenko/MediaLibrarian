@@ -17,6 +17,7 @@ namespace MediaLibrarian
         public string FormCaptionText { get; set; }
         public string ThemeColor { get; set; }
         public string MainColor { get; set; }
+        public string FontColor { get; set; }
         public SFont MainFont { get; set; }
     }
     [Serializable]
