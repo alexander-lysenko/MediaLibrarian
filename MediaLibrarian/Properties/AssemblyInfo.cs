@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // Управление общими сведениями о сборке осуществляется с помощью 
 // набора атрибутов. Измените значения этих атрибутов, чтобы изменить сведения,
 // связанные со сборкой.
-[assembly: AssemblyTitle("MediaLibrarian")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Медиа-библиотекарь")]
+[assembly: AssemblyDescription("Медиа-библиотекарь")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Microsoft")]
+[assembly: AssemblyCompany("LinJay")]
 [assembly: AssemblyProduct("MediaLibrarian")]
-[assembly: AssemblyCopyright("Copyright © Microsoft 2015")]
+[assembly: AssemblyCopyright("Copyright © 2017. LinJay")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

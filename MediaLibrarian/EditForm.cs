@@ -22,8 +22,7 @@ namespace MediaLibrarian
         LibManagerForm _libManagerForm;
         List<Control> columnData = new List<Control>();
         string customDateTimeFormat = "d.MM.yyyy, HH:mm:ss";
-        static string database = "baza.db";
-        readonly SQLiteConnection _connection = new SQLiteConnection(string.Format("Data Source={0};", database));
+        readonly SQLiteConnection _connection = Connetcion.Connection;
         public bool EditMode;
         public EventArgs E { get; set; }
 
@@ -160,7 +159,7 @@ namespace MediaLibrarian
             _connection.Open();
             deleteItem.ExecuteNonQuery();
             _connection.Close();
-            var pathToPoster = String.Format(@"{0}\{1}\{2}.jpg", Environment.CurrentDirectory,
+            var pathToPoster = String.Format(@"{0}\Posters\{1}\{2}.jpg", Environment.CurrentDirectory,
                         _mainForm.ReplaceSymblos(_mainForm.SelectedLibLabel.Text),
                         _mainForm.ReplaceSymblos(itemName));
             if (File.Exists(pathToPoster))
@@ -237,10 +236,10 @@ namespace MediaLibrarian
         void SavePicture()
         {
             _mainForm.PosterBox.Image.Dispose();
-            var newStr = String.Format(@"{0}\{1}\{2}.jpg", Environment.CurrentDirectory,
+            var newStr = String.Format(@"{0}\Posters\{1}\{2}.jpg", Environment.CurrentDirectory,
                         _mainForm.ReplaceSymblos(_mainForm.SelectedLibLabel.Text),
                         _mainForm.ReplaceSymblos(columnData[0].Text));
-            var oldStr = String.Format(@"{0}\{1}\{2}.jpg", Environment.CurrentDirectory,
+            var oldStr = String.Format(@"{0}\Posters\{1}\{2}.jpg", Environment.CurrentDirectory,
                         _mainForm.ReplaceSymblos(_mainForm.SelectedLibLabel.Text),
                         _mainForm.ReplaceSymblos(columnData[0].Tag.ToString()));
             try
@@ -607,7 +606,7 @@ namespace MediaLibrarian
             {
                 PushDataIntoCreatedControls(GetDataFromDatabase(_mainForm.SelectedLibLabel.Text, _mainForm.ColumnsInfo[0].Name, 
                     _mainForm.Collection.FocusedItem.Text));
-                var pathToFile = String.Format(@"{0}\{1}\{2}.jpg", Environment.CurrentDirectory,
+                var pathToFile = String.Format(@"{0}\Posters\{1}\{2}.jpg", Environment.CurrentDirectory,
                         _mainForm.ReplaceSymblos(_mainForm.SelectedLibLabel.Text),
                         _mainForm.ReplaceSymblos(columnData[0].Text));
                 if (File.Exists(pathToFile))

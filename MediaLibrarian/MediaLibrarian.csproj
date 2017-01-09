@@ -100,6 +100,7 @@
     <Compile Include="AboutForm.Designer.cs">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Connetcion.cs" />
     <Compile Include="EditForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -221,9 +222,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\noposter.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\aa.jpg" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\splash.png" />

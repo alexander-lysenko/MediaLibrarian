@@ -26,8 +26,7 @@ namespace MediaLibrarian
         List<Button> _removeButton = new List<Button>();
         TextBox _libNameTb = new TextBox() { Size = new Size(265, 20), Location = new Point(130, 0), MaxLength = 50 };
         Point _fieldPosition = new Point(5, 25);
-        static string _database = "baza.db";
-        public readonly SQLiteConnection _connection = new SQLiteConnection(string.Format("Data Source={0};", _database));
+        public readonly SQLiteConnection _connection = Connetcion.Connection;
 
         private int GetColumnLength(string type)
         {
@@ -183,7 +182,7 @@ namespace MediaLibrarian
                     _connection.Close();
                     _mainForm.StatusLabel.Text = " Была удалена библиотека \"" + LibsList.SelectedItems[0].Text + "\"";
                     try { 
-                    System.IO.Directory.Delete(Environment.CurrentDirectory + "\\" +
+                    System.IO.Directory.Delete(Environment.CurrentDirectory + "\\Posters\\" +
                         _mainForm.ReplaceSymblos(LibsList.SelectedItems[0].Text), true);
                     }
                     catch(Exception)

@@ -387,8 +387,7 @@
             this.InfoPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.InfoPanel.Controls.Add(this.infoHintLabel);
             this.InfoPanel.Name = "InfoPanel";
-            this.InfoPanel.ControlAdded += new System.Windows.Forms.ControlEventHandler(this.InfoPanel_ControlAdded);
-            this.InfoPanel.ControlRemoved += new System.Windows.Forms.ControlEventHandler(this.InfoPanel_ControlRemoved);
+            this.InfoPanel.Scroll += new System.Windows.Forms.ScrollEventHandler(this.InfoPanel_Scroll);
             // 
             // pictureBox1
             // 
@@ -414,6 +413,8 @@
             this.Name = "MainForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.MainForm_Paint);
+            this.Resize += new System.EventHandler(this.MainForm_Resize);
             this.StatusBar.ResumeLayout(false);
             this.StatusBar.PerformLayout();
             this.MainMenu.ResumeLayout(false);

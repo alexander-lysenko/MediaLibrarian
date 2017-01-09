@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -36,6 +38,7 @@ namespace MediaLibrarian
         {
             MainMenu.ForeColor = ElementInfoGB.ForeColor = ElementActionsGB.ForeColor = LibInfoGB.ForeColor = 
                 StatusLabel.ForeColor = screenResolutionLabel.ForeColor = Color.FromName(Preferences.FontColor);
+            Text = Preferences.FormCaptionText;
         }
         #region Buttons
         private void SelectCollectionButton_Click(object sender, EventArgs e)
@@ -144,11 +147,12 @@ namespace MediaLibrarian
         #region HelpTSM
         private void HelpTSMI_Click(object sender, EventArgs e)
         {
-
+            //Process.Start(@"C:\Temp\bootstrap_log.txt");
         }
         private void AboutTSMI_Click(object sender, EventArgs e)
         {
-
+            AboutForm aboutForm = new AboutForm();
+            aboutForm.ShowDialog();
         }
         #endregion
         #region Items
@@ -173,7 +177,7 @@ namespace MediaLibrarian
             }
             try
             {
-                PosterBox.Image = Image.FromFile(String.Format(@"{0}\{1}\{2}.jpg", Environment.CurrentDirectory,
+                PosterBox.Image = Image.FromFile(String.Format(@"{0}\Posters\{1}\{2}.jpg", Environment.CurrentDirectory,
                     ReplaceSymblos(SelectedLibLabel.Text),
                     ReplaceSymblos(Collection.SelectedItems[0].Text)));
                     PosterBox.BackgroundImage = null;
@@ -330,16 +334,17 @@ namespace MediaLibrarian
                     AutoSortByName = true,
                     CropMaxViewSize = true,
                     FocusFirstItem = true,
-                    FormCaptionText = "Media Librarian",
+                    FormCaptionText = "Медиа-библиотекарь",
                     LastLibraryName = "",
                     MainFont = new SFont { FontFamilyName = "Tahoma", FontSize = 16, FontStyle = FontStyle.Bold },
                     PicMaxHeight = 720,
                     PicMaxWidth = 720,
                     RememberLastLibrary = false,
                     StartFullScreen = false,
-                    ThemeColor = "White",
-                    MainColor = "Black",
-                    FontColor = "ControlText"
+                    ThemeColor1 = "WhiteSmoke",
+                    ThemeColor2 = "SteelBlue",
+                    MainColor = "Blue",
+                    FontColor = "Black"
                 };
                 InitFont();
                 if (Preferences.RememberLastLibrary)
@@ -350,7 +355,7 @@ namespace MediaLibrarian
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "Ошибка открытия файла настроек", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             if (Preferences.StartFullScreen)
             {
@@ -362,7 +367,7 @@ namespace MediaLibrarian
                 AutoSortingTSMI.Checked = true;
             }
             Text = Preferences.FormCaptionText;
-            BackColor = Color.FromName(Preferences.ThemeColor);
+            BackColor = Color.FromName(Preferences.ThemeColor1);
             TitleLabel.ForeColor = SelectedLibLabel.ForeColor = ElementCount.ForeColor =
                 Color.FromName(Preferences.MainColor);          
 
@@ -389,14 +394,21 @@ namespace MediaLibrarian
             ElementActionsGB.Enabled = false;
         }
 
-        private void InfoPanel_ControlRemoved(object sender, ControlEventArgs e)
+        private void MainForm_Paint(object sender, PaintEventArgs e)
         {
-
+            using (LinearGradientBrush brush = new LinearGradientBrush(this.ClientRectangle,
+                Color.FromName(Preferences.ThemeColor1), Color.FromName(Preferences.ThemeColor2), 80F))
+            {
+                e.Graphics.FillRectangle(brush, this.ClientRectangle);
+            }
         }
-
-        private void InfoPanel_ControlAdded(object sender, ControlEventArgs e)
+        private void MainForm_Resize(object sender, EventArgs e)
         {
-
+            this.Invalidate();
+        }
+        private void InfoPanel_Scroll(object sender, ScrollEventArgs e)
+        {
+            InfoPanel.Invalidate();
         }
     }
 }

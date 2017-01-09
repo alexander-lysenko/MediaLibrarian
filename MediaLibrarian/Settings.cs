@@ -15,7 +15,8 @@ namespace MediaLibrarian
         public bool StartFullScreen { get; set; }
         public bool AutoSortByName { get; set; }
         public string FormCaptionText { get; set; }
-        public string ThemeColor { get; set; }
+        public string ThemeColor1 { get; set; }
+        public string ThemeColor2 { get; set; }
         public string MainColor { get; set; }
         public string FontColor { get; set; }
         public SFont MainFont { get; set; }

@@ -12,13 +12,7 @@ namespace MediaLibrarian
             _mainForm = formMain;
         }
         MainForm _mainForm;
-
-        private void CancelButton_Click(object sender, EventArgs e)
-        {
-            Hide();
-        }
-
-        private void ApplyButton_Click(object sender, EventArgs e)
+        public void SaveSettings() 
         {
             _mainForm.Preferences = new Settings
             {
@@ -31,35 +25,21 @@ namespace MediaLibrarian
                 StartFullScreen = fullScreenStartChk.Checked,
                 AutoSortByName = autoSortByNameChk.Checked,
                 FormCaptionText = formCaptionTB.Text,
-                ThemeColor = themeColorCB.Text,
+                ThemeColor1 = themeColor1CB.Text,
+                ThemeColor2 = themeColor2CB.Text,
                 MainColor = mainColorCB.Text,
                 FontColor = fontColorCB.Text,
                 MainFont = new SFont(mainFontLabel.Font.FontFamily.Name, mainFontLabel.Font.Size, mainFontLabel.Font.Style)
             };
+            if (formCaptionTB.Text == "") _mainForm.Preferences.FormCaptionText = "Медиа-библиотекарь";
             XmlManager.Serialize(_mainForm.Preferences);
             hintLabel.Text = "Настройки сохранены успешно.";
             _mainForm.TitleLabel.ForeColor = _mainForm.SelectedLibLabel.ForeColor =
                 _mainForm.ElementCount.ForeColor = Color.FromName(_mainForm.Preferences.MainColor);
-            _mainForm.BackColor = Color.FromName(_mainForm.Preferences.ThemeColor);
+            _mainForm.Refresh();
+            _mainForm.Collection.SelectedItems[0].Selected = true;
             _mainForm.InitFont();
         }
-
-        private void OK_Button_Click(object sender, EventArgs e)
-        {
-            applyButton.PerformClick();
-            cancelButton.PerformClick();
-        }
-
-        private void mainFontLabel_Click(object sender, EventArgs e)
-        {
-            headerFontDialog.Font = mainFontLabel.Font;
-            if(headerFontDialog.ShowDialog()==DialogResult.OK)
-            {
-                mainFontLabel.Text = headerFontDialog.Font.Name+"\n(Проверка кириллицы)";
-                mainFontLabel.Font = headerFontDialog.Font;
-            }
-        }
-
         public void RestoreSettings(Settings Preferences)
         {
             rememberLastLibraryChk.Checked = Preferences.RememberLastLibrary;
@@ -71,12 +51,56 @@ namespace MediaLibrarian
             fullScreenStartChk.Checked = Preferences.StartFullScreen;
             autoSortByNameChk.Checked = Preferences.AutoSortByName;
             formCaptionTB.Text = Preferences.FormCaptionText;
-            themeColorCB.Text = Preferences.ThemeColor;
+            themeColor1CB.Text = Preferences.ThemeColor1;
+            themeColor2CB.Text = Preferences.ThemeColor2;
             mainColorCB.Text = Preferences.MainColor;
             fontColorCB.Text = Preferences.FontColor;
             mainFontLabel.Font = new Font(Preferences.MainFont.FontFamilyName,
                 Preferences.MainFont.FontSize, Preferences.MainFont.FontStyle);
             mainFontLabel.Text = Preferences.MainFont.FontFamilyName + "\n(Проверка кириллицы)";
+        }
+        #region Buttons
+        private void OK_Button_Click(object sender, EventArgs e)
+        {
+            SaveSettings();
+            cancelButton.PerformClick();
+        }
+        private void CancelButton_Click(object sender, EventArgs e)
+        {
+            Hide();
+        }
+        private void ApplyButton_Click(object sender, EventArgs e)
+        {
+            SaveSettings();
+        }
+        #endregion
+        #region ColorsCB
+        private void themeColor1CB_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            themeColor1PB.BackColor = Color.FromName(themeColor1CB.Text);
+        }
+        private void themeColor2CB_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            themeColor2PB.BackColor = Color.FromName(themeColor2CB.Text);
+        }
+        
+        private void mainColorCB_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            mainColorPB.BackColor = Color.FromName(mainColorCB.Text);
+        }
+        private void fontColorCB_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            fontColorPB.BackColor = Color.FromName(fontColorCB.Text);
+        }
+        #endregion
+        private void mainFontLabel_Click(object sender, EventArgs e)
+        {
+            headerFontDialog.Font = mainFontLabel.Font;
+            if(headerFontDialog.ShowDialog()==DialogResult.OK)
+            {
+                mainFontLabel.Text = headerFontDialog.Font.Name+"\n(Проверка кириллицы)";
+                mainFontLabel.Font = headerFontDialog.Font;
+            }
         }
         private void SettingsForm_Load(object sender, EventArgs e)
         {
@@ -85,23 +109,22 @@ namespace MediaLibrarian
             {
                 if (((Color.FromName(color)).IsSystemColor == false) && ((Color.FromName(color)).Name != Color.Transparent.Name))
                 {
-                    themeColorCB.Items.Add(color);
+                    themeColor1CB.Items.Add(color);
+                    themeColor2CB.Items.Add(color);
                     mainColorCB.Items.Add(color);
                     fontColorCB.Items.Add(color);
                 }
             }
             toolTip.SetToolTip(rememberLastLibraryChk, "При зауске в программу будет автоматически \nзагружаться последняя открытая ранее библиотека");
-            toolTip.SetToolTip(focusFirstItemChk, "Когда в программу загружена библиотека, и в ней есть элементы, \nбудет автоамтически выделен первый элемент, и будет отображена информация о нем");
-            toolTip.SetToolTip(cropMaxViewSizeChk, "По умолчанию просмотрщик постеров определяет разрешение \nВашего экрана, и будет подгонять постер под него. \nВы можете ограничить размер отображения постеров.");
+            toolTip.SetToolTip(focusFirstItemChk, "Когда в программу загружена библиотека, и в ней есть элементы, \nбудет автоматически выделен первый элемент, и будет отображена информация о нем");
+            toolTip.SetToolTip(cropMaxViewSizeChk, "По умолчанию просмотрщик постеров определяет разрешение \nВашего экрана, и будет подгонять постер под него. \nВы можете ограничить размер отображения постеров");
             toolTip.SetToolTip(fullScreenStartChk, "Активируйте, если хотите, чтобы при запуске \nпрограмма разворачивалась на весь экран");
-            toolTip.SetToolTip(autoSortByNameChk, "При каких-либо изменениях в таблице элементов, \nони всегда будут сортироваться автоматически по первому столбцу.");
-            toolTip.SetToolTip(themeColorLabel, "Выбор цветовой схемы отображения основных разделов программы \n(Основная форма, выбор библиотеки, редактирование элемента).\nВы можете выбрать цветовую схему из предложенных вариантов.");
-            toolTip.SetToolTip(fromCaptionLabel, "Вы можете установить собственный заголовок программы.\nЭтот текст заменит стандартный заголовок - \"Медиа-библиотекарь\"");
-            toolTip.SetToolTip(mainColorLabel, "Независимо от выбранной темы оформления, можно выбрать \nцвет отображения подробных данных элемента в основной форме.\nЧтобы выбрать цвет, нажмите на элемент справа от этой надписи.\nДля удобства восприятия, его фон будет подкрашен в цвет \nвыбранной Вами темы.");
+            toolTip.SetToolTip(autoSortByNameChk, "При каких-либо изменениях в таблице элементов, \nони всегда будут сортироваться автоматически по первому столбцу");
+            toolTip.SetToolTip(fromCaptionLabel, "Вы можете установить собственный заголовок программы.\nЭтот текст заменит стандартный заголовок - \"Медиа-библиотекарь\"\nЕсли не хотите менять, оставьте пустым");
+            toolTip.SetToolTip(backgroundGB, "Выбор цветовой схемы отображения главного окна программы.\nПредставляет собой градиентное наложение двух контрастных цветов,\nкоторые можно выбрать по своему вкусу");
+            toolTip.SetToolTip(mainColorLabel, "Независимо от выбранной темы оформления, можно выбрать \nцвет отображения подробных данных элемента в основной форме.\nИмейте в виду, что выбранный Вами цвет может не гармонировать\nс выбранными цветами темы");
+            toolTip.SetToolTip(fontColorLabel, "Если Вы выбрали темные цвета для темы, и остальных надписей\nпрограммы не видно, можно задать им цвет посветлее");
             toolTip.SetToolTip(fontSelectLabel, "Можно выбрать шрифт отображения ИМЕНИ ЭЛЕМЕНТА в основной форме \n(Имя элемента - это первый столбец таблицы, в основной форме \nотображается большими буквами рядом с постером).\n Обратите внимание: не все шрифты поддерживают кириллицу!");
-            //toolTip.SetToolTip()
-            //toolTip.SetToolTip();
-            //toolTip.SetToolTip();
 
             try
             {
@@ -113,23 +136,8 @@ namespace MediaLibrarian
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "Ошибка открытия файла настроек", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        private void themeColorCB_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            themeColorPB.BackColor = Color.FromName(themeColorCB.Text);
-        }
-
-        private void mainColorCB_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            mainColorPB.BackColor = Color.FromName(mainColorCB.Text);
-        }
-
-        private void fontColorCB_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            fontColorPB.BackColor = Color.FromName(fontColorCB.Text);
         }
     }
 }
