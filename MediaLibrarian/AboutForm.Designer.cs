@@ -3,185 +3,194 @@
     partial class AboutForm
     {
         /// <summary>
-        /// Требуется переменная конструктора.
+        /// Designer variable used to keep track of non-visual components.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label CurVersionHintLabel;
+        private System.Windows.Forms.Label CurrentVersionLabel;
+        private System.Windows.Forms.RichTextBox ChangelogRTB;
+        private System.Windows.Forms.Label FirVerDateHintLabel;
+        private System.Windows.Forms.Label FirstVersionDateLabel;
+        private System.Windows.Forms.Label AuthorsNameHintLabel;
+        private System.Windows.Forms.Label companyNameLabel;
+        private System.Windows.Forms.Label ChangelogHintLabel;
+        private System.Windows.Forms.Label CurVerDateHintLabel;
+        private System.Windows.Forms.Label CurVersionDateLabel;
 
         /// <summary>
-        /// Освободить все используемые ресурсы.
+        /// Disposes resources used by the form.
         /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
+            if (disposing)
             {
-                components.Dispose();
+                if (components != null)
+                {
+                    components.Dispose();
+                }
             }
             base.Dispose(disposing);
         }
 
-        #region Код, автоматически созданный конструктором форм Windows
-
         /// <summary>
-        /// Обязательный метод для поддержки конструктора - не изменяйте
-        /// содержимое данного метода при помощи редактора кода.
+        /// This method is required for Windows Forms designer support.
+        /// Do not change the method contents inside the source code editor. The Forms designer might
+        /// not be able to load this method if it was changed manually.
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AboutForm));
-            this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.logoPictureBox = new System.Windows.Forms.PictureBox();
-            this.labelProductName = new System.Windows.Forms.Label();
-            this.labelVersion = new System.Windows.Forms.Label();
-            this.labelCopyright = new System.Windows.Forms.Label();
-            this.labelCompanyName = new System.Windows.Forms.Label();
-            this.textBoxDescription = new System.Windows.Forms.TextBox();
-            this.okButton = new System.Windows.Forms.Button();
-            this.tableLayoutPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).BeginInit();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.CurVersionHintLabel = new System.Windows.Forms.Label();
+            this.CurrentVersionLabel = new System.Windows.Forms.Label();
+            this.ChangelogRTB = new System.Windows.Forms.RichTextBox();
+            this.FirVerDateHintLabel = new System.Windows.Forms.Label();
+            this.FirstVersionDateLabel = new System.Windows.Forms.Label();
+            this.AuthorsNameHintLabel = new System.Windows.Forms.Label();
+            this.companyNameLabel = new System.Windows.Forms.Label();
+            this.ChangelogHintLabel = new System.Windows.Forms.Label();
+            this.CurVerDateHintLabel = new System.Windows.Forms.Label();
+            this.CurVersionDateLabel = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
-            // tableLayoutPanel
+            // pictureBox1
             // 
-            this.tableLayoutPanel.ColumnCount = 2;
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35.58952F));
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 64.41048F));
-            this.tableLayoutPanel.Controls.Add(this.logoPictureBox, 0, 0);
-            this.tableLayoutPanel.Controls.Add(this.labelProductName, 1, 0);
-            this.tableLayoutPanel.Controls.Add(this.labelVersion, 1, 1);
-            this.tableLayoutPanel.Controls.Add(this.labelCopyright, 1, 2);
-            this.tableLayoutPanel.Controls.Add(this.labelCompanyName, 1, 3);
-            this.tableLayoutPanel.Controls.Add(this.textBoxDescription, 1, 4);
-            this.tableLayoutPanel.Controls.Add(this.okButton, 1, 5);
-            this.tableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel.Location = new System.Drawing.Point(3, 3);
-            this.tableLayoutPanel.Name = "tableLayoutPanel";
-            this.tableLayoutPanel.RowCount = 6;
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.9375F));
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.625F));
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.25F));
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.5625F));
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 67.1875F));
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.4375F));
-            this.tableLayoutPanel.Size = new System.Drawing.Size(458, 320);
-            this.tableLayoutPanel.TabIndex = 0;
+            this.pictureBox1.Image = global::MediaLibrarian.Properties.Resources.splash;
+            this.pictureBox1.Location = new System.Drawing.Point(12, 0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(340, 85);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
             // 
-            // logoPictureBox
+            // CurVersionHintLabel
             // 
-            this.logoPictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.logoPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("logoPictureBox.Image")));
-            this.logoPictureBox.Location = new System.Drawing.Point(3, 3);
-            this.logoPictureBox.Name = "logoPictureBox";
-            this.tableLayoutPanel.SetRowSpan(this.logoPictureBox, 6);
-            this.logoPictureBox.Size = new System.Drawing.Size(156, 314);
-            this.logoPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.logoPictureBox.TabIndex = 12;
-            this.logoPictureBox.TabStop = false;
+            this.CurVersionHintLabel.Location = new System.Drawing.Point(12, 187);
+            this.CurVersionHintLabel.Name = "CurVersionHintLabel";
+            this.CurVersionHintLabel.Size = new System.Drawing.Size(100, 17);
+            this.CurVersionHintLabel.TabIndex = 1;
+            this.CurVersionHintLabel.Text = "Текущая версия:";
+            this.CurVersionHintLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // labelProductName
+            // CurrentVersionLabel
             // 
-            this.labelProductName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelProductName.Location = new System.Drawing.Point(168, 0);
-            this.labelProductName.Margin = new System.Windows.Forms.Padding(6, 0, 3, 0);
-            this.labelProductName.MaximumSize = new System.Drawing.Size(0, 17);
-            this.labelProductName.Name = "labelProductName";
-            this.labelProductName.Size = new System.Drawing.Size(287, 17);
-            this.labelProductName.TabIndex = 19;
-            this.labelProductName.Text = "Название продукта";
-            this.labelProductName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.CurrentVersionLabel.Location = new System.Drawing.Point(230, 189);
+            this.CurrentVersionLabel.Name = "CurrentVersionLabel";
+            this.CurrentVersionLabel.Size = new System.Drawing.Size(122, 17);
+            this.CurrentVersionLabel.TabIndex = 2;
+            this.CurrentVersionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // labelVersion
+            // ChangelogRTB
             // 
-            this.labelVersion.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelVersion.Location = new System.Drawing.Point(168, 19);
-            this.labelVersion.Margin = new System.Windows.Forms.Padding(6, 0, 3, 0);
-            this.labelVersion.MaximumSize = new System.Drawing.Size(0, 17);
-            this.labelVersion.Name = "labelVersion";
-            this.labelVersion.Size = new System.Drawing.Size(287, 17);
-            this.labelVersion.TabIndex = 0;
-            this.labelVersion.Text = "Версия";
-            this.labelVersion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.ChangelogRTB.AutoWordSelection = true;
+            this.ChangelogRTB.BackColor = System.Drawing.SystemColors.Control;
+            this.ChangelogRTB.Location = new System.Drawing.Point(12, 273);
+            this.ChangelogRTB.Name = "ChangelogRTB";
+            this.ChangelogRTB.ReadOnly = true;
+            this.ChangelogRTB.Size = new System.Drawing.Size(340, 160);
+            this.ChangelogRTB.TabIndex = 3;
+            this.ChangelogRTB.Text = "";
             // 
-            // labelCopyright
+            // FirVerDateHintLabel
             // 
-            this.labelCopyright.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelCopyright.Location = new System.Drawing.Point(168, 37);
-            this.labelCopyright.Margin = new System.Windows.Forms.Padding(6, 0, 3, 0);
-            this.labelCopyright.MaximumSize = new System.Drawing.Size(0, 17);
-            this.labelCopyright.Name = "labelCopyright";
-            this.labelCopyright.Size = new System.Drawing.Size(287, 17);
-            this.labelCopyright.TabIndex = 21;
-            this.labelCopyright.Text = "Авторские права";
-            this.labelCopyright.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.FirVerDateHintLabel.Location = new System.Drawing.Point(12, 221);
+            this.FirVerDateHintLabel.Name = "FirVerDateHintLabel";
+            this.FirVerDateHintLabel.Size = new System.Drawing.Size(173, 17);
+            this.FirVerDateHintLabel.TabIndex = 4;
+            this.FirVerDateHintLabel.Text = "Дата выхода первой версии:";
+            this.FirVerDateHintLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // labelCompanyName
+            // FirstVersionDateLabel
             // 
-            this.labelCompanyName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelCompanyName.Location = new System.Drawing.Point(168, 57);
-            this.labelCompanyName.Margin = new System.Windows.Forms.Padding(6, 0, 3, 0);
-            this.labelCompanyName.MaximumSize = new System.Drawing.Size(0, 17);
-            this.labelCompanyName.Name = "labelCompanyName";
-            this.labelCompanyName.Size = new System.Drawing.Size(287, 17);
-            this.labelCompanyName.TabIndex = 22;
-            this.labelCompanyName.Text = "Название организации";
-            this.labelCompanyName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.FirstVersionDateLabel.Location = new System.Drawing.Point(289, 223);
+            this.FirstVersionDateLabel.Name = "FirstVersionDateLabel";
+            this.FirstVersionDateLabel.Size = new System.Drawing.Size(63, 17);
+            this.FirstVersionDateLabel.TabIndex = 5;
+            this.FirstVersionDateLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // textBoxDescription
+            // AuthorsNameHintLabel
             // 
-            this.textBoxDescription.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBoxDescription.Location = new System.Drawing.Point(168, 81);
-            this.textBoxDescription.Margin = new System.Windows.Forms.Padding(6, 3, 3, 3);
-            this.textBoxDescription.Multiline = true;
-            this.textBoxDescription.Name = "textBoxDescription";
-            this.textBoxDescription.ReadOnly = true;
-            this.textBoxDescription.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBoxDescription.Size = new System.Drawing.Size(287, 209);
-            this.textBoxDescription.TabIndex = 23;
-            this.textBoxDescription.TabStop = false;
-            this.textBoxDescription.Text = "Описание";
+            this.AuthorsNameHintLabel.Location = new System.Drawing.Point(12, 237);
+            this.AuthorsNameHintLabel.Name = "AuthorsNameHintLabel";
+            this.AuthorsNameHintLabel.Size = new System.Drawing.Size(115, 17);
+            this.AuthorsNameHintLabel.TabIndex = 6;
+            this.AuthorsNameHintLabel.Text = "Автор программы:";
+            this.AuthorsNameHintLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // okButton
+            // companyNameLabel
             // 
-            this.okButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.okButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.okButton.Location = new System.Drawing.Point(380, 296);
-            this.okButton.Name = "okButton";
-            this.okButton.Size = new System.Drawing.Size(75, 21);
-            this.okButton.TabIndex = 24;
-            this.okButton.Text = "&ОК";
+            this.companyNameLabel.Location = new System.Drawing.Point(123, 239);
+            this.companyNameLabel.Name = "companyNameLabel";
+            this.companyNameLabel.Size = new System.Drawing.Size(229, 15);
+            this.companyNameLabel.TabIndex = 7;
+            this.companyNameLabel.Text = "Александр \"LinJay\" Лысенко";
+            this.companyNameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // ChangelogHintLabel
+            // 
+            this.ChangelogHintLabel.Location = new System.Drawing.Point(9, 254);
+            this.ChangelogHintLabel.Name = "ChangelogHintLabel";
+            this.ChangelogHintLabel.Size = new System.Drawing.Size(340, 16);
+            this.ChangelogHintLabel.TabIndex = 8;
+            this.ChangelogHintLabel.Text = "Изменения в этой и предыдущих версиях:";
+            this.ChangelogHintLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // CurVerDateHintLabel
+            // 
+            this.CurVerDateHintLabel.Location = new System.Drawing.Point(12, 204);
+            this.CurVerDateHintLabel.Name = "CurVerDateHintLabel";
+            this.CurVerDateHintLabel.Size = new System.Drawing.Size(173, 17);
+            this.CurVerDateHintLabel.TabIndex = 9;
+            this.CurVerDateHintLabel.Text = "Дата выхода текущей версии:";
+            this.CurVerDateHintLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // CurVersionDateLabel
+            // 
+            this.CurVersionDateLabel.Location = new System.Drawing.Point(289, 206);
+            this.CurVersionDateLabel.Name = "CurVersionDateLabel";
+            this.CurVersionDateLabel.Size = new System.Drawing.Size(63, 17);
+            this.CurVersionDateLabel.TabIndex = 10;
+            this.CurVersionDateLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label1
+            // 
+            this.label1.Location = new System.Drawing.Point(12, 88);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(340, 99);
+            this.label1.TabIndex = 11;
+            this.label1.Text = "Описание программы";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // AboutForm
             // 
-            this.AcceptButton = this.okButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(464, 326);
-            this.Controls.Add(this.tableLayoutPanel);
+            this.ClientSize = new System.Drawing.Size(364, 446);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.CurVersionDateLabel);
+            this.Controls.Add(this.CurVerDateHintLabel);
+            this.Controls.Add(this.ChangelogHintLabel);
+            this.Controls.Add(this.companyNameLabel);
+            this.Controls.Add(this.AuthorsNameHintLabel);
+            this.Controls.Add(this.FirstVersionDateLabel);
+            this.Controls.Add(this.FirVerDateHintLabel);
+            this.Controls.Add(this.ChangelogRTB);
+            this.Controls.Add(this.CurrentVersionLabel);
+            this.Controls.Add(this.CurVersionHintLabel);
+            this.Controls.Add(this.pictureBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "AboutForm";
-            this.Padding = new System.Windows.Forms.Padding(3);
-            this.ShowIcon = false;
-            this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "О программе";
-            this.Load += new System.EventHandler(this.AboutForm_Load);
-            this.tableLayoutPanel.ResumeLayout(false);
-            this.tableLayoutPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).EndInit();
+            this.Load += new System.EventHandler(this.AboutForm_Load_1);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
 
-        #endregion
-
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel;
-        private System.Windows.Forms.PictureBox logoPictureBox;
-        private System.Windows.Forms.Label labelProductName;
-        private System.Windows.Forms.Label labelVersion;
-        private System.Windows.Forms.Label labelCopyright;
-        private System.Windows.Forms.Label labelCompanyName;
-        private System.Windows.Forms.TextBox textBoxDescription;
-        private System.Windows.Forms.Button okButton;
+        private System.Windows.Forms.Label label1;
     }
 }

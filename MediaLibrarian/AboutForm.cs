@@ -13,12 +13,9 @@ namespace MediaLibrarian
         public AboutForm()
         {
             InitializeComponent();
-            this.Text = String.Format("О программе \"{0}\"", AssemblyTitle);
-            this.labelProductName.Text = String.Format("Название: \"{0}\"", AssemblyProduct);
-            this.labelVersion.Text = String.Format("Версия: {0}", AssemblyVersion);
-            this.labelCopyright.Text = AssemblyCopyright;
-            this.labelCompanyName.Text = String.Format("Автор: \"{0}\"", AssemblyCompany);
-            //this.textBoxDescription.Text = AssemblyDescription;
+            Text = String.Format("О программе \"{0}\"", AssemblyTitle);
+            CurrentVersionLabel.Text = AssemblyVersion;
+            companyNameLabel.Text = AssemblyCompany;
         }
 
         #region Методы доступа к атрибутам сборки
@@ -102,6 +99,11 @@ namespace MediaLibrarian
         #endregion
 
         private void AboutForm_Load(object sender, EventArgs e)
+        {
+            ChangelogRTB.Text = Properties.Resources.changelog;
+        }
+
+        private void AboutForm_Load_1(object sender, EventArgs e)
         {
 
         }

@@ -8,12 +8,11 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Медиа-библиотекарь")]
 [assembly: AssemblyDescription("Медиа-библиотекарь")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("LinJay")]
+[assembly: AssemblyCompany("Александр ''LinJay'' Лысенко")]
 [assembly: AssemblyProduct("MediaLibrarian")]
 [assembly: AssemblyCopyright("Copyright © 2017. LinJay")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
-
 // Параметр ComVisible со значением FALSE делает типы в сборке невидимыми 
 // для COM-компонентов.  Если требуется обратиться к типу в этой сборке через 
 // COM, задайте атрибуту ComVisible значение TRUE для этого типа.

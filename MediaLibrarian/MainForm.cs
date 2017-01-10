@@ -147,7 +147,7 @@ namespace MediaLibrarian
         #region HelpTSM
         private void HelpTSMI_Click(object sender, EventArgs e)
         {
-            //Process.Start(@"C:\Temp\bootstrap_log.txt");
+            //Process.Start(@"ChangeLog.txt");
         }
         private void AboutTSMI_Click(object sender, EventArgs e)
         {

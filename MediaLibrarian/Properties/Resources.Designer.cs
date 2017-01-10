@@ -61,6 +61,16 @@ namespace MediaLibrarian.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на v.1.0 - Релиз основных возможностей программы
+        ///.
+        /// </summary>
+        public static string changelog {
+            get {
+                return ResourceManager.GetString("changelog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
         public static System.Drawing.Bitmap noposter {
