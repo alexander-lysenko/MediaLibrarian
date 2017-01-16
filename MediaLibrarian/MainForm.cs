@@ -21,10 +21,10 @@ namespace MediaLibrarian
             _searchForm = new SearchForm(this);
         }
 
-        LibManagerForm _libManagerForm;
+        public LibManagerForm _libManagerForm;
         EditForm _editForm;
         SettingsForm _settingsForm;
-        SearchForm _searchForm;
+        public SearchForm _searchForm;
         public Settings Preferences;
         public List<Category> ColumnsInfo = new List<Category>();
         int offset; //LocationOffset
@@ -193,7 +193,7 @@ namespace MediaLibrarian
             str = str.Replace(":", "꞉").Replace("*", "˟").Replace("?", "‽").Replace("\"", "ʺ");
             return str;
         }
-        int HowMatch(string sourceString)
+        public int HowMatch(string sourceString)
         {
             var star = new Regex("★");
             return star.Matches(sourceString, 0).Count;

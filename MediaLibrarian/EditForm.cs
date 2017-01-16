@@ -19,7 +19,6 @@ namespace MediaLibrarian
             _mainForm = formMain;            
         }
         MainForm _mainForm;
-        LibManagerForm _libManagerForm;
         List<Control> columnData = new List<Control>();
         string customDateTimeFormat = "d.MM.yyyy, HH:mm:ss";
         readonly SQLiteConnection _connection = Connetcion.Connection;
@@ -235,7 +234,7 @@ namespace MediaLibrarian
         }
         void SavePicture()
         {
-            _mainForm.PosterBox.Image.Dispose();
+            if(_mainForm.PosterBox.Image!=null) _mainForm.PosterBox.Image.Dispose();
             var newStr = String.Format(@"{0}\Posters\{1}\{2}.jpg", Environment.CurrentDirectory,
                         _mainForm.ReplaceSymblos(_mainForm.SelectedLibLabel.Text),
                         _mainForm.ReplaceSymblos(columnData[0].Text));
@@ -246,7 +245,7 @@ namespace MediaLibrarian
             {
                 if (PosterImageTB.Text == "") //Если картинка пуста, независимо от изменения имени, убираем ее
                 {
-                    loadedPicture.Image.Dispose();
+                    if (loadedPicture.Image!=null) loadedPicture.Image.Dispose();
                     if (File.Exists(oldStr)) File.Delete(oldStr);
                 }
                 else //Если картинка не пуста...
@@ -261,7 +260,7 @@ namespace MediaLibrarian
                         }
                         else if (File.Exists(oldStr)) //Если имя изменено, а картинка нет, ее нужно переместить
                             {
-                                loadedPicture.Image.Dispose();
+                                if (loadedPicture.Image != null) loadedPicture.Image.Dispose();
                                 File.Move(oldStr, newStr);
                             }
                     }
@@ -536,9 +535,7 @@ namespace MediaLibrarian
         #region Miscellaneous
         private void UpdateCollection()
         {
-            _libManagerForm = new LibManagerForm(_mainForm);
-            _libManagerForm.ReadTableFromDatabase(_mainForm.SelectedLibLabel.Text);
-            _libManagerForm.Dispose();
+            _mainForm._libManagerForm.ReadTableFromDatabase(_mainForm.SelectedLibLabel.Text);
         }
         int GetNumValue(string stars)
         {

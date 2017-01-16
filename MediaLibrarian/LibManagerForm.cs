@@ -238,7 +238,7 @@ namespace MediaLibrarian
             createTable.ExecuteNonQuery();
             readTables.Close();
             _connection.Close();
-            System.IO.Directory.CreateDirectory(Environment.CurrentDirectory+"\\" + _mainForm.ReplaceSymblos(_libNameTb.Text));
+            System.IO.Directory.CreateDirectory(String.Format(@"{0}\Posters\{1}", Environment.CurrentDirectory, _mainForm.ReplaceSymblos(_libNameTb.Text)));
             ReadDatabase_ForLibsList();
             CollectionEditGB.Visible = Edited = false;
             CreateNewLibraryButton.Enabled = RemoveLibraryButton.Enabled = true;
@@ -304,6 +304,7 @@ namespace MediaLibrarian
             _mainForm.ColumnsInfo.Clear();
             ReadHeadersForTable(LibsList.FocusedItem.Text);
             ReadTableFromDatabase(LibsList.FocusedItem.Text);
+            _mainForm._searchForm.dataPanel.Controls.Clear();
             _mainForm.ClearLibTSMI.Enabled = true;
             this.Close();
         }
