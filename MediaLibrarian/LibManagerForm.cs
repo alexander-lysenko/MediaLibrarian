@@ -61,39 +61,55 @@ namespace MediaLibrarian
         {
             LibsList.Items.Clear();
             var getTables = new SQLiteCommand("select name from sqlite_master where type='table' order by name;", _connection);
-            _connection.Open();
-            var readTables = getTables.ExecuteReader();
-            foreach (DbDataRecord table in readTables)
+            try
             {
-                var colsList = new List<string>();
-                var lib = new ListViewItem(table["name"].ToString());
-                var getColumns = new SQLiteCommand(string.Format("pragma table_info(`{0}`);", table["name"]), _connection);
-                var readCols = getColumns.ExecuteReader();
-                foreach (DbDataRecord col in readCols)
+                _connection.Open();
+                var readTables = getTables.ExecuteReader();
+                foreach (DbDataRecord table in readTables)
                 {
-                    colsList.Add(col["name"].ToString());
+                    var colsList = new List<string>();
+                    var lib = new ListViewItem(table["name"].ToString());
+                    var getColumns = new SQLiteCommand(string.Format("pragma table_info(`{0}`);", table["name"]), _connection);
+                    var readCols = getColumns.ExecuteReader();
+                    foreach (DbDataRecord col in readCols)
+                    {
+                        colsList.Add(col["name"].ToString());
+                    }
+                    lib.SubItems.Add(string.Join(", ", colsList));
+                    LibsList.Items.Add(lib);
                 }
-                lib.SubItems.Add(string.Join(", ", colsList));
-                LibsList.Items.Add(lib);
+                _connection.Close();
             }
-            _connection.Close();
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка подключения к базе данных", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                _connection.Close();
+            }
+            
         }
         public void ReadHeadersForTable(string tableName)
         {
             _mainForm.ColumnsInfo.Clear();
             var getColumns = new SQLiteCommand(string.Format("pragma table_info('{0}');", tableName), _connection);
-            _connection.Open();
-            var readCols = getColumns.ExecuteReader();
-            foreach (DbDataRecord col in readCols)
-            {
-                _mainForm.Collection.Columns.Add(col["name"].ToString(), GetColumnLength(col["type"].ToString()));
-                _mainForm.ColumnsInfo.Add(new Category
+            try { 
+                _connection.Open();
+                var readCols = getColumns.ExecuteReader();
+                foreach (DbDataRecord col in readCols)
                 {
-                    Name = col["name"].ToString(),
-                    Type = col["type"].ToString()
-                });
+                    _mainForm.Collection.Columns.Add(col["name"].ToString(), GetColumnLength(col["type"].ToString()));
+                    _mainForm.ColumnsInfo.Add(new Category
+                    {
+                        Name = col["name"].ToString(),
+                        Type = col["type"].ToString()
+                    });
+                }
+                _connection.Close();
             }
-            _connection.Close();
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка подключения к базе данных", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                _connection.Close();
+            }
         }
         public void ReadTableFromDatabase(string tableName)
         {
@@ -136,6 +152,7 @@ namespace MediaLibrarian
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Ошибка подключения к базе данных", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                _connection.Close();
             }
         }
         public void ClearLibrary(string tableName)
@@ -306,6 +323,7 @@ namespace MediaLibrarian
             ReadTableFromDatabase(LibsList.FocusedItem.Text);
             _mainForm._searchForm.dataPanel.Controls.Clear();
             _mainForm.ClearLibTSMI.Enabled = true;
+            _mainForm.StatusLabel.Text = String.Format("Загружена библиотека \"{0}\"", LibsList.FocusedItem.Text);
             this.Close();
         }
         private void TB_TextChanged(object sender, EventArgs e)

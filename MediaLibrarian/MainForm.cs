@@ -36,7 +36,7 @@ namespace MediaLibrarian
         }
         public void InitFont()
         {
-            MainMenu.ForeColor = ElementInfoGB.ForeColor = ElementActionsGB.ForeColor = LibInfoGB.ForeColor = 
+            MainMenu.ForeColor = ElementInfoGB.ForeColor = ElementActionsGB.ForeColor = LibInfoGB.ForeColor =
                 StatusLabel.ForeColor = screenResolutionLabel.ForeColor = Color.FromName(Preferences.FontColor);
             Text = Preferences.FormCaptionText;
         }
@@ -77,7 +77,11 @@ namespace MediaLibrarian
         }
         private void SearchButton_Click(object sender, EventArgs e)
         {
-            if(Collection.Items.Count>1) _searchForm.Show();
+            if (Collection.Items.Count > 2) _searchForm.Show();
+            else
+            {
+                StatusLabel.Text = "Библиотека не заполнена. Поиск не доступен.";
+            }
         }
         #endregion
         #region FileTSM
@@ -87,9 +91,9 @@ namespace MediaLibrarian
         }
         private void ClearLibTSMI_Click(object sender, EventArgs e)
         {
-            if(MessageBox.Show("Внимание! Данная операция безвозратно уничтожит ВСЕ элементы в этой библиотеке.\n"+
-                "В результате библиотека останется, но будет пуста."+
-                "Вы действительно желаете продолжить?", 
+            if (MessageBox.Show("Внимание! Данная операция безвозратно уничтожит ВСЕ элементы в этой библиотеке.\n" +
+                "В результате библиотека останется, но будет пуста." +
+                "Вы действительно желаете продолжить?",
                 "Подтверждение очистки библиотеки",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
@@ -122,16 +126,24 @@ namespace MediaLibrarian
         #region ViewTSM
         private void AutoSortingTSMI_Click(object sender, EventArgs e)
         {
-            if (AutoSortingTSMI.Checked) Preferences.AutoSortByName = true;
-            else Preferences.AutoSortByName = false; 
-            try
+            if (AutoSortingTSMI.Checked)
             {
+                Preferences.AutoSortByName = true; 
+                StatusLabel.Text = "Включена автоматическая сортировка таблицы по имени";
+            }
+            else 
+            { 
+                Preferences.AutoSortByName = false; 
+                StatusLabel.Text = "Отключена автоматическая сортировка таблицы по имени"; 
+            }
+            try
+            {   
+                if(SelectedLibLabel.Text!="")
                 _libManagerForm.ReadTableFromDatabase(SelectedLibLabel.Text);
             }
             catch (Exception)
             {
                 _libManagerForm._connection.Close();
-                StatusLabel.Text = "Включить автоматическую сортировку таблицы по имени";
             }
         }
         private void FullScreenTSMI_Click(object sender, EventArgs e)
@@ -158,7 +170,7 @@ namespace MediaLibrarian
         #region Items
         private void PosterBox_MouseClick(object sender, MouseEventArgs e)
         {
-            var pv = new PictureViewer {ImageBox = {Image = PosterBox.Image}};
+            var pv = new PictureViewer { ImageBox = { Image = PosterBox.Image } };
             if (Preferences.CropMaxViewSize) pv.Size =
                 new Size((int)Preferences.PicMaxWidth, (int)Preferences.PicMaxHeight);
             else pv.Size = new Size(720, 720);
@@ -175,12 +187,17 @@ namespace MediaLibrarian
                 LoadItemInfo(Collection.SelectedItems[0]);
                 TitleLabel.Text = Collection.SelectedItems[0].Text;
             }
+            else
+            {
+                InfoPanel.Controls.Clear();
+                TitleLabel.Text = "";
+            }
             try
             {
                 PosterBox.Image = Image.FromFile(String.Format(@"{0}\Posters\{1}\{2}.jpg", Environment.CurrentDirectory,
                     ReplaceSymblos(SelectedLibLabel.Text),
                     ReplaceSymblos(Collection.SelectedItems[0].Text)));
-                    PosterBox.BackgroundImage = null;
+                PosterBox.BackgroundImage = null;
             }
             catch (Exception)
             {
@@ -215,7 +232,7 @@ namespace MediaLibrarian
             };
             InfoPanel.Controls.Add(strLabel);
             offset += 20;
-            
+
         }
         void LoadTextData(string text)
         {
@@ -320,7 +337,7 @@ namespace MediaLibrarian
                         break; //Поле оценка (10)
                 }
             }
-            InfoPanel.Controls.Add(new Label() {Location = new Point(1, offset), Size = new Size(1, 20)});
+            InfoPanel.Controls.Add(new Label() { Location = new Point(1, offset), Size = new Size(1, 20) });
         }
         #endregion
         private void MainForm_Load(object sender, EventArgs e)
@@ -347,7 +364,7 @@ namespace MediaLibrarian
                     FontColor = "Black"
                 };
                 InitFont();
-                if (Preferences.RememberLastLibrary)
+                if (Preferences.RememberLastLibrary && Preferences.LastLibraryName != "")
                 {
                     _libManagerForm.ReadHeadersForTable(Preferences.LastLibraryName);
                     _libManagerForm.ReadTableFromDatabase(Preferences.LastLibraryName);
@@ -362,19 +379,19 @@ namespace MediaLibrarian
                 WindowState = FormWindowState.Maximized;
                 FullScreenTSMI.Checked = true;
             }
-            if(Preferences.AutoSortByName)
+            if (Preferences.AutoSortByName)
             {
                 AutoSortingTSMI.Checked = true;
             }
             Text = Preferences.FormCaptionText;
             BackColor = Color.FromName(Preferences.ThemeColor1);
             TitleLabel.ForeColor = SelectedLibLabel.ForeColor = ElementCount.ForeColor =
-                Color.FromName(Preferences.MainColor);          
+                Color.FromName(Preferences.MainColor);
 
             TitleLabel.Font = new Font(Preferences.MainFont.FontFamilyName,
                 Preferences.MainFont.FontSize, Preferences.MainFont.FontStyle);
 
-            screenResolutionLabel.Text = String.Format("Разрешение экрана: {0}х{1}", 
+            screenResolutionLabel.Text = String.Format("Разрешение экрана: {0}х{1}",
                 SystemInformation.PrimaryMonitorSize.Width, SystemInformation.PrimaryMonitorSize.Height);
         }
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)

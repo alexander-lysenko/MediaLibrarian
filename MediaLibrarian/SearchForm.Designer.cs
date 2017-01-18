@@ -43,7 +43,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.dataPanel);
-            this.groupBox1.Location = new System.Drawing.Point(5, 0);
+            this.groupBox1.Location = new System.Drawing.Point(5, 5);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(454, 276);
             this.groupBox1.TabIndex = 2;
@@ -63,9 +63,9 @@
             // 
             this.searchBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.searchBtn.Enabled = false;
-            this.searchBtn.Location = new System.Drawing.Point(8, 277);
+            this.searchBtn.Location = new System.Drawing.Point(8, 284);
             this.searchBtn.Name = "searchBtn";
-            this.searchBtn.Size = new System.Drawing.Size(153, 25);
+            this.searchBtn.Size = new System.Drawing.Size(153, 22);
             this.searchBtn.TabIndex = 3;
             this.searchBtn.Text = "Искать";
             this.searchBtn.UseVisualStyleBackColor = true;
@@ -73,7 +73,7 @@
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(5, 306);
+            this.label1.Location = new System.Drawing.Point(5, 309);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(454, 13);
             this.label1.TabIndex = 4;
@@ -83,9 +83,9 @@
             // clearFormBtn
             // 
             this.clearFormBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.clearFormBtn.Location = new System.Drawing.Point(167, 277);
+            this.clearFormBtn.Location = new System.Drawing.Point(167, 284);
             this.clearFormBtn.Name = "clearFormBtn";
-            this.clearFormBtn.Size = new System.Drawing.Size(149, 25);
+            this.clearFormBtn.Size = new System.Drawing.Size(149, 22);
             this.clearFormBtn.TabIndex = 5;
             this.clearFormBtn.Text = "Очистить данные";
             this.clearFormBtn.UseVisualStyleBackColor = true;
@@ -94,9 +94,9 @@
             // restoreTableBtn
             // 
             this.restoreTableBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.restoreTableBtn.Location = new System.Drawing.Point(322, 277);
+            this.restoreTableBtn.Location = new System.Drawing.Point(322, 284);
             this.restoreTableBtn.Name = "restoreTableBtn";
-            this.restoreTableBtn.Size = new System.Drawing.Size(134, 25);
+            this.restoreTableBtn.Size = new System.Drawing.Size(134, 22);
             this.restoreTableBtn.TabIndex = 6;
             this.restoreTableBtn.Text = "Сбросить результаты";
             this.restoreTableBtn.UseVisualStyleBackColor = true;

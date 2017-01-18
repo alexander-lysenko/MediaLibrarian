@@ -18,6 +18,30 @@ namespace MediaLibrarian
         List<CheckBox> boxList = new List<CheckBox>();
         List<Control> dataList = new List<Control>();
 
+        static string CreateStars(string type, decimal value)
+        {
+            string str = ""; int symbolIndex, max;
+            char[] symbols = { '☆', '★', '▒', '█' };
+            switch (type)
+            {
+                case "VARCHAR(10)": symbolIndex = 3; max = 10; //Приоритет
+                    break;
+                case "CHAR(10)": symbolIndex = 1; max = 10; //Оценка 10
+                    break;
+                default: symbolIndex = 1; max = 5; //Оценка 5
+                    break;
+            }
+            for (int i = 0; i < (int)value; i++)
+            {
+                str += symbols[symbolIndex];
+            }
+            for (int j = (int)value; j < max; j++)
+            {
+                str += symbols[symbolIndex - 1];
+            }
+            return str;
+        }
+
         private void SearchForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             this.Hide();
@@ -97,6 +121,11 @@ namespace MediaLibrarian
                 int i = _mainForm.ColumnsInfo.IndexOf(item);
                 if (dataList[i].Enabled)
                 {
+                    if(dataList[i] is NumericUpDown)
+                    {
+                        selectQuery += String.Format("`{0}` = '{1}' and", item.Name, CreateStars(item.Type, (dataList[i] as NumericUpDown).Value));
+                    }
+                    else
                     selectQuery += String.Format("`{0}` like '%{1}%' and", item.Name, dataList[i].Text);
                 }
             }
@@ -127,29 +156,6 @@ namespace MediaLibrarian
             {
                 MessageBox.Show(ex.Message, "Ошибка подключения к базе данных", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-        string CreateStars(string type, decimal value)
-        {
-            string str = ""; int symbolIndex, max;
-            char[] symbols = { '☆', '★', '▒', '█' };
-            switch (type)
-            {
-                case "VARCHAR(10)": symbolIndex = 3; max = 10;
-                    break;
-                case "CHAR(10)": symbolIndex = 1; max = 5; 
-                    break;
-                default: symbolIndex = 1; max = 10;
-                    break;
-            }
-            for (int i = 0; i < (int)value; i++)
-            {
-                str += symbols[symbolIndex];
-            }
-            for (int j = (int)value; j < max; j++)
-            {
-                str += symbols[symbolIndex - 1];
-            }
-            return str;
         }
 
         private void searchButton_Click(object sender, EventArgs e)

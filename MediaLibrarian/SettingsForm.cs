@@ -37,7 +37,6 @@ namespace MediaLibrarian
             _mainForm.TitleLabel.ForeColor = _mainForm.SelectedLibLabel.ForeColor =
                 _mainForm.ElementCount.ForeColor = Color.FromName(_mainForm.Preferences.MainColor);
             _mainForm.Refresh();
-            _mainForm.Collection.SelectedItems[0].Selected = true;
             _mainForm.InitFont();
         }
         public void RestoreSettings(Settings Preferences)
