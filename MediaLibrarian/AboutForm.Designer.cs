@@ -41,6 +41,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AboutForm));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.CurVersionHintLabel = new System.Windows.Forms.Label();
             this.CurrentVersionLabel = new System.Windows.Forms.Label();
@@ -161,7 +162,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(340, 99);
             this.label1.TabIndex = 11;
-            this.label1.Text = "Описание программы";
+            this.label1.Text = resources.GetString("label1.Text");
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // AboutForm

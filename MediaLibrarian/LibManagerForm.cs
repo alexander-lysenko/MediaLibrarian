@@ -185,7 +185,7 @@ namespace MediaLibrarian
         {
             if (LibsList.SelectedItems.Count != 0)
                 if (MessageBox.Show("Нажимая \"Удалить библиотеку\", \nВы осознанно принимаете решение удалить выбранную библиотеку\n(" + LibsList.FocusedItem.Text
-                    + ")\nцеликом, включая все накопленные в ней элементы.\nПродолжить?", "Очень важное предупреждение", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                    + ")\nцеликом, включая все накопленные в ней записи.\nПродолжить?", "Очень важное предупреждение", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
                     if (_mainForm.SelectedLibLabel.Text == LibsList.SelectedItems[0].Text)
                     {

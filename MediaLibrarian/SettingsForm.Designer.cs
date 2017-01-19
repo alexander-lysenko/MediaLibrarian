@@ -70,6 +70,7 @@
             this.focusFirstItemChk = new System.Windows.Forms.CheckBox();
             this.rememberLastLibraryChk = new System.Windows.Forms.CheckBox();
             this.Tabs = new System.Windows.Forms.TabControl();
+            this.screenResolutionLabel = new System.Windows.Forms.Label();
             this.UIPage.SuspendLayout();
             this.backgroundGB.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.themeColor2PB)).BeginInit();
@@ -290,6 +291,7 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.screenResolutionLabel);
             this.groupBox4.Controls.Add(this.label7);
             this.groupBox4.Controls.Add(this.label6);
             this.groupBox4.Controls.Add(this.picMaxHeightNUD);
@@ -384,6 +386,11 @@
             this.Tabs.Name = "Tabs";
             this.Tabs.SelectedIndex = 0;
             // 
+            // screenResolutionLabel
+            // 
+            resources.ApplyResources(this.screenResolutionLabel, "screenResolutionLabel");
+            this.screenResolutionLabel.Name = "screenResolutionLabel";
+            // 
             // SettingsForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -467,5 +474,6 @@
         private System.Windows.Forms.PictureBox themeColor2PB;
         public System.Windows.Forms.ComboBox themeColor2CB;
         private System.Windows.Forms.Label themeColor2Label;
+        private System.Windows.Forms.Label screenResolutionLabel;
     }
 }

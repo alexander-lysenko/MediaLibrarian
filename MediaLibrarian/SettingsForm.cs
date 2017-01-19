@@ -45,8 +45,16 @@ namespace MediaLibrarian
             _mainForm.SelectedLibLabel.Text = Preferences.LastLibraryName;
             focusFirstItemChk.Checked = Preferences.FocusFirstItem;
             cropMaxViewSizeChk.Checked = Preferences.CropMaxViewSize;
-            picMaxWidthNUD.Value = Preferences.PicMaxWidth;
-            picMaxHeightNUD.Value = Preferences.PicMaxHeight;
+            try
+            {
+                picMaxWidthNUD.Value = Preferences.PicMaxWidth;
+                picMaxHeightNUD.Value = Preferences.PicMaxHeight;
+            }
+            catch (Exception)
+            {
+                picMaxWidthNUD.Value = 720;
+                picMaxHeightNUD.Value = 720;
+            }
             fullScreenStartChk.Checked = Preferences.StartFullScreen;
             autoSortByNameChk.Checked = Preferences.AutoSortByName;
             formCaptionTB.Text = Preferences.FormCaptionText;
@@ -125,6 +133,10 @@ namespace MediaLibrarian
             toolTip.SetToolTip(fontColorLabel, "Если Вы выбрали темные цвета для темы, и остальных надписей\nпрограммы не видно, можно задать им цвет посветлее");
             toolTip.SetToolTip(fontSelectLabel, "Можно выбрать шрифт отображения ИМЕНИ ЭЛЕМЕНТА в основной форме \n(Имя элемента - это первый столбец таблицы, в основной форме \nотображается большими буквами рядом с постером).\n Обратите внимание: не все шрифты поддерживают кириллицу!");
 
+            screenResolutionLabel.Text = String.Format("Разрешение экрана: {0}х{1}",
+                SystemInformation.PrimaryMonitorSize.Width, SystemInformation.PrimaryMonitorSize.Height);
+            picMaxWidthNUD.Maximum = SystemInformation.PrimaryMonitorSize.Width;
+            picMaxHeightNUD.Maximum = SystemInformation.PrimaryMonitorSize.Height;
             try
             {
                 RestoreSettings(_mainForm.Preferences);

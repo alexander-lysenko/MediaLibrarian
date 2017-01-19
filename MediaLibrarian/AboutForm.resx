@@ -117,4 +117,8 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="label1.Text" xml:space="preserve">
+    <value>Медиа-библиотекарь - программа для создания и хранения коллекций контента. С её помощью можно создать электронную картотеку прочитанных Вами книг, просмотренных фильмов, или информации об альбомах Ваших любимых музыкантов. Программа также подойдет для хранения Ваших личных заметок или даже телефонной книжки.
+Гибкая в использовании и удобна в настройке.</value>
+  </data>
 </root>

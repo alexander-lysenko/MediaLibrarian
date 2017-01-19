@@ -32,7 +32,7 @@
             this.Collection = new System.Windows.Forms.ListView();
             this.StatusBar = new System.Windows.Forms.StatusStrip();
             this.StatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.screenResolutionLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.informationLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.MainMenu = new System.Windows.Forms.MenuStrip();
             this.FileTSMI = new System.Windows.Forms.ToolStripMenuItem();
             this.OpenLibTSMI = new System.Windows.Forms.ToolStripMenuItem();
@@ -99,7 +99,7 @@
             this.StatusBar.BackColor = System.Drawing.Color.Transparent;
             this.StatusBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.StatusLabel,
-            this.screenResolutionLabel});
+            this.informationLabel});
             resources.ApplyResources(this.StatusBar, "StatusBar");
             this.StatusBar.Name = "StatusBar";
             // 
@@ -109,11 +109,11 @@
             this.StatusLabel.Name = "StatusLabel";
             resources.ApplyResources(this.StatusLabel, "StatusLabel");
             // 
-            // screenResolutionLabel
+            // informationLabel
             // 
-            this.screenResolutionLabel.Name = "screenResolutionLabel";
-            resources.ApplyResources(this.screenResolutionLabel, "screenResolutionLabel");
-            this.screenResolutionLabel.Spring = true;
+            this.informationLabel.Name = "informationLabel";
+            resources.ApplyResources(this.informationLabel, "informationLabel");
+            this.informationLabel.Spring = true;
             // 
             // MainMenu
             // 
@@ -466,7 +466,7 @@
         public System.Windows.Forms.ToolStripMenuItem AutoSortingTSMI;
         private System.Windows.Forms.ToolStripMenuItem FullScreenTSMI;
         private System.Windows.Forms.Label ElementCountHintLabel;
-        private System.Windows.Forms.ToolStripStatusLabel screenResolutionLabel;
+        private System.Windows.Forms.ToolStripStatusLabel informationLabel;
         public System.Windows.Forms.PictureBox PosterBox;
         public System.Windows.Forms.Panel InfoPanel;
         public System.Windows.Forms.Label TitleLabel;

@@ -108,7 +108,7 @@ namespace MediaLibrarian
                 try { editItem.ExecuteNonQuery(); }
                 catch (SQLiteException) { 
                     MessageBox.Show("Доступ к базе временно заблокирован. Попробуйте еще раз",
-                        "ОТшибка ",MessageBoxButtons.OK, MessageBoxIcon.Error); 
+                        "Ошибка ",MessageBoxButtons.OK, MessageBoxIcon.Error); 
                     _connection.Close();
                     this.DialogResult = DialogResult.Abort;
                     return; }
@@ -130,7 +130,7 @@ namespace MediaLibrarian
                 addNewItem.ExecuteNonQuery();
                 _connection.Close();
                 SavePicture();
-                _mainForm.StatusLabel.Text = "Добавлен элемент \"" + columnData[0].Text + "\"";
+                _mainForm.StatusLabel.Text = "Добавлена запись \"" + columnData[0].Text + "\"";
                 Close();
             }
         }
@@ -142,7 +142,7 @@ namespace MediaLibrarian
             var reader = verify.ExecuteReader();
             if (reader.HasRows && (columnData[0].Tag.ToString() != columnData[0].Text))
             {
-                MessageBox.Show("Элемент с таким именем уже существует в библиотеке", "Обнаружен дубликат данных", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Запись с таким именем уже существует в библиотеке", "Обнаружен дубликат данных", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 _connection.Close();
                 this.DialogResult = DialogResult.Abort;
                 return false;
@@ -166,7 +166,7 @@ namespace MediaLibrarian
                 _mainForm.PosterBox.Image.Dispose();
                 File.Delete(pathToPoster);
             }
-            _mainForm.StatusLabel.Text = "Элемент \"" + itemName + "\" успешно удален";
+            _mainForm.StatusLabel.Text = "Запись \"" + itemName + "\" успешно удалена";
             UpdateCollection();
         }
         #endregion
@@ -181,7 +181,7 @@ namespace MediaLibrarian
                 return;
             }
             SaveButton.Enabled = false;
-            if (new Regex("http://|https://|ftp://").IsMatch(PosterImageTB.Text))
+            if (new Regex(@"(http|https|ftp):\/\/(([a-z0-9\-\.]+)?[a-z0-9\-]+(!?\.[a-z]{2,4}))").IsMatch(PosterImageTB.Text))
                 DownloadPicture(PosterImageTB.Text);
             else
             {
@@ -626,6 +626,7 @@ namespace MediaLibrarian
             EditPanel.Controls.Clear();
             PosterImageTB.Text = "";
             LoadingLabel.Text = "";
+            loadedPicture.Image = null;
         }
         #endregion
     }

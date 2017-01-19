@@ -177,18 +177,78 @@
   <data name="StatusLabel.Text" xml:space="preserve">
     <value>Статусная строка отображает уведомления</value>
   </data>
-  <data name="screenResolutionLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>747, 17</value>
+  <data name="informationLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>716, 17</value>
   </data>
-  <data name="screenResolutionLabel.Text" xml:space="preserve">
-    <value>Разрешение экрана: 1000 х 1000</value>
-  </data>
-  <data name="screenResolutionLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="informationLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleRight</value>
   </data>
   <metadata name="MainMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>133, 17</value>
   </metadata>
+  <data name="FileTSMI.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 20</value>
+  </data>
+  <data name="FileTSMI.Text" xml:space="preserve">
+    <value>Файл</value>
+  </data>
+  <data name="AddElementTSMI.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Ctrl+N</value>
+  </data>
+  <data name="AddElementTSMI.Size" type="System.Drawing.Size, System.Drawing">
+    <value>234, 22</value>
+  </data>
+  <data name="AddElementTSMI.Text" xml:space="preserve">
+    <value>Добавить запись</value>
+  </data>
+  <data name="EditElementTSMI.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Ctrl+E</value>
+  </data>
+  <data name="EditElementTSMI.Size" type="System.Drawing.Size, System.Drawing">
+    <value>234, 22</value>
+  </data>
+  <data name="EditElementTSMI.Text" xml:space="preserve">
+    <value>Редактировать запись</value>
+  </data>
+  <data name="DeleteElementTSMI.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Del</value>
+  </data>
+  <data name="DeleteElementTSMI.Size" type="System.Drawing.Size, System.Drawing">
+    <value>234, 22</value>
+  </data>
+  <data name="DeleteElementTSMI.Text" xml:space="preserve">
+    <value>Удалить запись</value>
+  </data>
+  <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>240, 6</value>
+  </data>
+  <data name="FindElementTSMI.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Ctrl+F</value>
+  </data>
+  <data name="FindElementTSMI.Size" type="System.Drawing.Size, System.Drawing">
+    <value>234, 22</value>
+  </data>
+  <data name="FindElementTSMI.Text" xml:space="preserve">
+    <value>Поиск </value>
+  </data>
+  <data name="EditTSMI.Size" type="System.Drawing.Size, System.Drawing">
+    <value>59, 20</value>
+  </data>
+  <data name="EditTSMI.Text" xml:space="preserve">
+    <value>Правка</value>
+  </data>
+  <data name="ViewTSMI.Size" type="System.Drawing.Size, System.Drawing">
+    <value>39, 20</value>
+  </data>
+  <data name="ViewTSMI.Text" xml:space="preserve">
+    <value>Вид</value>
+  </data>
+  <data name="HelpAboutTSMI.Size" type="System.Drawing.Size, System.Drawing">
+    <value>65, 20</value>
+  </data>
+  <data name="HelpAboutTSMI.Text" xml:space="preserve">
+    <value>Справка</value>
+  </data>
   <data name="MainMenu.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
@@ -212,12 +272,6 @@
   </data>
   <data name="&gt;&gt;MainMenu.ZOrder" xml:space="preserve">
     <value>5</value>
-  </data>
-  <data name="FileTSMI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>48, 20</value>
-  </data>
-  <data name="FileTSMI.Text" xml:space="preserve">
-    <value>Файл</value>
   </data>
   <data name="OpenLibTSMI.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>F2</value>
@@ -252,57 +306,6 @@
   <data name="CloseAppTSMI.Text" xml:space="preserve">
     <value>Закрыть программу</value>
   </data>
-  <data name="EditTSMI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>59, 20</value>
-  </data>
-  <data name="EditTSMI.Text" xml:space="preserve">
-    <value>Правка</value>
-  </data>
-  <data name="AddElementTSMI.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>Ctrl+N</value>
-  </data>
-  <data name="AddElementTSMI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>243, 22</value>
-  </data>
-  <data name="AddElementTSMI.Text" xml:space="preserve">
-    <value>Добавить элемент</value>
-  </data>
-  <data name="EditElementTSMI.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>Ctrl+E</value>
-  </data>
-  <data name="EditElementTSMI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>243, 22</value>
-  </data>
-  <data name="EditElementTSMI.Text" xml:space="preserve">
-    <value>Редактировать элемент</value>
-  </data>
-  <data name="DeleteElementTSMI.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>Del</value>
-  </data>
-  <data name="DeleteElementTSMI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>243, 22</value>
-  </data>
-  <data name="DeleteElementTSMI.Text" xml:space="preserve">
-    <value>Удалить элемент</value>
-  </data>
-  <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>240, 6</value>
-  </data>
-  <data name="FindElementTSMI.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>Ctrl+F</value>
-  </data>
-  <data name="FindElementTSMI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>243, 22</value>
-  </data>
-  <data name="FindElementTSMI.Text" xml:space="preserve">
-    <value>Поиск элемента</value>
-  </data>
-  <data name="ViewTSMI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>39, 20</value>
-  </data>
-  <data name="ViewTSMI.Text" xml:space="preserve">
-    <value>Вид</value>
-  </data>
   <data name="AutoSortingTSMI.Size" type="System.Drawing.Size, System.Drawing">
     <value>287, 22</value>
   </data>
@@ -330,12 +333,6 @@
   <data name="PreferencesTSMI.Text" xml:space="preserve">
     <value>Настройки</value>
   </data>
-  <data name="HelpAboutTSMI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>65, 20</value>
-  </data>
-  <data name="HelpAboutTSMI.Text" xml:space="preserve">
-    <value>Справка</value>
-  </data>
   <data name="HelpTSMI.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>F1</value>
   </data>
@@ -358,7 +355,7 @@
     <value>NoControl</value>
   </data>
   <data name="CurrentLibHintLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 13</value>
+    <value>9, 14</value>
   </data>
   <data name="CurrentLibHintLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>184, 15</value>
@@ -418,7 +415,7 @@
     <value>NoControl</value>
   </data>
   <data name="SelectedLibLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>192, 13</value>
+    <value>192, 14</value>
   </data>
   <data name="SelectedLibLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>155, 15</value>
@@ -443,51 +440,6 @@
   </data>
   <data name="LibInfoGB.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
-  </data>
-  <data name="&gt;&gt;ElementCount.Name" xml:space="preserve">
-    <value>ElementCount</value>
-  </data>
-  <data name="&gt;&gt;ElementCount.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ElementCount.Parent" xml:space="preserve">
-    <value>LibInfoGB</value>
-  </data>
-  <data name="&gt;&gt;ElementCount.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;ElementCountHintLabel.Name" xml:space="preserve">
-    <value>ElementCountHintLabel</value>
-  </data>
-  <data name="&gt;&gt;ElementCountHintLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ElementCountHintLabel.Parent" xml:space="preserve">
-    <value>LibInfoGB</value>
-  </data>
-  <data name="&gt;&gt;ElementCountHintLabel.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="LibInfoGB.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 604</value>
-  </data>
-  <data name="LibInfoGB.Size" type="System.Drawing.Size, System.Drawing">
-    <value>440, 53</value>
-  </data>
-  <data name="LibInfoGB.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;LibInfoGB.Name" xml:space="preserve">
-    <value>LibInfoGB</value>
-  </data>
-  <data name="&gt;&gt;LibInfoGB.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;LibInfoGB.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;LibInfoGB.ZOrder" xml:space="preserve">
-    <value>3</value>
   </data>
   <data name="ElementCount.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -532,7 +484,7 @@
     <value>2</value>
   </data>
   <data name="ElementCountHintLabel.Text" xml:space="preserve">
-    <value>Количество элементов в библиотеке:</value>
+    <value>Количество записей в библиотеке:</value>
   </data>
   <data name="ElementCountHintLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -549,6 +501,27 @@
   <data name="&gt;&gt;ElementCountHintLabel.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="LibInfoGB.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 604</value>
+  </data>
+  <data name="LibInfoGB.Size" type="System.Drawing.Size, System.Drawing">
+    <value>440, 53</value>
+  </data>
+  <data name="LibInfoGB.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;LibInfoGB.Name" xml:space="preserve">
+    <value>LibInfoGB</value>
+  </data>
+  <data name="&gt;&gt;LibInfoGB.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LibInfoGB.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;LibInfoGB.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
   <data name="infoHintLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -562,7 +535,7 @@
     <value>5</value>
   </data>
   <data name="infoHintLabel.Text" xml:space="preserve">
-    <value>Здесь будет отображаться подробная информация об элементах из выбранной Вами библиотеки.
+    <value>Здесь будет отображаться подробная информация о записях из выбранной Вами библиотеки.
 Создайте новую, или выберите существующую библиотеку, нажав кнопку "Выбрать..."</value>
   </data>
   <data name="infoHintLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
@@ -896,7 +869,7 @@
     <value>8</value>
   </data>
   <data name="ElementInfoGB.Text" xml:space="preserve">
-    <value>Информация о выделенном элементе</value>
+    <value>Информация о выделенной записи</value>
   </data>
   <data name="&gt;&gt;ElementInfoGB.Name" xml:space="preserve">
     <value>ElementInfoGB</value>
@@ -967,10 +940,10 @@
   <data name="&gt;&gt;StatusLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;screenResolutionLabel.Name" xml:space="preserve">
-    <value>screenResolutionLabel</value>
+  <data name="&gt;&gt;informationLabel.Name" xml:space="preserve">
+    <value>informationLabel</value>
   </data>
-  <data name="&gt;&gt;screenResolutionLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;informationLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;FileTSMI.Name" xml:space="preserve">

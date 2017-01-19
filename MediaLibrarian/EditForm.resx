@@ -379,7 +379,7 @@
     <value>CenterScreen</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Добавление элемента</value>
+    <value>Редактирование записи</value>
   </data>
   <data name="&gt;&gt;OpenFile.Name" xml:space="preserve">
     <value>OpenFile</value>

@@ -37,7 +37,7 @@ namespace MediaLibrarian
         public void InitFont()
         {
             MainMenu.ForeColor = ElementInfoGB.ForeColor = ElementActionsGB.ForeColor = LibInfoGB.ForeColor =
-                StatusLabel.ForeColor = screenResolutionLabel.ForeColor = Color.FromName(Preferences.FontColor);
+                StatusLabel.ForeColor = informationLabel.ForeColor = Color.FromName(Preferences.FontColor);
             Text = Preferences.FormCaptionText;
         }
         #region Buttons
@@ -91,13 +91,14 @@ namespace MediaLibrarian
         }
         private void ClearLibTSMI_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Внимание! Данная операция безвозратно уничтожит ВСЕ элементы в этой библиотеке.\n" +
+            if (MessageBox.Show("Внимание! Данная операция безвозратно уничтожит ВСЕ записи в этой библиотеке.\n" +
                 "В результате библиотека останется, но будет пуста." +
                 "Вы действительно желаете продолжить?",
                 "Подтверждение очистки библиотеки",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 _libManagerForm.ClearLibrary(SelectedLibLabel.Text);
+                _libManagerForm.ReadTableFromDatabase(SelectedLibLabel.Text);
             }
         }
         private void CloseAppTSMI_Click(object sender, EventArgs e)
@@ -159,7 +160,7 @@ namespace MediaLibrarian
         #region HelpTSM
         private void HelpTSMI_Click(object sender, EventArgs e)
         {
-            //Process.Start(@"ChangeLog.txt");
+            Process.Start(@"help.chm");
         }
         private void AboutTSMI_Click(object sender, EventArgs e)
         {
@@ -390,9 +391,6 @@ namespace MediaLibrarian
 
             TitleLabel.Font = new Font(Preferences.MainFont.FontFamilyName,
                 Preferences.MainFont.FontSize, Preferences.MainFont.FontStyle);
-
-            screenResolutionLabel.Text = String.Format("Разрешение экрана: {0}х{1}",
-                SystemInformation.PrimaryMonitorSize.Width, SystemInformation.PrimaryMonitorSize.Height);
         }
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
