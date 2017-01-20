@@ -26,7 +26,7 @@ namespace MediaLibrarian
         List<Button> _removeButton = new List<Button>();
         TextBox _libNameTb = new TextBox() { Size = new Size(265, 20), Location = new Point(130, 0), MaxLength = 50 };
         Point _fieldPosition = new Point(5, 25);
-        public readonly SQLiteConnection _connection = Connetcion.Connection;
+        public readonly SQLiteConnection _connection = Database.Connection;
 
         private int GetColumnLength(string type)
         {

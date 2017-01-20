@@ -101,7 +101,7 @@
     <Compile Include="AboutForm.Designer.cs">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Connetcion.cs" />
+    <Compile Include="Database.cs" />
     <Compile Include="EditForm.cs">
       <SubType>Form</SubType>
     </Compile>

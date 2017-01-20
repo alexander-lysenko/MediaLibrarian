@@ -132,7 +132,7 @@ namespace MediaLibrarian
             selectQuery += " 1 ";
             if (_mainForm.Preferences.AutoSortByName) selectQuery += String.Format("order by `{0}`", _mainForm.ColumnsInfo[0].Name);
             _mainForm.Collection.Items.Clear();
-            var connection = Connetcion.Connection;
+            var connection = Database.Connection;
             var readTable = new SQLiteCommand(selectQuery, connection);
             var data = new DataTable();
             try

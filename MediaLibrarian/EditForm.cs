@@ -21,7 +21,7 @@ namespace MediaLibrarian
         MainForm _mainForm;
         List<Control> columnData = new List<Control>();
         string customDateTimeFormat = "d.MM.yyyy, HH:mm:ss";
-        readonly SQLiteConnection _connection = Connetcion.Connection;
+        readonly SQLiteConnection _connection = Database.Connection;
         public bool EditMode;
         public EventArgs E { get; set; }
 
@@ -139,16 +139,15 @@ namespace MediaLibrarian
             var verify = new SQLiteCommand(string.Format("select `{0}` from `{1}` where `{0}` = '{2}'",
                 _mainForm.ColumnsInfo[0].Name, _mainForm.SelectedLibLabel.Text, columnData[0].Text.Replace("'", "''")), _connection);
             _connection.Open();
-            var reader = verify.ExecuteReader();
-            if (reader.HasRows && (columnData[0].Tag.ToString() != columnData[0].Text))
+            var value = verify.ExecuteScalar();
+            if (value.ToString().ToLower() == columnData[0].Text && (columnData[0].Tag.ToString() != columnData[0].Text))
             {
                 MessageBox.Show("Запись с таким именем уже существует в библиотеке", "Обнаружен дубликат данных", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 _connection.Close();
                 this.DialogResult = DialogResult.Abort;
                 return false;
             }
-            reader.Close();
-            reader.Dispose();
+            _connection.Close();
             return true;
         }
         public void DeleteItem(string itemType, string itemName)
