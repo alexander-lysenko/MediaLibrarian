@@ -21,11 +21,16 @@ namespace MediaLibrarian
         MainForm _mainForm;
         List<Control> columnData = new List<Control>();
         string customDateTimeFormat = "d.MM.yyyy, HH:mm:ss";
-        readonly SQLiteConnection _connection = Database.Connection;
         public bool EditMode;
         public EventArgs E { get; set; }
 
-        #region DatabaseAPI
+        public static void ErrorMessage(Exception ex)
+        {
+            MessageBox.Show(String.Format("Имя ошибки: {0}\nМесто: {1}\nЗначение: {2}",
+                ex.ToString().Remove(ex.ToString().IndexOf(':')), ex.Source, ex.Message),
+                "Произошла ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+        #region DatabaseAPI&LoadData
         private void GetControlByType(string type, int i)
         {
             switch (type)
@@ -41,18 +46,23 @@ namespace MediaLibrarian
         }
         private List<string> GetDataFromDatabase(string tableName, string elementHeaderName, string elementName)
         {
-            var getData = new SQLiteCommand(String.Format("select * from `{0}` where `{1}`='{2}'", tableName, 
-                elementHeaderName, elementName.Replace("'","''")), _connection);
-            var editString = new DataTable();
-            _connection.Open();
-            editString.Load(getData.ExecuteReader());
-            _connection.Close();
             var items = new List<string>();
-            foreach (var item in editString.Rows[0].ItemArray)
+            try
             {
-                items.Add(item.ToString());
+                var getDataQuery = String.Format("select * from `{0}` where `{1}`='{2}'", tableName, 
+                    elementHeaderName, elementName.Replace("'","''"));
+                var editString = Database.GetTable(getDataQuery);
+                foreach (var item in editString.Rows[0].ItemArray)
+                {
+                    items.Add(item.ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorMessage(ex);
             }
             return items;
+
         }
         private void PushDataIntoCreatedControls(List<string> items)
         {
@@ -104,16 +114,15 @@ namespace MediaLibrarian
             updateQuery += " where `" + names[0] + "` = '" + columnData[0].Tag.ToString().Replace("'", "''") + "'";            
             if (VerifyItem())
             {
-                var editItem = new SQLiteCommand(updateQuery, _connection);
-                try { editItem.ExecuteNonQuery(); }
-                catch (SQLiteException) { 
-                    MessageBox.Show("Доступ к базе временно заблокирован. Попробуйте еще раз",
-                        "Ошибка ",MessageBoxButtons.OK, MessageBoxIcon.Error); 
-                    _connection.Close();
-                    this.DialogResult = DialogResult.Abort;
-                    return; }
-                _connection.Close();
-                SavePicture();
+                try
+                {
+                    Database.Execute(updateQuery); 
+                    SavePicture();
+                }
+                catch (Exception ex)
+                {
+                    ErrorMessage(ex);
+                }
                 _mainForm.StatusLabel.Text = "Элемент \"" + columnData[0].Text + "\" изменен";
                 Close();
             }
@@ -123,40 +132,57 @@ namespace MediaLibrarian
         {
             var names = String.Join("` , `", from val in _mainForm.ColumnsInfo select val.Name);
             var values = String.Join("\" , \"", from data in columnData select data.Text);
-            var addNewItem = new SQLiteCommand(String.Format("insert into `{0}` (`{1}`) values (\"{2}\")",
-                _mainForm.SelectedLibLabel.Text, names, values), _connection);
+            var addNewItemQuery = String.Format("insert into `{0}` (`{1}`) values (\"{2}\")",
+                _mainForm.SelectedLibLabel.Text, names, values);
             if (VerifyItem())
             {
-                addNewItem.ExecuteNonQuery();
-                _connection.Close();
-                SavePicture();
+                try
+                {
+                    Database.Execute(addNewItemQuery);
+                    SavePicture();
+                }
+                catch (Exception ex)
+                {
+                    ErrorMessage(ex);
+                }
                 _mainForm.StatusLabel.Text = "Добавлена запись \"" + columnData[0].Text + "\"";
                 Close();
             }
         }
         private bool VerifyItem()
         {
-            var verify = new SQLiteCommand(string.Format("select `{0}` from `{1}` where `{0}` = '{2}'",
-                _mainForm.ColumnsInfo[0].Name, _mainForm.SelectedLibLabel.Text, columnData[0].Text.Replace("'", "''")), _connection);
-            _connection.Open();
-            var value = verify.ExecuteScalar();
-            if (value.ToString().ToLower() == columnData[0].Text && (columnData[0].Tag.ToString() != columnData[0].Text))
+            try
             {
-                MessageBox.Show("Запись с таким именем уже существует в библиотеке", "Обнаружен дубликат данных", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                _connection.Close();
-                this.DialogResult = DialogResult.Abort;
+                var verifyQuery = string.Format("select `{0}` from `{1}` where TOUPPER(`{0}`) = '{2}'",
+                    _mainForm.ColumnsInfo[0].Name, _mainForm.SelectedLibLabel.Text, columnData[0].Text.Replace("'", "''").ToUpper());
+                var value = Database.GetScalar(verifyQuery);
+                if (value!=null && value.ToString().ToUpper() == columnData[0].Text.ToUpper() && (columnData[0].Tag.ToString() != columnData[0].Text))
+                {
+                    MessageBox.Show("Запись с таким именем уже существует в библиотеке", "Обнаружен дубликат данных", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    this.DialogResult = DialogResult.Abort;
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorMessage(ex);
                 return false;
             }
-            _connection.Close();
             return true;
         }
         public void DeleteItem(string itemType, string itemName)
         {
-            var deleteItem = new SQLiteCommand(String.Format("delete from `{0}` where `{1}` = '{2}'", _mainForm.SelectedLibLabel.Text,
-                itemType, itemName), _connection);
-            _connection.Open();
-            deleteItem.ExecuteNonQuery();
-            _connection.Close();
+            try
+            {
+                var deleteItemQuery = String.Format("delete from `{0}` where `{1}` = '{2}'", _mainForm.SelectedLibLabel.Text,
+                    itemType, itemName);
+                Database.Execute(deleteItemQuery);
+            }
+            catch (Exception ex)
+            {
+                ErrorMessage(ex);
+                return;
+            }
             var pathToPoster = String.Format(@"{0}\Posters\{1}\{2}.jpg", Environment.CurrentDirectory,
                         _mainForm.ReplaceSymblos(_mainForm.SelectedLibLabel.Text),
                         _mainForm.ReplaceSymblos(itemName));

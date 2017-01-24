@@ -19,6 +19,7 @@ namespace MediaLibrarian
             _editForm = new EditForm(this);
             _settingsForm = new SettingsForm(this);
             _searchForm = new SearchForm(this);
+            Database.Connection.Open();
         }
 
         public LibManagerForm _libManagerForm;
@@ -142,9 +143,9 @@ namespace MediaLibrarian
                 if(SelectedLibLabel.Text!="")
                 _libManagerForm.ReadTableFromDatabase(SelectedLibLabel.Text);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                _libManagerForm._connection.Close();
+                MessageBox.Show(ex.Message, "Ошибка подключения к базе данных", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void FullScreenTSMI_Click(object sender, EventArgs e)
@@ -160,7 +161,14 @@ namespace MediaLibrarian
         #region HelpTSM
         private void HelpTSMI_Click(object sender, EventArgs e)
         {
-            Process.Start(@"help.chm");
+            try
+            {
+                Process.Start(@"help.chm");
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Файл со справкой не найден");
+            }
         }
         private void AboutTSMI_Click(object sender, EventArgs e)
         {
@@ -341,6 +349,31 @@ namespace MediaLibrarian
             InfoPanel.Controls.Add(new Label() { Location = new Point(1, offset), Size = new Size(1, 20) });
         }
         #endregion
+        #region FormEvents
+        private void MainForm_Paint(object sender, PaintEventArgs e)
+        {
+            using (LinearGradientBrush brush = new LinearGradientBrush(this.ClientRectangle,
+                Color.FromName(Preferences.ThemeColor1), Color.FromName(Preferences.ThemeColor2), 80F))
+            {
+                e.Graphics.FillRectangle(brush, this.ClientRectangle);
+            }
+        }
+        private void MainForm_Resize(object sender, EventArgs e)
+        {
+            this.Invalidate();
+        }
+        private void InfoPanel_Scroll(object sender, ScrollEventArgs e)
+        {
+            InfoPanel.Invalidate();
+        }
+        public void FormReset()
+        {
+            Collection.Items.Clear();
+            InfoPanel.Controls.Clear();
+            SelectedLibLabel.Text = "";
+            ColumnsInfo.Clear();
+            ElementActionsGB.Enabled = false;
+        }
         private void MainForm_Load(object sender, EventArgs e)
         {
             try
@@ -397,33 +430,10 @@ namespace MediaLibrarian
             if (Preferences.RememberLastLibrary)
             {
                 Preferences.LastLibraryName = SelectedLibLabel.Text;
+                Database.Connection.Close();
                 XmlManager.Serialize(Preferences);
             }
         }
-        public void FormReset()
-        {
-            Collection.Items.Clear();
-            InfoPanel.Controls.Clear();
-            SelectedLibLabel.Text = "";
-            ColumnsInfo.Clear();
-            ElementActionsGB.Enabled = false;
-        }
-
-        private void MainForm_Paint(object sender, PaintEventArgs e)
-        {
-            using (LinearGradientBrush brush = new LinearGradientBrush(this.ClientRectangle,
-                Color.FromName(Preferences.ThemeColor1), Color.FromName(Preferences.ThemeColor2), 80F))
-            {
-                e.Graphics.FillRectangle(brush, this.ClientRectangle);
-            }
-        }
-        private void MainForm_Resize(object sender, EventArgs e)
-        {
-            this.Invalidate();
-        }
-        private void InfoPanel_Scroll(object sender, ScrollEventArgs e)
-        {
-            InfoPanel.Invalidate();
-        }
+        #endregion
     }
 }

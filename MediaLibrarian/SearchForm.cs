@@ -123,25 +123,19 @@ namespace MediaLibrarian
                 {
                     if(dataList[i] is NumericUpDown)
                     {
-                        selectQuery += String.Format("`{0}` = '{1}' and", item.Name, CreateStars(item.Type, (dataList[i] as NumericUpDown).Value));
+                        selectQuery += String.Format("`{0}` = '{1}' and ", item.Name, CreateStars(item.Type, (dataList[i] as NumericUpDown).Value));
                     }
                     else
-                    selectQuery += String.Format("`{0}` like '%{1}%' and", item.Name, dataList[i].Text);
+                    selectQuery += String.Format("TOUPPER(`{0}`) like '%{1}%' and ", item.Name, dataList[i].Text.ToUpper());
                 }
             }
             selectQuery += " 1 ";
             if (_mainForm.Preferences.AutoSortByName) selectQuery += String.Format("order by `{0}`", _mainForm.ColumnsInfo[0].Name);
             _mainForm.Collection.Items.Clear();
-            var connection = Database.Connection;
-            var readTable = new SQLiteCommand(selectQuery, connection);
             var data = new DataTable();
             try
             {
-                connection.Open();
-                var reader = readTable.ExecuteReader();
-                data.Load(reader);
-                reader.Close();
-                connection.Close();
+                data = Database.GetTable(selectQuery);
                 foreach (DataRow row in data.Rows)
                 {
                     var item = new ListViewItem(row[0].ToString());
@@ -173,13 +167,11 @@ namespace MediaLibrarian
             }
             if (chkCount > 0) searchBtn.Enabled = true;
         }
-
         private void clearFormBtn_Click(object sender, EventArgs e)
         {
             dataPanel.Controls.Clear();
             LoadMeta(_mainForm.ColumnsInfo);
         }
-
         private void restoreTableBtn_Click(object sender, EventArgs e)
         {
             _mainForm._libManagerForm.ReadTableFromDatabase(_mainForm.SelectedLibLabel.Text);

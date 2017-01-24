@@ -26,8 +26,13 @@ namespace MediaLibrarian
         List<Button> _removeButton = new List<Button>();
         TextBox _libNameTb = new TextBox() { Size = new Size(265, 20), Location = new Point(130, 0), MaxLength = 50 };
         Point _fieldPosition = new Point(5, 25);
-        public readonly SQLiteConnection _connection = Database.Connection;
 
+        public static void ErrorMessage(Exception ex)
+        {
+            MessageBox.Show(String.Format("Имя ошибки: {0}\nМесто: {1}\nЗначение: {2}",
+                ex.ToString().Remove(ex.ToString().IndexOf(':')), ex.Source, ex.Message), 
+                "Произошла ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
         private int GetColumnLength(string type)
         {
             switch (type)
@@ -56,21 +61,57 @@ namespace MediaLibrarian
                 default: return "VARCHAR(128)";
             }
         }
+        void VerifyFields()
+        {
+            if (_libNameTb.Text == "")
+            {
+                MessageBox.Show("Не заполнено название новой библиотеки", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            for (var i = 0; i < _fieldName.Count; i++)
+            {
+                if (_fieldName[i].Text == "" || _fieldType[_fieldName.IndexOf(_fieldName[i])].SelectedIndex == -1)
+                { MessageBox.Show("Пожалуйста, заполните все поля", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
+                for (var j = i + 1; j < _fieldName.Count; j++)
+                {
+                    if (_fieldName[i].Text == _fieldName[j].Text)
+                    { MessageBox.Show("Пожалуйста, воздержитесь от одинаковых имен для полей", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
+                }
+            }
+        }
+        string MakeCreateQuery()
+        {
+            string createQuery = String.Format("create table `{0}` (", _libNameTb.Text);
+            foreach (var item in _fieldName)
+            {
+                createQuery += "`" + item.Text + "` " + GetTypeString(_fieldType[_fieldName.IndexOf(item)].SelectedIndex);
+                if (_fieldName.IndexOf(item) == 0)
+                {
+                    createQuery += " NOT NULL UNIQUE";
+                }
+                if (_fieldName.IndexOf(item) != _fieldName.Count - 1)
+                {
+                    createQuery += ", ";
+                }
+            }
+            createQuery += ");";
+            return createQuery;
+        }
+
         #region Database API
         private void ReadDatabase_ForLibsList()
         {
             LibsList.Items.Clear();
-            var getTables = new SQLiteCommand("select name from sqlite_master where type='table' order by name;", _connection);
             try
             {
-                _connection.Open();
-                var readTables = getTables.ExecuteReader();
+                var getTablesQuery = "select name from sqlite_master where type='table' order by name;";
+                var readTables = Database.GetReader(getTablesQuery);
                 foreach (DbDataRecord table in readTables)
                 {
                     var colsList = new List<string>();
                     var lib = new ListViewItem(table["name"].ToString());
-                    var getColumns = new SQLiteCommand(string.Format("pragma table_info(`{0}`);", table["name"]), _connection);
-                    var readCols = getColumns.ExecuteReader();
+                    var getColumnsQuery = String.Format("pragma table_info(`{0}`);", table["name"]);
+                    var readCols = Database.GetReader(getColumnsQuery);
                     foreach (DbDataRecord col in readCols)
                     {
                         colsList.Add(col["name"].ToString());
@@ -78,22 +119,19 @@ namespace MediaLibrarian
                     lib.SubItems.Add(string.Join(", ", colsList));
                     LibsList.Items.Add(lib);
                 }
-                _connection.Close();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка подключения к базе данных", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                _connection.Close();
+                ErrorMessage(ex);
             }
             
         }
         public void ReadHeadersForTable(string tableName)
         {
             _mainForm.ColumnsInfo.Clear();
-            var getColumns = new SQLiteCommand(string.Format("pragma table_info('{0}');", tableName), _connection);
-            try { 
-                _connection.Open();
-                var readCols = getColumns.ExecuteReader();
+            var getColumnsQuery = String.Format("pragma table_info('{0}');", tableName);
+            try {
+                var readCols = Database.GetReader(getColumnsQuery);
                 foreach (DbDataRecord col in readCols)
                 {
                     _mainForm.Collection.Columns.Add(col["name"].ToString(), GetColumnLength(col["type"].ToString()));
@@ -103,12 +141,10 @@ namespace MediaLibrarian
                         Type = col["type"].ToString()
                     });
                 }
-                _connection.Close();
             }
             catch(Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка подключения к базе данных", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                _connection.Close();
+                ErrorMessage(ex);
             }
         }
         public void ReadTableFromDatabase(string tableName)
@@ -117,18 +153,10 @@ namespace MediaLibrarian
             if (_mainForm.Preferences.AutoSortByName) selectQuery += "order by " + _mainForm.ColumnsInfo[0].Name;
             var selectCountQuery = String.Format("select count(*) from `{0}`", tableName);
             _mainForm.Collection.Items.Clear();
-            var readTable = new SQLiteCommand(selectQuery, _connection);
-            var count = new SQLiteCommand(selectCountQuery, _connection);
-            var data = new DataTable();
-            object rowsCount;
             try
             {
-                _connection.Open();
-                var reader = readTable.ExecuteReader();
-                rowsCount = count.ExecuteScalar();
-                data.Load(reader);
-                reader.Close();
-                _connection.Close();
+                var data = Database.GetTable(selectQuery);
+                object rowsCount = Database.GetScalar(selectCountQuery);
                 foreach (DataRow row in data.Rows)
                 {
                     var item = new ListViewItem(row[0].ToString());
@@ -151,17 +179,13 @@ namespace MediaLibrarian
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка подключения к базе данных", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                _connection.Close();
+                ErrorMessage(ex);
             }
         }
         public void ClearLibrary(string tableName)
         {
             var clearQuery = String.Format("delete from `{0}`", tableName);
-            var Clear = new SQLiteCommand(clearQuery, _connection);
-            _connection.Open();
-            Clear.ExecuteNonQuery();
-            _connection.Close();
+            Database.Execute(clearQuery);
         }
         #endregion
         #region Buttons
@@ -193,69 +217,48 @@ namespace MediaLibrarian
                         _mainForm.SelectedLibLabel.Text = "";
                         _mainForm.ElementActionsGB.Enabled = false;
                     }
-                    var dropTable = new SQLiteCommand(String.Format("drop table `{0}`;", LibsList.SelectedItems[0].Text), _connection);
-                    _connection.Open();
-                    dropTable.ExecuteNonQuery();
-                    _connection.Close();
-                    _mainForm.StatusLabel.Text = " Была удалена библиотека \"" + LibsList.SelectedItems[0].Text + "\"";
-                    try { 
-                    System.IO.Directory.Delete(Environment.CurrentDirectory + "\\Posters\\" +
-                        _mainForm.ReplaceSymblos(LibsList.SelectedItems[0].Text), true);
+                    try
+                    {
+                        var dropTableQuery = String.Format("drop table `{0}`;", LibsList.SelectedItems[0].Text);
+                        Database.Execute(dropTableQuery);
+                        _mainForm.StatusLabel.Text = " Была удалена библиотека \"" + LibsList.SelectedItems[0].Text + "\"";
+
+                        System.IO.Directory.Delete(Environment.CurrentDirectory + "\\Posters\\" +
+                            _mainForm.ReplaceSymblos(LibsList.SelectedItems[0].Text), true);
                     }
-                    catch(Exception)
-                    {}
+                    catch (Exception ex)
+                    {
+                        ErrorMessage(ex);
+                    }
                     if (_mainForm.SelectedLibLabel.Text == LibsList.SelectedItems[0].Text) _mainForm.FormReset();
                     ReadDatabase_ForLibsList(); 
                 }
         }
         private void SaveLibraryButton_Click(object sender, EventArgs e)
         {
-            if (_libNameTb.Text == "")
+            VerifyFields();
+            try
             {
-                MessageBox.Show("Не заполнено название новой библиотеки", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                var verifyNameQuery = "select name from sqlite_master where type='table' order by name;";
+                var readTables = Database.GetReader(verifyNameQuery);
+                foreach (DbDataRecord table in readTables)
+                {
+                    if (table["name"].ToString().ToLower().Equals(_libNameTb.Text.ToLower()))
+                    {
+                        MessageBox.Show("Библиотека с таким именем уже существует", "Ошибка", 
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                }
+                Database.Execute(MakeCreateQuery());
+                System.IO.Directory.CreateDirectory(String.Format(@"{0}\Posters\{1}", Environment.CurrentDirectory, 
+                    _mainForm.ReplaceSymblos(_libNameTb.Text)));
+            }
+            catch (Exception ex)
+            {
+                ErrorMessage(ex);
                 return;
             }
-            for (var i = 0; i < _fieldName.Count; i++)
-            {
-                if (_fieldName[i].Text == "" || _fieldType[_fieldName.IndexOf(_fieldName[i])].SelectedIndex == -1)
-                { MessageBox.Show("Пожалуйста, заполните все поля", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
-                for (var j = i + 1; j < _fieldName.Count; j++)
-                {
-                    if (_fieldName[i].Text == _fieldName[j].Text)
-                    { MessageBox.Show("Пожалуйста, воздержитесь от одинаковых имен для полей", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
-                }
-            }
-            var query = String.Format("create table `{0}` (", _libNameTb.Text);
-            foreach (var item in _fieldName)
-            {
-                query += "`" + item.Text + "` " + GetTypeString(_fieldType[_fieldName.IndexOf(item)].SelectedIndex);
-                if (_fieldName.IndexOf(item) == 0)
-                {
-                    query += " NOT NULL UNIQUE";
-                }
-                if (_fieldName.IndexOf(item) != _fieldName.Count - 1)
-                {
-                    query += ", ";
-                }
-            }
-            query += ");";
-
-            var createTable = new SQLiteCommand(query, _connection);
-            _connection.Open();
-            var verifyName = new SQLiteCommand("select name from sqlite_master where type='table' order by name;", _connection);
-            var readTables = verifyName.ExecuteReader();
-            foreach (DbDataRecord table in readTables)
-            {
-                if (table["name"].ToString().ToLower().Equals(_libNameTb.Text.ToLower()))
-                {
-                    MessageBox.Show("Библиотека с таким именем уже существует", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    _connection.Close(); return;
-                }
-            }
-            createTable.ExecuteNonQuery();
-            readTables.Close();
-            _connection.Close();
-            System.IO.Directory.CreateDirectory(String.Format(@"{0}\Posters\{1}", Environment.CurrentDirectory, _mainForm.ReplaceSymblos(_libNameTb.Text)));
             ReadDatabase_ForLibsList();
             CollectionEditGB.Visible = Edited = false;
             CreateNewLibraryButton.Enabled = RemoveLibraryButton.Enabled = true;
@@ -306,7 +309,7 @@ namespace MediaLibrarian
                 MessageBox.Show("Это поле удалять нельзя!");
                 return;
             }
-            var In = _removeButton.IndexOf(sender as Button);//int.Parse((sender as Button).Tag.ToString());
+            var In = _removeButton.IndexOf(sender as Button);
             AddFieldsPanel.Controls.Remove(_fieldName[In]);
             _fieldName.Remove(_fieldName[In]);
             AddFieldsPanel.Controls.Remove(_fieldType[In]);
@@ -331,6 +334,7 @@ namespace MediaLibrarian
             (sender as TextBox).Text = (sender as TextBox).Text.
                 Replace("<", "").Replace(">", "").Replace("|", "").Replace("/", "").Replace("\\", "");
         }
+        #region FormEvents
         private void LibManagerForm_KeyDown(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)
@@ -350,7 +354,9 @@ namespace MediaLibrarian
         {
             if (Edited)
             {
-                if (MessageBox.Show("Выйти без сохранения?", "Предупреждение", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                if (MessageBox.Show("Выйти без сохранения?", "Предупреждение", 
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == 
+                    DialogResult.Yes)
                 {
                     FormReset();
                 }
@@ -371,5 +377,7 @@ namespace MediaLibrarian
             RemoveLibraryButton.Enabled = true;
             Edited = false;
         }
+        #endregion
+
     }
 }
