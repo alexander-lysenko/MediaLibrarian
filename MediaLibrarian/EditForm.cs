@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.SQLite;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -16,7 +14,7 @@ namespace MediaLibrarian
         public EditForm(MainForm formMain)
         {
             InitializeComponent();
-            _mainForm = formMain;            
+            _mainForm = formMain;
         }
         MainForm _mainForm;
         List<Control> columnData = new List<Control>();
@@ -49,8 +47,8 @@ namespace MediaLibrarian
             var items = new List<string>();
             try
             {
-                var getDataQuery = String.Format("select * from `{0}` where `{1}`='{2}'", tableName, 
-                    elementHeaderName, elementName.Replace("'","''"));
+                var getDataQuery = String.Format("select * from `{0}` where `{1}`='{2}'", tableName,
+                    elementHeaderName, elementName.Replace("'", "''"));
                 var editString = Database.GetTable(getDataQuery);
                 foreach (var item in editString.Rows[0].ItemArray)
                 {
@@ -70,29 +68,30 @@ namespace MediaLibrarian
             {
                 switch (columnData[i].GetType().ToString())
                 {
-                    case "System.Windows.Forms.TextBox": case "System.Windows.Forms.RichTextBox":
+                    case "System.Windows.Forms.TextBox":
+                    case "System.Windows.Forms.RichTextBox":
                         columnData[i].Text = items[i]; break;
                     case "System.Windows.Forms.Panel":
                         //if (!new List<string>(){null, "", "0"}.Contains(Items[i])) 
-                            switch (columnData[i].Tag.ToString())
+                        switch (columnData[i].Tag.ToString())
                         {
                             case "Star5": if (GetNumValue(items[i]) != 0)
-                                Star5_Click(columnData[i].Controls[GetNumValue(items[i]) - 1], E);
+                                    Star5_Click(columnData[i].Controls[GetNumValue(items[i]) - 1], E);
                                 else columnData[i].Text = "☆☆☆☆☆"; break;
                             case "Star10": if (GetNumValue(items[i]) != 0)
-                                Star10_Click(columnData[i].Controls[GetNumValue(items[i]) - 1], E);
+                                    Star10_Click(columnData[i].Controls[GetNumValue(items[i]) - 1], E);
                                 else columnData[i].Text = "☆☆☆☆☆☆☆☆☆☆"; break;
                             case "Cube10": if (GetNumValue(items[i]) != 0)
-                                Cube10_Click(columnData[i].Controls[GetNumValue(items[i]) - 1], E);
+                                    Cube10_Click(columnData[i].Controls[GetNumValue(items[i]) - 1], E);
                                 else columnData[i].Text = "▒▒▒▒▒▒▒▒▒▒"; break;
                         }
                         break;
-                    case "System.Windows.Forms.DateTimePicker": 
+                    case "System.Windows.Forms.DateTimePicker":
                         try
-                            {
-                                (columnData[i] as DateTimePicker).Value = DateTime.Parse(items[i]);
-                            }
-                        catch (Exception ex) {MessageBox.Show(ex.Message);}
+                        {
+                            (columnData[i] as DateTimePicker).Value = DateTime.Parse(items[i]);
+                        }
+                        catch (Exception ex) { MessageBox.Show(ex.Message); }
                         break;
                 }
             }
@@ -111,12 +110,12 @@ namespace MediaLibrarian
                 updateQuery += "`" + names[i] + "` = '" + values[i].Replace("'", "''") + "'";
                 if (names.Count - i > 1) updateQuery += ", ";
             }
-            updateQuery += " where `" + names[0] + "` = '" + columnData[0].Tag.ToString().Replace("'", "''") + "'";            
+            updateQuery += " where `" + names[0] + "` = '" + columnData[0].Tag.ToString().Replace("'", "''") + "'";
             if (VerifyItem())
             {
                 try
                 {
-                    Database.Execute(updateQuery); 
+                    Database.Execute(updateQuery);
                     SavePicture();
                 }
                 catch (Exception ex)
@@ -156,7 +155,7 @@ namespace MediaLibrarian
                 var verifyQuery = string.Format("select `{0}` from `{1}` where TOUPPER(`{0}`) = '{2}'",
                     _mainForm.ColumnsInfo[0].Name, _mainForm.SelectedLibLabel.Text, columnData[0].Text.Replace("'", "''").ToUpper());
                 var value = Database.GetScalar(verifyQuery);
-                if (value!=null && value.ToString().ToUpper() == columnData[0].Text.ToUpper() && (columnData[0].Tag.ToString() != columnData[0].Text))
+                if (value != null && value.ToString().ToUpper() == columnData[0].Text.ToUpper() && (columnData[0].Tag.ToString() != columnData[0].Text))
                 {
                     MessageBox.Show("Запись с таким именем уже существует в библиотеке", "Обнаружен дубликат данных", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     this.DialogResult = DialogResult.Abort;
@@ -225,8 +224,8 @@ namespace MediaLibrarian
         {
             LoadingLabel.Text = "Загрузка...";
             try
-            {   
-                if(loadedPicture.Image!=null) loadedPicture.Image.Dispose();
+            {
+                if (loadedPicture.Image != null) loadedPicture.Image.Dispose();
                 var request = System.Net.WebRequest.Create(address);
                 var response = request.GetResponse();
                 using (var responseStream = response.GetResponseStream())
@@ -259,7 +258,7 @@ namespace MediaLibrarian
         }
         void SavePicture()
         {
-            if(_mainForm.PosterBox.Image!=null) _mainForm.PosterBox.Image.Dispose();
+            if (_mainForm.PosterBox.Image != null) _mainForm.PosterBox.Image.Dispose();
             var newStr = String.Format(@"{0}\Posters\{1}\{2}.jpg", Environment.CurrentDirectory,
                         _mainForm.ReplaceSymblos(_mainForm.SelectedLibLabel.Text),
                         _mainForm.ReplaceSymblos(columnData[0].Text));
@@ -270,7 +269,7 @@ namespace MediaLibrarian
             {
                 if (PosterImageTB.Text == "") //Если картинка пуста, независимо от изменения имени, убираем ее
                 {
-                    if (loadedPicture.Image!=null) loadedPicture.Image.Dispose();
+                    if (loadedPicture.Image != null) loadedPicture.Image.Dispose();
                     if (File.Exists(oldStr)) File.Delete(oldStr);
                 }
                 else //Если картинка не пуста...
@@ -284,14 +283,14 @@ namespace MediaLibrarian
                             if (File.Exists(oldStr)) File.Delete(oldStr); //Избавляемся от старой картинки
                         }
                         else if (File.Exists(oldStr)) //Если имя изменено, а картинка нет, ее нужно переместить
-                            {
-                                if (loadedPicture.Image != null) loadedPicture.Image.Dispose();
-                                File.Move(oldStr, newStr);
-                            }
+                        {
+                            if (loadedPicture.Image != null) loadedPicture.Image.Dispose();
+                            File.Move(oldStr, newStr);
+                        }
                     }
                     else //Если имя не изменено, но изменена картинка перезаписываем существующую картинку
                     {
-                        if(oldStr != PosterImageTB.Text)loadedPicture.Image.Save(newStr, ImageFormat.Jpeg);
+                        if (oldStr != PosterImageTB.Text) loadedPicture.Image.Save(newStr, ImageFormat.Jpeg);
                         //В случае, если ничего не изменено, ничего не делать
                     }
                 }
@@ -301,14 +300,14 @@ namespace MediaLibrarian
                 MessageBox.Show(ex.Message, ex.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 DialogResult = DialogResult.Abort;
             }
-            
+
 
         }
         #endregion
         #region CreateControls
         void CreateHeaderLabel(int i)
         {
-            EditPanel.Controls.Add(new Label() 
+            EditPanel.Controls.Add(new Label()
             {
                 Size = new Size(220, 15),
                 AutoEllipsis = true,
@@ -341,7 +340,7 @@ namespace MediaLibrarian
             columnData.Add(new DateTimePicker()
             {
                 Size = new Size(150, 20),
-                Margin = new Padding() {Left = 47, Bottom = 5 },
+                Margin = new Padding() { Left = 47, Bottom = 5 },
                 Font = new Font("Tahoma", 9),
                 Format = DateTimePickerFormat.Long,
                 Value = DateTime.Now,
@@ -352,7 +351,7 @@ namespace MediaLibrarian
             columnData.Add(new DateTimePicker()
             {
                 Size = new Size(160, 20),
-                Margin = new Padding() {Left = 37, Bottom = 5 },
+                Margin = new Padding() { Left = 37, Bottom = 5 },
                 Font = new Font("Tahoma", 9),
                 Format = DateTimePickerFormat.Custom,
                 CustomFormat = customDateTimeFormat,
@@ -368,7 +367,7 @@ namespace MediaLibrarian
             {
                 Size = new Size(190, 30),
                 Tag = "Star5",
-               
+
             };
             for (var ii = 0; ii < 5; ii++)
             {
@@ -380,7 +379,7 @@ namespace MediaLibrarian
                     ForeColor = Color.Gray,
                     TextAlign = ContentAlignment.TopLeft,
                     Text = "☆",
-                    Tag = new int[] {i , starsList.Count}
+                    Tag = new int[] { i, starsList.Count }
                 };
                 star5.Click += new EventHandler(Star5_Click);
                 starsList.Add(star5);
@@ -407,7 +406,7 @@ namespace MediaLibrarian
                     ForeColor = Color.Gray,
                     TextAlign = ContentAlignment.TopLeft,
                     Text = "☆",
-                    Tag = new int[] {i, starsList.Count}
+                    Tag = new int[] { i, starsList.Count }
                 };
                 star10.Click += new EventHandler(Star10_Click);
                 starsList.Add(star10);
@@ -434,7 +433,7 @@ namespace MediaLibrarian
                     FlatStyle = FlatStyle.System,
                     ForeColor = Color.Gray,
                     Text = "▒",
-                    Tag = new int[] {i, cubeList.Count}
+                    Tag = new int[] { i, cubeList.Count }
                 };
                 cube.Click += new EventHandler(Cube10_Click);
                 cubeList.Add(cube);
@@ -603,15 +602,15 @@ namespace MediaLibrarian
         {
             switch (e.KeyCode)
             {
-                case Keys.F4: if (e.Alt) if(MessageBox.Show("Редактирование еще не завершено.\nВы действительно желаете закрыть это окно?",
-                    "Стоп-стоп-стоп...", MessageBoxButtons.YesNo, MessageBoxIcon.Question)==DialogResult.No) e.Handled = true;
+                case Keys.F4: if (e.Alt) if (MessageBox.Show("Редактирование еще не завершено.\nВы действительно желаете закрыть это окно?",
+                    "Стоп-стоп-стоп...", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) e.Handled = true;
                     break;
             }
         }
         private void tb_TextChanged(object sender, EventArgs e)
         {
             (sender as TextBox).Text = (sender as TextBox).Text.
-                Replace("<", "").Replace(">", "").Replace("|", "").Replace("/", "").Replace("\\", "");
+                Replace("<", "").Replace(">", "").Replace("|", "").Replace("/", "").Replace("\\", "").Replace(";", "");
         }
         #endregion
         #region OpenClose
@@ -626,7 +625,7 @@ namespace MediaLibrarian
             }
             if (EditMode && _mainForm.Collection.SelectedItems.Count > 0)
             {
-                PushDataIntoCreatedControls(GetDataFromDatabase(_mainForm.SelectedLibLabel.Text, _mainForm.ColumnsInfo[0].Name, 
+                PushDataIntoCreatedControls(GetDataFromDatabase(_mainForm.SelectedLibLabel.Text, _mainForm.ColumnsInfo[0].Name,
                     _mainForm.Collection.FocusedItem.Text));
                 var pathToFile = String.Format(@"{0}\Posters\{1}\{2}.jpg", Environment.CurrentDirectory,
                         _mainForm.ReplaceSymblos(_mainForm.SelectedLibLabel.Text),

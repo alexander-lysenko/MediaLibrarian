@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using System.Data.SQLite;
 using System.Drawing;
 using System.Data;
 

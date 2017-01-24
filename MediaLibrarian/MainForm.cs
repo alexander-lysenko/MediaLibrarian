@@ -66,7 +66,7 @@ namespace MediaLibrarian
         {
             if (Collection.SelectedItems.Count > 0)
             {
-                if (MessageBox.Show("Удалить элемент \"" + Collection.FocusedItem.Text + "\"?",
+                if (MessageBox.Show("Удалить элемент \"" + Collection.SelectedItems[0].Text + "\"?",
                         "Подтверждение удаления элемента",
                         MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     _editForm.DeleteItem(Collection.Columns[0].Text, Collection.SelectedItems[0].Text);
@@ -130,18 +130,18 @@ namespace MediaLibrarian
         {
             if (AutoSortingTSMI.Checked)
             {
-                Preferences.AutoSortByName = true; 
+                Preferences.AutoSortByName = true;
                 StatusLabel.Text = "Включена автоматическая сортировка таблицы по имени";
             }
-            else 
-            { 
-                Preferences.AutoSortByName = false; 
-                StatusLabel.Text = "Отключена автоматическая сортировка таблицы по имени"; 
+            else
+            {
+                Preferences.AutoSortByName = false;
+                StatusLabel.Text = "Отключена автоматическая сортировка таблицы по имени";
             }
             try
-            {   
-                if(SelectedLibLabel.Text!="")
-                _libManagerForm.ReadTableFromDatabase(SelectedLibLabel.Text);
+            {
+                if (SelectedLibLabel.Text != "")
+                    _libManagerForm.ReadTableFromDatabase(SelectedLibLabel.Text);
             }
             catch (Exception ex)
             {
