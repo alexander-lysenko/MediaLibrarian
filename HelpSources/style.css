@@ -1,0 +1,37 @@
+body {
+    font-family:Tahoma; 
+    font-size:10pt;
+}
+
+h1 {
+    font-weight:500;
+}
+
+img {
+    padding: 10px;
+}
+
+.bigger {
+    width: 100%;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td {
+    border: 1px solid black;
+}
+
+.thead{
+    font-weight: bold;
+    text-align: center;
+    background: #ddd;
+}
+
+ p {
+     text-indent: 1.5em;
+     text-align: justify;
+     margin: 0 0 5px 0;
+ }

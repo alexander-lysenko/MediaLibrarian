@@ -11,14 +11,10 @@
 <UL>
  <LI><OBJECT type="text/sitemap">
   <PARAM name="Name" value="&Ccedil;&iacute;&agrave;&ecirc;&icirc;&igrave;&ntilde;&ograve;&acirc;&icirc; &ntilde; &iuml;&eth;&icirc;&atilde;&eth;&agrave;&igrave;&igrave;&icirc;&eacute; &quot;Media Librarian&quot;">
+  <PARAM name="Local" value="1.1. Назначение программы.htm">
   <PARAM name="ImageNumber" value="1">
  </OBJECT>
 <UL>
- <LI><OBJECT type="text/sitemap">
-  <PARAM name="Name" value="&Iacute;&agrave;&ccedil;&iacute;&agrave;&divide;&aring;&iacute;&egrave;&aring; &iuml;&eth;&icirc;&atilde;&eth;&agrave;&igrave;&igrave;&ucirc;">
-  <PARAM name="Local" value="1.1. Назначение программы.htm">
-  <PARAM name="ImageNumber" value="31">
- </OBJECT>
  <LI><OBJECT type="text/sitemap">
   <PARAM name="Name" value="&Ocirc;&oacute;&iacute;&ecirc;&ouml;&egrave;&icirc;&iacute;&agrave;&euml; &iuml;&eth;&icirc;&atilde;&eth;&agrave;&igrave;&igrave;&ucirc;">
   <PARAM name="Local" value="1.2. Функционал программы.htm">
@@ -29,9 +25,15 @@
   <PARAM name="Local" value="1.3. Первый запуск.htm">
   <PARAM name="ImageNumber" value="19">
  </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="&Atilde;&icirc;&eth;&yuml;&divide;&egrave;&aring; &ecirc;&euml;&agrave;&acirc;&egrave;&oslash;&egrave;">
+  <PARAM name="Local" value="1.4. Горячие клавиши.htm">
+  <PARAM name="ImageNumber" value="37">
+ </OBJECT>
 </UL>
  <LI><OBJECT type="text/sitemap">
   <PARAM name="Name" value="&Aacute;&egrave;&aacute;&euml;&egrave;&icirc;&ograve;&aring;&ecirc;&egrave;">
+  <PARAM name="Local" value="2.1. Поля библиотеки.htm">
   <PARAM name="ImageNumber" value="1">
  </OBJECT>
 <UL>
@@ -48,6 +50,7 @@
 </UL>
  <LI><OBJECT type="text/sitemap">
   <PARAM name="Name" value="&Dstrok;&agrave;&aacute;&icirc;&ograve;&agrave; &ntilde; &ccedil;&agrave;&iuml;&egrave;&ntilde;&yuml;&igrave;&egrave; &acirc; &aacute;&egrave;&aacute;&euml;&egrave;&icirc;&ograve;&aring;&ecirc;&agrave;&otilde;">
+  <PARAM name="Local" value="3.1. Добавление записи.htm">
   <PARAM name="ImageNumber" value="1">
  </OBJECT>
 <UL>
@@ -69,22 +72,24 @@
  <LI><OBJECT type="text/sitemap">
   <PARAM name="Name" value="&Oacute;&auml;&agrave;&euml;&aring;&iacute;&egrave;&aring; &ccedil;&agrave;&iuml;&egrave;&ntilde;&egrave;">
   <PARAM name="Local" value="3.4. Удаление записи.htm">
-  <PARAM name="ImageNumber" value="17">
+  <PARAM name="ImageNumber" value="23">
  </OBJECT>
 </UL>
  <LI><OBJECT type="text/sitemap">
   <PARAM name="Name" value="&Iuml;&icirc;&egrave;&ntilde;&ecirc;">
+  <PARAM name="Local" value="4.1. Как работает поиск элементов.htm">
   <PARAM name="ImageNumber" value="1">
  </OBJECT>
 <UL>
  <LI><OBJECT type="text/sitemap">
   <PARAM name="Name" value="&Ecirc;&agrave;&ecirc; &eth;&agrave;&aacute;&icirc;&ograve;&agrave;&aring;&ograve; &iuml;&icirc;&egrave;&ntilde;&ecirc; &yacute;&euml;&aring;&igrave;&aring;&iacute;&ograve;&icirc;&acirc;">
-  <PARAM name="Local" value="4.1. Как работает поиск эементов.htm">
+  <PARAM name="Local" value="4.1. Как работает поиск элементов.htm">
   <PARAM name="ImageNumber" value="9">
  </OBJECT>
 </UL>
  <LI><OBJECT type="text/sitemap">
   <PARAM name="Name" value="&Iacute;&agrave;&ntilde;&ograve;&eth;&icirc;&eacute;&ecirc;&egrave;">
+  <PARAM name="Local" value="5.1. Окно настроек.htm">
   <PARAM name="ImageNumber" value="1">
  </OBJECT>
 <UL>
@@ -101,6 +106,7 @@
 </UL>
  <LI><OBJECT type="text/sitemap">
   <PARAM name="Name" value="&Auml;&euml;&yuml; &eth;&agrave;&ccedil;&eth;&agrave;&aacute;&icirc;&ograve;&divide;&egrave;&ecirc;&icirc;&acirc;">
+  <PARAM name="Local" value="6.1. Информация о технологиях.htm">
   <PARAM name="ImageNumber" value="1">
  </OBJECT>
 <UL>
