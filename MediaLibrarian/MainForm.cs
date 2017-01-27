@@ -29,6 +29,7 @@ namespace MediaLibrarian
         public Settings Preferences;
         public List<Category> ColumnsInfo = new List<Category>();
         int offset; //LocationOffset
+        public int sortColumn = -1;
 
         public static void ShowForm()
         {
@@ -193,25 +194,28 @@ namespace MediaLibrarian
         {
             if (Collection.SelectedItems.Count > 0)
             {
+                TitleHeaderLabel.Text = ColumnsInfo[0].Name;
                 LoadItemInfo(Collection.SelectedItems[0]);
                 TitleLabel.Text = Collection.SelectedItems[0].Text;
+                try
+                {
+                    PosterBox.Image = Image.FromFile(String.Format(@"{0}\Posters\{1}\{2}.jpg", Environment.CurrentDirectory,
+                        ReplaceSymblos(SelectedLibLabel.Text),
+                        ReplaceSymblos(Collection.SelectedItems[0].Text)));
+                    PosterBox.BackgroundImage = null;
+                }
+                catch (Exception)
+                {
+                    PosterBox.Image = null;
+                    PosterBox.BackgroundImage = Properties.Resources.noposter;
+                }
             }
             else
             {
                 InfoPanel.Controls.Clear();
                 TitleLabel.Text = "";
-            }
-            try
-            {
-                PosterBox.Image = Image.FromFile(String.Format(@"{0}\Posters\{1}\{2}.jpg", Environment.CurrentDirectory,
-                    ReplaceSymblos(SelectedLibLabel.Text),
-                    ReplaceSymblos(Collection.SelectedItems[0].Text)));
+                TitleHeaderLabel.Text = "Нет элементов для отображения";
                 PosterBox.BackgroundImage = null;
-            }
-            catch (Exception)
-            {
-                PosterBox.Image = null;
-                PosterBox.BackgroundImage = Properties.Resources.noposter;
             }
         }
         public string ReplaceSymblos(string str)
@@ -434,6 +438,26 @@ namespace MediaLibrarian
                 XmlManager.Serialize(Preferences);
             }
         }
+        private void Collection_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            // Определение того, совпадает ли столбец с последним выбранным столбцом.
+            if (e.Column != sortColumn)
+            {	// Установка сортировки нового столбца.
+                sortColumn = e.Column;
+                // Установка порядка сортировки "по возрастанию" как порядка по умолчанию.
+                Collection.Sorting = SortOrder.Ascending;
+            }
+            else
+            {
+                if (Collection.Sorting == SortOrder.Ascending)
+                    Collection.Sorting = SortOrder.Descending;
+                else
+                    Collection.Sorting = SortOrder.Ascending;
+            }
+            this.Collection.Sort();
+            this.Collection.ListViewItemSorter = new ListViewItemComparer(e.Column, Collection.Sorting);
+        }
         #endregion
+
     }
 }

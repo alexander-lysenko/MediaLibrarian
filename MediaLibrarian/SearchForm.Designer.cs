@@ -34,6 +34,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.clearFormBtn = new System.Windows.Forms.Button();
             this.restoreTableBtn = new System.Windows.Forms.Button();
+            this.closeButton = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -65,7 +66,7 @@
             this.searchBtn.Enabled = false;
             this.searchBtn.Location = new System.Drawing.Point(8, 284);
             this.searchBtn.Name = "searchBtn";
-            this.searchBtn.Size = new System.Drawing.Size(153, 22);
+            this.searchBtn.Size = new System.Drawing.Size(125, 22);
             this.searchBtn.TabIndex = 3;
             this.searchBtn.Text = "Искать";
             this.searchBtn.UseVisualStyleBackColor = true;
@@ -83,9 +84,9 @@
             // clearFormBtn
             // 
             this.clearFormBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.clearFormBtn.Location = new System.Drawing.Point(167, 284);
+            this.clearFormBtn.Location = new System.Drawing.Point(139, 284);
             this.clearFormBtn.Name = "clearFormBtn";
-            this.clearFormBtn.Size = new System.Drawing.Size(149, 22);
+            this.clearFormBtn.Size = new System.Drawing.Size(113, 22);
             this.clearFormBtn.TabIndex = 5;
             this.clearFormBtn.Text = "Очистить данные";
             this.clearFormBtn.UseVisualStyleBackColor = true;
@@ -94,20 +95,34 @@
             // restoreTableBtn
             // 
             this.restoreTableBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.restoreTableBtn.Location = new System.Drawing.Point(322, 284);
+            this.restoreTableBtn.Location = new System.Drawing.Point(258, 284);
             this.restoreTableBtn.Name = "restoreTableBtn";
-            this.restoreTableBtn.Size = new System.Drawing.Size(134, 22);
+            this.restoreTableBtn.Size = new System.Drawing.Size(130, 22);
             this.restoreTableBtn.TabIndex = 6;
             this.restoreTableBtn.Text = "Сбросить результаты";
             this.restoreTableBtn.UseVisualStyleBackColor = true;
             this.restoreTableBtn.Click += new System.EventHandler(this.restoreTableBtn_Click);
+            // 
+            // closeButton
+            // 
+            this.closeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.closeButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.closeButton.Location = new System.Drawing.Point(394, 284);
+            this.closeButton.Name = "closeButton";
+            this.closeButton.Size = new System.Drawing.Size(62, 22);
+            this.closeButton.TabIndex = 7;
+            this.closeButton.Text = "Закрыть";
+            this.closeButton.UseVisualStyleBackColor = true;
+            this.closeButton.Click += new System.EventHandler(this.closeButton_Click);
             // 
             // SearchForm
             // 
             this.AcceptButton = this.searchBtn;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.closeButton;
             this.ClientSize = new System.Drawing.Size(464, 326);
+            this.Controls.Add(this.closeButton);
             this.Controls.Add(this.restoreTableBtn);
             this.Controls.Add(this.clearFormBtn);
             this.Controls.Add(this.label1);
@@ -133,5 +148,6 @@
         public System.Windows.Forms.FlowLayoutPanel dataPanel;
         private System.Windows.Forms.Button clearFormBtn;
         private System.Windows.Forms.Button restoreTableBtn;
+        private System.Windows.Forms.Button closeButton;
     }
 }

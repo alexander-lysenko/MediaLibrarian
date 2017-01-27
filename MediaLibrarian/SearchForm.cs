@@ -41,16 +41,6 @@ namespace MediaLibrarian
             return str;
         }
 
-        private void SearchForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            this.Hide();
-            e.Cancel = true;
-        }
-        private void SearchForm_Load(object sender, EventArgs e)
-        {
-            LoadMeta(_mainForm.ColumnsInfo);
-            boxList[0].Checked = true;
-        }
         public void LoadMeta(List<Category> columns)
         {
             foreach (var item in columns)
@@ -59,7 +49,7 @@ namespace MediaLibrarian
                 CreateControl(item.Type);
             }
         }
-
+        
         void CreateChkBox(string name)
         {
             var chkBox = new CheckBox
@@ -110,7 +100,6 @@ namespace MediaLibrarian
                     break;
             }
         }
-
         void Search()
         {
             string tableName = _mainForm.SelectedLibLabel.Text;
@@ -150,7 +139,7 @@ namespace MediaLibrarian
                 MessageBox.Show(ex.Message, "Ошибка подключения к базе данных", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
+        #region FormEvents
         private void searchButton_Click(object sender, EventArgs e)
         {
             Search();
@@ -175,5 +164,20 @@ namespace MediaLibrarian
         {
             _mainForm._libManagerForm.ReadTableFromDatabase(_mainForm.SelectedLibLabel.Text);
         }
+        private void SearchForm_Load(object sender, EventArgs e)
+        {
+            LoadMeta(_mainForm.ColumnsInfo);
+            boxList[0].Checked = true;
+        }
+        private void closeButton_Click(object sender, EventArgs e)
+        {
+            Hide();
+        }
+        private void SearchForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Hide();
+            e.Cancel = true;
+        }
+        #endregion
     }
 }

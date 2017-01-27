@@ -171,7 +171,7 @@ namespace MediaLibrarian
                 _mainForm.InfoPanel.Controls.Clear();
                 _mainForm.PosterBox.BackgroundImage = null;
                 _mainForm.PosterBox.Image = null;
-                _mainForm.TitleHeaderLabel.Text = _mainForm.Collection.Columns[0].Text + ":";
+                _mainForm.TitleHeaderLabel.Text = "Нет элементов для отображения";
                 _mainForm.TitleLabel.Text = "";
                 _mainForm.SelectedLibLabel.Text = tableName;
                 _mainForm.ElementActionsGB.Enabled = true;
@@ -208,14 +208,15 @@ namespace MediaLibrarian
         }
         private void RemoveCollectionButton_Click(object sender, EventArgs e)
         {
-            if (LibsList.SelectedItems.Count != 0)
-                if (MessageBox.Show("Нажимая \"Удалить библиотеку\", \nВы осознанно принимаете решение удалить выбранную библиотеку\n(" + LibsList.FocusedItem.Text
-                    + ")\nцеликом, включая все накопленные в ней записи.\nПродолжить?", "Очень важное предупреждение", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            if (LibsList.SelectedItems.Count > 0)
+                if (MessageBox.Show("Нажимая \"Удалить библиотеку\", \nВы осознанно принимаете решение удалить выбранную библиотеку\n(" + 
+                    LibsList.FocusedItem.Text + ")\nцеликом, включая все накопленные в ней записи.\nПродолжить?", 
+                    "Очень важное предупреждение", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
                     if (_mainForm.SelectedLibLabel.Text == LibsList.SelectedItems[0].Text)
                     {
                         _mainForm.Collection.Clear();
-                        _mainForm.SelectedLibLabel.Text = "";
+                        _mainForm.SelectedLibLabel.Text = _mainForm.TitleHeaderLabel.Text = "";
                         _mainForm.ElementActionsGB.Enabled = false;
                     }
                     try

@@ -91,6 +91,7 @@
             this.Collection.ShowGroups = false;
             this.Collection.UseCompatibleStateImageBehavior = false;
             this.Collection.View = System.Windows.Forms.View.Details;
+            this.Collection.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.Collection_ColumnClick);
             this.Collection.ItemActivate += new System.EventHandler(this.Collection_ItemActivate);
             this.Collection.SelectedIndexChanged += new System.EventHandler(this.Collection_SelectedIndexChanged);
             // 
@@ -375,7 +376,6 @@
             // 
             // PosterBox
             // 
-            this.PosterBox.BackgroundImage = global::MediaLibrarian.Properties.Resources.noposter;
             resources.ApplyResources(this.PosterBox, "PosterBox");
             this.PosterBox.Name = "PosterBox";
             this.PosterBox.TabStop = false;

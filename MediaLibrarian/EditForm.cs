@@ -386,6 +386,7 @@ namespace MediaLibrarian
             }
             stars5Panel.Controls.AddRange(starsList.ToArray());
             columnData.Add(stars5Panel);
+            columnData[columnData.IndexOf(stars5Panel)].Text = "☆☆☆☆☆";
         }
         void Make10Stars(int i) //i - порядок панели на форме
         {
@@ -413,6 +414,7 @@ namespace MediaLibrarian
             }
             stars10Panel.Controls.AddRange(starsList.ToArray());
             columnData.Add(stars10Panel);
+            columnData[columnData.IndexOf(stars10Panel)].Text = "☆☆☆☆☆☆☆☆☆☆";
         }
         void Make10Cubes(int i) //i - порядок панели на форме
         {
@@ -440,6 +442,7 @@ namespace MediaLibrarian
             }
             cubes10Panel.Controls.AddRange(cubeList.ToArray());
             columnData.Add(cubes10Panel);
+            columnData[columnData.IndexOf(cubes10Panel)].Text = "▒▒▒▒▒▒▒▒▒▒";
         }
         #endregion
         #region ClickToBlocks
@@ -605,6 +608,8 @@ namespace MediaLibrarian
                 case Keys.F4: if (e.Alt) if (MessageBox.Show("Редактирование еще не завершено.\nВы действительно желаете закрыть это окно?",
                     "Стоп-стоп-стоп...", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) e.Handled = true;
                     break;
+                case Keys.Enter: if (e.Control)
+                     SaveButton.PerformClick(); break;
             }
         }
         private void tb_TextChanged(object sender, EventArgs e)
