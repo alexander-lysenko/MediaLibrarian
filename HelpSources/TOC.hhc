@@ -121,11 +121,6 @@
   <PARAM name="ImageNumber" value="21">
  </OBJECT>
  <LI><OBJECT type="text/sitemap">
-  <PARAM name="Name" value="&Egrave;&ntilde;&otilde;&icirc;&auml;&iacute;&ucirc;&eacute; &ecirc;&icirc;&auml;">
-  <PARAM name="Local" value="6.3. Исходный код.htm">
-  <PARAM name="ImageNumber" value="23">
- </OBJECT>
- <LI><OBJECT type="text/sitemap">
   <PARAM name="Name" value="&Agrave;&acirc;&ograve;&icirc;&eth;&ntilde;&ecirc;&egrave;&aring; &iuml;&eth;&agrave;&acirc;&agrave;">
   <PARAM name="Local" value="6.4. Авторские права.htm">
   <PARAM name="ImageNumber" value="27">
