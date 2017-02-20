@@ -279,9 +279,9 @@ namespace MediaLibrarian
                     m5Label.ForeColor = Color.Red;
                     break;
                 case 3:
-                case 4:
                     m5Label.ForeColor = Color.Orange;
                     break;
+                case 4:
                 case 5:
                     m5Label.ForeColor = Color.Green;
                     break;
