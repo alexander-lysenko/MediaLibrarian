@@ -41,6 +41,8 @@ namespace MediaLibrarian
             MainMenu.ForeColor = ElementInfoGB.ForeColor = ElementActionsGB.ForeColor = LibInfoGB.ForeColor =
                 StatusLabel.ForeColor = informationLabel.ForeColor = Color.FromName(Preferences.FontColor);
             Text = Preferences.FormCaptionText;
+            AddElementButton.ForeColor = EditElementButton.ForeColor = DeleteElementButton.ForeColor =
+                SearchButton.ForeColor = SelectCollectionButton.ForeColor = SystemColors.ControlText;
         }
         #region Buttons
         private void SelectCollectionButton_Click(object sender, EventArgs e)
@@ -79,7 +81,7 @@ namespace MediaLibrarian
         }
         private void SearchButton_Click(object sender, EventArgs e)
         {
-            if (Collection.Items.Count > 2) _searchForm.Show();
+            if (int.Parse(ElementCount.Text) > 5) _searchForm.Show();
             else
             {
                 StatusLabel.Text = "Библиотека не заполнена. Поиск не доступен.";
@@ -215,7 +217,7 @@ namespace MediaLibrarian
                 InfoPanel.Controls.Clear();
                 TitleLabel.Text = "";
                 TitleHeaderLabel.Text = "Нет элементов для отображения";
-                PosterBox.BackgroundImage = null;
+                PosterBox.Image = null;
             }
         }
         public string ReplaceSymblos(string str)

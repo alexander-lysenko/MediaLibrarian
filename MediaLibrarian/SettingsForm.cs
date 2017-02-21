@@ -35,7 +35,7 @@ namespace MediaLibrarian
             XmlManager.Serialize(_mainForm.Preferences);
             hintLabel.Text = "Настройки сохранены успешно.";
             _mainForm.TitleLabel.ForeColor = _mainForm.SelectedLibLabel.ForeColor =
-                _mainForm.ElementCount.ForeColor = Color.FromName(_mainForm.Preferences.MainColor);
+                _mainForm.ElementCount.ForeColor = Color.FromName(_mainForm.Preferences.MainColor);            
             _mainForm.Refresh();
             _mainForm.InitFont();
         }
