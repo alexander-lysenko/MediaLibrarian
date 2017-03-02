@@ -43,6 +43,7 @@ namespace MediaLibrarian
             Text = Preferences.FormCaptionText;
             AddElementButton.ForeColor = EditElementButton.ForeColor = DeleteElementButton.ForeColor =
                 SearchButton.ForeColor = SelectCollectionButton.ForeColor = SystemColors.ControlText;
+            TitleLabel.Font = new Font(Preferences.MainFont.FontFamilyName, Preferences.MainFont.FontSize, Preferences.MainFont.FontStyle);
         }
         #region Buttons
         private void SelectCollectionButton_Click(object sender, EventArgs e)

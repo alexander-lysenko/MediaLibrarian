@@ -34,11 +34,11 @@
             // 
             // ImageBox
             // 
+            this.ImageBox.BackColor = System.Drawing.SystemColors.Window;
             this.ImageBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ImageBox.Location = new System.Drawing.Point(0, 0);
             this.ImageBox.Name = "ImageBox";
             this.ImageBox.Size = new System.Drawing.Size(400, 400);
-            this.ImageBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.ImageBox.TabIndex = 0;
             this.ImageBox.TabStop = false;
             // 
@@ -47,18 +47,17 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.BackColor = System.Drawing.SystemColors.Control;
+            this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(400, 400);
             this.Controls.Add(this.ImageBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.KeyPreview = true;
-            this.MaximumSize = new System.Drawing.Size(1366, 768);
             this.Name = "PictureViewer";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PictureViewer";
-            this.TransparencyKey = System.Drawing.SystemColors.Control;
+            this.TransparencyKey = System.Drawing.SystemColors.Window;
             this.Deactivate += new System.EventHandler(this.PictureViewer_Deactivate);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.PictureViewer_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.ImageBox)).EndInit();
