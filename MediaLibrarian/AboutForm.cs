@@ -100,12 +100,9 @@ namespace MediaLibrarian
 
         private void AboutForm_Load(object sender, EventArgs e)
         {
+            CurVersionDateLabel.Text = new DateTime(2017 , 03, 10).ToShortDateString();
+            FirstVersionDateLabel.Text = new DateTime(2017, 03, 10).ToShortDateString();
             ChangelogRTB.Text = Properties.Resources.changelog;
-        }
-
-        private void AboutForm_Load_1(object sender, EventArgs e)
-        {
-
         }
     }
 }
