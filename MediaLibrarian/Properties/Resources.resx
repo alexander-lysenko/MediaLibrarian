@@ -118,7 +118,11 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="changelog" xml:space="preserve">
-    <value>v.1.0 - Релиз основных возможностей программы
+    <value>v.1.0.1 (07.10.2017):
+* Переделана логика работы с базой данных
+----------
+v.1.0 (10.03.2017): 
++ Релиз основных возможностей программы
 </value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />

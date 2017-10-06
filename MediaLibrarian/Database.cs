@@ -34,13 +34,16 @@ namespace MediaLibrarian
             SQLiteDataReader readerData;
             try
             {
+                Connection.Open();
                 var reader = readReader.ExecuteReader();
                 readerData = reader;
             }
             catch (System.Exception)
             {
+                Connection.Close();
                 throw;
             }
+            Connection.Close();
             return readerData;
         }
         public static DataTable GetTable(string query)
@@ -49,13 +52,16 @@ namespace MediaLibrarian
             var dataTable = new DataTable();
             try
             {
+                Connection.Open();
                 var reader = readTable.ExecuteReader();
                 dataTable.Load(reader);
             }
             catch (System.Exception)
-            {                
+            {
+                Connection.Close();
                 throw;
             }
+            Connection.Close();
             return dataTable;
         }
         public static object GetScalar(string query)
@@ -64,12 +70,15 @@ namespace MediaLibrarian
             object data;
             try
             {
+                Connection.Open();
                 data = command.ExecuteScalar();
             }
             catch (System.Exception)
             {
+                Connection.Close();
                 throw;
-            }
+            } 
+            Connection.Close();
             return data;
         }
         public static bool Execute(string query)
@@ -77,12 +86,15 @@ namespace MediaLibrarian
             var command = new SQLiteCommand(query, Connection);
             try
             {
+                Connection.Open();
                 command.ExecuteNonQuery();
             }
             catch (System.Exception)
             {
+                Connection.Close();
                 return false;
             }
+            Connection.Close();
             return true;
         }
     }

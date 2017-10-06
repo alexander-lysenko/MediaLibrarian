@@ -105,7 +105,22 @@ namespace MediaLibrarian
             try
             {
                 var getTablesQuery = "select name from sqlite_master where type='table' order by name;";
-                var readTables = Database.GetReader(getTablesQuery);
+                var readTables = Database.GetTable(getTablesQuery);
+                foreach (DataRow table in readTables.Rows)
+                {
+                    var colsList = new List<string>();
+                    var lib = new ListViewItem(table[0].ToString());
+                    var getColumnsQuery = String.Format("pragma table_info(`{0}`);", table[table.Table.Columns["name"].Ordinal]);
+                    var readCols = Database.GetTable(getColumnsQuery);
+                    foreach (DataRow col in readCols.Rows)
+                    {
+                        Console.Write(col.ItemArray);
+                        colsList.Add(col[col.Table.Columns["name"].Ordinal].ToString());
+                    }
+                    lib.SubItems.Add(string.Join(", ", colsList));
+                    LibsList.Items.Add(lib);
+                }
+                /*var readTables = Database.GetReader(getTablesQuery);
                 foreach (DbDataRecord table in readTables)
                 {
                     var colsList = new List<string>();
@@ -118,7 +133,7 @@ namespace MediaLibrarian
                     }
                     lib.SubItems.Add(string.Join(", ", colsList));
                     LibsList.Items.Add(lib);
-                }
+                }*/
             }
             catch (Exception ex)
             {
@@ -132,14 +147,16 @@ namespace MediaLibrarian
             var getColumnsQuery = String.Format("pragma table_info('{0}');", tableName);
             try
             {
-                var readCols = Database.GetReader(getColumnsQuery);
-                foreach (DbDataRecord col in readCols)
+                var readCols = Database.GetTable(getColumnsQuery);
+                foreach (DataRow col in readCols.Rows)
                 {
-                    _mainForm.Collection.Columns.Add(col["name"].ToString(), GetColumnLength(col["type"].ToString()));
+                    int name = col.Table.Columns["name"].Ordinal;
+                    int type = col.Table.Columns["type"].Ordinal;
+                    _mainForm.Collection.Columns.Add(col[name].ToString(), GetColumnLength(col[type].ToString()));
                     _mainForm.ColumnsInfo.Add(new Category
                     {
-                        Name = col["name"].ToString(),
-                        Type = col["type"].ToString()
+                        Name = col[name].ToString(),
+                        Type = col[type].ToString()
                     });
                 }
             }
@@ -209,8 +226,8 @@ namespace MediaLibrarian
         private void RemoveCollectionButton_Click(object sender, EventArgs e)
         {
             if (LibsList.SelectedItems.Count > 0)
-                if (MessageBox.Show("Нажимая \"Удалить библиотеку\", \nВы осознанно принимаете решение удалить выбранную библиотеку\n(" + 
-                    LibsList.FocusedItem.Text + ")\nцеликом, включая все накопленные в ней записи.\nПродолжить?", 
+                if (MessageBox.Show("Нажимая \"Удалить библиотеку\", \nВы осознанно принимаете решение удалить выбранную библиотеку\n(" +
+                    LibsList.FocusedItem.Text + ")\nцеликом, включая все накопленные в ней записи.\nПродолжить?",
                     "Очень важное предупреждение", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
                     if (_mainForm.SelectedLibLabel.Text == LibsList.SelectedItems[0].Text)
@@ -243,10 +260,11 @@ namespace MediaLibrarian
                 try
                 {
                     var verifyNameQuery = "select name from sqlite_master where type='table' order by name;";
-                    var readTables = Database.GetReader(verifyNameQuery);
-                    foreach (DbDataRecord table in readTables)
+                    var readTables = Database.GetTable(verifyNameQuery);
+                    foreach (DataRow table in readTables.Rows)
                     {
-                        if (table["name"].ToString().ToLower().Equals(_libNameTb.Text.ToLower()))
+                        int name = table.Table.Columns["name"].Ordinal;
+                        if (table[name].ToString().ToLower().Equals(_libNameTb.Text.ToLower()))
                         {
                             MessageBox.Show("Библиотека с таким именем уже существует", "Ошибка",
                                 MessageBoxButtons.OK, MessageBoxIcon.Error);

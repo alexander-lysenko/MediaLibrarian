@@ -19,7 +19,6 @@ namespace MediaLibrarian
             _editForm = new EditForm(this);
             _settingsForm = new SettingsForm(this);
             _searchForm = new SearchForm(this);
-            Database.Connection.Open();
         }
 
         public LibManagerForm _libManagerForm;
@@ -437,7 +436,6 @@ namespace MediaLibrarian
             if (Preferences.RememberLastLibrary)
             {
                 Preferences.LastLibraryName = SelectedLibLabel.Text;
-                Database.Connection.Close();
                 XmlManager.Serialize(Preferences);
             }
         }
