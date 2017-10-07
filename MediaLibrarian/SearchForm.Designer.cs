@@ -46,7 +46,7 @@
             this.groupBox1.Controls.Add(this.dataPanel);
             this.groupBox1.Location = new System.Drawing.Point(5, 5);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(454, 276);
+            this.groupBox1.Size = new System.Drawing.Size(454, 270);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Включить фильтр";
@@ -57,14 +57,14 @@
             this.dataPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataPanel.Location = new System.Drawing.Point(3, 16);
             this.dataPanel.Name = "dataPanel";
-            this.dataPanel.Size = new System.Drawing.Size(448, 257);
+            this.dataPanel.Size = new System.Drawing.Size(448, 251);
             this.dataPanel.TabIndex = 0;
             // 
             // searchBtn
             // 
             this.searchBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.searchBtn.Enabled = false;
-            this.searchBtn.Location = new System.Drawing.Point(8, 284);
+            this.searchBtn.Location = new System.Drawing.Point(8, 278);
             this.searchBtn.Name = "searchBtn";
             this.searchBtn.Size = new System.Drawing.Size(125, 22);
             this.searchBtn.TabIndex = 3;
@@ -74,7 +74,7 @@
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(5, 309);
+            this.label1.Location = new System.Drawing.Point(5, 303);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(454, 13);
             this.label1.TabIndex = 4;
@@ -84,7 +84,7 @@
             // clearFormBtn
             // 
             this.clearFormBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.clearFormBtn.Location = new System.Drawing.Point(139, 284);
+            this.clearFormBtn.Location = new System.Drawing.Point(139, 278);
             this.clearFormBtn.Name = "clearFormBtn";
             this.clearFormBtn.Size = new System.Drawing.Size(113, 22);
             this.clearFormBtn.TabIndex = 5;
@@ -95,7 +95,7 @@
             // restoreTableBtn
             // 
             this.restoreTableBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.restoreTableBtn.Location = new System.Drawing.Point(258, 284);
+            this.restoreTableBtn.Location = new System.Drawing.Point(258, 278);
             this.restoreTableBtn.Name = "restoreTableBtn";
             this.restoreTableBtn.Size = new System.Drawing.Size(130, 22);
             this.restoreTableBtn.TabIndex = 6;
@@ -107,7 +107,7 @@
             // 
             this.closeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.closeButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.closeButton.Location = new System.Drawing.Point(394, 284);
+            this.closeButton.Location = new System.Drawing.Point(394, 278);
             this.closeButton.Name = "closeButton";
             this.closeButton.Size = new System.Drawing.Size(62, 22);
             this.closeButton.TabIndex = 7;
@@ -121,7 +121,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.closeButton;
-            this.ClientSize = new System.Drawing.Size(464, 326);
+            this.ClientSize = new System.Drawing.Size(464, 321);
             this.Controls.Add(this.closeButton);
             this.Controls.Add(this.restoreTableBtn);
             this.Controls.Add(this.clearFormBtn);
