@@ -6,7 +6,7 @@
 #define MyAppPublisher "Alexander (LinJay) Lysenko"
 #define MyAppURL "https://github.com/Alexander-Lysenko/MediaLibrarian"
 #define MyAppExeName "MediaLibrarian.exe"
-#define SourceFolder "C:\Users\LinJay\Desktop\MediaLibrarian\MediaLibrarian\"
+#define SourceFolder "C:\Users\LinJay\Desktop\MediaLibrarian\"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
@@ -24,11 +24,11 @@ DefaultDirName={pf}\{#MyAppName}
 DefaultGroupName={#MyAppName}
 DisableWelcomePage=no
 AllowNoIcons=yes
-LicenseFile={#SourceFolder}license.txt
-UninstallDisplayIcon={#SourceFolder}icon.ico
-OutputDir=D:
+LicenseFile={#SourceFolder}MediaLibrarian\license.txt
+UninstallDisplayIcon={#SourceFolder}MediaLibrarian\icon.ico
+OutputDir={#SourceFolder}
 OutputBaseFilename=MediaLibrarianSetup
-SetupIconFile={#SourceFolder}icon.ico
+SetupIconFile={#SourceFolder}MediaLibrarian\icon.ico
 Compression=lzma
 SolidCompression=yes
 
@@ -43,15 +43,15 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked; OnlyBelowVersion: 0,6.1
 
 [Files]
-Source: "{#SourceFolder}bin\Release\MediaLibrarian.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#SourceFolder}bin\Release\EntityFramework.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#SourceFolder}bin\Release\EntityFramework.SqlServer.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#SourceFolder}bin\Release\Help.chm"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#SourceFolder}bin\Release\System.Data.SQLite.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#SourceFolder}bin\Release\System.Data.SQLite.EF6.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#SourceFolder}bin\Release\System.Data.SQLite.Linq.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#SourceFolder}bin\Release\x86\*"; DestDir: "{app}\x86"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "{#SourceFolder}bin\Release\x64\*"; DestDir: "{app}\x64"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "{#SourceFolder}MediaLibrarian\bin\Release\MediaLibrarian.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#SourceFolder}MediaLibrarian\bin\Release\EntityFramework.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#SourceFolder}MediaLibrarian\bin\Release\EntityFramework.SqlServer.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#SourceFolder}MediaLibrarian\bin\Release\Help.chm"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#SourceFolder}MediaLibrarian\bin\Release\System.Data.SQLite.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#SourceFolder}MediaLibrarian\bin\Release\System.Data.SQLite.EF6.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#SourceFolder}MediaLibrarian\bin\Release\System.Data.SQLite.Linq.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#SourceFolder}MediaLibrarian\bin\Release\x86\*"; DestDir: "{app}\x86"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "{#SourceFolder}MediaLibrarian\bin\Release\x64\*"; DestDir: "{app}\x64"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
