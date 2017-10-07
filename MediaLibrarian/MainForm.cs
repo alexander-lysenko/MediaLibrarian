@@ -88,6 +88,20 @@ namespace MediaLibrarian
             }
         }
         #endregion
+        #region ContextMenu
+        private void copyNameTSMI_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(Collection.FocusedItem.Text);
+        }
+        private void EditItemTSMI_Click(object sender, EventArgs e)
+        {
+            EditElementButton.PerformClick();
+        }
+        private void DeleteItemTSMI_Click(object sender, EventArgs e)
+        {
+            DeleteElementButton.PerformClick();
+        }
+        #endregion
         #region FileTSM
         private void OpenLibTSMI_Click(object sender, EventArgs e)
         {
@@ -183,9 +197,17 @@ namespace MediaLibrarian
         private void PosterBox_MouseClick(object sender, MouseEventArgs e)
         {
             var pv = new PictureViewer { ImageBox = { Image = PosterBox.Image } };
-            if (Preferences.CropMaxViewSize) pv.Size =
-                new Size((int)Preferences.PicMaxWidth, (int)Preferences.PicMaxHeight);
-            else pv.Size = new Size(720, 720);
+            if (Preferences.CropMaxViewSize)
+            {
+                pv.Size = new Size((int)Preferences.PicMaxWidth, (int)Preferences.PicMaxHeight);
+                pv.ImageBox.SizeMode = (PosterBox.Image.Width * PosterBox.Image.Height) > (pv.Size.Width * pv.Size.Height) ? 
+                    PictureBoxSizeMode.Zoom : PictureBoxSizeMode.CenterImage;
+            }
+            else
+            {
+                pv.Size = new Size(SystemInformation.PrimaryMonitorSize.Width, SystemInformation.PrimaryMonitorSize.Height);
+                pv.ImageBox.SizeMode = PictureBoxSizeMode.CenterImage;
+            }
             pv.Show();
         }
         private void Collection_ItemActivate(object sender, EventArgs e)
@@ -457,6 +479,10 @@ namespace MediaLibrarian
             }
             this.Collection.Sort();
             this.Collection.ListViewItemSorter = new ListViewItemComparer(e.Column, Collection.Sorting);
+        }
+        void ContextMenuBlockOpening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (Collection.SelectedItems.Count == 0) e.Cancel = true;
         }
         #endregion
 

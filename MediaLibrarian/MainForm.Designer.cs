@@ -28,8 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.Collection = new System.Windows.Forms.ListView();
+            this.contextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.CopyNameTSMI = new System.Windows.Forms.ToolStripMenuItem();
             this.StatusBar = new System.Windows.Forms.StatusStrip();
             this.StatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.informationLabel = new System.Windows.Forms.ToolStripStatusLabel();
@@ -71,6 +74,9 @@
             this.PosterBox = new System.Windows.Forms.PictureBox();
             this.InfoPanel = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.EditItemTSMI = new System.Windows.Forms.ToolStripMenuItem();
+            this.DeleteItemTSMI = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenu.SuspendLayout();
             this.StatusBar.SuspendLayout();
             this.MainMenu.SuspendLayout();
             this.LibInfoGB.SuspendLayout();
@@ -85,6 +91,7 @@
             // 
             resources.ApplyResources(this.Collection, "Collection");
             this.Collection.BackColor = System.Drawing.Color.White;
+            this.Collection.ContextMenuStrip = this.contextMenu;
             this.Collection.FullRowSelect = true;
             this.Collection.GridLines = true;
             this.Collection.Name = "Collection";
@@ -94,6 +101,22 @@
             this.Collection.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.Collection_ColumnClick);
             this.Collection.ItemActivate += new System.EventHandler(this.Collection_ItemActivate);
             this.Collection.SelectedIndexChanged += new System.EventHandler(this.Collection_SelectedIndexChanged);
+            // 
+            // contextMenu
+            // 
+            this.contextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.CopyNameTSMI,
+            this.EditItemTSMI,
+            this.DeleteItemTSMI});
+            this.contextMenu.Name = "contextMenu";
+            resources.ApplyResources(this.contextMenu, "contextMenu");
+            this.contextMenu.Opening += new System.ComponentModel.CancelEventHandler(this.ContextMenuBlockOpening);
+            // 
+            // CopyNameTSMI
+            // 
+            this.CopyNameTSMI.Name = "CopyNameTSMI";
+            resources.ApplyResources(this.CopyNameTSMI, "CopyNameTSMI");
+            this.CopyNameTSMI.Click += new System.EventHandler(this.copyNameTSMI_Click);
             // 
             // StatusBar
             // 
@@ -396,6 +419,18 @@
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.TabStop = false;
             // 
+            // EditItemTSMI
+            // 
+            this.EditItemTSMI.Name = "EditItemTSMI";
+            resources.ApplyResources(this.EditItemTSMI, "EditItemTSMI");
+            this.EditItemTSMI.Click += new System.EventHandler(this.EditItemTSMI_Click);
+            // 
+            // DeleteItemTSMI
+            // 
+            this.DeleteItemTSMI.Name = "DeleteItemTSMI";
+            resources.ApplyResources(this.DeleteItemTSMI, "DeleteItemTSMI");
+            this.DeleteItemTSMI.Click += new System.EventHandler(this.DeleteItemTSMI_Click);
+            // 
             // MainForm
             // 
             resources.ApplyResources(this, "$this");
@@ -415,6 +450,7 @@
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.MainForm_Paint);
             this.Resize += new System.EventHandler(this.MainForm_Resize);
+            this.contextMenu.ResumeLayout(false);
             this.StatusBar.ResumeLayout(false);
             this.StatusBar.PerformLayout();
             this.MainMenu.ResumeLayout(false);
@@ -474,6 +510,10 @@
         public System.Windows.Forms.Label ElementCount;
         public System.Windows.Forms.ToolStripMenuItem ClearLibTSMI;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.ContextMenuStrip contextMenu;
+        private System.Windows.Forms.ToolStripMenuItem CopyNameTSMI;
+        private System.Windows.Forms.ToolStripMenuItem EditItemTSMI;
+        private System.Windows.Forms.ToolStripMenuItem DeleteItemTSMI;
     }
 }
 

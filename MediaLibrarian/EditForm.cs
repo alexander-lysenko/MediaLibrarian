@@ -5,6 +5,8 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MediaLibrarian
@@ -19,6 +21,7 @@ namespace MediaLibrarian
         MainForm _mainForm;
         List<Control> columnData = new List<Control>();
         string customDateTimeFormat = "d.MM.yyyy, HH:mm:ss";
+        private string errorString;
         public bool EditMode;
         public EventArgs E { get; set; }
 
@@ -206,7 +209,16 @@ namespace MediaLibrarian
             }
             SaveButton.Enabled = false;
             if (new Regex(@"(http|https|ftp):\/\/(([a-z0-9\-\.]+)?[a-z0-9\-]+(!?\.[a-z]{2,4}))").IsMatch(PosterImageTB.Text))
-                DownloadPicture(PosterImageTB.Text);
+            {
+                try
+                {
+                    DownloadPicture(PosterImageTB.Text);
+                }
+                catch (ArgumentException)
+                {
+                    LoadingLabel.Text = "Адрес недоступен";
+                }
+            }
             else
             {
                 if (new Regex(@"^(.+):(\\.*)*\.(.*)$").IsMatch(PosterImageTB.Text) && File.Exists(PosterImageTB.Text))
@@ -222,24 +234,34 @@ namespace MediaLibrarian
         }
         void DownloadPicture(string address)
         {
+            Bitmap bmp = null;
+            if (loadedPicture.Image != null) loadedPicture.Image = null;
             LoadingLabel.Text = "Загрузка...";
-            try
-            {
-                if (loadedPicture.Image != null) loadedPicture.Image.Dispose();
-                var request = System.Net.WebRequest.Create(address);
-                var response = request.GetResponse();
-                using (var responseStream = response.GetResponseStream())
+            Task tsk = Task.Factory.StartNew(() =>
                 {
-                    loadedPicture.Image = new Bitmap(responseStream);
-                    LoadingLabel.Text = "Изображение загружено";
-                    SaveButton.Enabled = true;
+                    Thread.Sleep(500);
+                    try
+                    {
+                        var request = System.Net.WebRequest.Create(address);
+                        var response = request.GetResponse();
+                        using (var responseStream = response.GetResponseStream())
+                        {
+                            bmp = new Bitmap(responseStream);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        errorString = ex.Message;
+                        bmp = null;
+                    }
+                    this.Invoke((Action)(() =>
+                        {
+                            loadedPicture.Image = bmp;
+                            SaveButton.Enabled = true;
+                            LoadingLabel.Text = loadedPicture.Image != null ? "Изображение загружено" : errorString;
+                        }));
                 }
-            }
-            catch (Exception ex)
-            {
-                LoadingLabel.Text = ex.Message;
-                loadedPicture.Image = null;
-            }
+            );
         }
         void SelectLocalPicture(string filename)
         {
@@ -609,7 +631,7 @@ namespace MediaLibrarian
                     "Стоп-стоп-стоп...", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) e.Handled = true;
                     break;
                 case Keys.Enter: if (e.Control)
-                     SaveButton.PerformClick(); break;
+                        SaveButton.PerformClick(); break;
             }
         }
         private void tb_TextChanged(object sender, EventArgs e)
