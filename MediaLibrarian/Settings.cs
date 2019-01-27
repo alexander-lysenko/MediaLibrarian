@@ -6,6 +6,7 @@ namespace MediaLibrarian
     [Serializable]
     public class Settings
     {
+        public int PageSize { get; set; }
         public bool RememberLastLibrary { get; set; }
         public string LastLibraryName { get; set; }
         public bool FocusFirstItem { get; set; }

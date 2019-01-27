@@ -33,6 +33,8 @@
             this.Collection = new System.Windows.Forms.ListView();
             this.contextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.CopyNameTSMI = new System.Windows.Forms.ToolStripMenuItem();
+            this.EditItemTSMI = new System.Windows.Forms.ToolStripMenuItem();
+            this.DeleteItemTSMI = new System.Windows.Forms.ToolStripMenuItem();
             this.StatusBar = new System.Windows.Forms.StatusStrip();
             this.StatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.informationLabel = new System.Windows.Forms.ToolStripStatusLabel();
@@ -74,8 +76,16 @@
             this.PosterBox = new System.Windows.Forms.PictureBox();
             this.InfoPanel = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.EditItemTSMI = new System.Windows.Forms.ToolStripMenuItem();
-            this.DeleteItemTSMI = new System.Windows.Forms.ToolStripMenuItem();
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.paginationToolStrip = new System.Windows.Forms.ToolStrip();
+            this.pagerEndBtn = new System.Windows.Forms.ToolStripButton();
+            this.pagerUpBtn = new System.Windows.Forms.ToolStripButton();
+            this.pagerCountLabel = new System.Windows.Forms.ToolStripLabel();
+            this.pagerCurrentTb = new System.Windows.Forms.ToolStripTextBox();
+            this.pagerDownBtn = new System.Windows.Forms.ToolStripButton();
+            this.pagerBeginBtn = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.contextMenu.SuspendLayout();
             this.StatusBar.SuspendLayout();
             this.MainMenu.SuspendLayout();
@@ -85,6 +95,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.PosterBox)).BeginInit();
             this.InfoPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
+            this.paginationToolStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // Collection
@@ -117,6 +129,18 @@
             this.CopyNameTSMI.Name = "CopyNameTSMI";
             resources.ApplyResources(this.CopyNameTSMI, "CopyNameTSMI");
             this.CopyNameTSMI.Click += new System.EventHandler(this.copyNameTSMI_Click);
+            // 
+            // EditItemTSMI
+            // 
+            this.EditItemTSMI.Name = "EditItemTSMI";
+            resources.ApplyResources(this.EditItemTSMI, "EditItemTSMI");
+            this.EditItemTSMI.Click += new System.EventHandler(this.EditItemTSMI_Click);
+            // 
+            // DeleteItemTSMI
+            // 
+            this.DeleteItemTSMI.Name = "DeleteItemTSMI";
+            resources.ApplyResources(this.DeleteItemTSMI, "DeleteItemTSMI");
+            this.DeleteItemTSMI.Click += new System.EventHandler(this.DeleteItemTSMI_Click);
             // 
             // StatusBar
             // 
@@ -414,28 +438,95 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::MediaLibrarian.Properties.Resources.splash;
             resources.ApplyResources(this.pictureBox1, "pictureBox1");
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.TabStop = false;
             // 
-            // EditItemTSMI
+            // paginationToolStrip
             // 
-            this.EditItemTSMI.Name = "EditItemTSMI";
-            resources.ApplyResources(this.EditItemTSMI, "EditItemTSMI");
-            this.EditItemTSMI.Click += new System.EventHandler(this.EditItemTSMI_Click);
+            this.paginationToolStrip.AllowItemReorder = true;
+            this.paginationToolStrip.AllowMerge = false;
+            resources.ApplyResources(this.paginationToolStrip, "paginationToolStrip");
+            this.paginationToolStrip.BackColor = System.Drawing.Color.Transparent;
+            this.paginationToolStrip.CanOverflow = false;
+            this.paginationToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.pagerBeginBtn,
+            this.pagerDownBtn,
+            this.toolStripSeparator5,
+            this.pagerCurrentTb,
+            this.pagerCountLabel,
+            this.toolStripSeparator4,
+            this.pagerUpBtn,
+            this.pagerEndBtn});
+            this.paginationToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
+            this.paginationToolStrip.Name = "paginationToolStrip";
             // 
-            // DeleteItemTSMI
+            // pagerEndBtn
             // 
-            this.DeleteItemTSMI.Name = "DeleteItemTSMI";
-            resources.ApplyResources(this.DeleteItemTSMI, "DeleteItemTSMI");
-            this.DeleteItemTSMI.Click += new System.EventHandler(this.DeleteItemTSMI_Click);
+            this.pagerEndBtn.BackColor = System.Drawing.SystemColors.Control;
+            this.pagerEndBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            resources.ApplyResources(this.pagerEndBtn, "pagerEndBtn");
+            this.pagerEndBtn.Margin = new System.Windows.Forms.Padding(1);
+            this.pagerEndBtn.Name = "pagerEndBtn";
+            this.pagerEndBtn.Click += new System.EventHandler(this.pagerEndBtn_Click);
+            // 
+            // pagerUpBtn
+            // 
+            this.pagerUpBtn.BackColor = System.Drawing.SystemColors.Control;
+            this.pagerUpBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            resources.ApplyResources(this.pagerUpBtn, "pagerUpBtn");
+            this.pagerUpBtn.Margin = new System.Windows.Forms.Padding(1);
+            this.pagerUpBtn.Name = "pagerUpBtn";
+            this.pagerUpBtn.Click += new System.EventHandler(this.pagerUpBtn_Click);
+            // 
+            // pagerCountLabel
+            // 
+            this.pagerCountLabel.Margin = new System.Windows.Forms.Padding(3, 3, 0, 0);
+            this.pagerCountLabel.Name = "pagerCountLabel";
+            resources.ApplyResources(this.pagerCountLabel, "pagerCountLabel");
+            // 
+            // pagerCurrentTb
+            // 
+            resources.ApplyResources(this.pagerCurrentTb, "pagerCurrentTb");
+            this.pagerCurrentTb.Margin = new System.Windows.Forms.Padding(1);
+            this.pagerCurrentTb.Name = "pagerCurrentTb";
+            this.pagerCurrentTb.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.pagerCurrentTb_KeyPress);
+            this.pagerCurrentTb.TextChanged += new System.EventHandler(this.pagerCurrentTb_TextChanged);
+            // 
+            // pagerDownBtn
+            // 
+            this.pagerDownBtn.BackColor = System.Drawing.SystemColors.Control;
+            this.pagerDownBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            resources.ApplyResources(this.pagerDownBtn, "pagerDownBtn");
+            this.pagerDownBtn.Margin = new System.Windows.Forms.Padding(1);
+            this.pagerDownBtn.Name = "pagerDownBtn";
+            this.pagerDownBtn.Click += new System.EventHandler(this.pagerDownBtn_Click);
+            // 
+            // pagerBeginBtn
+            // 
+            this.pagerBeginBtn.BackColor = System.Drawing.SystemColors.Control;
+            this.pagerBeginBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            resources.ApplyResources(this.pagerBeginBtn, "pagerBeginBtn");
+            this.pagerBeginBtn.Margin = new System.Windows.Forms.Padding(1);
+            this.pagerBeginBtn.Name = "pagerBeginBtn";
+            this.pagerBeginBtn.Click += new System.EventHandler(this.pagerBeginBtn_Click);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            resources.ApplyResources(this.toolStripSeparator4, "toolStripSeparator4");
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            resources.ApplyResources(this.toolStripSeparator5, "toolStripSeparator5");
             // 
             // MainForm
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.Controls.Add(this.paginationToolStrip);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.ElementInfoGB);
             this.Controls.Add(this.ElementActionsGB);
@@ -461,6 +552,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.PosterBox)).EndInit();
             this.InfoPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
+            this.paginationToolStrip.ResumeLayout(false);
+            this.paginationToolStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -514,6 +608,16 @@
         private System.Windows.Forms.ToolStripMenuItem CopyNameTSMI;
         private System.Windows.Forms.ToolStripMenuItem EditItemTSMI;
         private System.Windows.Forms.ToolStripMenuItem DeleteItemTSMI;
+        private System.Windows.Forms.BindingSource bindingSource1;
+        private System.Windows.Forms.ToolStripButton pagerBeginBtn;
+        private System.Windows.Forms.ToolStripButton pagerDownBtn;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripButton pagerEndBtn;
+        private System.Windows.Forms.ToolStripButton pagerUpBtn;
+        public System.Windows.Forms.ToolStrip paginationToolStrip;
+        public System.Windows.Forms.ToolStripLabel pagerCountLabel;
+        public System.Windows.Forms.ToolStripTextBox pagerCurrentTb;
     }
 }
 

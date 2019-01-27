@@ -18,6 +18,7 @@ namespace MediaLibrarian
             InitializeComponent();
             _mainForm = formMain;
         }
+
         MainForm _mainForm;
         List<Control> columnData = new List<Control>();
         string customDateTimeFormat = "d.MM.yyyy, HH:mm:ss";
@@ -28,23 +29,40 @@ namespace MediaLibrarian
         public static void ErrorMessage(Exception ex)
         {
             MessageBox.Show(String.Format("Имя ошибки: {0}\nМесто: {1}\nЗначение: {2}",
-                ex.ToString().Remove(ex.ToString().IndexOf(':')), ex.Source, ex.Message),
+                    ex.ToString().Remove(ex.ToString().IndexOf(':')), ex.Source, ex.Message),
                 "Произошла ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
+
         #region DatabaseAPI&LoadData
+
         private void GetControlByType(string type, int i)
         {
             switch (type)
             {
-                case "VARCHAR(128)": MakeATextBox(i); break;        //Строка
-                case "TEXT": MakeATextArea(i); break;               //Текст
-                case "VARCHAR(20)": MakeADateField(i); break;       //Поле дата
-                case "CHAR(20)": MakeADateTimeField(i); break;      //Поле дата+время
-                case "CHAR(5)": Make5Stars(i); break;               //Поле оценка(5)
-                case "CHAR(10)": Make10Stars(i); break;             //Поле оценка(10)
-                case "VARCHAR(10)": Make10Cubes(i); break;          //Поле приоритет
+                case "VARCHAR(128)":
+                    MakeATextBox(i);
+                    break; //Строка
+                case "TEXT":
+                    MakeATextArea(i);
+                    break; //Текст
+                case "VARCHAR(20)":
+                    MakeADateField(i);
+                    break; //Поле дата
+                case "CHAR(20)":
+                    MakeADateTimeField(i);
+                    break; //Поле дата+время
+                case "CHAR(5)":
+                    Make5Stars(i);
+                    break; //Поле оценка(5)
+                case "CHAR(10)":
+                    Make10Stars(i);
+                    break; //Поле оценка(10)
+                case "VARCHAR(10)":
+                    Make10Cubes(i);
+                    break; //Поле приоритет
             }
         }
+
         private List<string> GetDataFromDatabase(string tableName, string elementHeaderName, string elementName)
         {
             var items = new List<string>();
@@ -62,9 +80,10 @@ namespace MediaLibrarian
             {
                 ErrorMessage(ex);
             }
-            return items;
 
+            return items;
         }
+
         private void PushDataIntoCreatedControls(List<string> items)
         {
             for (var i = 0; i < columnData.Count; i++)
@@ -73,34 +92,49 @@ namespace MediaLibrarian
                 {
                     case "System.Windows.Forms.TextBox":
                     case "System.Windows.Forms.RichTextBox":
-                        columnData[i].Text = items[i]; break;
+                        columnData[i].Text = items[i];
+                        break;
                     case "System.Windows.Forms.Panel":
                         //if (!new List<string>(){null, "", "0"}.Contains(Items[i])) 
                         switch (columnData[i].Tag.ToString())
                         {
-                            case "Star5": if (GetNumValue(items[i]) != 0)
+                            case "Star5":
+                                if (GetNumValue(items[i]) != 0)
                                     Star5_Click(columnData[i].Controls[GetNumValue(items[i]) - 1], E);
-                                else columnData[i].Text = "☆☆☆☆☆"; break;
-                            case "Star10": if (GetNumValue(items[i]) != 0)
+                                else columnData[i].Text = "☆☆☆☆☆";
+                                break;
+                            case "Star10":
+                                if (GetNumValue(items[i]) != 0)
                                     Star10_Click(columnData[i].Controls[GetNumValue(items[i]) - 1], E);
-                                else columnData[i].Text = "☆☆☆☆☆☆☆☆☆☆"; break;
-                            case "Cube10": if (GetNumValue(items[i]) != 0)
+                                else columnData[i].Text = "☆☆☆☆☆☆☆☆☆☆";
+                                break;
+                            case "Cube10":
+                                if (GetNumValue(items[i]) != 0)
                                     Cube10_Click(columnData[i].Controls[GetNumValue(items[i]) - 1], E);
-                                else columnData[i].Text = "▒▒▒▒▒▒▒▒▒▒"; break;
+                                else columnData[i].Text = "▒▒▒▒▒▒▒▒▒▒";
+                                break;
                         }
+
                         break;
                     case "System.Windows.Forms.DateTimePicker":
                         try
                         {
                             (columnData[i] as DateTimePicker).Value = DateTime.Parse(items[i]);
                         }
-                        catch (Exception ex) { MessageBox.Show(ex.Message); }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
+
                         break;
                 }
             }
         }
+
         #endregion
+
         #region Items
+
         private void EditItem()
         {
             var names = new List<string>();
@@ -110,10 +144,12 @@ namespace MediaLibrarian
             var updateQuery = String.Format("update `{0}` set ", _mainForm.SelectedLibLabel.Text);
             for (var i = 0; i < names.Count; i++)
             {
-                updateQuery += "`" + names[i] + "` = '" + values[i].Replace("'", "''") + "'";
+                updateQuery += "`" + names[i] + "` = '" + values[i].Trim().Replace("'", "''") + "'";
                 if (names.Count - i > 1) updateQuery += ", ";
             }
-            updateQuery += " where `" + names[0] + "` = '" + columnData[0].Tag.ToString().Replace("'", "''") + "'";
+
+            updateQuery += " where `" + names[0] + "` = '" + columnData[0].Tag.ToString().Trim().Replace("'", "''") +
+                           "'";
             if (VerifyItem())
             {
                 try
@@ -125,15 +161,16 @@ namespace MediaLibrarian
                 {
                     ErrorMessage(ex);
                 }
+
                 _mainForm.StatusLabel.Text = "Элемент \"" + columnData[0].Text + "\" изменен";
                 Close();
             }
-
         }
+
         private void AddNewItem()
         {
-            var names = String.Join("` , `", from val in _mainForm.ColumnsInfo select val.Name);
-            var values = String.Join("\" , \"", from data in columnData select data.Text);
+            var names = String.Join("` , `", from val in _mainForm.ColumnsInfo select val.Name.Trim());
+            var values = String.Join("\" , \"", from data in columnData select data.Text.Trim());
             var addNewItemQuery = String.Format("insert into `{0}` (`{1}`) values (\"{2}\")",
                 _mainForm.SelectedLibLabel.Text, names, values);
             if (VerifyItem())
@@ -147,21 +184,26 @@ namespace MediaLibrarian
                 {
                     ErrorMessage(ex);
                 }
+
                 _mainForm.StatusLabel.Text = "Добавлена запись \"" + columnData[0].Text + "\"";
                 Close();
             }
         }
+
         private bool VerifyItem()
         {
             try
             {
                 var verifyQuery = string.Format("select `{0}` from `{1}` where TOUPPER(`{0}`) = '{2}'",
-                    _mainForm.ColumnsInfo[0].Name, _mainForm.SelectedLibLabel.Text, columnData[0].Text.Replace("'", "''").ToUpper());
+                    _mainForm.ColumnsInfo[0].Name, _mainForm.SelectedLibLabel.Text,
+                    columnData[0].Text.Trim().Replace("'", "''").ToUpper());
                 var value = Database.GetScalar(verifyQuery);
-                if (value != null && value.ToString().ToUpper() == columnData[0].Text.ToUpper() && (columnData[0].Tag.ToString() != columnData[0].Text))
+                if (value != null && value.ToString().ToLower() == columnData[0].Text.Trim().ToLower() &&
+                    (columnData[0].Tag.ToString() != columnData[0].Text))
                 {
-                    MessageBox.Show("Запись с таким именем уже существует в библиотеке", "Обнаружен дубликат данных", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    this.DialogResult = DialogResult.Abort;
+                    MessageBox.Show("Запись с таким именем уже существует в библиотеке", "Обнаружен дубликат данных",
+                        MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    DialogResult = DialogResult.Abort;
                     return false;
                 }
             }
@@ -170,13 +212,16 @@ namespace MediaLibrarian
                 ErrorMessage(ex);
                 return false;
             }
+
             return true;
         }
+
         public void DeleteItem(string itemType, string itemName)
         {
             try
             {
-                var deleteItemQuery = String.Format("delete from `{0}` where `{1}` = '{2}'", _mainForm.SelectedLibLabel.Text,
+                var deleteItemQuery = String.Format("delete from `{0}` where `{1}` = '{2}'",
+                    _mainForm.SelectedLibLabel.Text,
                     itemType, itemName);
                 Database.Execute(deleteItemQuery);
             }
@@ -185,20 +230,24 @@ namespace MediaLibrarian
                 ErrorMessage(ex);
                 return;
             }
+
             var pathToPoster = String.Format(@"{0}\Posters\{1}\{2}.jpg", Environment.CurrentDirectory,
-                        _mainForm.ReplaceSymblos(_mainForm.SelectedLibLabel.Text),
-                        _mainForm.ReplaceSymblos(itemName));
+                _mainForm.ReplaceSymblos(_mainForm.SelectedLibLabel.Text),
+                _mainForm.ReplaceSymblos(itemName));
             if (File.Exists(pathToPoster))
             {
                 _mainForm.PosterBox.Image.Dispose();
                 File.Delete(pathToPoster);
             }
+
             _mainForm.StatusLabel.Text = "Запись \"" + itemName + "\" успешно удалена";
             UpdateCollection();
         }
+
         #endregion
 
         #region SetPoster
+
         private void PosterImageTB_TextChanged(object sender, EventArgs e)
         {
             if (PosterImageTB.Text == "")
@@ -207,8 +256,10 @@ namespace MediaLibrarian
                 LoadingLabel.Text = "Постер отсутствует";
                 return;
             }
+
             SaveButton.Enabled = false;
-            if (new Regex(@"(http|https|ftp):\/\/(([a-z0-9\-\.]+)?[a-z0-9\-]+(!?\.[a-z]{2,4}))").IsMatch(PosterImageTB.Text))
+            if (new Regex(@"(http|https|ftp):\/\/(([a-z0-9\-\.]+)?[a-z0-9\-]+(!?\.[a-z]{2,4}))").IsMatch(PosterImageTB
+                .Text))
             {
                 try
                 {
@@ -232,6 +283,7 @@ namespace MediaLibrarian
                 }
             }
         }
+
         void DownloadPicture(string address)
         {
             Bitmap bmp = null;
@@ -254,15 +306,17 @@ namespace MediaLibrarian
                         errorString = ex.Message;
                         bmp = null;
                     }
-                    this.Invoke((Action)(() =>
-                        {
-                            loadedPicture.Image = bmp;
-                            SaveButton.Enabled = true;
-                            LoadingLabel.Text = loadedPicture.Image != null ? "Изображение загружено" : errorString;
-                        }));
+
+                    this.Invoke((Action) (() =>
+                    {
+                        loadedPicture.Image = bmp;
+                        SaveButton.Enabled = true;
+                        LoadingLabel.Text = loadedPicture.Image != null ? "Изображение загружено" : errorString;
+                    }));
                 }
             );
         }
+
         void SelectLocalPicture(string filename)
         {
             try
@@ -278,15 +332,16 @@ namespace MediaLibrarian
                 loadedPicture.Image = null;
             }
         }
+
         void SavePicture()
         {
             if (_mainForm.PosterBox.Image != null) _mainForm.PosterBox.Image.Dispose();
             var newStr = String.Format(@"{0}\Posters\{1}\{2}.jpg", Environment.CurrentDirectory,
-                        _mainForm.ReplaceSymblos(_mainForm.SelectedLibLabel.Text),
-                        _mainForm.ReplaceSymblos(columnData[0].Text));
+                _mainForm.ReplaceSymblos(_mainForm.SelectedLibLabel.Text),
+                _mainForm.ReplaceSymblos(columnData[0].Text));
             var oldStr = String.Format(@"{0}\Posters\{1}\{2}.jpg", Environment.CurrentDirectory,
-                        _mainForm.ReplaceSymblos(_mainForm.SelectedLibLabel.Text),
-                        _mainForm.ReplaceSymblos(columnData[0].Tag.ToString()));
+                _mainForm.ReplaceSymblos(_mainForm.SelectedLibLabel.Text),
+                _mainForm.ReplaceSymblos(columnData[0].Tag.ToString()));
             try
             {
                 if (PosterImageTB.Text == "") //Если картинка пуста, независимо от изменения имени, убираем ее
@@ -322,11 +377,12 @@ namespace MediaLibrarian
                 MessageBox.Show(ex.Message, ex.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 DialogResult = DialogResult.Abort;
             }
-
-
         }
+
         #endregion
+
         #region CreateControls
+
         void CreateHeaderLabel(int i)
         {
             EditPanel.Controls.Add(new Label()
@@ -338,6 +394,7 @@ namespace MediaLibrarian
                 Text = _mainForm.ColumnsInfo[i].Name
             });
         }
+
         void MakeATextBox(int i)
         {
             var tb = new TextBox()
@@ -348,6 +405,7 @@ namespace MediaLibrarian
             tb.TextChanged += tb_TextChanged;
             columnData.Add(tb);
         }
+
         void MakeATextArea(int i)
         {
             columnData.Add(new RichTextBox()
@@ -357,31 +415,36 @@ namespace MediaLibrarian
                 WordWrap = true,
             });
         }
+
         void MakeADateField(int i)
         {
             columnData.Add(new DateTimePicker()
             {
                 Size = new Size(150, 20),
-                Margin = new Padding() { Left = 47, Bottom = 5 },
+                Margin = new Padding() {Left = 47, Bottom = 5},
                 Font = new Font("Tahoma", 9),
                 Format = DateTimePickerFormat.Long,
                 Value = DateTime.Now,
             });
         }
+
         void MakeADateTimeField(int i)
         {
             columnData.Add(new DateTimePicker()
             {
                 Size = new Size(160, 20),
-                Margin = new Padding() { Left = 37, Bottom = 5 },
+                Margin = new Padding() {Left = 37, Bottom = 5},
                 Font = new Font("Tahoma", 9),
                 Format = DateTimePickerFormat.Custom,
                 CustomFormat = customDateTimeFormat,
                 Value = DateTime.Now,
             });
         }
+
         #endregion
+
         #region CreateStarsAndCubes
+
         void Make5Stars(int i) //i - порядок панели на форме
         {
             var starsList = new List<Label>();
@@ -389,7 +452,6 @@ namespace MediaLibrarian
             {
                 Size = new Size(190, 30),
                 Tag = "Star5",
-
             };
             for (var ii = 0; ii < 5; ii++)
             {
@@ -401,15 +463,17 @@ namespace MediaLibrarian
                     ForeColor = Color.Gray,
                     TextAlign = ContentAlignment.TopLeft,
                     Text = "☆",
-                    Tag = new int[] { i, starsList.Count }
+                    Tag = new int[] {i, starsList.Count}
                 };
                 star5.Click += new EventHandler(Star5_Click);
                 starsList.Add(star5);
             }
+
             stars5Panel.Controls.AddRange(starsList.ToArray());
             columnData.Add(stars5Panel);
             columnData[columnData.IndexOf(stars5Panel)].Text = "☆☆☆☆☆";
         }
+
         void Make10Stars(int i) //i - порядок панели на форме
         {
             var starsList = new List<Label>();
@@ -429,22 +493,24 @@ namespace MediaLibrarian
                     ForeColor = Color.Gray,
                     TextAlign = ContentAlignment.TopLeft,
                     Text = "☆",
-                    Tag = new int[] { i, starsList.Count }
+                    Tag = new int[] {i, starsList.Count}
                 };
                 star10.Click += new EventHandler(Star10_Click);
                 starsList.Add(star10);
             }
+
             stars10Panel.Controls.AddRange(starsList.ToArray());
             columnData.Add(stars10Panel);
             columnData[columnData.IndexOf(stars10Panel)].Text = "☆☆☆☆☆☆☆☆☆☆";
         }
+
         void Make10Cubes(int i) //i - порядок панели на форме
         {
             var cubeList = new List<Label>();
             var cubes10Panel = new Panel()
             {
                 Size = new Size(150, 30),
-                Margin = new Padding() { Left = 42 },
+                Margin = new Padding() {Left = 42},
                 Tag = "Cube10"
             };
             for (var ii = 0; ii < 10; ii++)
@@ -457,22 +523,27 @@ namespace MediaLibrarian
                     FlatStyle = FlatStyle.System,
                     ForeColor = Color.Gray,
                     Text = "▒",
-                    Tag = new int[] { i, cubeList.Count }
+                    Tag = new int[] {i, cubeList.Count}
                 };
                 cube.Click += new EventHandler(Cube10_Click);
                 cubeList.Add(cube);
             }
+
             cubes10Panel.Controls.AddRange(cubeList.ToArray());
             columnData.Add(cubes10Panel);
             columnData[columnData.IndexOf(cubes10Panel)].Text = "▒▒▒▒▒▒▒▒▒▒";
         }
+
         #endregion
+
         #region ClickToBlocks
+
         private void Star5_Click(object sender, EventArgs e)
         {
-            var colCrd = ((int[])(sender as Label).Tag)[0];
-            var listCrd = ((int[])(sender as Label).Tag)[1];
-            if ((sender as Label) == columnData[colCrd].Controls[0] && columnData[colCrd].Controls[0].Text == "★" && columnData[colCrd].Controls[1].Text == "☆")
+            var colCrd = ((int[]) (sender as Label).Tag)[0];
+            var listCrd = ((int[]) (sender as Label).Tag)[1];
+            if ((sender as Label) == columnData[colCrd].Controls[0] && columnData[colCrd].Controls[0].Text == "★" &&
+                columnData[colCrd].Controls[1].Text == "☆")
             {
                 columnData[colCrd].Controls[0].Text = "☆";
                 columnData[colCrd].Controls[0].ForeColor = Color.Gray;
@@ -489,6 +560,7 @@ namespace MediaLibrarian
                     columnData[colCrd].Controls[i].Text = "★";
                     columnData[colCrd].Text += "★";
                 }
+
                 for (var j = columnData[colCrd].Controls.Count - 1; j > listCrd; j--)
                 {
                     columnData[colCrd].Controls[j].ForeColor = Color.Gray;
@@ -497,11 +569,13 @@ namespace MediaLibrarian
                 }
             }
         }
+
         private void Star10_Click(object sender, EventArgs e)
         {
-            var colCrd = ((int[])(sender as Label).Tag)[0];
-            var listCrd = ((int[])(sender as Label).Tag)[1];
-            if ((sender as Label) == columnData[colCrd].Controls[0] && columnData[colCrd].Controls[0].Text == "★" && columnData[colCrd].Controls[1].Text == "☆")
+            var colCrd = ((int[]) (sender as Label).Tag)[0];
+            var listCrd = ((int[]) (sender as Label).Tag)[1];
+            if ((sender as Label) == columnData[colCrd].Controls[0] && columnData[colCrd].Controls[0].Text == "★" &&
+                columnData[colCrd].Controls[1].Text == "☆")
             {
                 columnData[colCrd].Controls[0].Text = "☆";
                 columnData[colCrd].Controls[0].ForeColor = Color.Gray;
@@ -518,6 +592,7 @@ namespace MediaLibrarian
                     columnData[colCrd].Controls[i].Text = "★";
                     columnData[colCrd].Text += "★";
                 }
+
                 for (var j = columnData[colCrd].Controls.Count - 1; j > listCrd; j--)
                 {
                     columnData[colCrd].Controls[j].ForeColor = Color.Gray;
@@ -526,11 +601,13 @@ namespace MediaLibrarian
                 }
             }
         }
+
         private void Cube10_Click(object sender, EventArgs e)
         {
-            var colCrd = ((int[])(sender as Label).Tag)[0];
-            var listCrd = ((int[])(sender as Label).Tag)[1];
-            if ((sender as Label) == columnData[colCrd].Controls[0] && columnData[colCrd].Controls[0].Text == "█" && columnData[colCrd].Controls[1].Text == "▒")
+            var colCrd = ((int[]) (sender as Label).Tag)[0];
+            var listCrd = ((int[]) (sender as Label).Tag)[1];
+            if ((sender as Label) == columnData[colCrd].Controls[0] && columnData[colCrd].Controls[0].Text == "█" &&
+                columnData[colCrd].Controls[1].Text == "▒")
             {
                 columnData[colCrd].Controls[0].Text = "▒";
                 columnData[colCrd].Controls[0].ForeColor = Color.Gray;
@@ -545,6 +622,7 @@ namespace MediaLibrarian
                     columnData[colCrd].Controls[i].Text = "█";
                     columnData[colCrd].Text += "█";
                 }
+
                 for (var j = columnData[colCrd].Controls.Count - 1; j > listCrd; j--)
                 {
                     columnData[colCrd].Controls[j].ForeColor = Color.Gray;
@@ -553,8 +631,11 @@ namespace MediaLibrarian
                 }
             }
         }
+
         #endregion
+
         #region ButtonClicks
+
         private void SaveButton_Click(object sender, EventArgs e)
         {
             if (columnData[0].Text == "")
@@ -564,13 +645,17 @@ namespace MediaLibrarian
                 this.DialogResult = DialogResult.Abort;
                 return;
             }
-            if (EditMode) EditItem(); else AddNewItem();
+
+            if (EditMode) EditItem();
+            else AddNewItem();
             UpdateCollection();
         }
+
         private void CancelButton_Click(object sender, EventArgs e)
         {
             Close();
         }
+
         private void SelectImageButton_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Abort;
@@ -578,69 +663,147 @@ namespace MediaLibrarian
             {
                 PosterImageTB.Text = OpenFile.FileName;
             }
-
         }
+
         #endregion
+
         #region Miscellaneous
+
         private void UpdateCollection()
         {
-            _mainForm._libManagerForm.ReadTableFromDatabase(_mainForm.SelectedLibLabel.Text);
+            int currentPage = Convert.ToInt32(_mainForm.pagerCurrentTb.Text);
+            var offset = _mainForm.Preferences.PageSize * (currentPage - 1);
+            _mainForm._libManagerForm.ReadTableFromDatabase(_mainForm.SelectedLibLabel.Text,
+                _mainForm.Preferences.PageSize, offset);
         }
+
         int GetNumValue(string stars)
         {
             var digit = 0;
             switch (stars)
             {
-                case "☆☆☆☆☆": digit = 0; break;
-                case "☆☆☆☆☆☆☆☆☆☆": digit = 0; break;
-                case "▒▒▒▒▒▒▒▒▒▒": digit = 0; break;
-                case "★☆☆☆☆": digit = 1; break;
-                case "★☆☆☆☆☆☆☆☆☆": digit = 1; break;
-                case "█▒▒▒▒▒▒▒▒▒": digit = 1; break;
-                case "★★☆☆☆": digit = 2; break;
-                case "★★☆☆☆☆☆☆☆": digit = 2; break;
-                case "██▒▒▒▒▒▒▒▒": digit = 2; break;
-                case "★★★☆☆": digit = 3; break;
-                case "★★★☆☆☆☆☆☆☆": digit = 3; break;
-                case "███▒▒▒▒▒▒▒": digit = 3; break;
-                case "★★★★☆": digit = 4; break;
-                case "★★★★☆☆☆☆☆☆": digit = 4; break;
-                case "████▒▒▒▒▒▒": digit = 4; break;
-                case "★★★★★": digit = 5; break;
-                case "★★★★★☆☆☆☆☆": digit = 5; break;
-                case "█████▒▒▒▒▒": digit = 5; break;
-                case "★★★★★★☆☆☆☆": digit = 6; break;
-                case "██████▒▒▒▒": digit = 6; break;
-                case "★★★★★★★☆☆☆": digit = 7; break;
-                case "███████▒▒▒": digit = 7; break;
-                case "★★★★★★★★☆☆": digit = 8; break;
-                case "████████▒▒": digit = 8; break;
-                case "★★★★★★★★★☆": digit = 9; break;
-                case "█████████▒": digit = 9; break;
-                case "★★★★★★★★★★": digit = 10; break;
-                case "██████████": digit = 10; break;
-                default: digit = 0; break;
+                case "☆☆☆☆☆":
+                    digit = 0;
+                    break;
+                case "☆☆☆☆☆☆☆☆☆☆":
+                    digit = 0;
+                    break;
+                case "▒▒▒▒▒▒▒▒▒▒":
+                    digit = 0;
+                    break;
+                case "★☆☆☆☆":
+                    digit = 1;
+                    break;
+                case "★☆☆☆☆☆☆☆☆☆":
+                    digit = 1;
+                    break;
+                case "█▒▒▒▒▒▒▒▒▒":
+                    digit = 1;
+                    break;
+                case "★★☆☆☆":
+                    digit = 2;
+                    break;
+                case "★★☆☆☆☆☆☆☆":
+                    digit = 2;
+                    break;
+                case "██▒▒▒▒▒▒▒▒":
+                    digit = 2;
+                    break;
+                case "★★★☆☆":
+                    digit = 3;
+                    break;
+                case "★★★☆☆☆☆☆☆☆":
+                    digit = 3;
+                    break;
+                case "███▒▒▒▒▒▒▒":
+                    digit = 3;
+                    break;
+                case "★★★★☆":
+                    digit = 4;
+                    break;
+                case "★★★★☆☆☆☆☆☆":
+                    digit = 4;
+                    break;
+                case "████▒▒▒▒▒▒":
+                    digit = 4;
+                    break;
+                case "★★★★★":
+                    digit = 5;
+                    break;
+                case "★★★★★☆☆☆☆☆":
+                    digit = 5;
+                    break;
+                case "█████▒▒▒▒▒":
+                    digit = 5;
+                    break;
+                case "★★★★★★☆☆☆☆":
+                    digit = 6;
+                    break;
+                case "██████▒▒▒▒":
+                    digit = 6;
+                    break;
+                case "★★★★★★★☆☆☆":
+                    digit = 7;
+                    break;
+                case "███████▒▒▒":
+                    digit = 7;
+                    break;
+                case "★★★★★★★★☆☆":
+                    digit = 8;
+                    break;
+                case "████████▒▒":
+                    digit = 8;
+                    break;
+                case "★★★★★★★★★☆":
+                    digit = 9;
+                    break;
+                case "█████████▒":
+                    digit = 9;
+                    break;
+                case "★★★★★★★★★★":
+                    digit = 10;
+                    break;
+                case "██████████":
+                    digit = 10;
+                    break;
+                default:
+                    digit = 0;
+                    break;
             }
+
             return digit;
         }
+
         private void EditForm_KeyDown(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)
             {
-                case Keys.F4: if (e.Alt) if (MessageBox.Show("Редактирование еще не завершено.\nВы действительно желаете закрыть это окно?",
-                    "Стоп-стоп-стоп...", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) e.Handled = true;
+                case Keys.F4:
+                    if (e.Alt)
+                        if (MessageBox.Show(
+                                "Редактирование еще не завершено.\nВы действительно желаете закрыть это окно?",
+                                "Стоп-стоп-стоп...", MessageBoxButtons.YesNo, MessageBoxIcon.Question) ==
+                            DialogResult.No)
+                            e.Handled = true;
                     break;
-                case Keys.Enter: if (e.Control)
-                        SaveButton.PerformClick(); break;
+                case Keys.Enter:
+                    if (e.Control)
+                        SaveButton.PerformClick();
+                    break;
             }
         }
+
         private void tb_TextChanged(object sender, EventArgs e)
         {
-            (sender as TextBox).Text = (sender as TextBox).Text.
-                Replace("<", "").Replace(">", "").Replace("|", "").Replace("/", "").Replace("\\", "").Replace(";", "");
+            (sender as TextBox).Text = (sender as TextBox).Text
+                .Replace("<", "").Replace(">", "").Replace("|", "")
+                .Replace("/", "").Replace("\\", "").Replace(";", "");
         }
+
         #endregion
+
         #region OpenClose
+
         private void EditForm_Load(object sender, EventArgs e)
         {
             columnData.Clear();
@@ -650,26 +813,31 @@ namespace MediaLibrarian
                 GetControlByType(_mainForm.ColumnsInfo[i].Type, i);
                 EditPanel.Controls.Add(columnData[i]);
             }
+
             if (EditMode && _mainForm.Collection.SelectedItems.Count > 0)
             {
-                PushDataIntoCreatedControls(GetDataFromDatabase(_mainForm.SelectedLibLabel.Text, _mainForm.ColumnsInfo[0].Name,
+                PushDataIntoCreatedControls(GetDataFromDatabase(_mainForm.SelectedLibLabel.Text,
+                    _mainForm.ColumnsInfo[0].Name,
                     _mainForm.Collection.FocusedItem.Text));
                 var pathToFile = String.Format(@"{0}\Posters\{1}\{2}.jpg", Environment.CurrentDirectory,
-                        _mainForm.ReplaceSymblos(_mainForm.SelectedLibLabel.Text),
-                        _mainForm.ReplaceSymblos(columnData[0].Text));
+                    _mainForm.ReplaceSymblos(_mainForm.SelectedLibLabel.Text),
+                    _mainForm.ReplaceSymblos(columnData[0].Text));
                 if (File.Exists(pathToFile))
                 {
                     PosterImageTB.Text = pathToFile;
                     PosterImageTB_TextChanged(PosterImageTB, null);
                 }
             }
+
             columnData[0].Tag = columnData[0].Text;
         }
+
         private void EditForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (DialogResult == DialogResult.Abort) e.Cancel = true;
             else FormReset();
         }
+
         private void FormReset()
         {
             EditMode = false;
@@ -679,6 +847,7 @@ namespace MediaLibrarian
             LoadingLabel.Text = "";
             loadedPicture.Image = null;
         }
+
         #endregion
     }
 }

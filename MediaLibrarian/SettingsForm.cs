@@ -16,6 +16,7 @@ namespace MediaLibrarian
         {
             _mainForm.Preferences = new Settings
             {
+                PageSize = 50,
                 RememberLastLibrary = rememberLastLibraryChk.Checked,
                 LastLibraryName = _mainForm.SelectedLibLabel.Text,
                 FocusFirstItem = focusFirstItemChk.Checked,

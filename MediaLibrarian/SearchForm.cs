@@ -162,7 +162,7 @@ namespace MediaLibrarian
         }
         private void restoreTableBtn_Click(object sender, EventArgs e)
         {
-            _mainForm._libManagerForm.ReadTableFromDatabase(_mainForm.SelectedLibLabel.Text);
+            _mainForm._libManagerForm.ReadTableFromDatabase(_mainForm.SelectedLibLabel.Text, _mainForm.Preferences.PageSize);
         }
         private void SearchForm_Load(object sender, EventArgs e)
         {
