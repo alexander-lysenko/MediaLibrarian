@@ -48,7 +48,6 @@ namespace MediaLibrarian
         {
             pageSizeNumeric.Value = Preferences.PageSize;
             rememberLastLibraryChk.Checked = Preferences.RememberLastLibrary;
-            _mainForm.SelectedLibLabel.Text = Preferences.LastLibraryName;
             focusFirstItemChk.Checked = Preferences.FocusFirstItem;
             cropMaxViewSizeChk.Checked = Preferences.CropMaxViewSize;
             try
