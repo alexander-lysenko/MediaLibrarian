@@ -222,6 +222,7 @@ namespace MediaLibrarian
                     _mainForm.pagerCountLabel.Text = String.Format("из {0}", pagesCount);
                     _mainForm.paginationToolStrip.Enabled = rows > _mainForm.Preferences.PageSize;
                 }
+
                 _mainForm.ElementCount.Text = rowsCount.ToString();
                 _mainForm.InfoPanel.Controls.Clear();
                 _mainForm.PosterBox.BackgroundImage = null;
@@ -406,6 +407,7 @@ namespace MediaLibrarian
             ReadHeadersForTable(LibsList.FocusedItem.Text);
             ReadTableFromDatabase(LibsList.FocusedItem.Text, _mainForm.Preferences.PageSize);
             _mainForm._searchForm.dataPanel.Controls.Clear();
+            _mainForm.pagerCurrentTb.Text = "1";
             _mainForm.ClearLibTSMI.Enabled = true;
             _mainForm.StatusLabel.Text = String.Format("Загружена библиотека \"{0}\"", LibsList.FocusedItem.Text);
             this.Close();
@@ -413,7 +415,8 @@ namespace MediaLibrarian
 
         private void TB_TextChanged(object sender, EventArgs e)
         {
-            (sender as TextBox).Text = (sender as TextBox).Text.Replace("<", "").Replace(">", "").Replace("|", "")
+            (sender as TextBox).Text = (sender as TextBox).Text
+                .Replace("<", "").Replace(">", "").Replace("|", "")
                 .Replace("/", "").Replace("\\", "").Replace(";", "");
         }
 

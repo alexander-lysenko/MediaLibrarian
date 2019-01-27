@@ -600,7 +600,7 @@ namespace MediaLibrarian
             }
 
             int tableLimit = Preferences.PageSize;
-            int tableOffset = currentPage * tableLimit;
+            int tableOffset = (currentPage - 1) * tableLimit;
             _libManagerForm.ReadTableFromDatabase(SelectedLibLabel.Text, tableLimit, tableOffset);
         }
 
@@ -628,7 +628,6 @@ namespace MediaLibrarian
             int currentPage = Convert.ToInt32(pagerCurrentTb.Text);
             pagerCurrentTb.Text = (currentPage - 1).ToString();
             PagerUpdate();
-            ;
         }
 
         private void pagerUpBtn_Click(object sender, EventArgs e)
