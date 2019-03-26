@@ -60,6 +60,10 @@ namespace MediaLibrarian
                 case "VARCHAR(10)":
                     Make10Cubes(i);
                     break; //Поле приоритет
+                default:
+                    MessageBox.Show("Типы данных повреждены. Чтение невозможно", "Ошибка базы данных",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
             }
         }
 
@@ -123,7 +127,7 @@ namespace MediaLibrarian
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show(ex.Message);
+                            ErrorMessage(ex);
                         }
 
                         break;
