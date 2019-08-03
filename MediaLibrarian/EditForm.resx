@@ -333,6 +333,9 @@
   <data name="&gt;&gt;LoadingLabel.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="loadedPicture.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
   <data name="loadedPicture.Location" type="System.Drawing.Point, System.Drawing">
     <value>414, 381</value>
   </data>

@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.IO;
-using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -245,7 +244,7 @@ namespace MediaLibrarian
             {
                 pv.Size = new Size((int) Preferences.PicMaxWidth, (int) Preferences.PicMaxHeight);
                 pv.ImageBox.SizeMode =
-                    (PosterBox.Image.Width * PosterBox.Image.Height) > (pv.Size.Width * pv.Size.Height)
+                    (PosterBox.Image.Width > pv.Size.Width || PosterBox.Image.Height > pv.Size.Height)
                         ? PictureBoxSizeMode.Zoom
                         : PictureBoxSizeMode.CenterImage;
             }
