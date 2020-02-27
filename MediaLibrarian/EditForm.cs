@@ -174,7 +174,7 @@ namespace MediaLibrarian
         private void AddNewItem()
         {
             var names = String.Join("` , `", from val in _mainForm.ColumnsInfo select val.Name.Trim());
-            var values = String.Join("\" , \"", from data in columnData select data.Text.Trim());
+            var values = String.Join("\" , \"", from data in columnData select data.Text.Trim().Replace("\"", "\"\""));
             var addNewItemQuery = String.Format("insert into `{0}` (`{1}`) values (\"{2}\")",
                 _mainForm.SelectedLibLabel.Text, names, values);
             if (VerifyItem())
@@ -822,7 +822,7 @@ namespace MediaLibrarian
             {
                 PushDataIntoCreatedControls(GetDataFromDatabase(_mainForm.SelectedLibLabel.Text,
                     _mainForm.ColumnsInfo[0].Name,
-                    _mainForm.Collection.FocusedItem.Text));
+                    _mainForm.Collection.SelectedItems[0].Text));
                 var pathToFile = String.Format(@"{0}\Posters\{1}\{2}.jpg", Environment.CurrentDirectory,
                     _mainForm.ReplaceSymblos(_mainForm.SelectedLibLabel.Text),
                     _mainForm.ReplaceSymblos(columnData[0].Text));

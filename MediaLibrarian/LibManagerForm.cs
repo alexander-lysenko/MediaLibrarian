@@ -402,14 +402,21 @@ namespace MediaLibrarian
 
         private void LibsList_ItemActivate(object sender, EventArgs e)
         {
-            _mainForm.Collection.Clear();
-            _mainForm.ColumnsInfo.Clear();
-            ReadHeadersForTable(LibsList.FocusedItem.Text);
-            ReadTableFromDatabase(LibsList.FocusedItem.Text, _mainForm.Preferences.PageSize);
-            _mainForm._searchForm.dataPanel.Controls.Clear();
-            _mainForm.pagerCurrentTb.Text = "1";
-            _mainForm.ClearLibTSMI.Enabled = true;
-            _mainForm.StatusLabel.Text = String.Format("Загружена библиотека \"{0}\"", LibsList.FocusedItem.Text);
+            try
+            {
+                _mainForm.Collection.Clear();
+                _mainForm.ColumnsInfo.Clear();
+                ReadHeadersForTable(LibsList.FocusedItem.Text);
+                ReadTableFromDatabase(LibsList.FocusedItem.Text, _mainForm.Preferences.PageSize);
+                _mainForm._searchForm.dataPanel.Controls.Clear();
+                _mainForm.pagerCurrentTb.Text = "1";
+                _mainForm.ClearLibTSMI.Enabled = true;
+                _mainForm.StatusLabel.Text = String.Format("Загружена библиотека \"{0}\"", LibsList.FocusedItem.Text);
+            }
+            catch (Exception ex)
+            {
+                ErrorMessage(ex);
+            }
             this.Close();
         }
 
