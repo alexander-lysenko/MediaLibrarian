@@ -12,7 +12,7 @@ namespace MediaLibrarian
 
         private void PictureViewer_Deactivate(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void PictureViewer_KeyDown(object sender, KeyEventArgs e)

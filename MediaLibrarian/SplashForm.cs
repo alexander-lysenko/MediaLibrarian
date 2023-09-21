@@ -5,7 +5,7 @@ namespace MediaLibrarian
 {
     public partial class SplashForm : Form
     {
-        public SplashForm()
+        private SplashForm()
         {
             InitializeComponent();
         }

@@ -1,6 +1,6 @@
 ﻿namespace MediaLibrarian
 {
-    partial class AboutForm
+    sealed partial class AboutForm
     {
         /// <summary>
         /// Designer variable used to keep track of non-visual components.

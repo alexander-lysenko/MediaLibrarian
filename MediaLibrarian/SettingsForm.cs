@@ -12,13 +12,13 @@ namespace MediaLibrarian
             _mainForm = formMain;
         }
 
-        MainForm _mainForm;
+        private readonly MainForm _mainForm;
 
-        public void SaveSettings()
+        private void SaveSettings()
         {
             _mainForm.Preferences = new Settings
             {
-                PageSize = (int) pageSizeNumeric.Value,
+                PageSize = (int)pageSizeNumeric.Value,
                 RememberLastLibrary = rememberLastLibraryChk.Checked,
                 LastLibraryName = _mainForm.SelectedLibLabel.Text,
                 FocusFirstItem = focusFirstItemChk.Checked,
@@ -44,16 +44,16 @@ namespace MediaLibrarian
             _mainForm.InitFont();
         }
 
-        public void RestoreSettings(Settings Preferences)
+        private void RestoreSettings(Settings preferences)
         {
-            pageSizeNumeric.Value = Preferences.PageSize;
-            rememberLastLibraryChk.Checked = Preferences.RememberLastLibrary;
-            focusFirstItemChk.Checked = Preferences.FocusFirstItem;
-            cropMaxViewSizeChk.Checked = Preferences.CropMaxViewSize;
+            pageSizeNumeric.Value = preferences.PageSize;
+            rememberLastLibraryChk.Checked = preferences.RememberLastLibrary;
+            focusFirstItemChk.Checked = preferences.FocusFirstItem;
+            cropMaxViewSizeChk.Checked = preferences.CropMaxViewSize;
             try
             {
-                picMaxWidthNUD.Value = Preferences.PicMaxWidth;
-                picMaxHeightNUD.Value = Preferences.PicMaxHeight;
+                picMaxWidthNUD.Value = preferences.PicMaxWidth;
+                picMaxHeightNUD.Value = preferences.PicMaxHeight;
             }
             catch (Exception)
             {
@@ -61,16 +61,16 @@ namespace MediaLibrarian
                 picMaxHeightNUD.Value = 720;
             }
 
-            fullScreenStartChk.Checked = Preferences.StartFullScreen;
-            autoSortByNameChk.Checked = Preferences.AutoSortByName;
-            formCaptionTB.Text = Preferences.FormCaptionText;
-            themeColor1CB.Text = Preferences.ThemeColor1;
-            themeColor2CB.Text = Preferences.ThemeColor2;
-            mainColorCB.Text = Preferences.MainColor;
-            fontColorCB.Text = Preferences.FontColor;
-            mainFontLabel.Font = new Font(Preferences.MainFont.FontFamilyName,
-                Preferences.MainFont.FontSize, Preferences.MainFont.FontStyle);
-            mainFontLabel.Text = Preferences.MainFont.FontFamilyName + "\n(Проверка кириллицы)";
+            fullScreenStartChk.Checked = preferences.StartFullScreen;
+            autoSortByNameChk.Checked = preferences.AutoSortByName;
+            formCaptionTB.Text = preferences.FormCaptionText;
+            themeColor1CB.Text = preferences.ThemeColor1;
+            themeColor2CB.Text = preferences.ThemeColor2;
+            mainColorCB.Text = preferences.MainColor;
+            fontColorCB.Text = preferences.FontColor;
+            mainFontLabel.Font = new Font(preferences.MainFont.FontFamilyName,
+                preferences.MainFont.FontSize, preferences.MainFont.FontStyle);
+            mainFontLabel.Text = preferences.MainFont.FontFamilyName + "\n(Проверка кириллицы)";
         }
 
         #region Buttons
@@ -120,65 +120,94 @@ namespace MediaLibrarian
         private void mainFontLabel_Click(object sender, EventArgs e)
         {
             headerFontDialog.Font = mainFontLabel.Font;
-            if (headerFontDialog.ShowDialog() == DialogResult.OK)
-            {
-                mainFontLabel.Text = headerFontDialog.Font.Name + "\n(Проверка кириллицы)";
-                mainFontLabel.Font = headerFontDialog.Font;
-            }
+            if (headerFontDialog.ShowDialog() != DialogResult.OK) return;
+
+            mainFontLabel.Text = headerFontDialog.Font.Name + "\n(Проверка кириллицы)";
+            mainFontLabel.Font = headerFontDialog.Font;
         }
 
         private void SettingsForm_Load(object sender, EventArgs e)
         {
-            string[] colors = Enum.GetNames(typeof(KnownColor));
-            foreach (string color in colors)
+            var colors = Enum.GetNames(enumType: typeof(KnownColor));
+            foreach (var color in colors)
             {
-                if (((Color.FromName(color)).IsSystemColor == false) &&
-                    ((Color.FromName(color)).Name != Color.Transparent.Name))
-                {
-                    themeColor1CB.Items.Add(color);
-                    themeColor2CB.Items.Add(color);
-                    mainColorCB.Items.Add(color);
-                    fontColorCB.Items.Add(color);
-                }
+                if (Color.FromName(name: color).IsSystemColor ||
+                    Color.FromName(name: color).Name == Color.Transparent.Name)
+                    continue;
+                themeColor1CB.Items.Add(item: color);
+                themeColor2CB.Items.Add(item: color);
+                mainColorCB.Items.Add(item: color);
+                fontColorCB.Items.Add(item: color);
             }
 
-            toolTip.SetToolTip(rememberLastLibraryChk,
-                "При зауске в программу будет автоматически \nзагружаться последняя открытая ранее библиотека");
-            toolTip.SetToolTip(focusFirstItemChk,
-                "Когда в программу загружена библиотека, и в ней есть элементы, \nбудет автоматически выделен первый элемент," +
-                " и будет отображена информация о нем");
-            toolTip.SetToolTip(cropMaxViewSizeChk,
-                "По умолчанию просмотрщик постеров определяет разрешение \nВашего экрана, и будет подгонять постер под него.\n" +
-                "Вы можете ограничить размер отображения постеров");
-            toolTip.SetToolTip(fullScreenStartChk,
-                "Активируйте, если хотите, чтобы при запуске \nпрограмма разворачивалась на весь экран");
-            toolTip.SetToolTip(autoSortByNameChk,
-                "При каких-либо изменениях в таблице элементов, \nони всегда будут сортироваться автоматически по первому столбцу");
-            toolTip.SetToolTip(fromCaptionLabel,
-                "Вы можете установить собственный заголовок программы.\nЭтот текст заменит стандартный заголовок - " +
-                "\"Медиа-библиотекарь\"\nЕсли не хотите его изменять, оставьте пустым");
-            toolTip.SetToolTip(backgroundGB,
+            toolTip.SetToolTip(
+                control: rememberLastLibraryChk,
+                caption: "При зауске в программу будет автоматически \nзагружаться последняя открытая ранее библиотека"
+            );
+            toolTip.SetToolTip(
+                control: focusFirstItemChk,
+                caption: "Когда в программу загружена библиотека, и в ней есть элементы, \n" +
+                         "будет автоматически выделен первый элемент, и будет отображена информация о нем"
+            );
+            toolTip.SetToolTip(
+                control: cropMaxViewSizeChk,
+                caption: "По умолчанию просмотрщик постеров определяет разрешение \nВашего экрана, и будет " +
+                         "подгонять постер под него.\nВы можете ограничить размер отображения постеров"
+            );
+            toolTip.SetToolTip(
+                control: fullScreenStartChk,
+                caption: "Активируйте, если хотите, чтобы при запуске \nпрограмма разворачивалась на весь экран"
+            );
+            toolTip.SetToolTip(
+                control: autoSortByNameChk,
+                caption: "При каких-либо изменениях в таблице элементов, \n" +
+                         "они всегда будут сортироваться автоматически по первому столбцу"
+            );
+            toolTip.SetToolTip(
+                control: fromCaptionLabel,
+                caption: "Вы можете установить собственный заголовок программы.\nЭтот текст заменит " +
+                         "стандартный заголовок - \"Медиа-библиотекарь\"\nЕсли не хотите его изменять, оставьте пустым"
+            );
+            toolTip.SetToolTip(
+                control: backgroundGB,
+                caption:
                 "Выбор цветовой схемы отображения главного окна программы.\nПредставляет собой градиентное наложение " +
-                "двух контрастных цветов,\nкоторые можно выбрать по своему вкусу");
-            toolTip.SetToolTip(mainColorLabel,
+                "двух контрастных цветов,\nкоторые можно выбрать по своему вкусу"
+            );
+            toolTip.SetToolTip(
+                control: mainColorLabel,
+                caption:
                 "Независимо от выбранной темы оформления, можно выбрать \nцвет отображения подробных данных элемента в основной форме.\n" +
-                "Имейте в виду, что выбранный Вами цвет может не гармонировать\nс выбранными цветами темы");
-            toolTip.SetToolTip(fontColorLabel,
-                "Если Вы выбрали темные цвета для темы, и остальных надписей\nпрограммы не видно, можно задать им цвет посветлее");
-            toolTip.SetToolTip(fontSelectLabel,
+                "Имейте в виду, что выбранный Вами цвет может не гармонировать\nс выбранными цветами темы"
+            );
+            toolTip.SetToolTip(
+                control: fontColorLabel,
+                caption:
+                "Если Вы выбрали темные цвета для темы, и остальных надписей\nпрограммы не видно, можно задать им цвет посветлее"
+            );
+            toolTip.SetToolTip(
+                control: fontSelectLabel,
+                caption:
                 "Можно выбрать шрифт отображения ИМЕНИ ЭЛЕМЕНТА в основной форме \n(Имя элемента - это первый столбец таблицы, в" +
-                " основной форме \nотображается большими буквами рядом с постером).\nОбратите внимание: не все шрифты поддерживают кириллицу!");
-            toolTip.SetToolTip(pageSizeLabel,
+                " основной форме \nотображается большими буквами рядом с постером).\nОбратите внимание: не все шрифты поддерживают кириллицу!"
+            );
+            toolTip.SetToolTip(
+                control: pageSizeLabel,
+                caption:
                 "Если выбрано значение 1-500, будет активирована встроенная пагинация.\nВыбранное значение определяет количество " +
-                "элементов, отображаемых на странице.\nЗначение '0' отключает пагинацию, на страницу выводятся все элементы библиотеки");
+                "элементов, отображаемых на странице.\nЗначение '0' отключает пагинацию, на страницу выводятся все элементы библиотеки"
+            );
 
-            screenResolutionLabel.Text = String.Format("Разрешение экрана: {0}х{1}",
-                SystemInformation.PrimaryMonitorSize.Width, SystemInformation.PrimaryMonitorSize.Height);
+            screenResolutionLabel.Text = string.Format(
+                "Разрешение экрана: {0}х{1}",
+                SystemInformation.PrimaryMonitorSize.Width,
+                SystemInformation.PrimaryMonitorSize.Height
+            );
             picMaxWidthNUD.Maximum = SystemInformation.PrimaryMonitorSize.Width;
             picMaxHeightNUD.Maximum = SystemInformation.PrimaryMonitorSize.Height;
             try
             {
-                RestoreSettings(_mainForm.Preferences);
+                RestoreSettings(preferences: _mainForm.Preferences);
             }
             catch (InvalidOperationException)
             {
@@ -186,8 +215,12 @@ namespace MediaLibrarian
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка открытия файла настроек", MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
+                MessageBox.Show(
+                    text: ex.Message,
+                    caption: "Ошибка открытия файла настроек",
+                    buttons: MessageBoxButtons.OK,
+                    icon: MessageBoxIcon.Error
+                );
             }
         }
     }

@@ -15,10 +15,10 @@ namespace MediaLibrarian
 
         public static void Serialize(Settings settings)
         {
-            if(settings == null)
+            if (settings == null)
                 throw new ArgumentNullException("Произошла ошибка при сохранении настроек");
-            XmlSerializer formatter = new XmlSerializer(settings.GetType());
-            using (FileStream file = new FileStream(Path, FileMode.Create))
+            var formatter = new XmlSerializer(settings.GetType());
+            using (var file = new FileStream(Path, FileMode.Create))
             {
                 formatter.Serialize(file, settings);
             }
@@ -26,14 +26,14 @@ namespace MediaLibrarian
 
         public static Settings Deserialize()
         {
-            XmlSerializer formatter = new XmlSerializer(typeof(Settings));
+            var formatter = new XmlSerializer(typeof(Settings));
             Settings preferences;
-            using (FileStream file = new FileStream(Path, FileMode.OpenOrCreate))
+            using (var file = new FileStream(Path, FileMode.OpenOrCreate))
             {
                 preferences = (Settings)formatter.Deserialize(file);
             }
+
             return preferences;
         }
-
     }
 }

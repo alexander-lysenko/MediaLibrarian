@@ -1,60 +1,52 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Linq;
+using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
+using MediaLibrarian.Properties;
 
 namespace MediaLibrarian
 {
-    partial class AboutForm : Form
+    internal sealed partial class AboutForm : Form
     {
         public AboutForm()
         {
             InitializeComponent();
-            Text = String.Format("О программе \"{0}\"", AssemblyTitle);
+            Text = string.Format("О программе \"{0}\"", AssemblyTitle);
             CurrentVersionLabel.Text = AssemblyVersion;
             companyNameLabel.Text = AssemblyCompany;
         }
 
         #region Методы доступа к атрибутам сборки
 
-        public string AssemblyTitle
+        private static string AssemblyTitle
         {
             get
             {
-                object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyTitleAttribute), false);
-                if (attributes.Length > 0)
-                {
-                    AssemblyTitleAttribute titleAttribute = (AssemblyTitleAttribute)attributes[0];
-                    if (titleAttribute.Title != "")
-                    {
-                        return titleAttribute.Title;
-                    }
-                }
-                return System.IO.Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().CodeBase);
+                var attributes = Assembly
+                    .GetExecutingAssembly()
+                    .GetCustomAttributes(typeof(AssemblyTitleAttribute), false);
+                if (attributes.Length <= 0)
+                    return Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().CodeBase);
+                var titleAttribute = (AssemblyTitleAttribute)attributes[0];
+                return titleAttribute.Title != ""
+                    ? titleAttribute.Title
+                    : Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().CodeBase);
             }
         }
 
-        public string AssemblyVersion
+        private static string AssemblyVersion
         {
-            get
-            {
-                return Assembly.GetExecutingAssembly().GetName().Version.ToString();
-            }
+            get { return Assembly.GetExecutingAssembly().GetName().Version.ToString(); }
         }
 
         public string AssemblyDescription
         {
             get
             {
-                object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyDescriptionAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    return "";
-                }
-                return ((AssemblyDescriptionAttribute)attributes[0]).Description;
+                var attributes = Assembly
+                    .GetExecutingAssembly()
+                    .GetCustomAttributes(typeof(AssemblyDescriptionAttribute), false);
+                return attributes.Length == 0 ? "" : ((AssemblyDescriptionAttribute)attributes[0]).Description;
             }
         }
 
@@ -62,12 +54,10 @@ namespace MediaLibrarian
         {
             get
             {
-                object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyProductAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    return "";
-                }
-                return ((AssemblyProductAttribute)attributes[0]).Product;
+                var attributes = Assembly
+                    .GetExecutingAssembly()
+                    .GetCustomAttributes(typeof(AssemblyProductAttribute), false);
+                return attributes.Length == 0 ? "" : ((AssemblyProductAttribute)attributes[0]).Product;
             }
         }
 
@@ -75,34 +65,31 @@ namespace MediaLibrarian
         {
             get
             {
-                object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyCopyrightAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    return "";
-                }
-                return ((AssemblyCopyrightAttribute)attributes[0]).Copyright;
+                var attributes = Assembly
+                    .GetExecutingAssembly()
+                    .GetCustomAttributes(typeof(AssemblyCopyrightAttribute), false);
+                return attributes.Length == 0 ? "" : ((AssemblyCopyrightAttribute)attributes[0]).Copyright;
             }
         }
 
-        public string AssemblyCompany
+        private static string AssemblyCompany
         {
             get
             {
-                object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyCompanyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    return "";
-                }
-                return ((AssemblyCompanyAttribute)attributes[0]).Company;
+                var attributes = Assembly
+                    .GetExecutingAssembly()
+                    .GetCustomAttributes(typeof(AssemblyCompanyAttribute), false);
+                return attributes.Length == 0 ? "" : ((AssemblyCompanyAttribute)attributes[0]).Company;
             }
         }
+
         #endregion
 
         private void AboutForm_Load(object sender, EventArgs e)
         {
-            CurVersionDateLabel.Text = new DateTime(2019 , 08, 03).ToShortDateString();
+            CurVersionDateLabel.Text = new DateTime(2019, 08, 03).ToShortDateString();
             FirstVersionDateLabel.Text = new DateTime(2017, 03, 10).ToShortDateString();
-            ChangelogRTB.Text = Properties.Resources.changelog;
+            ChangelogRTB.Text = Resources.changelog;
         }
     }
 }

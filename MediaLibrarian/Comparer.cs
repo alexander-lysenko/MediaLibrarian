@@ -1,23 +1,27 @@
 ﻿using System;
 using System.Collections;
 using System.Windows.Forms;
+
 // Реализация ручной сортировки элементов по столбцам.
 namespace MediaLibrarian
 {
-    class ListViewItemComparer : IComparer
+    internal class ListViewItemComparer : IComparer
     {
-        private int col;
-        private SortOrder order;
+        private readonly int _col;
+        private readonly SortOrder _order;
+
         public ListViewItemComparer()
         {
-            col = 0;
-            order = SortOrder.Ascending;
+            _col = 0;
+            _order = SortOrder.Ascending;
         }
+
         public ListViewItemComparer(int column, SortOrder order)
         {
-            col = column;
-            this.order = order;
+            _col = column;
+            _order = order;
         }
+
         public int Compare(object x, object y)
         {
             int returnVal;
@@ -25,8 +29,8 @@ namespace MediaLibrarian
             try
             {
                 // Анализ двух обрабатываемых объектов как параметра DateTime.
-                DateTime firstDate = DateTime.Parse(((ListViewItem)x).SubItems[col].Text);
-                DateTime secondDate = DateTime.Parse(((ListViewItem)y).SubItems[col].Text);
+                var firstDate = DateTime.Parse((x as ListViewItem).SubItems[_col].Text);
+                var secondDate = DateTime.Parse((y as ListViewItem).SubItems[_col].Text);
                 // Сравнение двух дат.
                 returnVal = DateTime.Compare(firstDate, secondDate);
             }
@@ -34,10 +38,14 @@ namespace MediaLibrarian
             catch
             {
                 // Сравнение двух элементов как строк.
-                returnVal = String.Compare(((ListViewItem)x).SubItems[col].Text, ((ListViewItem)y).SubItems[col].Text);
+                returnVal = string.CompareOrdinal(
+                    (x as ListViewItem).SubItems[_col].Text,
+                    (y as ListViewItem).SubItems[_col].Text
+                );
             }
+
             // Определение того, является ли порядок сортировки порядком "по убыванию".
-            if (order == SortOrder.Descending)
+            if (_order == SortOrder.Descending)
                 // Изменение значения, возвращенного String.Compare, на противоположное.
                 returnVal *= -1;
             return returnVal;

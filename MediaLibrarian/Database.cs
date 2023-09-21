@@ -16,11 +16,11 @@ namespace MediaLibrarian
     }
 
     [SQLiteFunction(Name = "COLLATION_CASE_INSENSITIVE", FuncType = FunctionType.Collation)]
-    class CollationCaseInsensitive : SQLiteFunction
+    internal class CollationCaseInsensitive : SQLiteFunction
     {
         public override int Compare(string param1, string param2) //According to Turkish character sorting to patch
         {
-            return String.Compare(param1, param2, StringComparison.InvariantCulture);
+            return string.Compare(param1, param2, StringComparison.InvariantCulture);
         }
     }
 
@@ -28,13 +28,13 @@ namespace MediaLibrarian
 
     public static class Database
     {
-        public static string DatabaseName = "baza.db";
-        public static string DataSource = string.Format("Data Source={0};", DatabaseName);
+        private const string DatabaseName = "baza.db";
+        private static readonly string DataSource = string.Format("Data Source={0};", DatabaseName);
 
         public static SQLiteDataReader GetReader(string query)
         {
             SQLiteDataReader readerData;
-            SQLiteConnection connection = new SQLiteConnection(DataSource);
+            var connection = new SQLiteConnection(DataSource);
             try
             {
                 connection.Open();
@@ -55,7 +55,7 @@ namespace MediaLibrarian
         public static DataTable GetTable(string query)
         {
             var dataTable = new DataTable();
-            SQLiteConnection connection = new SQLiteConnection(DataSource);
+            var connection = new SQLiteConnection(DataSource);
             try
             {
                 connection.Open();
@@ -76,7 +76,7 @@ namespace MediaLibrarian
         public static object GetScalar(string query)
         {
             object data;
-            SQLiteConnection connection = new SQLiteConnection(DataSource);
+            var connection = new SQLiteConnection(DataSource);
             try
             {
                 connection.Open();
@@ -95,7 +95,7 @@ namespace MediaLibrarian
 
         public static bool Execute(string query)
         {
-            SQLiteConnection connection = new SQLiteConnection(DataSource);
+            var connection = new SQLiteConnection(DataSource);
             var command = new SQLiteCommand(query, connection);
             try
             {

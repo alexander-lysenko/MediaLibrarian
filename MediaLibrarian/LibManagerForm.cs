@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Windows.Forms;
-using System.Data.Common;
 using System.Data;
-using System.Threading.Tasks;
+using System.Drawing;
+using System.IO;
+using System.Windows.Forms;
 
 namespace MediaLibrarian
 {
@@ -16,26 +15,41 @@ namespace MediaLibrarian
             _mainForm = formMain;
         }
 
-        MainForm _mainForm;
+        private readonly MainForm _mainForm;
 
-        public bool Edited;
+        private bool _edited;
         public const int MaxFc = 20;
-        public int FNo = -1;
+        private int _fNo = -1;
         public string LibTableHeaders = "";
-        List<TextBox> _fieldName = new List<TextBox>();
-        List<ComboBox> _fieldType = new List<ComboBox>();
-        List<Button> _removeButton = new List<Button>();
-        TextBox _libNameTb = new TextBox() {Size = new Size(265, 20), Location = new Point(130, 0), MaxLength = 50};
-        Point _fieldPosition = new Point(5, 25);
+        private readonly List<TextBox> _fieldName = new List<TextBox>();
+        private readonly List<ComboBox> _fieldType = new List<ComboBox>();
+        private readonly List<Button> _removeButton = new List<Button>();
 
-        public static void ErrorMessage(Exception ex)
+        private readonly TextBox _libNameTb = new TextBox
         {
-            MessageBox.Show(String.Format("Имя ошибки: {0}\nМесто: {1}\nЗначение: {2}",
-                    ex.ToString().Remove(ex.ToString().IndexOf(':')), ex.Source, ex.Message),
-                "Произошла ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            Size = new Size(265, 20),
+            Location = new Point(130, 0),
+            MaxLength = 50
+        };
+
+        private Point _fieldPosition = new Point(5, 25);
+
+        private static void ErrorMessage(Exception ex)
+        {
+            MessageBox.Show(
+                text: string.Format(
+                    "Имя ошибки: {0}\nМесто: {1}\nЗначение: {2}",
+                    ex.ToString().Remove(ex.ToString().IndexOf(':')),
+                    ex.Source,
+                    ex.Message
+                ),
+                caption: "Произошла ошибка",
+                buttons: MessageBoxButtons.OK,
+                icon: MessageBoxIcon.Error
+            );
         }
 
-        private int GetColumnLength(string type)
+        private static int GetColumnLength(string type)
         {
             switch (type)
             {
@@ -51,7 +65,7 @@ namespace MediaLibrarian
             return 120;
         }
 
-        private string GetTypeString(int index)
+        private static string GetTypeString(int index)
         {
             switch (index)
             {
@@ -66,12 +80,16 @@ namespace MediaLibrarian
             }
         }
 
-        bool VerifyFields()
+        private bool VerifyFields()
         {
             if (_libNameTb.Text == "")
             {
-                MessageBox.Show("Не заполнено название новой библиотеки", "Ошибка", MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
+                MessageBox.Show(
+                    text: "Не заполнено название новой библиотеки",
+                    caption: "Ошибка",
+                    buttons: MessageBoxButtons.OK,
+                    icon: MessageBoxIcon.Error
+                );
                 return false;
             }
 
@@ -79,41 +97,43 @@ namespace MediaLibrarian
             {
                 if (_fieldName[i].Text == "" || _fieldType[_fieldName.IndexOf(_fieldName[i])].SelectedIndex == -1)
                 {
-                    MessageBox.Show("Пожалуйста, заполните все поля", "Ошибка", MessageBoxButtons.OK,
-                        MessageBoxIcon.Error);
+                    MessageBox.Show(
+                        text: "Пожалуйста, заполните все поля",
+                        caption: "Ошибка",
+                        buttons: MessageBoxButtons.OK,
+                        icon: MessageBoxIcon.Error
+                    );
                     return false;
                 }
 
                 for (var j = i + 1; j < _fieldName.Count; j++)
                 {
-                    if (_fieldName[i].Text.Trim() == _fieldName[j].Text.Trim())
-                    {
-                        MessageBox.Show("Пожалуйста, воздержитесь от одинаковых имен для полей", "Ошибка",
-                            MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return false;
-                    }
+                    if (_fieldName[i].Text.Trim() != _fieldName[j].Text.Trim()) continue;
+                    MessageBox.Show(
+                        text: "Пожалуйста, воздержитесь от одинаковых имен для полей",
+                        caption: "Ошибка",
+                        buttons: MessageBoxButtons.OK,
+                        icon: MessageBoxIcon.Error
+                    );
+                    return false;
                 }
             }
 
             return true;
         }
 
-        string MakeCreateQuery()
+        private string MakeCreateQuery()
         {
-            string createQuery = String.Format("create table `{0}` (", _libNameTb.Text.Trim());
+            var createQuery = string.Format("create table `{0}` (", _libNameTb.Text.Trim());
             foreach (var item in _fieldName)
             {
-                createQuery += "`" + item.Text.Trim() + "` " +
-                               GetTypeString(_fieldType[_fieldName.IndexOf(item)].SelectedIndex);
-                if (_fieldName.IndexOf(item) == 0)
-                {
-                    createQuery += " NOT NULL UNIQUE";
-                }
-
-                if (_fieldName.IndexOf(item) != _fieldName.Count - 1)
-                {
-                    createQuery += ", ";
-                }
+                createQuery += string.Format(
+                    "`{0}` {1}",
+                    item.Text.Trim(),
+                    GetTypeString(_fieldType[_fieldName.IndexOf(item)].SelectedIndex)
+                );
+                if (_fieldName.IndexOf(item) == 0) createQuery += " NOT NULL UNIQUE";
+                if (_fieldName.IndexOf(item) != _fieldName.Count - 1) createQuery += ", ";
             }
 
             createQuery += ");";
@@ -133,7 +153,7 @@ namespace MediaLibrarian
                 {
                     var colsList = new List<string>();
                     var lib = new ListViewItem(table[0].ToString());
-                    var getColumnsQuery = String.Format("pragma table_info(`{0}`);",
+                    var getColumnsQuery = string.Format("pragma table_info(`{0}`);",
                         table[table.Table.Columns["name"].Ordinal]);
                     var readCols = Database.GetTable(getColumnsQuery);
                     foreach (DataRow col in readCols.Rows)
@@ -170,14 +190,14 @@ namespace MediaLibrarian
         public void ReadHeadersForTable(string tableName)
         {
             _mainForm.ColumnsInfo.Clear();
-            var getColumnsQuery = String.Format("pragma table_info('{0}');", tableName);
+            var getColumnsQuery = string.Format("pragma table_info('{0}');", tableName);
             try
             {
                 var readCols = Database.GetTable(getColumnsQuery);
                 foreach (DataRow col in readCols.Rows)
                 {
-                    int name = col.Table.Columns["name"].Ordinal;
-                    int type = col.Table.Columns["type"].Ordinal;
+                    var name = col.Table.Columns["name"].Ordinal;
+                    var type = col.Table.Columns["type"].Ordinal;
                     _mainForm.Collection.Columns.Add(col[name].ToString(), GetColumnLength(col[type].ToString()));
                     _mainForm.ColumnsInfo.Add(new Category
                     {
@@ -194,15 +214,15 @@ namespace MediaLibrarian
 
         public void ReadTableFromDatabase(string tableName, int limit = 0, int offset = 0)
         {
-            var selectCountQuery = String.Format("select count(*) from `{0}`", tableName);
-            var selectQuery = String.Format("select * from `{0}` ", tableName);
+            var selectCountQuery = string.Format("select count(*) from `{0}`", tableName);
+            var selectQuery = string.Format("select * from `{0}` ", tableName);
             if (_mainForm.Preferences.AutoSortByName) selectQuery += "order by " + _mainForm.ColumnsInfo[0].Name;
-            if (limit > 0) selectQuery += String.Format(" limit {0} offset {1}", limit, offset);
+            if (limit > 0) selectQuery += string.Format(" limit {0} offset {1}", limit, offset);
             _mainForm.Collection.Items.Clear();
             try
             {
                 var data = Database.GetTable(selectQuery);
-                object rowsCount = Database.GetScalar(selectCountQuery);
+                var rowsCount = Database.GetScalar(selectCountQuery);
                 foreach (DataRow row in data.Rows)
                 {
                     var item = new ListViewItem(row[0].ToString());
@@ -217,9 +237,9 @@ namespace MediaLibrarian
                 if (limit > 0)
                 {
                     var rows = Convert.ToInt32(rowsCount);
-                    var pagesCount = Math.Ceiling(d: (rows / limit)) + 1;
+                    var pagesCount = Math.Ceiling(d: rows / limit) + 1;
                     _mainForm.pagerCountLabel.Tag = pagesCount;
-                    _mainForm.pagerCountLabel.Text = String.Format("из {0}", pagesCount);
+                    _mainForm.pagerCountLabel.Text = string.Format("из {0}", pagesCount);
                     _mainForm.paginationToolStrip.Enabled = rows > _mainForm.Preferences.PageSize;
                 }
 
@@ -242,7 +262,7 @@ namespace MediaLibrarian
 
         public void ClearLibrary(string tableName)
         {
-            var clearQuery = String.Format("delete from `{0}`", tableName);
+            var clearQuery = string.Format("delete from `{0}`", tableName);
             Database.Execute(clearQuery);
         }
 
@@ -254,12 +274,12 @@ namespace MediaLibrarian
         {
             AddFieldsPanel.Controls.Clear();
             CollectionEditGB.Visible = true;
-            AddFieldsPanel.Controls.Add(new Label()
+            AddFieldsPanel.Controls.Add(new Label
             {
                 Size = new Size(120, 20),
                 Text = "Название библиотеки"
             });
-            _libNameTb.TextChanged += new EventHandler(this.TB_TextChanged);
+            _libNameTb.TextChanged += TB_TextChanged;
             AddFieldsPanel.Controls.Add(_libNameTb);
             AddMoreFieldsButton.PerformClick();
             _fieldType[0].Enabled = false;
@@ -269,75 +289,91 @@ namespace MediaLibrarian
 
         private void RemoveCollectionButton_Click(object sender, EventArgs e)
         {
-            if (LibsList.SelectedItems.Count > 0)
-                if (MessageBox.Show(
-                        "Нажимая \"Удалить библиотеку\", \nВы осознанно принимаете решение удалить выбранную библиотеку\n(" +
-                        LibsList.FocusedItem.Text + ")\nцеликом, включая все накопленные в ней записи.\nПродолжить?",
-                        "Очень важное предупреждение", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) ==
-                    DialogResult.Yes)
-                {
-                    if (_mainForm.SelectedLibLabel.Text == LibsList.SelectedItems[0].Text)
-                    {
-                        _mainForm.Collection.Clear();
-                        _mainForm.SelectedLibLabel.Text = _mainForm.TitleHeaderLabel.Text = "";
-                        _mainForm.ElementActionsGB.Enabled = false;
-                    }
+            if (LibsList.SelectedItems.Count <= 0) return;
+            var dialogResult = MessageBox.Show(
+                text: string.Format(
+                    "Нажимая \"Удалить библиотеку\", \nВы осознанно принимаете решение удалить выбранную библиотеку\n" +
+                    "({0})\nцеликом, включая все накопленные в ней записи.\nПродолжить?",
+                    LibsList.FocusedItem.Text
+                ),
+                caption: "Очень важное предупреждение",
+                buttons: MessageBoxButtons.YesNo,
+                icon: MessageBoxIcon.Warning
+            );
+            if (dialogResult == DialogResult.No) return;
 
-                    try
-                    {
-                        var dropTableQuery = String.Format("drop table `{0}`;", LibsList.SelectedItems[0].Text);
-                        Database.Execute(dropTableQuery);
-                        _mainForm.StatusLabel.Text =
-                            " Была удалена библиотека \"" + LibsList.SelectedItems[0].Text + "\"";
+            if (_mainForm.SelectedLibLabel.Text == LibsList.SelectedItems[0].Text)
+            {
+                _mainForm.Collection.Clear();
+                _mainForm.SelectedLibLabel.Text = _mainForm.TitleHeaderLabel.Text = "";
+                _mainForm.ElementActionsGB.Enabled = false;
+            }
 
-                        System.IO.Directory.Delete(Environment.CurrentDirectory + "\\Posters\\" +
-                                                   _mainForm.ReplaceSymblos(LibsList.SelectedItems[0].Text), true);
-                    }
-                    catch (Exception ex)
-                    {
-                        ErrorMessage(ex);
-                    }
+            try
+            {
+                var dropTableQuery = string.Format("drop table `{0}`;", LibsList.SelectedItems[0].Text);
+                Database.Execute(dropTableQuery);
+                _mainForm.StatusLabel.Text =
+                    string.Format("Была удалена библиотека \"{0}\"", LibsList.SelectedItems[0].Text);
 
-                    if (_mainForm.SelectedLibLabel.Text == LibsList.SelectedItems[0].Text) _mainForm.FormReset();
-                    ReadDatabase_ForLibsList();
-                }
+                Directory.Delete(
+                    path: string.Format(
+                        @"{0}\Posters\{1}",
+                        Environment.CurrentDirectory,
+                        _mainForm.ReplaceSymbols(LibsList.SelectedItems[0].Text)
+                    ),
+                    recursive: true
+                );
+            }
+            catch (Exception ex)
+            {
+                ErrorMessage(ex);
+            }
+
+            if (_mainForm.SelectedLibLabel.Text == LibsList.SelectedItems[0].Text) _mainForm.FormReset();
+            ReadDatabase_ForLibsList();
         }
 
         private void SaveLibraryButton_Click(object sender, EventArgs e)
         {
-            if (VerifyFields())
+            if (!VerifyFields()) return;
+            try
             {
-                try
+                const string verifyNameQuery = "select name from sqlite_master where type='table' order by name;";
+                var readTables = Database.GetTable(verifyNameQuery);
+                foreach (DataRow table in readTables.Rows)
                 {
-                    var verifyNameQuery = "select name from sqlite_master where type='table' order by name;";
-                    var readTables = Database.GetTable(verifyNameQuery);
-                    foreach (DataRow table in readTables.Rows)
-                    {
-                        int name = table.Table.Columns["name"].Ordinal;
-                        if (table[name].ToString().ToLower().Equals(_libNameTb.Text.ToLower()))
-                        {
-                            MessageBox.Show("Библиотека с таким именем уже существует", "Ошибка",
-                                MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
-                        }
-                    }
-
-                    Database.Execute(MakeCreateQuery());
-                    System.IO.Directory.CreateDirectory(String.Format(@"{0}\Posters\{1}", Environment.CurrentDirectory,
-                        _mainForm.ReplaceSymblos(_libNameTb.Text)));
-                }
-                catch (Exception ex)
-                {
-                    ErrorMessage(ex);
+                    var name = table.Table.Columns["name"].Ordinal;
+                    if (!table[name].ToString().ToLower().Equals(_libNameTb.Text.ToLower())) continue;
+                    MessageBox.Show(
+                        text: "Библиотека с таким именем уже существует",
+                        caption: "Ошибка",
+                        buttons: MessageBoxButtons.OK,
+                        icon: MessageBoxIcon.Error
+                    );
                     return;
                 }
 
-                ReadDatabase_ForLibsList();
-                CollectionEditGB.Visible = Edited = false;
-                CreateNewLibraryButton.Enabled = RemoveLibraryButton.Enabled = true;
-                _mainForm.StatusLabel.Text = " Была создана библиотека \"" + _libNameTb.Text + "\"";
-                FormReset();
+                Database.Execute(MakeCreateQuery());
+                Directory.CreateDirectory(
+                    string.Format(
+                        @"{0}\Posters\{1}",
+                        Environment.CurrentDirectory,
+                        _mainForm.ReplaceSymbols(_libNameTb.Text)
+                    )
+                );
             }
+            catch (Exception ex)
+            {
+                ErrorMessage(ex);
+                return;
+            }
+
+            ReadDatabase_ForLibsList();
+            CollectionEditGB.Visible = _edited = false;
+            CreateNewLibraryButton.Enabled = RemoveLibraryButton.Enabled = true;
+            _mainForm.StatusLabel.Text = " Была создана библиотека \"" + _libNameTb.Text + "\"";
+            FormReset();
         }
 
         private void AddMoreFieldsButton_Click(object sender, EventArgs e)
@@ -348,37 +384,42 @@ namespace MediaLibrarian
                 return;
             }
 
-            FNo = _fieldName.Count;
-            _fieldName.Add(new TextBox()
+            _fNo = _fieldName.Count;
+            _fieldName.Add(new TextBox
             {
                 Size = new Size(210, 20),
             });
-            AddFieldsPanel.Controls.Add(_fieldName[FNo]);
-            _fieldName[FNo].TextChanged += new EventHandler(this.TB_TextChanged);
+            AddFieldsPanel.Controls.Add(_fieldName[_fNo]);
+            _fieldName[_fNo].TextChanged += TB_TextChanged;
 
-            _fieldType.Add(new ComboBox()
+            _fieldType.Add(new ComboBox
             {
                 Size = new Size(150, 21),
                 DropDownStyle = ComboBoxStyle.DropDownList,
             });
-            _fieldType[FNo].Items.AddRange(new object[]
+            _fieldType[_fNo].Items.AddRange(new object[]
             {
-                "Строка", "Текст", "Поле \"Дата\"",
-                "Поле \"Дата + Время\"", "Поле \"Оценка (5)\"", "Поле \"Оценка (10)\"", "Поле \"Приоритет\""
+                "Строка",
+                "Текст",
+                @"Поле ""Дата""",
+                @"Поле ""Дата + Время""",
+                @"Поле ""Оценка (5)""",
+                @"Поле ""Оценка (10)""",
+                @"Поле ""Приоритет"""
             });
-            AddFieldsPanel.Controls.Add(_fieldType[FNo]);
-            _fieldType[FNo].SelectedIndex = 0;
+            AddFieldsPanel.Controls.Add(_fieldType[_fNo]);
+            _fieldType[_fNo].SelectedIndex = 0;
 
-            _removeButton.Add(new Button()
+            _removeButton.Add(new Button
             {
                 Size = new Size(20, 21),
                 Text = "-",
-                Tag = FNo.ToString(),
+                Tag = _fNo.ToString(),
                 TabStop = true
             });
-            _removeButton[FNo].Click += new System.EventHandler(this.RemoveButton_Click);
-            AddFieldsPanel.Controls.Add(_removeButton[FNo]);
-            Edited = true;
+            _removeButton[_fNo].Click += RemoveButton_Click;
+            AddFieldsPanel.Controls.Add(_removeButton[_fNo]);
+            _edited = true;
         }
 
         private void RemoveButton_Click(object sender, EventArgs e)
@@ -389,13 +430,13 @@ namespace MediaLibrarian
                 return;
             }
 
-            var In = _removeButton.IndexOf(sender as Button);
-            AddFieldsPanel.Controls.Remove(_fieldName[In]);
-            _fieldName.Remove(_fieldName[In]);
-            AddFieldsPanel.Controls.Remove(_fieldType[In]);
-            _fieldType.Remove(_fieldType[In]);
-            AddFieldsPanel.Controls.Remove(_removeButton[In]);
-            _removeButton.Remove(_removeButton[In]);
+            var @in = _removeButton.IndexOf(sender as Button);
+            AddFieldsPanel.Controls.Remove(_fieldName[@in]);
+            _fieldName.Remove(_fieldName[@in]);
+            AddFieldsPanel.Controls.Remove(_fieldType[@in]);
+            _fieldType.Remove(_fieldType[@in]);
+            AddFieldsPanel.Controls.Remove(_removeButton[@in]);
+            _removeButton.Remove(_removeButton[@in]);
         }
 
         #endregion
@@ -408,19 +449,20 @@ namespace MediaLibrarian
                 _mainForm.ColumnsInfo.Clear();
                 ReadHeadersForTable(LibsList.FocusedItem.Text);
                 ReadTableFromDatabase(LibsList.FocusedItem.Text, _mainForm.Preferences.PageSize);
-                _mainForm._searchForm.dataPanel.Controls.Clear();
+                _mainForm.SearchForm.dataPanel.Controls.Clear();
                 _mainForm.pagerCurrentTb.Text = "1";
                 _mainForm.ClearLibTSMI.Enabled = true;
-                _mainForm.StatusLabel.Text = String.Format("Загружена библиотека \"{0}\"", LibsList.FocusedItem.Text);
+                _mainForm.StatusLabel.Text = string.Format("Загружена библиотека \"{0}\"", LibsList.FocusedItem.Text);
             }
             catch (Exception ex)
             {
                 ErrorMessage(ex);
             }
-            this.Close();
+
+            Close();
         }
 
-        private void TB_TextChanged(object sender, EventArgs e)
+        private static void TB_TextChanged(object sender, EventArgs e)
         {
             (sender as TextBox).Text = (sender as TextBox).Text
                 .Replace("<", "").Replace(">", "").Replace("|", "")
@@ -431,20 +473,13 @@ namespace MediaLibrarian
 
         private void LibManagerForm_KeyDown(object sender, KeyEventArgs e)
         {
-            switch (e.KeyCode)
-            {
-                case Keys.Delete:
-                    RemoveLibraryButton.PerformClick();
-                    break;
-                case Keys.Escape:
-                    FormReset();
-                    break;
-            }
+            if (e.KeyCode == Keys.Delete) RemoveLibraryButton.PerformClick();
+            else if (e.KeyCode == Keys.Escape) FormReset();
         }
 
         private void LibManagerForm_Load(object sender, EventArgs e)
         {
-            this.Size = new Size(480, 220);
+            Size = new Size(480, 220);
             ReadDatabase_ForLibsList();
             LibsList.Focus();
             if (LibsList.Items.Count > 0) LibsList.Items[0].Selected = LibsList.Items[0].Focused = true;
@@ -452,14 +487,16 @@ namespace MediaLibrarian
 
         private void LibManagerForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (Edited)
+            if (_edited)
             {
-                if (MessageBox.Show("Выйти без сохранения?", "Предупреждение",
-                        MessageBoxButtons.YesNo, MessageBoxIcon.Warning) ==
-                    DialogResult.Yes)
-                {
+                var dialogResult = MessageBox.Show(
+                    text: "Выйти без сохранения?",
+                    caption: "Предупреждение",
+                    buttons: MessageBoxButtons.YesNo,
+                    icon: MessageBoxIcon.Warning
+                );
+                if (dialogResult == DialogResult.Yes)
                     FormReset();
-                }
                 else e.Cancel = true;
             }
             else FormReset();
@@ -476,7 +513,7 @@ namespace MediaLibrarian
             _fieldPosition = new Point(5, 25);
             CreateNewLibraryButton.Enabled = true;
             RemoveLibraryButton.Enabled = true;
-            Edited = false;
+            _edited = false;
         }
 
         #endregion
