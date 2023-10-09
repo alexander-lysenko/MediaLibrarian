@@ -1,0 +1,22 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:v="clr-namespace:System;assembly=mscorlib">
+    <!-- Common -->
+    <v:String x:Key="Common.CancelButton">Cancel</v:String>
+    <v:String x:Key="Common.CloseButton">Close</v:String>
+    <v:String x:Key="Common.SaveButton">Save</v:String>
+    
+    <!-- Main window -->
+    <!-- https://habr.com/ru/articles/256193/ -->
+    <v:String x:Key="MainWindow.Title">Media Librarian</v:String>
+    
+    <!-- LibManager window -->
+    <v:String x:Key="LibManager.Title">Library Manager</v:String>
+    
+    <!-- Editor window -->
+    <v:String x:Key="Editor.TitleCreate">Create Entry</v:String>
+    <v:String x:Key="Editor.TitleUpdate">Update Entry</v:String>
+    
+    <!-- Settings window -->
+    <v:String x:Key="Settings.Title">Settings</v:String>
+</ResourceDictionary>

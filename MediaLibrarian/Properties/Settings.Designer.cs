@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MediaLibrarian_.Properties {
+namespace MediaLibrarian.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
@@ -24,13 +24,13 @@ namespace MediaLibrarian_.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Control")]
-        public global::System.Drawing.Color Цвет {
+        [global::System.Configuration.DefaultSettingValueAttribute("en-US")]
+        public global::System.Globalization.CultureInfo DefaultLanguage {
             get {
-                return ((global::System.Drawing.Color)(this["Цвет"]));
+                return ((global::System.Globalization.CultureInfo)(this["DefaultLanguage"]));
             }
             set {
-                this["Цвет"] = value;
+                this["DefaultLanguage"] = value;
             }
         }
     }

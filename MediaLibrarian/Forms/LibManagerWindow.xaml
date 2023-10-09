@@ -9,7 +9,7 @@
         MinWidth="480"
         Height="640"
         Width="480"
-        Title="LibManagerWindow">
+        Title="{DynamicResource LibManager.Title}">
     <DockPanel LastChildFill="True" Margin="5">
         <Grid Tag="Library Name" DockPanel.Dock="Top" Height="25" Margin="5,10">
             <Grid.ColumnDefinitions>

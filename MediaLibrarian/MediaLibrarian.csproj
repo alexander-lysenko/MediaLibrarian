@@ -92,6 +92,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DB\Database.cs" />
+    <Compile Include="Properties\Settings.Designer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Forms\EditorWindow.xaml.cs">
@@ -134,6 +135,10 @@
     </Page>
     <Page Include="Forms\PictureViewWindow.xaml" />
     <Page Include="Forms\SettingsWindow.xaml" />
+    <Page Include="Properties\lang.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Properties\Settings.settings" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.118.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets" Condition="Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.118.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" />
