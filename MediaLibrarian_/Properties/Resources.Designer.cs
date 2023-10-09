@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MediaLibrarian._0.Properties {
+namespace MediaLibrarian_.Properties {
     using System;
     
     
@@ -21,7 +21,7 @@ namespace MediaLibrarian._0.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -35,10 +35,10 @@ namespace MediaLibrarian._0.Properties {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MediaLibrarian.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MediaLibrarian_.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -50,12 +50,52 @@ namespace MediaLibrarian._0.Properties {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to v.1.0.2 (03.08.2019):
+        ///+ Добавлена возможность ограничить выборку записей
+        ///+ Добавлена пагинация для записей библиотеки
+        ///* Оптимизация работы с базой данных
+        ///----------
+        ///v.1.0.1 (07.10.2017):
+        ///* Переделана логика работы с базой данных
+        ///* Исправлены ошибки просмотрщика постеров
+        ///* Исправлены подвисания при загрузке постера по URL
+        ///----------
+        ///v.1.0 (10.03.2017): 
+        ///+ Релиз основных возможностей программы.
+        /// </summary>
+        public static string changelog {
+            get {
+                return ResourceManager.GetString("changelog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap noposter {
+            get {
+                object obj = ResourceManager.GetObject("noposter", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap splash {
+            get {
+                object obj = ResourceManager.GetObject("splash", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }

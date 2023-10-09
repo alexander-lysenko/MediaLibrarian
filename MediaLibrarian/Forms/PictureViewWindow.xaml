@@ -1,0 +1,25 @@
+﻿<Window x:Class="MediaLibrarian.Forms.PictureViewWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        mc:Ignorable="d"
+        Topmost="True"
+        AllowsTransparency="True"
+        WindowStyle="None"
+        WindowState="Maximized"
+        SizeChanged="OnSizeChanged"
+        MouseDown="OnMouseDown"
+        Title="PictureViewWindow">
+    <Window.Background>
+        <SolidColorBrush Color="#FF000000" Opacity="0.05" />
+    </Window.Background>
+    <Grid ShowGridLines="True">
+        <Image Name="Picture" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <!-- Todo: Remove on production -->
+            <Image.Source>
+                <BitmapImage UriSource="https://source.unsplash.com/wMkaMXTJjlQ/480x640" />
+            </Image.Source>
+        </Image>
+    </Grid>
+</Window>
