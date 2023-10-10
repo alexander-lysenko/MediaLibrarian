@@ -5,18 +5,35 @@
     <v:String x:Key="Common.CancelButton">Cancel</v:String>
     <v:String x:Key="Common.CloseButton">Close</v:String>
     <v:String x:Key="Common.SaveButton">Save</v:String>
-    
+    <v:String x:Key="Common.SelectLibraryButton">Select</v:String>
+
+    <!-- Menu -->
+    <v:String x:Key="Menu.File">_File</v:String>
+    <v:String x:Key="Menu.Edit">_Edit</v:String>
+    <v:String x:Key="Menu.View">_View</v:String>
+    <v:String x:Key="Menu.Help">_Help</v:String>
+
     <!-- Main window -->
     <!-- https://habr.com/ru/articles/256193/ -->
     <v:String x:Key="MainWindow.Title">Media Librarian</v:String>
+    <v:String x:Key="MainWindow.StatusBarStub">Status bar displays notifications</v:String>
     
+    <v:String x:Key="MainWindow.LibraryItemActions">Actions over items in the Library</v:String>
+    <v:String x:Key="MainWindow.AddItemButton">Create</v:String>
+    <v:String x:Key="MainWindow.EditItemButton">Update</v:String>
+    <v:String x:Key="MainWindow.RemoveItemButton">Delete</v:String>
+    <v:String x:Key="MainWindow.FilterItemsButton">Search</v:String>
+
+    <v:String x:Key="MainWindow.ViewingLibrary">Viewing Library:</v:String>
+    <v:String x:Key="MainWindow.CountItems">Number of items in the Library:</v:String>
+
     <!-- LibManager window -->
     <v:String x:Key="LibManager.Title">Library Manager</v:String>
-    
+
     <!-- Editor window -->
     <v:String x:Key="Editor.TitleCreate">Create Entry</v:String>
     <v:String x:Key="Editor.TitleUpdate">Update Entry</v:String>
-    
+
     <!-- Settings window -->
     <v:String x:Key="Settings.Title">Settings</v:String>
 </ResourceDictionary>

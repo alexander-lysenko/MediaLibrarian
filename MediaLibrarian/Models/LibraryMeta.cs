@@ -23,7 +23,7 @@ namespace MediaLibrarian.Models
                 var res = query.Where("id", id).First<LibraryMeta>();
                 return res;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }

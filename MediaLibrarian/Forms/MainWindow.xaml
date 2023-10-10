@@ -5,39 +5,152 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         MinHeight="600" MinWidth="800"
-        Background="Aqua"
         Title="{DynamicResource MainWindow.Title}">
+    <Window.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="DarkTurquoise" Offset="0" />
+            <GradientStop Color="Cyan" Offset="0.5" />
+            <GradientStop Color="DarkCyan" Offset="1" />
+        </LinearGradientBrush>
+    </Window.Background>
     <Window.Resources>
-        <Style x:Key="Transparent">
-            <Setter Property="Control.Background" Value="Transparent"></Setter>
-        </Style>
     </Window.Resources>
-    
-    <DockPanel LastChildFill="True">
-        <Menu DockPanel.Dock="Top" Height="24" VerticalAlignment="Center">
-            <MenuItem Header="_File">
+    <DockPanel LastChildFill="True" Tag="Window">
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="{DynamicResource Menu.File}">
                 <MenuItem Header="_New"></MenuItem>
                 <MenuItem Header="_Open"></MenuItem>
                 <MenuItem Header="_Save"></MenuItem>
                 <Separator></Separator>
                 <MenuItem Header="_Exit"></MenuItem>
             </MenuItem>
+            <MenuItem Header="{DynamicResource Menu.Edit}"> </MenuItem>
+            <MenuItem Header="{DynamicResource Menu.View}"> </MenuItem>
+            <MenuItem Header="{DynamicResource Menu.Help}"> </MenuItem>
         </Menu>
-        <StatusBar DockPanel.Dock="Bottom" Name="MainStatusBar">
-            Статусная строка отображает уведомления
+        <StatusBar DockPanel.Dock="Bottom">
+            <StatusBarItem>
+                <TextBlock Name="Notification" Text="{DynamicResource MainWindow.StatusBarStub}" />
+            </StatusBarItem>
         </StatusBar>
-        
-        <Grid Background="Transparent" Margin="4">
+
+        <!-- Grid Content -->
+        <Grid Background="Transparent" Margin="4" Tag="Contents">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition MinWidth="440" MaxWidth="600" Width="2*"></ColumnDefinition>
-                <ColumnDefinition Width="3*"></ColumnDefinition>
+                <ColumnDefinition MinWidth="440" MaxWidth="600" Width="2*" />
+                <ColumnDefinition Width="3*" />
             </Grid.ColumnDefinitions>
-            <DockPanel Grid.Column="0" LastChildFill="True">
-                <Button>Hello</Button>
-                <Button>Words</Button>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <!-- Left Panel -->
+            <DockPanel
+                Grid.Row="0"
+                Grid.Column="0"
+                Grid.RowSpan="2"
+                LastChildFill="True"
+                Margin="4,0"
+                Tag="LeftPanel">
+                <Image DockPanel.Dock="Top" Source="/Resources/splash.png" Height="120" />
+
+                <!-- Current Library Info -->
+                <Border DockPanel.Dock="Bottom" Style="{DynamicResource InfoBlock}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <TextBlock
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Text="{DynamicResource MainWindow.ViewingLibrary}" />
+                        <TextBlock
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            HorizontalAlignment="Right"
+                            FontWeight="DemiBold"
+                            TextTrimming="CharacterEllipsis"
+                            MaxWidth="180"
+                            Text="Фильмы" />
+                        <Button
+                            Grid.Row="0"
+                            Grid.Column="2"
+                            Margin="12,0,0,0"
+                            Padding="16,0"
+                            Content="{DynamicResource Common.SelectLibraryButton}" />
+                        <TextBlock
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            Text="{DynamicResource MainWindow.CountItems}" />
+                        <TextBlock
+                            Grid.Row="1"
+                            Grid.Column="2"
+                            HorizontalAlignment="Right"
+                            FontWeight="DemiBold"
+                            Text="0" />
+                    </Grid>
+                </Border>
+
+                <!-- Library Item Actions -->
+                <Border DockPanel.Dock="Bottom" Style="{DynamicResource InfoBlock}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <TextBlock
+                            Grid.Row="0"
+                            Grid.ColumnSpan="4"
+                            Margin="0,0,0,4"
+                            Text="{DynamicResource MainWindow.LibraryItemActions}" />
+                        <Button
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Margin="0,0,4,0"
+                            Content="{DynamicResource MainWindow.AddItemButton}" />
+                        <Button
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Margin="4,0"
+                            Content="{DynamicResource MainWindow.EditItemButton}" />
+                        <Button
+                            Grid.Row="1"
+                            Grid.Column="2"
+                            Margin="4,0"
+                            Content="{DynamicResource MainWindow.RemoveItemButton}" />
+                        <Button
+                            Grid.Row="1"
+                            Grid.Column="3"
+                            Margin="4,0,0,0"
+                            Content="{DynamicResource MainWindow.FilterItemsButton}" />
+                    </Grid>
+                </Border>
+
+                <Border Style="{DynamicResource InfoBlock}">
+                    <ScrollViewer VerticalScrollBarVisibility="Visible">
+                        <Grid>
+
+                        </Grid>
+                    </ScrollViewer>
+                </Border>
             </DockPanel>
-            <ListView Grid.Column="1" Name="Collection" Margin="4,0,0,0">
-            </ListView>
+
+            <!-- Right Panel -->
+            <ListView Grid.Row="0" Grid.Column="1" Name="Collection" Margin="4,0" />
         </Grid>
     </DockPanel>
 </Window>

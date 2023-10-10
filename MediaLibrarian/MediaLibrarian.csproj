@@ -124,6 +124,7 @@
       <DependentUpon>app.config</DependentUpon>
     </None>
     <None Include="packages.config" />
+    <EmbeddedResource Include="Resources\splash.png" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="Components\LibraryField.xaml" />
@@ -136,6 +137,7 @@
     <Page Include="Forms\PictureViewWindow.xaml" />
     <Page Include="Forms\SettingsWindow.xaml" />
     <Page Include="Properties\lang.xaml" />
+    <Page Include="Properties\Styles.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Properties\Settings.settings" />
