@@ -47,9 +47,9 @@
         <!-- Library Fields -->
         <ScrollViewer VerticalScrollBarVisibility="Visible">
             <StackPanel Name="LibraryFields" CanVerticallyScroll="True" Margin="0,0,8,0">
-                <components:LibraryFieldTemplate></components:LibraryFieldTemplate>
-                <components:LibraryFieldTemplate></components:LibraryFieldTemplate>
-                <components:LibraryFieldTemplate></components:LibraryFieldTemplate>
+                <components:LibraryFieldTemplate/>
+                <components:LibraryFieldTemplate/>
+                <components:LibraryFieldTemplate/>
             </StackPanel>
         </ScrollViewer>
     </DockPanel>

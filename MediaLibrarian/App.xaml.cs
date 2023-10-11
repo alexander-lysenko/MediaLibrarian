@@ -49,7 +49,7 @@ namespace MediaLibrarian
                 // Finding an old ResourceDictionary and replacing it with a new one
                 var oldDictionary = (
                     from d in Current.Resources.MergedDictionaries
-                    where d.Source != null && d.Source.OriginalString.StartsWith("Resources/lang.")
+                    where d.Source != null && d.Source.OriginalString.StartsWith("Lang/")
                     select d
                 ).First();
 
