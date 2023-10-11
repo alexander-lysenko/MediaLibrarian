@@ -1,28 +1,29 @@
-﻿<UserControl x:Class="MediaLibrarian.Components.LibraryField"
+﻿<UserControl x:Class="MediaLibrarian.Components.LibraryFieldTemplate"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d"
-             d:DesignHeight="55" d:DesignWidth="480">
-    <Grid Margin="5">
+             d:DesignWidth="480"
+             d:DesignHeight="55">
+    <Grid Margin="0,4">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="4*" />
-            <ColumnDefinition Width="3*" MaxWidth="250" />
-            <ColumnDefinition Width="32" MaxWidth="32" />
+            <ColumnDefinition Width="3*" MaxWidth="240" />
+            <ColumnDefinition Width="32" MaxWidth="24" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="25" />
-            <RowDefinition Height="Auto" MaxHeight="20" />
+            <RowDefinition Height="24" />
+            <RowDefinition Height="Auto" MaxHeight="16" />
         </Grid.RowDefinitions>
         <Border Grid.Row="0" Grid.Column="0" Padding="0">
-            <TextBox VerticalContentAlignment="Center" x:Name="FieldName"></TextBox>
+            <TextBox VerticalContentAlignment="Center" x:Name="FieldName"/>
         </Border>
-        <Border Grid.Row="0" Grid.Column="1" Padding="5,0">
-            <ComboBox x:Name="FieldType"></ComboBox>
+        <Border Grid.Row="0" Grid.Column="1" Padding="4,0">
+            <ComboBox x:Name="FieldType"/>
         </Border>
         <Border Grid.Row="0" Grid.Column="2" Padding="0">
-            <Button ToolTip="Это поле нельзя удалить">-</Button>
+            <Button ToolTip="{DynamicResource LibManager.RemoveField}" Content="-"/>
         </Border>
         <Border Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3">
             <TextBlock VerticalAlignment="Center">Validation Message</TextBlock>

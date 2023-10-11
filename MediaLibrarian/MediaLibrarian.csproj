@@ -79,8 +79,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Components\LibraryField.xaml.cs">
-      <DependentUpon>LibraryField.xaml</DependentUpon>
+    <Compile Include="Components\LibraryFieldTemplate.xaml.cs">
+      <DependentUpon>LibraryFieldTemplate.xaml</DependentUpon>
     </Compile>
     <Compile Include="Forms\LibManagerWindow.xaml.cs">
       <DependentUpon>LibManagerWindow.xaml</DependentUpon>
@@ -136,7 +136,10 @@
     <Resource Include="Resources\splash.png" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Components\LibraryField.xaml" />
+    <Page Include="Components\LibraryFieldTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Forms\EditorWindow.xaml" />
     <Page Include="Forms\LibManagerWindow.xaml" />
     <Page Include="Forms\MainWindow.xaml">

@@ -7,11 +7,12 @@
         mc:Ignorable="d"
         MinWidth="480"
         MinHeight="640"
+        Height="640"
         SizeToContent="WidthAndHeight"
         Title="{DynamicResource LibManager.Title}">
     <DockPanel LastChildFill="True" Margin="8">
         <!-- Library Name Input -->
-        <Grid DockPanel.Dock="Top" Height="24" Margin="0,4">
+        <Grid DockPanel.Dock="Top" Height="24" Margin="0,4,0,8">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="24" />
@@ -24,7 +25,7 @@
                 Text="Input" />
         </Grid>
         <!-- Action Buttons -->
-        <Grid DockPanel.Dock="Bottom" Height="32" Margin="0,4,0,0">
+        <Grid DockPanel.Dock="Bottom" Height="32" Margin="0,8,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="4*" />
                 <ColumnDefinition Width="48" />
@@ -44,8 +45,11 @@
         </Grid>
 
         <!-- Library Fields -->
-        <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0,4">
-            <StackPanel Name="LibraryFields" CanVerticallyScroll="True">
+        <ScrollViewer VerticalScrollBarVisibility="Visible">
+            <StackPanel Name="LibraryFields" CanVerticallyScroll="True" Margin="0,0,8,0">
+                <components:LibraryFieldTemplate></components:LibraryFieldTemplate>
+                <components:LibraryFieldTemplate></components:LibraryFieldTemplate>
+                <components:LibraryFieldTemplate></components:LibraryFieldTemplate>
             </StackPanel>
         </ScrollViewer>
     </DockPanel>

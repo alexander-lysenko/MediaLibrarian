@@ -33,6 +33,8 @@
     <!-- LibManager window -->
     <v:String x:Key="LibManager.Title">Library Manager</v:String>
     <v:String x:Key="LibManager.LibraryName">Library Name</v:String>
+    <v:String x:Key="LibManager.RemoveField">Remove this field</v:String>
+    <v:String x:Key="LibManager.CannotBeRemoved">This field cannot be removed</v:String>
 
     <!-- Editor window -->
     <v:String x:Key="Editor.TitleCreate">Create Entry</v:String>
