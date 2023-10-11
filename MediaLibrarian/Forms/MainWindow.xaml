@@ -4,7 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        MinHeight="600" MinWidth="800"
+        MinWidth="800"
+        MinHeight="600"
         Title="{DynamicResource MainWindow.Title}">
     <Window.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
@@ -15,7 +16,7 @@
     </Window.Background>
     <Window.Resources>
     </Window.Resources>
-    <DockPanel LastChildFill="True" Tag="Window">
+    <DockPanel LastChildFill="True">
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="{DynamicResource Menu.File}">
                 <MenuItem Header="_New"></MenuItem>
@@ -35,9 +36,9 @@
         </StatusBar>
 
         <!-- Grid Content -->
-        <Grid Background="Transparent" Margin="4" Tag="Contents">
+        <Grid Background="Transparent" Margin="8,0,0,4">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition MinWidth="440" MaxWidth="600" Width="2*" />
+                <ColumnDefinition MinWidth="480" MaxWidth="600" Width="2*" />
                 <ColumnDefinition Width="3*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
@@ -46,13 +47,7 @@
             </Grid.RowDefinitions>
 
             <!-- Left Panel -->
-            <DockPanel
-                Grid.Row="0"
-                Grid.Column="0"
-                Grid.RowSpan="2"
-                LastChildFill="True"
-                Margin="4,0"
-                Tag="LeftPanel">
+            <DockPanel Grid.Row="0" Grid.Column="0" Grid.RowSpan="2">
                 <Image DockPanel.Dock="Top" Source="/Resources/splash.png" Height="120" />
 
                 <!-- Current Library Info -->
@@ -140,17 +135,55 @@
                     </Grid>
                 </Border>
 
+                <!-- Library Item Info -->
                 <Border Style="{DynamicResource InfoBlock}">
-                    <ScrollViewer VerticalScrollBarVisibility="Visible">
-                        <Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="100" MaxWidth="100" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="100" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
 
-                        </Grid>
-                    </ScrollViewer>
+                        <!-- Library Title And Poster Image -->
+                        <TextBlock
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Text="Hello"
+                            Style="{DynamicResource TitleText}" />
+                        <Image Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right">
+                            <Image.Source>
+                                <BitmapImage UriSource="https://source.unsplash.com/wMkaMXTJjlQ/480x640" />
+                            </Image.Source>
+                        </Image>
+
+                        <!-- Library Item Info Container -->
+                        <ScrollViewer
+                            Name="LibraryItemInfoContainer"
+                            Grid.Column="0"
+                            Grid.Row="1"
+                            Grid.ColumnSpan="2"
+                            Margin="0,4"
+                            VerticalScrollBarVisibility="Auto">
+                            <TextBlock
+                                MaxWidth="360"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                TextWrapping="WrapWithOverflow"
+                                TextAlignment="Center">
+                                <Run Text="{DynamicResource MainWindow.ItemInfoStub1}"></Run>
+                                <LineBreak />
+                                <Run Text="{DynamicResource MainWindow.ItemInfoStub2}"></Run>
+                            </TextBlock>
+                        </ScrollViewer>
+                    </Grid>
                 </Border>
             </DockPanel>
 
             <!-- Right Panel -->
-            <ListView Grid.Row="0" Grid.Column="1" Name="Collection" Margin="4,0" />
+            <ListView Name="Collection" Grid.Row="0" Grid.Column="1" Margin="8,0" />
         </Grid>
     </DockPanel>
 </Window>

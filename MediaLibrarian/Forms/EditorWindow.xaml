@@ -3,12 +3,60 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:local="clr-namespace:MediaLibrarian.Forms"
         mc:Ignorable="d"
-        MinHeight="640"
         MinWidth="480"
-        Title="EditorWindow">
-    <Grid>
+        MinHeight="640"
+        SizeToContent="WidthAndHeight"
+        Title="{DynamicResource Editor.TitleCreate}">
+    <DockPanel LastChildFill="True" Margin="8">
+        <!-- Action buttons -->
+        <Grid
+            DockPanel.Dock="Bottom"
+            Width="480"
+            Height="32"
+            HorizontalAlignment="Right"
+            Margin="0,4,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="16" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Button
+                Grid.Column="0"
+                Content="{DynamicResource Common.SaveButton}" />
+            <Button
+                Grid.Column="2"
+                Content="{DynamicResource Common.CancelButton}" />
+        </Grid>
+        <!-- Poster Selector -->
+        <Grid DockPanel.Dock="Bottom" Margin="0,4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Column="0" Grid.Row="0">
+                <Run Text="{DynamicResource Editor.Poster}"/>
+                <LineBreak/>
+                <Run Text="{DynamicResource Editor.PosterHint}"/>
+                <LineBreak/>
+                <Run Name="PosterUploadStatus" Foreground="Blue" Text="No poster attached"/>
+            </TextBlock>
+            <Image Grid.Column="1" Grid.Row="0" Height="50" Width="50" Margin="0,0,0,4">
+                <Image.Source>
+                    <BitmapImage UriSource="https://source.unsplash.com/wMkaMXTJjlQ/480x640" />
+                </Image.Source>
+            </Image>
+            <TextBox Grid.Column="0" Grid.Row="1" Margin="0,0,8,0"></TextBox>
+            <Button Grid.Column="1" Grid.Row="1">Local</Button>
+        </Grid>
         
-    </Grid>
+        <!-- Editor Container -->
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel Name="EditorContainer" Margin="8" />
+        </ScrollViewer>
+    </DockPanel>
 </Window>

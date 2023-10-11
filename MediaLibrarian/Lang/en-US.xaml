@@ -5,6 +5,7 @@
     <v:String x:Key="Common.CancelButton">Cancel</v:String>
     <v:String x:Key="Common.CloseButton">Close</v:String>
     <v:String x:Key="Common.SaveButton">Save</v:String>
+    <v:String x:Key="Common.AddFieldButton">Add Field</v:String>
     <v:String x:Key="Common.SelectLibraryButton">Select</v:String>
 
     <!-- Menu -->
@@ -17,6 +18,8 @@
     <!-- https://habr.com/ru/articles/256193/ -->
     <v:String x:Key="MainWindow.Title">Media Librarian</v:String>
     <v:String x:Key="MainWindow.StatusBarStub">Status bar displays notifications</v:String>
+    <v:String x:Key="MainWindow.ItemInfoStub1">The details of an item from selected Library will be displayed here.</v:String>
+    <v:String x:Key="MainWindow.ItemInfoStub2">To get started, create new Library or choose an existing one using "Select" button.</v:String>
     
     <v:String x:Key="MainWindow.LibraryItemActions">Actions over items in the Library</v:String>
     <v:String x:Key="MainWindow.AddItemButton">Create</v:String>
@@ -29,10 +32,13 @@
 
     <!-- LibManager window -->
     <v:String x:Key="LibManager.Title">Library Manager</v:String>
+    <v:String x:Key="LibManager.LibraryName">Library Name</v:String>
 
     <!-- Editor window -->
     <v:String x:Key="Editor.TitleCreate">Create Entry</v:String>
     <v:String x:Key="Editor.TitleUpdate">Update Entry</v:String>
+    <v:String x:Key="Editor.Poster">Poster (leave blank if not needed)</v:String>
+    <v:String x:Key="Editor.PosterHint">Provide a direct URL or path to local file to attach</v:String>
 
     <!-- Settings window -->
     <v:String x:Key="Settings.Title">Settings</v:String>

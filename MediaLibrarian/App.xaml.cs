@@ -39,10 +39,10 @@ namespace MediaLibrarian
                 switch (value.Name)
                 {
                     case "ru-RU":
-                        dictionary.Source = new Uri($"Resources/lang.{value.Name}.xaml", UriKind.Relative);
+                        dictionary.Source = new Uri($"Lang/{value.Name}.xaml", UriKind.Relative);
                         break;
                     default:
-                        dictionary.Source = new Uri("Resources/lang.xaml", UriKind.Relative);
+                        dictionary.Source = new Uri("Lang/en_US.xaml", UriKind.Relative);
                         break;
                 }
 

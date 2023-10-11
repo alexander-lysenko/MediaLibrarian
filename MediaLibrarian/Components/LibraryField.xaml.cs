@@ -4,9 +4,8 @@ namespace MediaLibrarian.Components
 {
     public partial class LibraryField : UserControl
     {
-        public LibraryField(string fieldName)
+        public LibraryField()
         {
-            InitializeComponent();
         }
     }
 }
