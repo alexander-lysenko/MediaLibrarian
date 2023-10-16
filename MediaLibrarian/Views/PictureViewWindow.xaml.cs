@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Media.Animation;
 
-namespace MediaLibrarian.Forms
+namespace MediaLibrarian.Views
 {
     public partial class PictureViewWindow : Window
     {

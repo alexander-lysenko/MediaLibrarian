@@ -1,12 +1,8 @@
-﻿using System;
-using System.Data;
-using System.Data.SQLite;
+﻿using System.Data.SQLite;
 using SqlKata;
 using SqlKata.Compilers;
 using SqlKata.Execution;
-using SqlKata.Extensions;
 using System.Data.Linq;
-using System.Linq;
 
 namespace MediaLibrarian.DB
 {

@@ -3,9 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:components="clr-namespace:MediaLibrarian.Components"
              mc:Ignorable="d"
              d:DesignWidth="480"
-             d:DesignHeight="55">
+             d:DesignHeight="55"
+             d:DataContext="{d:DesignInstance components:LibraryFieldTemplate }">
     <Grid Margin="0,4">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="4*" />
@@ -17,13 +19,16 @@
             <RowDefinition Height="Auto" MaxHeight="16" />
         </Grid.RowDefinitions>
         <Border Grid.Row="0" Grid.Column="0" Padding="0">
-            <TextBox VerticalContentAlignment="Center" x:Name="FieldName"/>
+            <TextBox VerticalContentAlignment="Center" Text="{Binding FieldName}" />
         </Border>
         <Border Grid.Row="0" Grid.Column="1" Padding="4,0">
-            <ComboBox x:Name="FieldType"/>
+            <ComboBox ItemsSource="{Binding FieldTypes}" SelectedValue="{Binding FieldType}" />
         </Border>
         <Border Grid.Row="0" Grid.Column="2" Padding="0">
-            <Button ToolTip="{DynamicResource LibManager.RemoveField}" Content="-"/>
+            <Button
+                ToolTip="{DynamicResource LibManager.RemoveField}"
+                Content="-"
+                Command="{Binding RemoveCommand}" />
         </Border>
         <Border Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3">
             <TextBlock VerticalAlignment="Center">Validation Message</TextBlock>

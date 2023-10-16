@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace MediaLibrarian.Forms
+namespace MediaLibrarian.Views
 {
     public partial class SettingsWindow : Window
     {
