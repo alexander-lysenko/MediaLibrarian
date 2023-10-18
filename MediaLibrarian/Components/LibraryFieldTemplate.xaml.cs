@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -16,7 +18,7 @@ namespace MediaLibrarian.Components
 
         private static readonly DependencyProperty FieldTypeDep = DependencyProperty.Register(
             name: nameof(FieldType),
-            propertyType: typeof(FieldType),
+            propertyType: typeof(FieldTypes),
             ownerType: typeof(LibraryFieldTemplate)
         );
 
@@ -32,9 +34,9 @@ namespace MediaLibrarian.Components
             set => SetValue(FieldNameDep, value);
         }
 
-        public FieldType FieldType
+        public FieldTypes FieldType
         {
-            get => (FieldType)GetValue(FieldTypeDep);
+            get => (FieldTypes)GetValue(FieldTypeDep);
             set => SetValue(FieldTypeDep, value);
         }
 
@@ -44,12 +46,8 @@ namespace MediaLibrarian.Components
             set => SetValue(RemoveCommandDep, value);
         }
 
-        public List<FieldType> FieldTypes { get; set; } = new List<FieldType>
-        {
-            FieldType.Line,
-            FieldType.Text,
-            FieldType.Date
-        };
+        public List<FieldTypes> FieldTypesList { get; set; } =
+            Enum.GetValues(typeof(FieldTypes)).Cast<FieldTypes>().ToList();
 
         public string ValidationMessage { get; set; }
 

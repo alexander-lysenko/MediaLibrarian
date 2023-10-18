@@ -9,7 +9,7 @@ namespace MediaLibrarian.DB
     public static class Database
     {
         private const string DatabaseName = "storage.db";
-        private static readonly string DataSource = string.Format("Data Source=file:{0};", DatabaseName);
+        private static readonly string DataSource = $"Data Source=file:{DatabaseName};";
 
         public static Query GetQuery(string tableName)
         {

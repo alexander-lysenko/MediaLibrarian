@@ -2,7 +2,7 @@
 
 namespace MediaLibrarian.Models
 {
-    public enum FieldType
+    public enum FieldTypes
     {
         Line,
         Text,
@@ -20,12 +20,13 @@ namespace MediaLibrarian.Models
     public class LibraryField
     {
         public string Name { get; set; }
-        public FieldType Type { get; set; }
+        public FieldTypes Type { get; set; }
     }
 
     public class Library
     {
-        public string Title;
-        public List<LibraryField> Fields;
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public List<LibraryField> Fields { get; set; }
     }
 }

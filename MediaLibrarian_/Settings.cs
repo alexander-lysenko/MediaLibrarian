@@ -23,7 +23,7 @@ namespace MediaLibrarian_
         public SFont MainFont { get; set; }
     }
     [Serializable]
-    public class SFont 
+    public class SFont
     {
         public string FontFamilyName { get; set; }
         public float FontSize { get; set; }

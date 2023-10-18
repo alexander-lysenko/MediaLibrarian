@@ -22,12 +22,13 @@
             <TextBox VerticalContentAlignment="Center" Text="{Binding FieldName}" />
         </Border>
         <Border Grid.Row="0" Grid.Column="1" Padding="4,0">
-            <ComboBox ItemsSource="{Binding FieldTypes}" SelectedValue="{Binding FieldType}" />
+            <ComboBox ItemsSource="{Binding FieldTypesList}" SelectedValue="{Binding FieldType}" />
         </Border>
         <Border Grid.Row="0" Grid.Column="2" Padding="0">
             <Button
                 ToolTip="{DynamicResource LibManager.RemoveField}"
                 Content="-"
+                Padding="0"
                 Command="{Binding RemoveCommand}" />
         </Border>
         <Border Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3">

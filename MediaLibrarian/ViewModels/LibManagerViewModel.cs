@@ -27,7 +27,7 @@ namespace MediaLibrarian.ViewModels
                 Fields.Add(new LibraryField
                 {
                     Name = "Название",
-                    Type = FieldType.Text
+                    Type = FieldTypes.Text
                 });
             }
         );
