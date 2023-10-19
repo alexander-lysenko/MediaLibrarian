@@ -8,6 +8,19 @@
     <v:String x:Key="Common.AddFieldButton">Add Field</v:String>
     <v:String x:Key="Common.SelectLibraryButton">Select</v:String>
 
+    <!--Library Field Types-->
+    <v:String x:Key="FieldTypes.Line">Single line</v:String>
+    <v:String x:Key="FieldTypes.Text">Text</v:String>
+    <v:String x:Key="FieldTypes.Date">Date</v:String>
+    <v:String x:Key="FieldTypes.DateTime">Date+Time</v:String>
+    <v:String x:Key="FieldTypes.Url">URL</v:String>
+    <v:String x:Key="FieldTypes.CheckBox">Check Mark</v:String>
+    <v:String x:Key="FieldTypes.Rating5">Rating (5 stars)</v:String>
+    <v:String x:Key="FieldTypes.Rating5Precision">Rating (5 stars, half precision)</v:String>
+    <v:String x:Key="FieldTypes.Rating10">Rating (10 stars)</v:String>
+    <v:String x:Key="FieldTypes.Rating10Precision">Rating (10 stars, half precision)</v:String>
+    <v:String x:Key="FieldTypes.Priority">Priority</v:String>
+
     <!-- Menu -->
     <v:String x:Key="Menu.File">_File</v:String>
     <v:String x:Key="Menu.Edit">_Edit</v:String>
@@ -15,7 +28,6 @@
     <v:String x:Key="Menu.Help">_Help</v:String>
 
     <!-- Main window -->
-    <!-- https://habr.com/ru/articles/256193/ -->
     <v:String x:Key="MainWindow.Title">Media Librarian</v:String>
     <v:String x:Key="MainWindow.StatusBarStub">Status bar displays notifications</v:String>
     <v:String x:Key="MainWindow.ItemInfoStub1">The details of an item from selected Library will be displayed here.</v:String>

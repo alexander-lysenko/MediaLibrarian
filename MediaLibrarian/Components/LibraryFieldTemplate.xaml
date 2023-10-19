@@ -6,8 +6,7 @@
              xmlns:components="clr-namespace:MediaLibrarian.Components"
              mc:Ignorable="d"
              d:DesignWidth="480"
-             d:DesignHeight="55"
-             d:DataContext="{d:DesignInstance components:LibraryFieldTemplate }">
+             d:DesignHeight="55">
     <Grid Margin="0,4">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="4*" />
@@ -19,10 +18,12 @@
             <RowDefinition Height="Auto" MaxHeight="16" />
         </Grid.RowDefinitions>
         <Border Grid.Row="0" Grid.Column="0" Padding="0">
-            <TextBox VerticalContentAlignment="Center" Text="{Binding FieldName}" />
+            <TextBox VerticalContentAlignment="Center" Text="{Binding ElementName=self, Path=FieldName}" />
         </Border>
         <Border Grid.Row="0" Grid.Column="1" Padding="4,0">
-            <ComboBox ItemsSource="{Binding FieldTypesList}" SelectedValue="{Binding FieldType}" />
+            <ComboBox
+                ItemsSource="{Binding FieldTypesList}"
+                SelectedValue="{Binding ElementName=self, Path=FieldType}" />
         </Border>
         <Border Grid.Row="0" Grid.Column="2" Padding="0">
             <Button

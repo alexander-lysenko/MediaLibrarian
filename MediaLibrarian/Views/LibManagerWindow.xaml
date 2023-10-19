@@ -52,8 +52,8 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <components:LibraryFieldTemplate
-                            FieldName="{Binding Path=Name}"
-                            FieldType="{Binding Path=Type}" />
+                            FieldName="{Binding Name}"
+                            FieldType="{Binding Type}" />
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>

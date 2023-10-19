@@ -13,6 +13,7 @@ namespace MediaLibrarian
     {
         public static event EventHandler LanguageChanged;
 
+        // ReSharper disable once CollectionNeverQueried.Local
         private static List<CultureInfo> Languages { get; } = new List<CultureInfo>();
 
         public App()
@@ -23,6 +24,7 @@ namespace MediaLibrarian
             LanguageChanged += OnLanguageChanged;
         }
 
+        // https://habr.com/ru/articles/256193/
         private static CultureInfo Language
         {
             get => System.Threading.Thread.CurrentThread.CurrentUICulture;
