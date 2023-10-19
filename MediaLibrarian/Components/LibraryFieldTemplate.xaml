@@ -3,11 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:components="clr-namespace:MediaLibrarian.Components"
              mc:Ignorable="d"
+             x:Name="LayoutRoot"
              d:DesignWidth="480"
              d:DesignHeight="55">
-    <Grid Margin="0,4">
+    <Grid Margin="0,4" DataContext="{Binding ElementName=LayoutRoot}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="4*" />
             <ColumnDefinition Width="3*" MaxWidth="240" />
@@ -18,12 +18,12 @@
             <RowDefinition Height="Auto" MaxHeight="16" />
         </Grid.RowDefinitions>
         <Border Grid.Row="0" Grid.Column="0" Padding="0">
-            <TextBox VerticalContentAlignment="Center" Text="{Binding ElementName=self, Path=FieldName}" />
+            <TextBox VerticalContentAlignment="Center" Text="{Binding FieldName}" />
         </Border>
         <Border Grid.Row="0" Grid.Column="1" Padding="4,0">
             <ComboBox
                 ItemsSource="{Binding FieldTypesList}"
-                SelectedValue="{Binding ElementName=self, Path=FieldType}" />
+                SelectedValue="{Binding FieldType}" />
         </Border>
         <Border Grid.Row="0" Grid.Column="2" Padding="0">
             <Button
@@ -33,7 +33,10 @@
                 Command="{Binding RemoveCommand}" />
         </Border>
         <Border Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3">
-            <TextBlock VerticalAlignment="Center">Validation Message</TextBlock>
+            <TextBlock
+                VerticalAlignment="Center"
+                Foreground="OrangeRed"
+                Text="{Binding ValidationMessage}" />
         </Border>
     </Grid>
 </UserControl>

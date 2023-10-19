@@ -9,6 +9,7 @@ using MediaLibrarian.ViewModels;
 
 namespace MediaLibrarian.Components
 {
+    // https://blog.scottlogic.com/2012/02/06/a-simple-pattern-for-creating-re-useable-usercontrols-in-wpf-silverlight.html
     public partial class LibraryFieldTemplate : UserControl
     {
         private static readonly DependencyProperty FieldNameProperty = DependencyProperty.Register(
@@ -26,6 +27,12 @@ namespace MediaLibrarian.Components
         private static readonly DependencyProperty RemoveCommandProperty = DependencyProperty.Register(
             name: nameof(RemoveCommand),
             propertyType: typeof(ICommand),
+            ownerType: typeof(LibraryFieldTemplate)
+        );
+
+        private static readonly DependencyProperty ValidationMessageProperty = DependencyProperty.Register(
+            name: nameof(ValidationMessage),
+            propertyType: typeof(string),
             ownerType: typeof(LibraryFieldTemplate)
         );
 
@@ -47,15 +54,18 @@ namespace MediaLibrarian.Components
             set => SetValue(RemoveCommandProperty, value);
         }
 
+        public string ValidationMessage
+        {
+            get => (string)GetValue(ValidationMessageProperty);
+            set => SetValue(ValidationMessageProperty, value);
+        }
+
         public List<FieldTypes> FieldTypesList { get; set; } =
             Enum.GetValues(typeof(FieldTypes)).Cast<FieldTypes>().ToList();
-
-        public string ValidationMessage { get; set; }
 
         public LibraryFieldTemplate()
         {
             InitializeComponent();
-            DataContext = this;
         }
     }
 }

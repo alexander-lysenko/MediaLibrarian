@@ -6,11 +6,7 @@ namespace MediaLibrarian.ViewModels
 {
     internal class LibManagerViewModel : BaseViewModel
     {
-        public LibManagerViewModel()
-        {
-        }
-
-        private string _libraryName = "Фильмы";
+        private string _libraryName = "";
 
         public string Title
         {
@@ -18,18 +14,28 @@ namespace MediaLibrarian.ViewModels
             set => SetField(ref _libraryName, value);
         }
 
-        public ObservableCollection<LibraryField> Fields { get; set; }
-            = new ObservableCollection<LibraryField>();
+        public ObservableCollection<LibraryField> Fields { get; set; } = new ObservableCollection<LibraryField>
+        {
+            new LibraryField
+            {
+                Name = "",
+                Type = FieldTypes.Line,
+            }
+        };
 
         public ICommand AddNewField => new Command<object>(
             execute: (p) =>
             {
                 Fields.Add(new LibraryField
                 {
-                    Name = "Название",
-                    Type = FieldTypes.Text
+                    Name = "",
+                    Type = FieldTypes.Line
                 });
             }
         );
+
+        public LibManagerViewModel()
+        {
+        }
     }
 }

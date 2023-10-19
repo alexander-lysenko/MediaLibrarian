@@ -9,7 +9,7 @@
         MinWidth="480"
         MinHeight="640"
         Height="640"
-        SizeToContent="WidthAndHeight"
+        SizeToContent="Width"
         Title="{DynamicResource LibManager.Title}"
         d:DataContext="{d:DesignInstance viewModels:LibManagerViewModel}">
     <DockPanel LastChildFill="True" Margin="8">
