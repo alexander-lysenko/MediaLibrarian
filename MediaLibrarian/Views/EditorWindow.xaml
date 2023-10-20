@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:components="clr-namespace:MediaLibrarian.Components"
         mc:Ignorable="d"
         MinWidth="480"
         MinHeight="640"
@@ -12,10 +13,11 @@
         <!-- Action buttons -->
         <Grid
             DockPanel.Dock="Bottom"
-            Width="480"
-            Height="32"
+            MinWidth="456"
+            MaxWidth="640"
+            Height="24"
             HorizontalAlignment="Right"
-            Margin="0,4,0,0">
+            Margin="0,4,0,-2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="16" />
@@ -23,10 +25,10 @@
             </Grid.ColumnDefinitions>
             <Button
                 Grid.Column="0"
-                Content="{DynamicResource Common.SaveButton}" />
+                Content="{DynamicResource Buttons.Save}" />
             <Button
                 Grid.Column="2"
-                Content="{DynamicResource Common.CancelButton}" />
+                Content="{DynamicResource Buttons.Cancel}" />
         </Grid>
         <!-- Poster Selector -->
         <Grid DockPanel.Dock="Bottom" Margin="0,4">
@@ -39,24 +41,43 @@
                 <RowDefinition />
             </Grid.RowDefinitions>
             <TextBlock Grid.Column="0" Grid.Row="0">
-                <Run Text="{DynamicResource Editor.Poster}"/>
-                <LineBreak/>
-                <Run Text="{DynamicResource Editor.PosterHint}"/>
-                <LineBreak/>
-                <Run Name="PosterUploadStatus" Foreground="Blue" Text="No poster attached"/>
+                <Run Text="{DynamicResource Editor.Poster}" />
+                <LineBreak />
+                <Run Text="{DynamicResource Editor.PosterHint}" />
+                <LineBreak />
+                <Run Name="PosterUploadStatus" Foreground="Blue" Text="No poster attached" />
             </TextBlock>
-            <Image Grid.Column="1" Grid.Row="0" Height="50" Width="50" Margin="0,0,0,4">
+            <Image
+                Grid.Column="1"
+                Grid.Row="0"
+                Height="50"
+                Width="50"
+                Margin="0,0,0,4"
+                HorizontalAlignment="Right">
                 <Image.Source>
                     <BitmapImage UriSource="https://source.unsplash.com/wMkaMXTJjlQ/480x640" />
                 </Image.Source>
             </Image>
             <TextBox Grid.Column="0" Grid.Row="1" Margin="0,0,8,0"></TextBox>
-            <Button Grid.Column="1" Grid.Row="1">Local</Button>
+            <Button
+                Grid.Column="1"
+                Grid.Row="1"
+                Content="{DynamicResource Buttons.Browse}"/>
         </Grid>
-        
+
         <!-- Editor Container -->
-        <ScrollViewer VerticalScrollBarVisibility="Auto">
-            <StackPanel Name="EditorContainer" Margin="8" />
+        <ScrollViewer VerticalScrollBarVisibility="Visible">
+            <ItemsControl Margin="0,0,8,0" ItemsSource="{Binding Fields}">
+                <!--<ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>-->
+                <components:InputLine Label="Название" Value="Название"/>
+                <components:InputText Label="Описание" Value="Описание"/>
+                <components:InputDate Label="Дата" Value="2020-01-01"/>
+                <components:InputRating Label="Оценка" Value="5"/>
+                <components:InputPriority Label="Приоритет" Value="5"/>
+            </ItemsControl>
         </ScrollViewer>
     </DockPanel>
 </Window>

@@ -5,7 +5,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using MediaLibrarian.Models;
-using MediaLibrarian.ViewModels;
 
 namespace MediaLibrarian.Components
 {
@@ -18,8 +17,8 @@ namespace MediaLibrarian.Components
             ownerType: typeof(LibraryFieldTemplate)
         );
 
-        private static readonly DependencyProperty FieldTypeProperty = DependencyProperty.Register(
-            name: nameof(FieldType),
+        private static readonly DependencyProperty FieldTypesProperty = DependencyProperty.Register(
+            name: nameof(FieldTypes),
             propertyType: typeof(FieldTypes),
             ownerType: typeof(LibraryFieldTemplate)
         );
@@ -42,10 +41,10 @@ namespace MediaLibrarian.Components
             set => SetValue(FieldNameProperty, value);
         }
 
-        public FieldTypes FieldType
+        public FieldTypes FieldTypes
         {
-            get => (FieldTypes)GetValue(FieldTypeProperty);
-            set => SetValue(FieldTypeProperty, value);
+            get => (FieldTypes)GetValue(FieldTypesProperty);
+            set => SetValue(FieldTypesProperty, value);
         }
 
         public ICommand RemoveCommand

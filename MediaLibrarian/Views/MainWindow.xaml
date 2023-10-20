@@ -19,15 +19,15 @@
     <DockPanel LastChildFill="True">
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="{DynamicResource Menu.File}">
-                <MenuItem Header="_New"></MenuItem>
-                <MenuItem Header="_Open"></MenuItem>
-                <MenuItem Header="_Save"></MenuItem>
-                <Separator></Separator>
-                <MenuItem Header="_Exit"></MenuItem>
+                <MenuItem Header="_New"/>
+                <MenuItem Header="_Open"/>
+                <MenuItem Header="_Save"/>
+                <Separator/>
+                <MenuItem Header="_Exit"/>
             </MenuItem>
-            <MenuItem Header="{DynamicResource Menu.Edit}"> </MenuItem>
-            <MenuItem Header="{DynamicResource Menu.View}"> </MenuItem>
-            <MenuItem Header="{DynamicResource Menu.Help}"> </MenuItem>
+            <MenuItem Header="{DynamicResource Menu.Edit}"/>
+            <MenuItem Header="{DynamicResource Menu.View}"/>
+            <MenuItem Header="{DynamicResource Menu.Help}"/>
         </Menu>
         <StatusBar DockPanel.Dock="Bottom">
             <StatusBarItem>
@@ -42,8 +42,8 @@
                 <ColumnDefinition Width="3*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"></RowDefinition>
-                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
             <!-- Left Panel -->
@@ -79,7 +79,7 @@
                             Grid.Column="2"
                             Margin="12,0,0,0"
                             Padding="16,0"
-                            Content="{DynamicResource Common.SelectLibraryButton}" />
+                            Content="{DynamicResource Buttons.SelectLibrary}" />
                         <TextBlock
                             Grid.Row="1"
                             Grid.Column="0"
@@ -173,9 +173,9 @@
                                 HorizontalAlignment="Center"
                                 TextWrapping="WrapWithOverflow"
                                 TextAlignment="Center">
-                                <Run Text="{DynamicResource MainWindow.ItemInfoStub1}"></Run>
+                                <Run Text="{DynamicResource MainWindow.ItemInfoStub1}"/>
                                 <LineBreak />
-                                <Run Text="{DynamicResource MainWindow.ItemInfoStub2}"></Run>
+                                <Run Text="{DynamicResource MainWindow.ItemInfoStub2}"/>
                             </TextBlock>
                         </ScrollViewer>
                     </Grid>

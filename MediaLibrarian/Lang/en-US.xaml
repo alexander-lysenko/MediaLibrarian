@@ -2,11 +2,12 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:v="clr-namespace:System;assembly=mscorlib">
     <!-- Common -->
-    <v:String x:Key="Common.CancelButton">Cancel</v:String>
-    <v:String x:Key="Common.CloseButton">Close</v:String>
-    <v:String x:Key="Common.SaveButton">Save</v:String>
-    <v:String x:Key="Common.AddFieldButton">Add Field</v:String>
-    <v:String x:Key="Common.SelectLibraryButton">Select</v:String>
+    <v:String x:Key="Buttons.Cancel">Cancel</v:String>
+    <v:String x:Key="Buttons.Close">Close</v:String>
+    <v:String x:Key="Buttons.Save">Save</v:String>
+    <v:String x:Key="Buttons.AddField">Add Field</v:String>
+    <v:String x:Key="Buttons.SelectLibrary">Select</v:String>
+    <v:String x:Key="Buttons.Browse">Browse...</v:String>
 
     <!--Library Field Types-->
     <v:String x:Key="FieldTypes.Line">Single line</v:String>

@@ -79,6 +79,22 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Classes\NullToBooleanConverter.cs" />
+    <Compile Include="Components\InputDate.xaml.cs">
+      <DependentUpon>InputDate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\InputLine.xaml.cs">
+      <DependentUpon>InputLine.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\InputPriority.xaml.cs">
+      <DependentUpon>InputPriority.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\InputRating.xaml.cs">
+      <DependentUpon>InputRating.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\InputText.xaml.cs">
+      <DependentUpon>InputText.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Models\Command.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\LibManagerViewModel.cs" />
@@ -139,7 +155,27 @@
     <Resource Include="Resources\splash.png" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Components\InputDate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\InputPriority.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\InputRating.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Components\LibraryFieldTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\InputLine.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\InputText.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -162,9 +198,7 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Classes\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.118.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets" Condition="Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.118.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -3,11 +3,28 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             mc:Ignorable="d"
+             xmlns:classes="clr-namespace:MediaLibrarian.Classes"
+             xmlns:rem="ignorable"
+             mc:Ignorable="d rem"
              x:Name="LayoutRoot"
              d:DesignWidth="480"
-             d:DesignHeight="55">
+             d:DesignHeight="32">
+    <UserControl.Resources>
+        <classes:NullToBooleanConverter x:Key="NullToBooleanConverter" />
+    </UserControl.Resources>
     <Grid Margin="0,4" DataContext="{Binding ElementName=LayoutRoot}">
+        <Grid.Resources>
+            <Style TargetType="Button" x:Key="RemoveButtonTriggers">
+                <Style.Triggers>
+                    <Trigger Property="IsEnabled" Value="False">
+                        <Setter Property="ToolTip" Value="{DynamicResource LibManager.CannotBeRemoved}" />
+                    </Trigger>
+                    <Trigger Property="IsEnabled" Value="True">
+                        <Setter Property="ToolTip" Value="{DynamicResource LibManager.RemoveField}" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </Grid.Resources>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="4*" />
             <ColumnDefinition Width="3*" MaxWidth="240" />
@@ -23,14 +40,18 @@
         <Border Grid.Row="0" Grid.Column="1" Padding="4,0">
             <ComboBox
                 ItemsSource="{Binding FieldTypesList}"
-                SelectedValue="{Binding FieldType}" />
+                SelectedValue="{Binding FieldTypes}" />
         </Border>
         <Border Grid.Row="0" Grid.Column="2" Padding="0">
             <Button
-                ToolTip="{DynamicResource LibManager.RemoveField}"
                 Content="-"
                 Padding="0"
-                Command="{Binding RemoveCommand}" />
+                ToolTipService.ShowOnDisabled="True"
+                ToolTipService.InitialShowDelay="10"
+                Style="{StaticResource RemoveButtonTriggers}"
+                IsEnabled="{Binding RemoveCommand, Converter={StaticResource NullToBooleanConverter}}"
+                Command="{Binding RemoveCommand}">
+            </Button>
         </Border>
         <Border Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3">
             <TextBlock
