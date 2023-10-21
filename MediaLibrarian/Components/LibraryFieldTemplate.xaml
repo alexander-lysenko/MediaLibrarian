@@ -40,7 +40,10 @@
         <Border Grid.Row="0" Grid.Column="1" Padding="4,0">
             <ComboBox
                 ItemsSource="{Binding FieldTypesList}"
-                SelectedValue="{Binding FieldTypes}" />
+                SelectedValuePath="Key"
+                DisplayMemberPath="Value"
+                IsEnabled="{Binding RemoveCommand, Converter={StaticResource NullToBooleanConverter}}"
+                SelectedValue="{Binding FieldType}" />
         </Border>
         <Border Grid.Row="0" Grid.Column="2" Padding="0">
             <Button

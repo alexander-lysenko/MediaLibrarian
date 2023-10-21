@@ -1,5 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using System.Windows;
 using System.Windows.Input;
 using MediaLibrarian.Models;
 
@@ -8,6 +7,7 @@ namespace MediaLibrarian.ViewModels
     internal class LibManagerViewModel : BaseViewModel
     {
         private string _libraryName = "";
+        private bool _isEditMode = false;
 
         public string Title
         {
@@ -18,41 +18,47 @@ namespace MediaLibrarian.ViewModels
         public ObservableCollection<LibraryFieldItem> Fields { get; set; } =
             new ObservableCollection<LibraryFieldItem>
             {
-                new LibraryFieldItem
-                {
-                    Name = "",
-                    Type = FieldTypes.Line.ToString(),
-                }
+                new LibraryFieldItem { Type = FieldTypes.Line }
             };
 
         public ICommand AddNewField => new Command<object>(
-            execute: (p) =>
+            execute: param =>
             {
-                var aa = new LibraryFieldItem
-                {
-                    Type = FieldTypes.Line.ToString()
-                };
-                aa.RemoveCommand = new Command<object>(
-                    execute: (q) =>
-                    {
-                        MessageBox.Show("1");
-                        Fields.Remove(aa);
-                    }
+                var item = new LibraryFieldItem { Type = FieldTypes.Line };
+                item.RemoveCommand = new Command<object>(
+                    execute: _ => { Fields.Remove(item); },
+                    canExecute: _ => Fields.IndexOf(item) != 0
                 );
-                Fields.Add(aa);
+                Fields.Add(item);
             }
         );
 
-        public LibManagerViewModel()
+        public ICommand CreateLibrary => new Command<object>(
+            execute: param =>
+            {
+                IsEditMode = true;
+                IsViewMode = false;
+            },
+            canExecute: param => IsViewMode
+        );
+
+        public bool IsViewMode
         {
+            get => !_isEditMode;
+            set => SetField(ref _isEditMode, !value);
+        }
+
+        public bool IsEditMode
+        {
+            get => _isEditMode;
+            set => SetField(ref _isEditMode, value);
         }
     }
 
     public class LibraryFieldItem
     {
-        public int Id { get; set; }
         public string Name { get; set; }
-        public string Type { get; set; }
+        public FieldTypes Type { get; set; }
         public ICommand RemoveCommand { get; set; }
         public string ValidationMessage { get; set; }
     }

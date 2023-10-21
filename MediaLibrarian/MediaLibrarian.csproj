@@ -95,7 +95,7 @@
     <Compile Include="Components\InputText.xaml.cs">
       <DependentUpon>InputText.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\Command.cs" />
+    <Compile Include="Classes\Command.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\LibManagerViewModel.cs" />
     <Compile Include="Components\LibraryFieldTemplate.xaml.cs">

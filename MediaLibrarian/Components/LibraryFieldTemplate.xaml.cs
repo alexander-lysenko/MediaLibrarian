@@ -17,8 +17,8 @@ namespace MediaLibrarian.Components
             ownerType: typeof(LibraryFieldTemplate)
         );
 
-        private static readonly DependencyProperty FieldTypesProperty = DependencyProperty.Register(
-            name: nameof(FieldTypes),
+        private static readonly DependencyProperty FieldTypeProperty = DependencyProperty.Register(
+            name: nameof(FieldType),
             propertyType: typeof(FieldTypes),
             ownerType: typeof(LibraryFieldTemplate)
         );
@@ -41,10 +41,10 @@ namespace MediaLibrarian.Components
             set => SetValue(FieldNameProperty, value);
         }
 
-        public FieldTypes FieldTypes
+        public FieldTypes FieldType
         {
-            get => (FieldTypes)GetValue(FieldTypesProperty);
-            set => SetValue(FieldTypesProperty, value);
+            get => (FieldTypes)GetValue(FieldTypeProperty);
+            set => SetValue(FieldTypeProperty, value);
         }
 
         public ICommand RemoveCommand
@@ -59,8 +59,11 @@ namespace MediaLibrarian.Components
             set => SetValue(ValidationMessageProperty, value);
         }
 
-        public List<FieldTypes> FieldTypesList { get; set; } =
-            Enum.GetValues(typeof(FieldTypes)).Cast<FieldTypes>().ToList();
+        public Dictionary<FieldTypes, string> FieldTypesList { get; set; } =
+            Enum.GetValues(typeof(FieldTypes)).Cast<FieldTypes>().ToDictionary(
+                key => key,
+                value => (string)Application.Current.Resources[$"FieldTypes.{value}"]
+            );
 
         public LibraryFieldTemplate()
         {

@@ -7,7 +7,9 @@
         mc:Ignorable="d"
         MinWidth="480"
         MinHeight="640"
-        SizeToContent="WidthAndHeight"
+        Width="480"
+        Height="640"
+        SizeToContent="Manual"
         Title="{DynamicResource Editor.TitleCreate}">
     <DockPanel LastChildFill="True" Margin="8">
         <!-- Action buttons -->
@@ -73,6 +75,7 @@
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>-->
                 <components:InputLine Label="Название" Value="Название"/>
+                <components:InputText Label="Описание" Value="Описание"/>
                 <components:InputText Label="Описание" Value="Описание"/>
                 <components:InputDate Label="Дата" Value="2020-01-01"/>
                 <components:InputRating Label="Оценка" Value="5"/>

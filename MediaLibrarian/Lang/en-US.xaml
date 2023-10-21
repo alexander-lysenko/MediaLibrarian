@@ -2,10 +2,16 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:v="clr-namespace:System;assembly=mscorlib">
     <!-- Common -->
+    <v:String x:Key="Common.LongDateFormat">dd/MM/yyyy</v:String>
+    <v:String x:Key="Common.LongDateTimeFormat">dd/MM/yyyy HH:mm:ss</v:String>
+
+
+    <!-- Buttons -->
     <v:String x:Key="Buttons.Cancel">Cancel</v:String>
     <v:String x:Key="Buttons.Close">Close</v:String>
     <v:String x:Key="Buttons.Save">Save</v:String>
     <v:String x:Key="Buttons.AddField">Add Field</v:String>
+    <v:String x:Key="Buttons.CreateLibrary">Create New Library</v:String>
     <v:String x:Key="Buttons.SelectLibrary">Select</v:String>
     <v:String x:Key="Buttons.Browse">Browse...</v:String>
 
