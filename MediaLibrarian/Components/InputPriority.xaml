@@ -13,7 +13,7 @@
             <ColumnDefinition Width="2*" MinWidth="200" MaxWidth="320" />
         </Grid.ColumnDefinitions>
         <Border Grid.Column="0" Padding="0,4,4,4">
-            <TextBlock Style="{DynamicResource Ellipsis}" Text="{Binding Label}" />
+            <TextBlock Style="{DynamicResource Ellipsis}" Text="{Binding Label, FallbackValue='Priority'}" />
         </Border>
         <Border Grid.Column="1" Padding="0,4">
             <ComboBox

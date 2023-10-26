@@ -3,8 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             x:Name="LayoutRoot"
+             xmlns:classes="clr-namespace:MediaLibrarian.Classes"
              mc:Ignorable="d"
+             x:Name="LayoutRoot"
              d:DesignWidth="480"
              d:DesignHeight="32">
     <Grid DataContext="{Binding ElementName=LayoutRoot}">
@@ -13,12 +14,59 @@
             <ColumnDefinition Width="2*" MinWidth="200" MaxWidth="320" />
         </Grid.ColumnDefinitions>
         <Border Grid.Column="0" Padding="0,4,4,4">
-            <TextBlock Style="{DynamicResource Ellipsis}" Text="{Binding Label}" />
+            <TextBlock Style="{DynamicResource Ellipsis}" Text="{Binding Label, FallbackValue='Rating'}" />
         </Border>
-        <Border Grid.Column="1" Padding="0,4">
-            <DatePicker
-                VerticalAlignment="Center"
-                Text="{Binding Value}" />
+        <Border Grid.Column="1" Padding="0,4" HorizontalAlignment="Right">
+            <ItemsControl x:Name="StarItems" ItemsSource="{Binding Path=Stars}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <!--<ItemsControl.Resources>
+                    <ControlTemplate x:Key="RatingTemplate" TargetType="{x:Type ToggleButton}">
+                        <Viewbox Height="24">
+                            <Path
+                                Name="star"
+                                Stroke="Gray"
+                                Style="{StaticResource Star}"
+                                Fill="{Binding Fill}" />
+                        </Viewbox>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="star" Property="Fill" Value="Orange" />
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="star" Property="Fill" Value="Orange" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </ItemsControl.Resources>-->
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <DataTemplate.Triggers>
+                        </DataTemplate.Triggers>
+                        <Viewbox Height="24">
+                            <ToggleButton
+                                Tag="{Binding Weight, Mode=OneWay}"
+                                MouseEnter="InputRating_OnMouseEnter"
+                                Click="InputRating_OnClick">
+                                <ToggleButton.Template>
+                                    <ControlTemplate>
+                                        <Viewbox Height="24">
+                                            <Path
+                                                Name="star"
+                                                Stroke="Gray"
+                                                Style="{StaticResource Star}"
+                                                Fill="{Binding Fill}" />
+                                        </Viewbox>
+                                    </ControlTemplate>
+                                </ToggleButton.Template>
+                            </ToggleButton>
+                        </Viewbox>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
         </Border>
     </Grid>
 </UserControl>

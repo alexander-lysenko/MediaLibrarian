@@ -1,4 +1,6 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.Windows.Controls;
 using System.Windows.Input;
 using MediaLibrarian.Models;
 
@@ -8,6 +10,13 @@ namespace MediaLibrarian.ViewModels
     {
         private string _libraryName = "";
         private bool _isEditMode = false;
+
+        public ObservableCollection<DataGridColumn> Columns { get; set; } =
+            new ObservableCollection<DataGridColumn>
+            {
+                new DataGridTextColumn { Header = "Hello", },
+                new DataGridTextColumn { Header = "BOX" }
+            };
 
         public string Title
         {
@@ -40,6 +49,11 @@ namespace MediaLibrarian.ViewModels
                 IsViewMode = false;
             },
             canExecute: param => IsViewMode
+        );
+
+        public ICommand Save = new Command<object>(
+            execute: param => { },
+            canExecute: p => true
         );
 
         public bool IsViewMode

@@ -20,7 +20,7 @@
         <DockPanel
             x:Name="LibraryList"
             LastChildFill="True"
-            Visibility="{Binding IsViewMode, Converter={StaticResource BooleanToVisibilityConverter}}">
+            Visibility="Visible">
             <!-- Action Buttons -->
             <Grid DockPanel.Dock="Bottom" Height="24" Margin="0,8,0,0">
                 <Grid.ColumnDefinitions>
@@ -37,9 +37,12 @@
                     Content="{DynamicResource Buttons.Close}"
                     Command="Close" />
             </Grid>
-            <ListView>
-
-            </ListView>
+            <DataGrid AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Width="140" Header="Hello"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Its me"></DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
         </DockPanel>
         <DockPanel
             x:Name="LibraryForm"
@@ -73,7 +76,7 @@
                     Content="{DynamicResource Buttons.Save}" />
                 <Button
                     Grid.Column="4"
-                    Tag="{DynamicResource Buttons.Close}"
+                    Tag="{DynamicResource Buttons.Cancel}"
                     Content="{Binding Title}"
                     Command="Close" />
             </Grid>

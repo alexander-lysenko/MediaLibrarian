@@ -78,7 +78,8 @@
                 <components:InputText Label="Описание" Value="Описание"/>
                 <components:InputText Label="Описание" Value="Описание"/>
                 <components:InputDate Label="Дата" Value="2020-01-01"/>
-                <components:InputRating Label="Оценка" Value="5"/>
+                <components:InputRating Label="Оценка" Value="5" Length="5"/>
+                <components:InputRating Label="Оценка10" Value="5" Length="10"/>
                 <components:InputPriority Label="Приоритет" Value="5"/>
             </ItemsControl>
         </ScrollViewer>
