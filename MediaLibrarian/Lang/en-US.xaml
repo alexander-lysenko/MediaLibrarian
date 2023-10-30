@@ -50,6 +50,8 @@
     <v:String x:Key="MainWindow.CountItems">Number of items in the Library:</v:String>
 
     <!-- LibManager window -->
+    <v:String x:Key="LibManager.LibraryColumn">Library Title</v:String>
+    <v:String x:Key="LibManager.LibraryFieldsColumn">Fields included in the Library</v:String>
     <v:String x:Key="LibManager.Title">Library Manager</v:String>
     <v:String x:Key="LibManager.LibraryName">Library Name</v:String>
     <v:String x:Key="LibManager.RemoveField">Remove this field</v:String>

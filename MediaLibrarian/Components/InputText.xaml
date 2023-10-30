@@ -22,7 +22,7 @@
                 AcceptsReturn="True"
                 VerticalContentAlignment="Top"
                 VerticalScrollBarVisibility="Auto"
-                Text="{Binding Value}" />
+                Text="{Binding Value, Mode=TwoWay}" />
         </Border>
     </Grid>
 </UserControl>

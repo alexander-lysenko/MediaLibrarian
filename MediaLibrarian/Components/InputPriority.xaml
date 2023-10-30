@@ -19,7 +19,7 @@
             <ComboBox
                 VerticalContentAlignment="Center"
                 ItemsSource="{Binding}"
-                Text="{Binding Value}" />
+                Text="{Binding Value, Mode=TwoWay}" />
         </Border>
     </Grid>
 </UserControl>

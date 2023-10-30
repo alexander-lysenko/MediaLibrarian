@@ -4,11 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:classes="clr-namespace:MediaLibrarian.Classes"
-             xmlns:rem="ignorable"
-             mc:Ignorable="d rem"
+             mc:Ignorable="d"
              x:Name="LayoutRoot"
              d:DesignWidth="480"
-             d:DesignHeight="32">
+             d:DesignHeight="48">
     <UserControl.Resources>
         <classes:NullToBooleanConverter x:Key="NullToBooleanConverter" />
     </UserControl.Resources>
@@ -32,10 +31,12 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="24" />
-            <RowDefinition Height="Auto" MaxHeight="16" />
+            <RowDefinition Height="Auto" MaxHeight="24" />
         </Grid.RowDefinitions>
         <Border Grid.Row="0" Grid.Column="0" Padding="0">
-            <TextBox VerticalContentAlignment="Center" Text="{Binding FieldName}" />
+            <TextBox
+                VerticalContentAlignment="Center"
+                Text="{Binding FieldName, UpdateSourceTrigger=LostFocus}" />
         </Border>
         <Border Grid.Row="0" Grid.Column="1" Padding="4,0">
             <ComboBox
@@ -56,11 +57,11 @@
                 Command="{Binding RemoveCommand}">
             </Button>
         </Border>
-        <Border Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3">
+        <Border Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Visibility="{Binding MessageVisibility}">
             <TextBlock
                 VerticalAlignment="Center"
                 Foreground="OrangeRed"
-                Text="{Binding ValidationMessage}" />
+                Text="{Binding ValidationMessage, FallbackValue='Validation Message'}" />
         </Border>
     </Grid>
 </UserControl>

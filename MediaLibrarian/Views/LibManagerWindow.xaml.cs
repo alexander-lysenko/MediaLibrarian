@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-using MediaLibrarian.ViewModels;
 
 namespace MediaLibrarian.Views
 {
@@ -8,7 +7,6 @@ namespace MediaLibrarian.Views
         public LibManagerWindow()
         {
             InitializeComponent();
-            DataContext = new LibManagerViewModel();
         }
     }
 }

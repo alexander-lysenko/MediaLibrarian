@@ -23,10 +23,20 @@ namespace MediaLibrarian.Models
         public FieldTypes Type { get; set; }
     }
 
-    public class Library
+    public class Library: IActiveRecord
     {
         public int Id { get; set; }
         public string Title { get; set; }
         public List<LibraryField> Fields { get; set; }
+
+        public bool Save()
+        {
+            return true;
+        }
+
+        public bool Delete()
+        {
+            return true;
+        }
     }
 }

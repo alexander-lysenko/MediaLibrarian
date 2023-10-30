@@ -8,93 +8,112 @@
         mc:Ignorable="d"
         MinWidth="480"
         MinHeight="640"
+        Width="480"
         Height="640"
-        SizeToContent="Width"
-        Tag="{DynamicResource LibManager.Title}"
-        Title="{Binding IsViewMode}"
-        d:DataContext="{d:DesignInstance viewModels:LibManagerViewModel}">
+        Title="{DynamicResource LibManager.Title}">
+    <Window.DataContext>
+        <viewModels:LibManagerViewModel />
+    </Window.DataContext>
     <Window.Resources>
-        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <ControlTemplate x:Key="ViewMode">
+            <DockPanel x:Name="LibraryList" LastChildFill="True">
+                <!-- Action Buttons -->
+                <Grid DockPanel.Dock="Bottom" Height="24" Margin="0,8,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*" MaxWidth="200" />
+                        <ColumnDefinition MinWidth="16" />
+                        <ColumnDefinition Width="2*" MaxWidth="200" />
+                    </Grid.ColumnDefinitions>
+                    <Button
+                        Grid.Column="0"
+                        Content="{DynamicResource Buttons.CreateLibrary}"
+                        Command="{Binding CreateLibrary}" />
+                    <Button
+                        Grid.Column="2"
+                        Content="{DynamicResource Buttons.Close}"
+                        Command="SystemCommands.CloseWindowCommand" 
+                        IsCancel="True"/>
+                </Grid>
+                <DataGrid AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn
+                            Width="*" MinWidth="200"
+                            Header="{DynamicResource LibManager.LibraryColumn}" />
+                        <DataGridTextColumn
+                            Width="3*" MinWidth="256"
+                            Header="{DynamicResource LibManager.LibraryFieldsColumn}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </DockPanel>
+        </ControlTemplate>
+        <ControlTemplate x:Key="EditMode">
+            <DockPanel x:Name="LibraryForm" LastChildFill="True">
+                <!-- Library Name Input -->
+                <Grid DockPanel.Dock="Top" Height="24" Margin="0,4,0,8">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="24" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="{DynamicResource LibManager.LibraryName}" />
+                    <TextBox
+                        Grid.Column="2"
+                        Padding="2,0"
+                        Text="{Binding Title, UpdateSourceTrigger=LostFocus}" />
+                </Grid>
+                <!-- Action Buttons -->
+                <Grid DockPanel.Dock="Bottom" Height="24" Margin="0,8,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200" />
+                        <ColumnDefinition Width="*"  MinWidth="48" />
+                        <ColumnDefinition Width="2*" MaxWidth="200" />
+                        <ColumnDefinition Width="8" />
+                        <ColumnDefinition Width="2*" MaxWidth="200" />
+                    </Grid.ColumnDefinitions>
+                    <Button
+                        Grid.Column="0"
+                        Content="{DynamicResource Buttons.AddField}"
+                        Command="{Binding AddNewField}"
+                        CommandParameter="{Binding Fields}"/>
+                    <Button
+                        Grid.Column="2"
+                        Content="{DynamicResource Buttons.Save}"
+                        Command="{Binding Save}"/>
+                    <Button
+                        Grid.Column="4"
+                        Content="{DynamicResource Buttons.Cancel}"
+                        Command="{Binding Cancel}" />
+                </Grid>
+
+                <!-- Library Fields -->
+                <ScrollViewer VerticalScrollBarVisibility="Visible">
+                    <ItemsControl Margin="0,0,8,0" ItemsSource="{Binding Fields}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <components:LibraryFieldTemplate
+                                    FieldName="{Binding Name, Mode=OneWayToSource}"
+                                    FieldType="{Binding Type, Mode=OneWayToSource}"
+                                    RemoveCommand="{Binding RemoveCommand}"
+                                    ValidationMessage="{Binding ValidationMessage}" />
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </DockPanel>
+        </ControlTemplate>
     </Window.Resources>
     <Grid Margin="8">
-        <DockPanel
-            x:Name="LibraryList"
-            LastChildFill="True"
-            Visibility="Visible">
-            <!-- Action Buttons -->
-            <Grid DockPanel.Dock="Bottom" Height="24" Margin="0,8,0,0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2*" MaxWidth="200" />
-                    <ColumnDefinition MinWidth="16" />
-                    <ColumnDefinition Width="2*" MaxWidth="200" />
-                </Grid.ColumnDefinitions>
-                <Button
-                    Grid.Column="0"
-                    Content="{DynamicResource Buttons.CreateLibrary}"
-                    Command="{Binding CreateLibrary}" />
-                <Button
-                    Grid.Column="2"
-                    Content="{DynamicResource Buttons.Close}"
-                    Command="Close" />
-            </Grid>
-            <DataGrid AutoGenerateColumns="False">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Width="140" Header="Hello"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Its me"></DataGridTextColumn>
-                </DataGrid.Columns>
-            </DataGrid>
-        </DockPanel>
-        <DockPanel
-            x:Name="LibraryForm"
-            LastChildFill="True"
-            Visibility="{Binding IsEditMode, Converter={StaticResource BooleanToVisibilityConverter}}">
-            <!-- Library Name Input -->
-            <Grid DockPanel.Dock="Top" Height="24" Margin="0,4,0,8">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="24" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Text="{DynamicResource LibManager.LibraryName}" />
-                <TextBox Grid.Column="2" Padding="2,0" Text="{Binding Title}" />
-            </Grid>
-            <!-- Action Buttons -->
-            <Grid DockPanel.Dock="Bottom" Height="24" Margin="0,8,0,0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="4*" />
-                    <ColumnDefinition Width="48" />
-                    <ColumnDefinition Width="2*" MaxWidth="200" />
-                    <ColumnDefinition Width="8" />
-                    <ColumnDefinition Width="2*" MaxWidth="200" />
-                </Grid.ColumnDefinitions>
-                <Button
-                    Grid.Column="0"
-                    Content="{DynamicResource Buttons.AddField}"
-                    Command="{Binding AddNewField}" />
-                <Button
-                    Grid.Column="2"
-                    Content="{DynamicResource Buttons.Save}" />
-                <Button
-                    Grid.Column="4"
-                    Tag="{DynamicResource Buttons.Cancel}"
-                    Content="{Binding Title}"
-                    Command="Close" />
-            </Grid>
-
-            <!-- Library Fields -->
-            <ScrollViewer VerticalScrollBarVisibility="Visible">
-                <ItemsControl Margin="0,0,8,0" ItemsSource="{Binding Fields}">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <components:LibraryFieldTemplate
-                                FieldName="{Binding Name}"
-                                FieldType="{Binding Type}"
-                                RemoveCommand="{Binding RemoveCommand}"
-                                ValidationMessage="{Binding ValidationMessage}" />
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </ScrollViewer>
-        </DockPanel>
+        <ContentControl>
+            <ContentControl.Style>
+                <Style TargetType="ContentControl">
+                    <Setter Property="Template" Value="{StaticResource ViewMode}" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsEditMode}" Value="True">
+                            <Setter Property="Template" Value="{StaticResource EditMode}" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ContentControl.Style>
+        </ContentControl>
     </Grid>
 </Window>

@@ -18,7 +18,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>true</Optimize>
+    <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
@@ -96,6 +96,7 @@
       <DependentUpon>InputText.xaml</DependentUpon>
     </Compile>
     <Compile Include="Classes\Command.cs" />
+    <Compile Include="Models\IActiveRecord.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\LibManagerViewModel.cs" />
     <Compile Include="Components\LibraryFieldTemplate.xaml.cs">

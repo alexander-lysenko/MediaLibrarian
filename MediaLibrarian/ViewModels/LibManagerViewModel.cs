@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using MediaLibrarian.Models;
@@ -18,6 +20,19 @@ namespace MediaLibrarian.ViewModels
                 new DataGridTextColumn { Header = "BOX" }
             };
 
+        public bool IsEditMode
+        {
+            get => _isEditMode;
+            set => SetField(ref _isEditMode, value);
+        }
+
+        public void Validate()
+        {
+            IsFormValid = true;
+        }
+
+        #region CreateLibraryForm
+
         public string Title
         {
             get => _libraryName;
@@ -30,43 +45,60 @@ namespace MediaLibrarian.ViewModels
                 new LibraryFieldItem { Type = FieldTypes.Line }
             };
 
-        public ICommand AddNewField => new Command<object>(
-            execute: param =>
+        private bool IsFormValid { get; set; } = false;
+
+        #endregion
+
+        #region Commands
+
+        public ICommand AddNewField => new Command<ObservableCollection<LibraryFieldItem>>(
+            execute: fields =>
             {
                 var item = new LibraryFieldItem { Type = FieldTypes.Line };
                 item.RemoveCommand = new Command<object>(
-                    execute: _ => { Fields.Remove(item); },
-                    canExecute: _ => Fields.IndexOf(item) != 0
+                    execute: _ => { fields.Remove(item); },
+                    canExecute: _ => fields.IndexOf(item) != 0
                 );
-                Fields.Add(item);
-            }
+                fields.Add(item);
+            },
+            canExecute: _ => Fields.Count <= 20
         );
 
         public ICommand CreateLibrary => new Command<object>(
-            execute: param =>
+            execute: _ => { IsEditMode = true; },
+            canExecute: _ => !IsEditMode
+        );
+
+        public ICommand Cancel => new Command<object>(
+            execute: _ => { IsEditMode = false; }
+        );
+
+        public ICommand Save => new Command<object>(
+            execute: _ =>
             {
-                IsEditMode = true;
-                IsViewMode = false;
+                var library = new Library()
+                {
+                    Title = Title,
+                    Fields = Fields.Select((f) => new LibraryField { Name = f.Name, Type = f.Type }).ToList()
+                };
+                try
+                {
+                    if (library.Save()) IsEditMode = false;
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(
+                        e.Message,
+                        e.GetType().ToString(),
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Error
+                    );
+                }
             },
-            canExecute: param => IsViewMode
+            canExecute: _ => IsFormValid
         );
 
-        public ICommand Save = new Command<object>(
-            execute: param => { },
-            canExecute: p => true
-        );
-
-        public bool IsViewMode
-        {
-            get => !_isEditMode;
-            set => SetField(ref _isEditMode, !value);
-        }
-
-        public bool IsEditMode
-        {
-            get => _isEditMode;
-            set => SetField(ref _isEditMode, value);
-        }
+        #endregion
     }
 
     public class LibraryFieldItem

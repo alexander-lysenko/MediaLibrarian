@@ -65,6 +65,10 @@ namespace MediaLibrarian.Components
                 value => (string)Application.Current.Resources[$"FieldTypes.{value}"]
             );
 
+        public Visibility MessageVisibility => ValidationMessage == null
+            ? Visibility.Collapsed
+            : Visibility.Visible;
+
         public LibraryFieldTemplate()
         {
             InitializeComponent();
