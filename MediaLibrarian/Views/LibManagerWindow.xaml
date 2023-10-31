@@ -15,6 +15,21 @@
         <viewModels:LibManagerViewModel />
     </Window.DataContext>
     <Window.Resources>
+        <ControlTemplate x:Key="ErrorTemplate">
+            <StackPanel ToolTipService.InitialShowDelay="10" ToolTip="{Binding ErrorContent}">
+                <Border BorderBrush="OrangeRed" BorderThickness="1">
+                    <AdornedElementPlaceholder x:Name="adorned" />
+                </Border>
+                <ItemsControl ItemsSource="{Binding}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding ErrorContent}" Foreground="OrangeRed" />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </ControlTemplate>
+
         <ControlTemplate x:Key="ViewMode">
             <DockPanel x:Name="LibraryList" LastChildFill="True">
                 <!-- Action Buttons -->
@@ -31,8 +46,8 @@
                     <Button
                         Grid.Column="2"
                         Content="{DynamicResource Buttons.Close}"
-                        Command="SystemCommands.CloseWindowCommand" 
-                        IsCancel="True"/>
+                        Command="SystemCommands.CloseWindowCommand"
+                        IsCancel="True" />
                 </Grid>
                 <DataGrid AutoGenerateColumns="False">
                     <DataGrid.Columns>
@@ -49,7 +64,7 @@
         <ControlTemplate x:Key="EditMode">
             <DockPanel x:Name="LibraryForm" LastChildFill="True">
                 <!-- Library Name Input -->
-                <Grid DockPanel.Dock="Top" Height="24" Margin="0,4,0,8">
+                <Grid DockPanel.Dock="Top" MinHeight="24" Margin="0,4,0,8">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="24" />
@@ -59,13 +74,16 @@
                     <TextBox
                         Grid.Column="2"
                         Padding="2,0"
-                        Text="{Binding Title, UpdateSourceTrigger=LostFocus}" />
+                        Text="{Binding Title, UpdateSourceTrigger=LostFocus, Mode=TwoWay,
+                            ValidatesOnNotifyDataErrors=True}"
+                        Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
+                    </TextBox>
                 </Grid>
                 <!-- Action Buttons -->
                 <Grid DockPanel.Dock="Bottom" Height="24" Margin="0,8,0,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="200" />
-                        <ColumnDefinition Width="*"  MinWidth="48" />
+                        <ColumnDefinition Width="*" MinWidth="48" />
                         <ColumnDefinition Width="2*" MaxWidth="200" />
                         <ColumnDefinition Width="8" />
                         <ColumnDefinition Width="2*" MaxWidth="200" />
@@ -74,11 +92,11 @@
                         Grid.Column="0"
                         Content="{DynamicResource Buttons.AddField}"
                         Command="{Binding AddNewField}"
-                        CommandParameter="{Binding Fields}"/>
+                        CommandParameter="{Binding Fields}" />
                     <Button
                         Grid.Column="2"
                         Content="{DynamicResource Buttons.Save}"
-                        Command="{Binding Save}"/>
+                        Command="{Binding Save}" />
                     <Button
                         Grid.Column="4"
                         Content="{DynamicResource Buttons.Cancel}"
@@ -91,10 +109,14 @@
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <components:LibraryFieldTemplate
-                                    FieldName="{Binding Name, Mode=OneWayToSource}"
                                     FieldType="{Binding Type, Mode=OneWayToSource}"
                                     RemoveCommand="{Binding RemoveCommand}"
-                                    ValidationMessage="{Binding ValidationMessage}" />
+                                    ValidationMessage="{Binding ValidationMessage}"
+                                    FieldName="{Binding Path=Name, Mode=OneWayToSource,
+                                        UpdateSourceTrigger=LostFocus,
+                                        ValidatesOnNotifyDataErrors=True}"
+                                    Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
+                                </components:LibraryFieldTemplate>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
