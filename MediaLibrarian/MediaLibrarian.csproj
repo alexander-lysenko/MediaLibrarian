@@ -79,6 +79,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Classes\LibraryFieldsValidationRule.cs" />
+    <Compile Include="Classes\LibraryTitleValidationRule.cs" />
     <Compile Include="Classes\NullToBooleanConverter.cs" />
     <Compile Include="Components\InputDate.xaml.cs">
       <DependentUpon>InputDate.xaml</DependentUpon>

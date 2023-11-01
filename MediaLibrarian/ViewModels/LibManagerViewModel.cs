@@ -1,23 +1,22 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using MediaLibrarian.Classes;
 using MediaLibrarian.Models;
 
 namespace MediaLibrarian.ViewModels
 {
-    // https://stackoverflow.com/questions/34539663
-    // https://stackoverflow.com/a/47556421
+    // https://stackoverflow.com/questions/56606441
     // https://kmatyaszek.github.io/wpf%20validation/2019/03/13/wpf-validation-using-inotifydataerrorinfo.html
     internal class LibManagerViewModel : BaseViewModel
     {
-        private string _libraryName = "";
-        private bool _isEditMode = false;
+        private string _libraryName;
+        private bool _isEditMode;
 
         public ObservableCollection<DataGridColumn> Columns { get; set; } =
             new ObservableCollection<DataGridColumn>
@@ -39,8 +38,8 @@ namespace MediaLibrarian.ViewModels
             get => _libraryName;
             set
             {
-                SetField(ref _libraryName, value.Trim());
-                ValidateTitle();
+                SetField(ref _libraryName, value);
+                ValidateProperty(value);
             }
         }
 
@@ -49,8 +48,6 @@ namespace MediaLibrarian.ViewModels
             {
                 new LibraryFieldItem { Type = FieldTypes.Line }
             };
-
-        private bool IsFormValid { get; set; } = false;
 
         #endregion
 
@@ -102,29 +99,17 @@ namespace MediaLibrarian.ViewModels
                     );
                 }
             },
-            canExecute: _ => IsFormValid
+            canExecute: _ => !HasErrors
         );
-
-        #endregion
-
-        #region Validations
-
-        private void ValidateTitle()
-        {
-            const string propertyName = nameof(Title);
-            ClearErrors(propertyName);
-
-            if (string.IsNullOrEmpty(Title))
-                AddError(propertyName, "This field can not be blank");
-
-            if (string.Equals(Title, "Title"))
-                AddError(propertyName, "Title is already taken");
-        }
 
         #endregion
 
         public LibManagerViewModel()
         {
+            ValidationRules.Add(
+                nameof(Title),
+                new List<ValidationRule> { new LibraryTitleValidationRule() }
+            );
         }
     }
 
